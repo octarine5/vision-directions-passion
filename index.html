@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vision Quest — Career Passion Tracker</title>
+<style>
+:root {
+  --bg: #0f172a;
+  --surface: #1e293b;
+  --surface2: #334155;
+  --border: #475569;
+  --text: #f1f5f9;
+  --text2: #94a3b8;
+  --accent: #3b82f6;
+  --green: #10b981;
+  --purple: #8b5cf6;
+  --amber: #f59e0b;
+  --red: #ef4444;
+  --pink: #ec4899;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* Top Bar */
+.topbar {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.topbar-left h1 {
+  font-size: 20px;
+  background: linear-gradient(135deg, var(--accent), var(--purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.xp-bar-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.level-badge {
+  background: linear-gradient(135deg, var(--purple), var(--pink));
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.xp-bar {
+  width: 200px;
+  height: 8px;
+  background: var(--surface2);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.xp-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--purple));
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.streak-badge {
+  background: var(--surface);
+  border: 1px solid var(--amber);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  color: var(--amber);
+}
+
+/* Nav Tabs */
+.nav-tabs {
+  display: flex;
+  gap: 0;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+}
+
+.nav-tab {
+  padding: 12px 24px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--text2);
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.nav-tab:hover { color: var(--text); background: var(--surface2); }
+.nav-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* Main Layout */
+.main-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* Cards */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.card h2 {
+  font-size: 16px;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+.card h3 {
+  font-size: 14px;
+  color: var(--text2);
+  margin-bottom: 8px;
+}
+
+/* Grid */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+@media (max-width: 900px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+}
+
+/* Quest Map */
+.quest-map {
+  position: relative;
+  padding: 40px 20px;
+  min-height: 500px;
+}
+
+.quest-path {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.quest-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  position: relative;
+}
+
+.quest-node {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  position: relative;
+  z-index: 2;
+  border: 3px solid var(--border);
+  background: var(--surface);
+}
+
+.quest-node:hover { transform: scale(1.1); }
+
+.quest-node.completed {
+  border-color: var(--green);
+  background: linear-gradient(135deg, #064e3b, #065f46);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+}
+
+.quest-node.current {
+  border-color: var(--accent);
+  background: linear-gradient(135deg, #1e3a5f, #1e40af);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+  animation: pulse 2s infinite;
+}
+
+.quest-node.locked {
+  border-color: var(--surface2);
+  opacity: 0.5;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.4); }
+  50% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.7); }
+}
+
+.quest-node-icon { font-size: 24px; }
+.quest-node-label {
+  font-size: 10px;
+  text-align: center;
+  margin-top: 4px;
+  max-width: 70px;
+  line-height: 1.2;
+}
+
+.quest-connector {
+  width: 60px;
+  height: 3px;
+  background: var(--border);
+}
+
+.quest-connector.completed { background: var(--green); }
+
+.quest-vconnector {
+  width: 3px;
+  height: 40px;
+  background: var(--border);
+  margin: 0 auto;
+}
+
+.quest-vconnector.completed { background: var(--green); }
+
+/* Drill Cards */
+.drill-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.drill-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.drill-card.completed-today {
+  border-color: var(--green);
+  background: linear-gradient(135deg, var(--surface), #064e3b22);
+}
+
+.drill-check {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 16px;
+  transition: all 0.2s;
+}
+
+.drill-card.completed-today .drill-check {
+  background: var(--green);
+  border-color: var(--green);
+}
+
+.drill-info { flex: 1; }
+.drill-info h4 { font-size: 14px; margin-bottom: 4px; }
+.drill-info p { font-size: 12px; color: var(--text2); }
+
+.drill-xp {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--amber);
+}
+
+.drill-streak {
+  font-size: 12px;
+  color: var(--text2);
+  text-align: right;
+}
+
+/* Skill Tree Cards */
+.skill-tree-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+}
+
+.skill-tree-icon { font-size: 36px; margin-bottom: 8px; }
+
+.skill-tree-card h3 {
+  font-size: 16px;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.skill-tree-level {
+  font-size: 24px;
+  font-weight: 800;
+  margin: 8px 0;
+}
+
+.skill-tree-bar {
+  width: 100%;
+  height: 6px;
+  background: var(--surface2);
+  border-radius: 3px;
+  margin-top: 8px;
+  overflow: hidden;
+}
+
+.skill-tree-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.5s;
+}
+
+/* Feed */
+.feed-item {
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.feed-item:last-child { border-bottom: none; }
+
+.feed-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.feed-content h4 { font-size: 14px; margin-bottom: 4px; }
+.feed-content p { font-size: 13px; color: var(--text2); line-height: 1.4; }
+.feed-time { font-size: 11px; color: var(--text2); margin-top: 4px; }
+
+.feed-tag {
+  display: inline-block;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  margin-top: 6px;
+}
+
+.tag-hot { background: #ef444433; color: var(--red); }
+.tag-opportunity { background: #10b98133; color: var(--green); }
+.tag-watch { background: #f59e0b33; color: var(--amber); }
+.tag-insight { background: #8b5cf633; color: var(--purple); }
+
+/* Enterprise Watchlist */
+.enterprise-row {
+  display: flex;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  gap: 16px;
+}
+
+.enterprise-row:last-child { border-bottom: none; }
+
+.signal-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.signal-hot { background: var(--red); box-shadow: 0 0 8px rgba(239,68,68,0.5); }
+.signal-watch { background: var(--amber); }
+.signal-stable { background: var(--green); }
+
+.enterprise-info { flex: 1; }
+.enterprise-info h4 { font-size: 14px; }
+.enterprise-info p { font-size: 12px; color: var(--text2); }
+
+.enterprise-stage {
+  font-size: 12px;
+  padding: 2px 10px;
+  border-radius: 10px;
+  background: var(--surface2);
+  color: var(--text2);
+}
+
+/* Career Path */
+.career-path {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+  padding: 20px 0;
+}
+
+.career-node {
+  text-align: center;
+  padding: 20px;
+  min-width: 160px;
+  border-radius: 12px;
+  border: 2px solid var(--border);
+  background: var(--surface);
+  position: relative;
+}
+
+.career-node.current {
+  border-color: var(--accent);
+  background: linear-gradient(135deg, #1e3a5f, var(--surface));
+}
+
+.career-node.next {
+  border-color: var(--purple);
+  border-style: dashed;
+}
+
+.career-node.locked { opacity: 0.4; }
+
+.career-node h4 { font-size: 16px; margin-bottom: 4px; }
+.career-node p { font-size: 12px; color: var(--text2); }
+.career-node .income { font-size: 14px; color: var(--green); font-weight: 700; margin-top: 8px; }
+
+.career-arrow {
+  font-size: 24px;
+  color: var(--border);
+  padding: 0 8px;
+}
+
+/* Impact Proposals */
+.proposal-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.proposal-card h4 { font-size: 14px; margin-bottom: 8px; }
+.proposal-card p { font-size: 13px; color: var(--text2); line-height: 1.4; }
+
+.proposal-status {
+  display: inline-block;
+  font-size: 11px;
+  padding: 2px 10px;
+  border-radius: 10px;
+  margin-top: 8px;
+}
+
+.status-draft { background: var(--surface2); color: var(--text2); }
+.status-active { background: #3b82f633; color: var(--accent); }
+.status-shipped { background: #10b98133; color: var(--green); }
+
+/* Buttons */
+.btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s;
+}
+
+.btn:hover { background: var(--border); }
+.btn-primary { background: var(--accent); border-color: var(--accent); }
+.btn-primary:hover { background: #2563eb; }
+
+/* Modal */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-overlay.active { display: flex; }
+
+.modal {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.modal h2 { margin-bottom: 16px; }
+
+.modal input, .modal textarea, .modal select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  margin-bottom: 12px;
+  font-family: inherit;
+}
+
+.modal textarea { min-height: 100px; resize: vertical; }
+
+.modal-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+/* Notification toast */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--green);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  z-index: 300;
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+.toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Stats row */
+.stat-card {
+  text-align: center;
+  padding: 16px;
+}
+
+.stat-value {
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: var(--text2);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Notification settings */
+.setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.toggle {
+  width: 44px;
+  height: 24px;
+  border-radius: 12px;
+  background: var(--surface2);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.toggle.active { background: var(--green); }
+
+.toggle::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: white;
+  top: 3px;
+  left: 3px;
+  transition: all 0.2s;
+}
+
+.toggle.active::after { left: 23px; }
+
+/* Daily digest preview */
+.digest-preview {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 16px;
+}
+
+.digest-section {
+  margin-bottom: 16px;
+}
+
+.digest-section h4 {
+  font-size: 13px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.digest-item {
+  font-size: 13px;
+  color: var(--text2);
+  padding: 4px 0;
+  padding-left: 16px;
+  position: relative;
+}
+
+.digest-item::before {
+  content: '>';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+/* On-track indicator */
+.track-indicator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+.track-on { background: linear-gradient(135deg, #064e3b, #065f4633); border: 1px solid var(--green); }
+.track-behind { background: linear-gradient(135deg, #7f1d1d, #7f1d1d33); border: 1px solid var(--red); }
+.track-ahead { background: linear-gradient(135deg, #1e3a5f, #1e3a5f33); border: 1px solid var(--accent); }
+
+.track-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+</style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<div class="topbar">
+  <div class="topbar-left">
+    <h1>Vision Quest</h1>
+    <span style="font-size: 13px; color: var(--text2);">Personalized Intelligence & Any-Body Serving</span>
+  </div>
+  <div class="topbar-right">
+    <a href="knowledge-base.html" style="color:#3b82f6;text-decoration:none;font-size:13px;padding:6px 12px;border:1px solid #3b82f6;border-radius:6px;">Knowledge Base</a>
+    <div class="streak-badge" id="streakBadge">0 day streak</div>
+    <div class="xp-bar-container">
+      <div class="level-badge" id="levelBadge">LVL 1</div>
+      <div class="xp-bar"><div class="xp-bar-fill" id="xpBarFill" style="width: 0%"></div></div>
+      <span style="font-size: 12px; color: var(--text2)" id="xpText">0 / 100 XP</span>
+    </div>
+  </div>
+</div>
+
+<!-- Nav -->
+<div class="nav-tabs">
+  <div class="nav-tab active" data-tab="dashboard">Dashboard</div>
+  <div class="nav-tab" data-tab="quest-map">Quest Map</div>
+  <a href="journey.html" class="nav-tab" style="color: #06b6d4; text-decoration: none;">Passion to IPO Journey</a>
+  <div class="nav-tab" data-tab="drills">Daily Drills</div>
+  <div class="nav-tab" data-tab="impact">Impact Proposals</div>
+  <div class="nav-tab" data-tab="enterprise">Enterprise Watch</div>
+  <div class="nav-tab" data-tab="feed">Daily Feed</div>
+  <div class="nav-tab" data-tab="career">Career Track</div>
+  <div class="nav-tab" data-tab="settings">Settings</div>
+</div>
+
+<div class="main-content">
+
+  <!-- DASHBOARD TAB -->
+  <div class="tab-panel active" id="tab-dashboard">
+    <!-- On-track indicator -->
+    <div class="track-indicator track-on" id="trackIndicator">
+      <div class="track-dot" style="background: var(--green)"></div>
+      <div>
+        <strong>On Track</strong>
+        <span style="font-size: 13px; color: var(--text2); margin-left: 8px;">
+          Complete today's drills to maintain momentum toward Staff Engineer
+        </span>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="card">
+      <div class="grid-4">
+        <div class="stat-card">
+          <div class="stat-value" style="color: var(--accent)" id="statTotalXP">0</div>
+          <div class="stat-label">Total XP</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" style="color: var(--green)" id="statDrillsDone">0</div>
+          <div class="stat-label">Drills Done</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" style="color: var(--amber)" id="statStreak">0</div>
+          <div class="stat-label">Day Streak</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" style="color: var(--purple)" id="statLevel">1</div>
+          <div class="stat-label">Level</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skill Trees -->
+    <h2 style="margin: 20px 0 12px; font-size: 16px;">Skill Trees</h2>
+    <div class="grid-4" id="skillTreeGrid"></div>
+
+    <!-- Today's Drills -->
+    <h2 style="margin: 20px 0 12px; font-size: 16px;">Today's Drills</h2>
+    <div id="todayDrills"></div>
+
+    <!-- Recent Feed -->
+    <h2 style="margin: 20px 0 12px; font-size: 16px;">Latest Signals</h2>
+    <div class="card" id="dashFeed"></div>
+  </div>
+
+  <!-- QUEST MAP TAB -->
+  <div class="tab-panel" id="tab-quest-map">
+    <div class="card">
+      <h2>Your Quest Map</h2>
+      <p style="color: var(--text2); margin-bottom: 20px; font-size: 14px;">
+        Navigate the path from Senior to Principal Engineer. Complete quests to unlock new territories.
+      </p>
+      <div class="quest-map" id="questMap"></div>
+    </div>
+  </div>
+
+  <!-- DRILLS TAB -->
+  <div class="tab-panel" id="tab-drills">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+      <h2 style="font-size: 18px;">Skill Drills</h2>
+      <button class="btn btn-primary" onclick="resetDailyDrills()">Reset Today</button>
+    </div>
+    <div id="allDrills"></div>
+  </div>
+
+  <!-- IMPACT PROPOSALS TAB -->
+  <div class="tab-panel" id="tab-impact">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+      <h2 style="font-size: 18px;">Impact Proposals</h2>
+      <button class="btn btn-primary" onclick="showProposalModal()">+ New Proposal</button>
+    </div>
+    <div class="card" style="margin-bottom: 16px;">
+      <h3>Impact Proposal Framework</h3>
+      <p style="font-size: 13px; color: var(--text2); line-height: 1.6;">
+        For every initiative: <strong>Problem</strong> (who feels pain?) &rarr; <strong>Scale</strong> (how many affected?) &rarr;
+        <strong>Solution</strong> (your approach) &rarr; <strong>Differentiation</strong> (why better?) &rarr;
+        <strong>Metrics</strong> (how to measure?) &rarr; <strong>Timeline</strong> (2wk / 2mo / 6mo milestones)
+      </p>
+    </div>
+    <div class="grid-2" id="proposalsList"></div>
+  </div>
+
+  <!-- ENTERPRISE WATCH TAB -->
+  <div class="tab-panel" id="tab-enterprise">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+      <h2 style="font-size: 18px;">Enterprise Watchlist</h2>
+      <button class="btn btn-primary" onclick="showEnterpriseModal()">+ Add Company</button>
+    </div>
+    <div class="card">
+      <div id="enterpriseList"></div>
+    </div>
+
+    <h2 style="margin: 20px 0 12px; font-size: 16px;">Market Opportunity Radar</h2>
+    <div class="grid-3">
+      <div class="card">
+        <h3 style="color: var(--red);">Hot Sectors</h3>
+        <p style="font-size: 13px; color: var(--text2); margin-top: 8px;">
+          Edge AI inference, humanoid robotics, personalized agents, on-device LLMs
+        </p>
+      </div>
+      <div class="card">
+        <h3 style="color: var(--amber);">Emerging</h3>
+        <p style="font-size: 13px; color: var(--text2); margin-top: 8px;">
+          Physical intelligence, model compression for wearables, federated personalization
+        </p>
+      </div>
+      <div class="card">
+        <h3 style="color: var(--green);">Your Edge</h3>
+        <p style="font-size: 13px; color: var(--text2); margin-top: 8px;">
+          Intersection of personalized ML + any-body serving is underserved. Few engineers have both depth areas.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAILY FEED TAB -->
+  <div class="tab-panel" id="tab-feed">
+    <h2 style="font-size: 18px; margin-bottom: 16px;">Daily Feed & Digest</h2>
+
+    <div class="card">
+      <h2>Today's Email Digest Preview</h2>
+      <div class="digest-preview">
+        <div class="digest-section">
+          <h4>Enterprise Movements</h4>
+          <div class="digest-item">Figure AI announces new partnership with BMW for factory humanoids</div>
+          <div class="digest-item">Groq raises $640M Series D, valued at $2.8B for LPU inference chips</div>
+          <div class="digest-item">Physical Intelligence demos cross-embodiment transfer learning</div>
+        </div>
+        <div class="digest-section">
+          <h4>Market Signals</h4>
+          <div class="digest-item">Edge AI inference market projected to hit $38B by 2028 (Gartner)</div>
+          <div class="digest-item">Apple hiring spree for on-device ML team (12 new roles posted)</div>
+          <div class="digest-item">3 new YC W26 companies in personalized AI agents space</div>
+        </div>
+        <div class="digest-section">
+          <h4>Your Passion Area</h4>
+          <div class="digest-item">New paper: "Efficient Personalized LLM Serving at the Edge" (Stanford)</div>
+          <div class="digest-item">HuggingFace releases new model compression toolkit for mobile</div>
+          <div class="digest-item">Open-source project: TinyAgent — personal AI that runs on Raspberry Pi</div>
+        </div>
+        <div class="digest-section">
+          <h4>Career Signal</h4>
+          <div class="digest-item">You've completed 0 drills this week. Staff-track engineers average 4+/week.</div>
+          <div class="digest-item">Tip: Write one impact post about your recent work to boost visibility.</div>
+        </div>
+      </div>
+    </div>
+
+    <h2 style="margin: 20px 0 12px; font-size: 16px;">Live Feed</h2>
+    <div class="card" id="liveFeed"></div>
+  </div>
+
+  <!-- CAREER TRACK TAB -->
+  <div class="tab-panel" id="tab-career">
+    <h2 style="font-size: 18px; margin-bottom: 16px;">Career Trajectory</h2>
+
+    <div class="track-indicator" id="careerTrackIndicator">
+      <div class="track-dot"></div>
+      <div>
+        <strong id="careerTrackStatus">Assessing...</strong>
+        <p style="font-size: 13px; color: var(--text2); margin-top: 4px;" id="careerTrackMsg"></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>The Path</h2>
+      <div class="career-path" id="careerPath"></div>
+    </div>
+
+    <div class="grid-2" style="margin-top: 16px;">
+      <div class="card">
+        <h2>Strengths to Leverage</h2>
+        <ul style="list-style: none; font-size: 14px; color: var(--text2);">
+          <li style="padding: 8px 0; border-bottom: 1px solid var(--border);">
+            <span style="color: var(--green); margin-right: 8px;">+</span>
+            Rare intersection: personalized ML + edge/embodied AI
+          </li>
+          <li style="padding: 8px 0; border-bottom: 1px solid var(--border);">
+            <span style="color: var(--green); margin-right: 8px;">+</span>
+            Enterprise-building mindset alongside engineering depth
+          </li>
+          <li style="padding: 8px 0;">
+            <span style="color: var(--green); margin-right: 8px;">+</span>
+            Systematic approach to skill development (this playbook!)
+          </li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Gaps to Close</h2>
+        <ul style="list-style: none; font-size: 14px; color: var(--text2);" id="gapsList">
+          <li style="padding: 8px 0; border-bottom: 1px solid var(--border);">
+            <span style="color: var(--red); margin-right: 8px;">!</span>
+            Articulation drill consistency — practice daily
+          </li>
+          <li style="padding: 8px 0; border-bottom: 1px solid var(--border);">
+            <span style="color: var(--red); margin-right: 8px;">!</span>
+            Cross-team influence — start with one cross-team project
+          </li>
+          <li style="padding: 8px 0;">
+            <span style="color: var(--red); margin-right: 8px;">!</span>
+            Public visibility — publish 1 technical blog post or talk
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: 16px;">
+      <h2>Income Trajectory Estimate</h2>
+      <div style="display: flex; gap: 24px; align-items: flex-end; height: 200px; padding: 20px 0;">
+        <div style="flex: 1; text-align: center;">
+          <div style="background: var(--accent); height: 60px; border-radius: 8px 8px 0 0; margin-bottom: 8px;"></div>
+          <div style="font-size: 14px; font-weight: 700;">$250K</div>
+          <div style="font-size: 11px; color: var(--text2);">Senior (Now)</div>
+        </div>
+        <div style="flex: 1; text-align: center;">
+          <div style="background: var(--purple); height: 100px; border-radius: 8px 8px 0 0; margin-bottom: 8px;"></div>
+          <div style="font-size: 14px; font-weight: 700;">$450K</div>
+          <div style="font-size: 11px; color: var(--text2);">Staff (1-2yr)</div>
+        </div>
+        <div style="flex: 1; text-align: center;">
+          <div style="background: var(--amber); height: 150px; border-radius: 8px 8px 0 0; margin-bottom: 8px;"></div>
+          <div style="font-size: 14px; font-weight: 700;">$650K</div>
+          <div style="font-size: 11px; color: var(--text2);">Sr Staff (3-4yr)</div>
+        </div>
+        <div style="flex: 1; text-align: center;">
+          <div style="background: var(--green); height: 200px; border-radius: 8px 8px 0 0; margin-bottom: 8px;"></div>
+          <div style="font-size: 14px; font-weight: 700;">$1M+</div>
+          <div style="font-size: 11px; color: var(--text2);">Principal (5-7yr)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SETTINGS TAB -->
+  <div class="tab-panel" id="tab-settings">
+    <h2 style="font-size: 18px; margin-bottom: 16px;">Notifications & Settings</h2>
+    <div class="card">
+      <h2>Daily Notifications</h2>
+      <div class="setting-row">
+        <div>
+          <h4 style="font-size: 14px;">Morning Drill Reminder</h4>
+          <p style="font-size: 12px; color: var(--text2);">Notify at 8:00 AM to start daily drills</p>
+        </div>
+        <div class="toggle active" onclick="this.classList.toggle('active')"></div>
+      </div>
+      <div class="setting-row">
+        <div>
+          <h4 style="font-size: 14px;">Evening Progress Summary</h4>
+          <p style="font-size: 12px; color: var(--text2);">Recap of today's XP, drills completed, and streak</p>
+        </div>
+        <div class="toggle active" onclick="this.classList.toggle('active')"></div>
+      </div>
+      <div class="setting-row">
+        <div>
+          <h4 style="font-size: 14px;">Email Digest</h4>
+          <p style="font-size: 12px; color: var(--text2);">Daily email with enterprise movements, market signals, and drill status</p>
+        </div>
+        <div class="toggle active" onclick="this.classList.toggle('active')"></div>
+      </div>
+      <div class="setting-row">
+        <div>
+          <h4 style="font-size: 14px;">Weekly Career Check-in</h4>
+          <p style="font-size: 12px; color: var(--text2);">Sunday reflection prompt — are you on track?</p>
+        </div>
+        <div class="toggle active" onclick="this.classList.toggle('active')"></div>
+      </div>
+      <div class="setting-row">
+        <div>
+          <h4 style="font-size: 14px;">Enterprise Alert</h4>
+          <p style="font-size: 12px; color: var(--text2);">Instant alert when a watched company raises funding or makes news</p>
+        </div>
+        <div class="toggle" onclick="this.classList.toggle('active')"></div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: 16px;">
+      <h2>Data Management</h2>
+      <div style="display: flex; gap: 8px; margin-top: 12px;">
+        <button class="btn" onclick="exportData()">Export Data (JSON)</button>
+        <button class="btn" onclick="document.getElementById('importInput').click()">Import Data</button>
+        <input type="file" id="importInput" accept=".json" style="display:none" onchange="importData(event)">
+        <button class="btn" style="color: var(--red);" onclick="if(confirm('Reset all progress?')){localStorage.removeItem('visionquest');location.reload();}">Reset All</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Proposal Modal -->
+<div class="modal-overlay" id="proposalModal">
+  <div class="modal">
+    <h2>New Impact Proposal</h2>
+    <input id="propTitle" placeholder="Proposal Title" />
+    <textarea id="propProblem" placeholder="Problem: What pain exists? Who feels it?"></textarea>
+    <textarea id="propSolution" placeholder="Solution: Your approach and why"></textarea>
+    <input id="propScale" placeholder="Scale: How many affected? Business impact?" />
+    <input id="propTimeline" placeholder="Timeline: 2wk / 2mo / 6mo milestones" />
+    <select id="propStatus">
+      <option value="draft">Draft</option>
+      <option value="active">Active</option>
+      <option value="shipped">Shipped</option>
+    </select>
+    <div class="modal-actions">
+      <button class="btn" onclick="closeModals()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveProposal()">Save Proposal</button>
+    </div>
+  </div>
+</div>
+
+<!-- Enterprise Modal -->
+<div class="modal-overlay" id="enterpriseModal">
+  <div class="modal">
+    <h2>Add Company to Watchlist</h2>
+    <input id="entName" placeholder="Company Name" />
+    <input id="entDomain" placeholder="Domain (e.g., Edge AI, Robotics)" />
+    <input id="entStage" placeholder="Stage (e.g., Series B)" />
+    <select id="entSignal">
+      <option value="hot">Hot</option>
+      <option value="watch">Watch</option>
+      <option value="stable">Stable</option>
+    </select>
+    <textarea id="entNotes" placeholder="Notes — what makes this company interesting?"></textarea>
+    <div class="modal-actions">
+      <button class="btn" onclick="closeModals()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveEnterprise()">Add Company</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ============ STATE ============
+const STORAGE_KEY = 'visionquest';
+const XP_PER_LEVEL = 100;
+
+let state = loadState();
+
+function getDefaultState() {
+  return {
+    profile: { totalXP: 0, level: 1, streak: 0, lastActiveDate: null },
+    skillTrees: {
+      architect: { name: 'Architect', icon: '&#x1f3d7;&#xfe0f;', xp: 0, level: 1, color: '#3b82f6' },
+      strategist: { name: 'Strategist', icon: '&#x265f;&#xfe0f;', xp: 0, level: 1, color: '#8b5cf6' },
+      communicator: { name: 'Communicator', icon: '&#x1f4e1;', xp: 0, level: 1, color: '#f59e0b' },
+      innovator: { name: 'Innovator', icon: '&#x1f52c;', xp: 0, level: 1, color: '#10b981' }
+    },
+    drills: [
+      { id: 1, name: 'Articulation', tree: 'communicator', xp: 15, frequency: 'daily', streak: 0, totalCompleted: 0, completedToday: false },
+      { id: 2, name: 'System Design', tree: 'architect', xp: 25, frequency: 'weekly', streak: 0, totalCompleted: 0, completedToday: false },
+      { id: 3, name: 'Early Phase Proposals', tree: 'strategist', xp: 25, frequency: 'weekly', streak: 0, totalCompleted: 0, completedToday: false },
+      { id: 4, name: 'Org Navigation & Influence', tree: 'communicator', xp: 20, frequency: 'weekly', streak: 0, totalCompleted: 0, completedToday: false },
+      { id: 5, name: 'Business Impact Sizing', tree: 'strategist', xp: 25, frequency: 'weekly', streak: 0, totalCompleted: 0, completedToday: false },
+      { id: 6, name: 'Launch & Impact Posts', tree: 'communicator', xp: 20, frequency: 'per-milestone', streak: 0, totalCompleted: 0, completedToday: false },
+      { id: 7, name: 'Reliability & Landing Change', tree: 'architect', xp: 20, frequency: 'weekly', streak: 0, totalCompleted: 0, completedToday: false },
+      { id: 8, name: 'Personalized Intelligence Deep Dive', tree: 'innovator', xp: 30, frequency: 'weekly', streak: 0, totalCompleted: 0, completedToday: false },
+      { id: 9, name: 'Pre-IPO & Market Signals', tree: 'innovator', xp: 20, frequency: 'weekly', streak: 0, totalCompleted: 0, completedToday: false },
+      { id: 10, name: 'Reflection & Signal Integration', tree: 'strategist', xp: 15, frequency: 'weekly', streak: 0, totalCompleted: 0, completedToday: false }
+    ],
+    proposals: [],
+    enterprises: [
+      { name: 'Figure AI', domain: 'Embodied AI / Humanoid Robots', stage: 'Series B', signal: 'hot', notes: 'General-purpose humanoid robot, backed by OpenAI/Microsoft' },
+      { name: 'Groq', domain: 'Model Serving Infrastructure', stage: 'Series D', signal: 'hot', notes: 'LPU inference chips, fastest LLM serving' },
+      { name: 'Rabbit', domain: 'Personalized AI Agent', stage: 'Series B', signal: 'watch', notes: 'LAM for personal AI' },
+      { name: 'Mistral', domain: 'Open Models / Edge AI', stage: 'Series B', signal: 'hot', notes: 'Open-weight models, edge deployment focus' },
+      { name: 'Physical Intelligence', domain: 'Embodied AI / Robotics', stage: 'Series A', signal: 'hot', notes: 'Foundation models for physical intelligence' },
+      { name: 'Together AI', domain: 'Model Serving', stage: 'Series A', signal: 'watch', notes: 'Open-source model training and serving' }
+    ],
+    completionLog: []
+  };
+}
+
+function loadState() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) return JSON.parse(saved);
+  } catch (e) {}
+  return getDefaultState();
+}
+
+function saveState() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+// ============ NAVIGATION ============
+document.querySelectorAll('.nav-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+  });
+});
+
+// ============ TOAST ============
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ============ DRILL COMPLETION ============
+function completeDrill(drillId) {
+  const drill = state.drills.find(d => d.id === drillId);
+  if (!drill || drill.completedToday) return;
+
+  drill.completedToday = true;
+  drill.totalCompleted++;
+  drill.streak++;
+
+  // Add XP to skill tree
+  const tree = state.skillTrees[drill.tree];
+  tree.xp += drill.xp;
+  tree.level = Math.floor(tree.xp / XP_PER_LEVEL) + 1;
+
+  // Add XP to profile
+  state.profile.totalXP += drill.xp;
+  state.profile.level = Math.floor(state.profile.totalXP / XP_PER_LEVEL) + 1;
+
+  // Update streak
+  const today = new Date().toDateString();
+  if (state.profile.lastActiveDate !== today) {
+    const yesterday = new Date(Date.now() - 86400000).toDateString();
+    if (state.profile.lastActiveDate === yesterday) {
+      state.profile.streak++;
+    } else if (state.profile.lastActiveDate !== today) {
+      state.profile.streak = 1;
+    }
+    state.profile.lastActiveDate = today;
+  }
+
+  // Log
+  state.completionLog.push({ drillId, date: new Date().toISOString(), xp: drill.xp });
+
+  saveState();
+  renderAll();
+  showToast(`+${drill.xp} XP — ${drill.name} complete!`);
+}
+
+function resetDailyDrills() {
+  state.drills.forEach(d => d.completedToday = false);
+  saveState();
+  renderAll();
+  showToast('Daily drills reset');
+}
+
+// ============ MODALS ============
+function closeModals() {
+  document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
+}
+
+function showProposalModal() {
+  document.getElementById('proposalModal').classList.add('active');
+}
+
+function showEnterpriseModal() {
+  document.getElementById('enterpriseModal').classList.add('active');
+}
+
+function saveProposal() {
+  const p = {
+    title: document.getElementById('propTitle').value,
+    problem: document.getElementById('propProblem').value,
+    solution: document.getElementById('propSolution').value,
+    scale: document.getElementById('propScale').value,
+    timeline: document.getElementById('propTimeline').value,
+    status: document.getElementById('propStatus').value,
+    date: new Date().toISOString()
+  };
+  if (!p.title) return;
+  state.proposals.push(p);
+  saveState();
+  closeModals();
+  renderAll();
+  showToast('Proposal saved!');
+  // Clear fields
+  ['propTitle','propProblem','propSolution','propScale','propTimeline'].forEach(id => document.getElementById(id).value = '');
+}
+
+function saveEnterprise() {
+  const e = {
+    name: document.getElementById('entName').value,
+    domain: document.getElementById('entDomain').value,
+    stage: document.getElementById('entStage').value,
+    signal: document.getElementById('entSignal').value,
+    notes: document.getElementById('entNotes').value
+  };
+  if (!e.name) return;
+  state.enterprises.push(e);
+  saveState();
+  closeModals();
+  renderAll();
+  showToast('Company added!');
+  ['entName','entDomain','entStage','entNotes'].forEach(id => document.getElementById(id).value = '');
+}
+
+// ============ EXPORT / IMPORT ============
+function exportData() {
+  const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'visionquest-data.json';
+  a.click();
+}
+
+function importData(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      state = JSON.parse(e.target.result);
+      saveState();
+      renderAll();
+      showToast('Data imported!');
+    } catch (err) {
+      alert('Invalid file');
+    }
+  };
+  reader.readAsText(file);
+}
+
+// ============ RENDER ============
+function renderAll() {
+  renderTopBar();
+  renderSkillTrees();
+  renderDrills('todayDrills', true);
+  renderDrills('allDrills', false);
+  renderQuestMap();
+  renderProposals();
+  renderEnterprises();
+  renderFeed();
+  renderCareerPath();
+  renderDashStats();
+}
+
+function renderTopBar() {
+  const xpInLevel = state.profile.totalXP % XP_PER_LEVEL;
+  document.getElementById('levelBadge').textContent = `LVL ${state.profile.level}`;
+  document.getElementById('xpBarFill').style.width = `${(xpInLevel / XP_PER_LEVEL) * 100}%`;
+  document.getElementById('xpText').textContent = `${xpInLevel} / ${XP_PER_LEVEL} XP`;
+  document.getElementById('streakBadge').textContent = `${state.profile.streak} day streak`;
+}
+
+function renderDashStats() {
+  document.getElementById('statTotalXP').textContent = state.profile.totalXP;
+  document.getElementById('statDrillsDone').textContent = state.drills.reduce((s, d) => s + d.totalCompleted, 0);
+  document.getElementById('statStreak').textContent = state.profile.streak;
+  document.getElementById('statLevel').textContent = state.profile.level;
+
+  // Track indicator
+  const completedToday = state.drills.filter(d => d.completedToday).length;
+  const indicator = document.getElementById('trackIndicator');
+  if (completedToday >= 3) {
+    indicator.className = 'track-indicator track-ahead';
+    indicator.querySelector('.track-dot').style.background = 'var(--accent)';
+    indicator.querySelector('strong').textContent = 'Crushing It';
+    indicator.querySelector('span').textContent = `${completedToday} drills done today! You're accelerating toward Staff.`;
+  } else if (completedToday >= 1) {
+    indicator.className = 'track-indicator track-on';
+    indicator.querySelector('.track-dot').style.background = 'var(--green)';
+    indicator.querySelector('strong').textContent = 'On Track';
+    indicator.querySelector('span').textContent = `${completedToday} drills done. Keep going to maintain momentum.`;
+  } else {
+    indicator.className = 'track-indicator track-behind';
+    indicator.querySelector('.track-dot').style.background = 'var(--red)';
+    indicator.querySelector('strong').textContent = 'Behind Today';
+    indicator.querySelector('span').textContent = 'No drills completed yet. Start with Articulation — it only takes 5 minutes.';
+  }
+}
+
+function renderSkillTrees() {
+  const grid = document.getElementById('skillTreeGrid');
+  grid.innerHTML = '';
+  for (const [key, tree] of Object.entries(state.skillTrees)) {
+    const xpInLevel = tree.xp % XP_PER_LEVEL;
+    grid.innerHTML += `
+      <div class="skill-tree-card">
+        <div class="skill-tree-icon">${tree.icon}</div>
+        <h3>${tree.name}</h3>
+        <div class="skill-tree-level" style="color: ${tree.color}">LVL ${tree.level}</div>
+        <div style="font-size: 12px; color: var(--text2)">${tree.xp} XP total</div>
+        <div class="skill-tree-bar">
+          <div class="skill-tree-bar-fill" style="width: ${(xpInLevel/XP_PER_LEVEL)*100}%; background: ${tree.color}"></div>
+        </div>
+      </div>
+    `;
+  }
+}
+
+function renderDrills(containerId, todayOnly) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  container.innerHTML = '';
+
+  const drills = todayOnly ? state.drills.filter(d => d.frequency === 'daily' || !d.completedToday).slice(0, 5) : state.drills;
+
+  drills.forEach(d => {
+    const treeName = state.skillTrees[d.tree]?.name || d.tree;
+    const treeColor = state.skillTrees[d.tree]?.color || '#888';
+    container.innerHTML += `
+      <div class="drill-card ${d.completedToday ? 'completed-today' : ''}" onclick="${d.completedToday ? '' : `completeDrill(${d.id})`}">
+        <div class="drill-check">${d.completedToday ? '&#10003;' : ''}</div>
+        <div class="drill-info">
+          <h4>${d.name}</h4>
+          <p><span style="color: ${treeColor}">${treeName}</span> &middot; ${d.frequency} &middot; ${d.totalCompleted} completed</p>
+        </div>
+        <div style="text-align: right">
+          <div class="drill-xp">+${d.xp} XP</div>
+          <div class="drill-streak">${d.streak} streak</div>
+        </div>
+      </div>
+    `;
+  });
+}
+
+function renderQuestMap() {
+  const map = document.getElementById('questMap');
+  const milestones = [
+    { icon: '&#x1f4dd;', label: 'First Drill', xp: 0, key: 'first_drill' },
+    { icon: '&#x1f4ac;', label: 'Articulation x5', xp: 75, key: 'artic_5' },
+    { icon: '&#x1f3d7;&#xfe0f;', label: 'Design x3', xp: 150, key: 'design_3' },
+    { icon: '&#x1f4cb;', label: 'First Proposal', xp: 200, key: 'first_proposal' },
+    { icon: '&#x1f91d;', label: 'Org Influence x3', xp: 300, key: 'org_3' },
+    { icon: '&#x1f4b0;', label: 'Impact Sized x5', xp: 425, key: 'impact_5' },
+    { icon: '&#x1f680;', label: 'First Launch Post', xp: 500, key: 'launch_post' },
+    { icon: '&#x2b50;', label: 'Staff Level', xp: 500, key: 'staff' },
+    { icon: '&#x1f9e0;', label: 'Deep Dive x10', xp: 800, key: 'deep_10' },
+    { icon: '&#x1f4c8;', label: 'Market Thesis', xp: 1000, key: 'thesis' },
+    { icon: '&#x1f451;', label: 'Sr Staff Level', xp: 2000, key: 'sr_staff' },
+    { icon: '&#x1f30d;', label: 'Principal', xp: 5000, key: 'principal' },
+  ];
+
+  let html = '<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; align-items: center;">';
+
+  milestones.forEach((m, i) => {
+    const completed = state.profile.totalXP >= m.xp && m.xp > 0;
+    const current = !completed && (i === 0 || state.profile.totalXP >= milestones[i-1].xp);
+    const locked = !completed && !current;
+    const cls = completed ? 'completed' : current ? 'current' : 'locked';
+
+    if (i > 0) {
+      html += `<div class="quest-connector ${completed ? 'completed' : ''}"></div>`;
+    }
+    html += `
+      <div class="quest-node ${cls}" title="${m.label} — ${m.xp} XP required">
+        <div class="quest-node-icon">${m.icon}</div>
+        <div class="quest-node-label">${m.label}</div>
+      </div>
+    `;
+  });
+
+  html += '</div>';
+  map.innerHTML = html;
+}
+
+function renderProposals() {
+  const list = document.getElementById('proposalsList');
+  if (!list) return;
+  if (state.proposals.length === 0) {
+    list.innerHTML = '<div class="card" style="grid-column: 1/-1; text-align: center; color: var(--text2);">No proposals yet. Click "+ New Proposal" to create your first impact proposal.</div>';
+    return;
+  }
+  list.innerHTML = state.proposals.map(p => `
+    <div class="proposal-card">
+      <h4>${p.title}</h4>
+      <p><strong>Problem:</strong> ${p.problem}</p>
+      <p style="margin-top: 6px;"><strong>Solution:</strong> ${p.solution}</p>
+      ${p.scale ? `<p style="margin-top: 6px;"><strong>Scale:</strong> ${p.scale}</p>` : ''}
+      ${p.timeline ? `<p style="margin-top: 6px;"><strong>Timeline:</strong> ${p.timeline}</p>` : ''}
+      <span class="proposal-status status-${p.status}">${p.status}</span>
+    </div>
+  `).join('');
+}
+
+function renderEnterprises() {
+  const list = document.getElementById('enterpriseList');
+  if (!list) return;
+  list.innerHTML = state.enterprises.map(e => `
+    <div class="enterprise-row">
+      <div class="signal-dot signal-${e.signal}"></div>
+      <div class="enterprise-info">
+        <h4>${e.name}</h4>
+        <p>${e.domain} — ${e.notes}</p>
+      </div>
+      <div class="enterprise-stage">${e.stage}</div>
+    </div>
+  `).join('');
+}
+
+function renderFeed() {
+  const feedItems = [
+    { icon: '&#x1f525;', bg: '#ef444433', title: 'Figure AI expands factory humanoid partnerships', desc: 'New deal with BMW signals accelerating enterprise adoption of humanoid robots in manufacturing.', tag: 'hot', time: '2h ago' },
+    { icon: '&#x1f4b0;', bg: '#10b98133', title: 'Edge AI inference market hits $38B projection', desc: 'Gartner report confirms massive opportunity in on-device ML serving — your passion area.', tag: 'opportunity', time: '4h ago' },
+    { icon: '&#x1f52c;', bg: '#8b5cf633', title: 'New paper: Efficient Personalized LLM Serving at Edge', desc: 'Stanford researchers achieve 3x inference speedup for personalized models on mobile hardware.', tag: 'insight', time: '6h ago' },
+    { icon: '&#x1f440;', bg: '#f59e0b33', title: 'Physical Intelligence demos cross-embodiment transfer', desc: 'Foundation model trained on multiple robot form factors shows zero-shot transfer to new bodies.', tag: 'watch', time: '8h ago' },
+    { icon: '&#x1f4b0;', bg: '#10b98133', title: '3 new YC W26 companies in personalized AI agents', desc: 'Growing startup density in your exact passion intersection — potential competitors or acquirers.', tag: 'opportunity', time: '12h ago' },
+    { icon: '&#x1f525;', bg: '#ef444433', title: 'Apple posts 12 new on-device ML roles', desc: 'Hiring signals suggest major push in edge AI — potential employer or partner for your vision.', tag: 'hot', time: '1d ago' },
+    { icon: '&#x1f52c;', bg: '#8b5cf633', title: 'HuggingFace releases model compression toolkit for mobile', desc: 'Open-source tooling makes edge deployment more accessible — lower barrier for your prototypes.', tag: 'insight', time: '1d ago' },
+  ];
+
+  // Dashboard feed (top 3)
+  const dashFeed = document.getElementById('dashFeed');
+  if (dashFeed) {
+    dashFeed.innerHTML = feedItems.slice(0, 3).map(f => `
+      <div class="feed-item">
+        <div class="feed-icon" style="background: ${f.bg}">${f.icon}</div>
+        <div class="feed-content">
+          <h4>${f.title}</h4>
+          <p>${f.desc}</p>
+          <span class="feed-tag tag-${f.tag}">${f.tag}</span>
+          <span class="feed-time">${f.time}</span>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Full feed
+  const liveFeed = document.getElementById('liveFeed');
+  if (liveFeed) {
+    liveFeed.innerHTML = feedItems.map(f => `
+      <div class="feed-item">
+        <div class="feed-icon" style="background: ${f.bg}">${f.icon}</div>
+        <div class="feed-content">
+          <h4>${f.title}</h4>
+          <p>${f.desc}</p>
+          <span class="feed-tag tag-${f.tag}">${f.tag}</span>
+          <span class="feed-time">${f.time}</span>
+        </div>
+      </div>
+    `).join('');
+  }
+}
+
+function renderCareerPath() {
+  const path = document.getElementById('careerPath');
+  if (!path) return;
+
+  const levels = [
+    { level: 'Senior', income: '$200-350K', status: 'current', xp: 0 },
+    { level: 'Staff', income: '$350-500K', status: 'next', xp: 500 },
+    { level: 'Senior Staff', income: '$500-700K', status: 'locked', xp: 2000 },
+    { level: 'Principal', income: '$700K-1.2M+', status: 'locked', xp: 5000 },
+  ];
+
+  // Determine actual status based on XP
+  levels.forEach((l, i) => {
+    if (state.profile.totalXP >= l.xp) l.status = i === levels.length - 1 ? 'current' : 'completed';
+  });
+  // Find the highest non-completed and mark as current/next
+  let foundCurrent = false;
+  for (let i = levels.length - 1; i >= 0; i--) {
+    if (state.profile.totalXP >= levels[i].xp && !foundCurrent) {
+      levels[i].status = 'current';
+      foundCurrent = true;
+      if (i + 1 < levels.length) levels[i+1].status = 'next';
+    }
+  }
+
+  path.innerHTML = levels.map((l, i) => `
+    ${i > 0 ? '<div class="career-arrow">&rarr;</div>' : ''}
+    <div class="career-node ${l.status}">
+      <h4>${l.level}</h4>
+      <p>${l.xp} XP</p>
+      <div class="income">${l.income}</div>
+    </div>
+  `).join('');
+
+  // Career track indicator
+  const ci = document.getElementById('careerTrackIndicator');
+  const weeklyDrills = state.completionLog.filter(l => {
+    const d = new Date(l.date);
+    const now = new Date();
+    return (now - d) < 7 * 86400000;
+  }).length;
+
+  if (weeklyDrills >= 7) {
+    ci.className = 'track-indicator track-ahead';
+    ci.querySelector('.track-dot').style.background = 'var(--accent)';
+    document.getElementById('careerTrackStatus').textContent = 'Accelerating';
+    document.getElementById('careerTrackMsg').textContent = `${weeklyDrills} drills this week. You're building serious momentum toward Staff.`;
+  } else if (weeklyDrills >= 3) {
+    ci.className = 'track-indicator track-on';
+    ci.querySelector('.track-dot').style.background = 'var(--green)';
+    document.getElementById('careerTrackStatus').textContent = 'On Track for Staff Engineer';
+    document.getElementById('careerTrackMsg').textContent = `${weeklyDrills} drills this week. Maintain 4+/week to stay on the Staff trajectory.`;
+  } else {
+    ci.className = 'track-indicator track-behind';
+    ci.querySelector('.track-dot').style.background = 'var(--red)';
+    document.getElementById('careerTrackStatus').textContent = 'Needs Attention';
+    document.getElementById('careerTrackMsg').textContent = `Only ${weeklyDrills} drills this week. Staff-track engineers average 4+ drills/week. Start today.`;
+  }
+}
+
+// ============ INIT ============
+// Check if day changed, reset daily completion flags
+const today = new Date().toDateString();
+const lastDate = state.profile.lastActiveDate;
+if (lastDate && lastDate !== today) {
+  // Check if streak should break (missed yesterday)
+  const yesterday = new Date(Date.now() - 86400000).toDateString();
+  if (lastDate !== yesterday) {
+    state.profile.streak = 0;
+    state.drills.forEach(d => d.streak = 0);
+  }
+  state.drills.forEach(d => d.completedToday = false);
+  saveState();
+}
+
+renderAll();
+
+// Daily notification simulation
+if (Notification.permission === 'default') {
+  // Will ask on first drill completion
+}
+
+function requestNotificationPermission() {
+  if ('Notification' in window && Notification.permission === 'default') {
+    Notification.requestPermission();
+  }
+}
+
+// Schedule morning reminder (if page is open)
+function scheduleMorningReminder() {
+  const now = new Date();
+  const morning = new Date();
+  morning.setHours(8, 0, 0, 0);
+  if (now > morning) morning.setDate(morning.getDate() + 1);
+  const delay = morning - now;
+
+  setTimeout(() => {
+    if ('Notification' in window && Notification.permission === 'granted') {
+      new Notification('Vision Quest - Morning Drills', {
+        body: 'Time to start your daily drills! Begin with Articulation.',
+        icon: '&#x1f3af;'
+      });
+    }
+    scheduleMorningReminder();
+  }, delay);
+}
+
+requestNotificationPermission();
+scheduleMorningReminder();
+</script>
+
+</body>
+</html>

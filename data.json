@@ -1,0 +1,49 @@
+{
+  "profile": {
+    "name": "Di Wang",
+    "currentLevel": "Senior Engineer",
+    "targetLevel": "Principal Engineer",
+    "passion": "Personalized Intelligence & Model Serving on Any Body",
+    "startDate": "2026-04-07",
+    "totalXP": 0,
+    "level": 1
+  },
+  "skillTrees": {
+    "architect": { "name": "Architect", "icon": "🏗️", "xp": 0, "level": 1, "color": "#3b82f6" },
+    "strategist": { "name": "Strategist", "icon": "♟️", "xp": 0, "level": 1, "color": "#8b5cf6" },
+    "communicator": { "name": "Communicator", "icon": "📡", "xp": 0, "level": 1, "color": "#f59e0b" },
+    "innovator": { "name": "Innovator", "icon": "🔬", "xp": 0, "level": 1, "color": "#10b981" }
+  },
+  "drills": [
+    { "id": 1, "name": "Articulation", "tree": "communicator", "xp": 15, "frequency": "daily", "streak": 0, "totalCompleted": 0 },
+    { "id": 2, "name": "System Design", "tree": "architect", "xp": 25, "frequency": "weekly", "streak": 0, "totalCompleted": 0 },
+    { "id": 3, "name": "Early Phase Proposals", "tree": "strategist", "xp": 25, "frequency": "weekly", "streak": 0, "totalCompleted": 0 },
+    { "id": 4, "name": "Org Navigation & Influence", "tree": "communicator", "xp": 20, "frequency": "weekly", "streak": 0, "totalCompleted": 0 },
+    { "id": 5, "name": "Business Impact Sizing", "tree": "strategist", "xp": 25, "frequency": "weekly", "streak": 0, "totalCompleted": 0 },
+    { "id": 6, "name": "Launch & Impact Posts", "tree": "communicator", "xp": 20, "frequency": "per-milestone", "streak": 0, "totalCompleted": 0 },
+    { "id": 7, "name": "Reliability & Landing Change", "tree": "architect", "xp": 20, "frequency": "weekly", "streak": 0, "totalCompleted": 0 },
+    { "id": 8, "name": "Personalized Intelligence Deep Dive", "tree": "innovator", "xp": 30, "frequency": "weekly", "streak": 0, "totalCompleted": 0 },
+    { "id": 9, "name": "Pre-IPO & Market Signals", "tree": "innovator", "xp": 20, "frequency": "weekly", "streak": 0, "totalCompleted": 0 },
+    { "id": 10, "name": "Reflection & Signal Integration", "tree": "strategist", "xp": 15, "frequency": "weekly", "streak": 0, "totalCompleted": 0 },
+    { "id": 11, "name": "Production Hotfix", "tree": "architect", "xp": 30, "frequency": "weekly", "streak": 0, "totalCompleted": 0 },
+    { "id": 12, "name": "Production Metrics & SLA Quantification", "tree": "architect", "xp": 25, "frequency": "weekly", "streak": 0, "totalCompleted": 0 }
+  ],
+  "completionLog": [],
+  "impactProposals": [],
+  "enterpriseWatchlist": [
+    { "name": "Figure AI", "domain": "Embodied AI / Humanoid Robots", "stage": "Series B", "signal": "hot", "notes": "General-purpose humanoid robot, backed by OpenAI/Microsoft" },
+    { "name": "Groq", "domain": "Model Serving Infrastructure", "stage": "Series D", "signal": "hot", "notes": "LPU inference chips, fastest LLM serving" },
+    { "name": "Rabbit", "domain": "Personalized AI Agent", "stage": "Series B", "signal": "watch", "notes": "LAM (Large Action Model) for personal AI" },
+    { "name": "Mistral", "domain": "Open Models / Edge AI", "stage": "Series B", "signal": "hot", "notes": "Open-weight models, edge deployment focus" },
+    { "name": "Cohere", "domain": "Enterprise AI Platform", "stage": "Series D", "signal": "stable", "notes": "Enterprise RAG and embeddings" },
+    { "name": "Physical Intelligence", "domain": "Embodied AI / Robotics", "stage": "Series A", "signal": "hot", "notes": "Foundation models for physical intelligence" },
+    { "name": "Modular/Mojo", "domain": "AI Infrastructure", "stage": "Series B", "signal": "watch", "notes": "Next-gen AI programming language and runtime" },
+    { "name": "Together AI", "domain": "Model Serving", "stage": "Series A", "signal": "watch", "notes": "Open-source model training and serving" }
+  ],
+  "careerMilestones": [
+    { "level": "Senior", "requirement": "Own features end-to-end", "status": "current", "xpThreshold": 0 },
+    { "level": "Staff", "requirement": "Cross-team system ownership + business impact", "status": "next", "xpThreshold": 500 },
+    { "level": "Senior Staff", "requirement": "Org-wide technical strategy", "status": "locked", "xpThreshold": 2000 },
+    { "level": "Principal", "requirement": "Company-wide direction + external influence", "status": "locked", "xpThreshold": 5000 }
+  ]
+}
