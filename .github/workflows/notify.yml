@@ -1,0 +1,69 @@
+name: Notify on Knowledge Engine Update
+
+on:
+  push:
+    branches: [master]
+    paths: ['db/**']
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    # Only notify on automated trigger commits (not manual edits)
+    if: contains(github.event.head_commit.message, 'drill') || contains(github.event.head_commit.message, 'update') || contains(github.event.head_commit.message, 'Market scan')
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Build notification summary
+        id: summary
+        run: |
+          COMMIT_MSG="${{ github.event.head_commit.message }}"
+          COMMIT_URL="${{ github.event.head_commit.url }}"
+          TIMESTAMP=$(date -u '+%Y-%m-%d %H:%M UTC')
+
+          # Count changes
+          ADDED=$(git diff --numstat HEAD~1 HEAD -- db/ | awk '{s+=$1} END {print s+0}')
+          REMOVED=$(git diff --numstat HEAD~1 HEAD -- db/ | awk '{s+=$1} END {print s+0}')
+          FILES_CHANGED=$(git diff --name-only HEAD~1 HEAD -- db/ | wc -l | tr -d ' ')
+
+          BODY="Daily Knowledge Engine ran at ${TIMESTAMP}
+
+          Commit: ${COMMIT_MSG}
+          Files changed: ${FILES_CHANGED}
+          Lines added: ${ADDED}
+
+          View: ${COMMIT_URL}"
+
+          echo "body<<DELIM" >> $GITHUB_OUTPUT
+          echo "$BODY" >> $GITHUB_OUTPUT
+          echo "DELIM" >> $GITHUB_OUTPUT
+          echo "subject=Vision Quest: ${COMMIT_MSG}" >> $GITHUB_OUTPUT
+
+      # --- Phone: Push notification via ntfy.sh ---
+      - name: Send phone push notification
+        run: |
+          curl -s \
+            -H "Title: Vision Quest Update" \
+            -H "Priority: default" \
+            -H "Tags: brain,rocket" \
+            -d "${{ steps.summary.outputs.body }}" \
+            https://ntfy.sh/vision-quest-diwang
+
+      # --- Email: Send via Gmail SMTP ---
+      # To enable: add GMAIL_USERNAME and GMAIL_APP_PASSWORD as repo secrets
+      # Generate app password: https://myaccount.google.com/apppasswords
+      - name: Send email notification
+        if: env.GMAIL_USERNAME != ''
+        uses: dawidd6/action-send-mail@v3
+        env:
+          GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.GMAIL_USERNAME }}
+          password: ${{ secrets.GMAIL_APP_PASSWORD }}
+          subject: ${{ steps.summary.outputs.subject }}
+          body: ${{ steps.summary.outputs.body }}
+          to: ${{ secrets.GMAIL_USERNAME }}
+          from: Vision Quest <${{ secrets.GMAIL_USERNAME }}>

@@ -110,7 +110,9 @@ const ITEM_SCHEMAS = {
 
 suite('JSON parsing');
 
-const dbFiles = fs.readdirSync(DB_DIR).filter(f => f.endsWith('.json'));
+// notifications.json has a different schema (entries, not sections) — validated separately
+const EXCLUDED_FILES = ['notifications.json'];
+const dbFiles = fs.readdirSync(DB_DIR).filter(f => f.endsWith('.json') && !EXCLUDED_FILES.includes(f));
 assert(dbFiles.length > 0, 'db/ directory contains JSON files');
 
 const loaded = {};
@@ -417,6 +419,35 @@ for (const file of dbFiles) {
       `${file} section "${section.title}" has items`
     );
   }
+}
+
+// ─── Test: notifications.json structure ───────────────────────────────────────
+
+suite('Notifications structure');
+
+const notifPath = path.join(DB_DIR, 'notifications.json');
+if (fs.existsSync(notifPath)) {
+  try {
+    const notifData = loadJSON(notifPath);
+    assert(true, 'notifications.json parses as valid JSON');
+    assert(notifData.metadata !== undefined, 'has metadata');
+    assert(notifData.metadata.category === 'notifications', 'category is notifications');
+    assert(isValidDate(notifData.metadata.last_updated), 'last_updated is valid date');
+    assert(Array.isArray(notifData.entries), 'entries is an array');
+
+    for (const entry of notifData.entries) {
+      assert(typeof entry.timestamp === 'string', `entry has timestamp`);
+      assert(typeof entry.type === 'string', `entry "${entry.title}" has type`);
+      assert(typeof entry.title === 'string', `entry has title`);
+      assert(typeof entry.summary === 'string', `entry "${entry.title}" has summary`);
+      assert(Array.isArray(entry.tasks), `entry "${entry.title}" has tasks array`);
+      assert(Array.isArray(entry.items_added), `entry "${entry.title}" has items_added array`);
+    }
+  } catch (e) {
+    assert(false, `notifications.json fails to parse: ${e.message}`);
+  }
+} else {
+  assert(false, 'notifications.json exists');
 }
 
 // ─── Summary ─────────────────────────────────────────────────────────────────

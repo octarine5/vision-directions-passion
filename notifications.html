@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vision Quest — Notifications</title>
+<style>
+:root {
+  --bg: #0f172a;
+  --surface: #1e293b;
+  --surface2: #334155;
+  --border: #475569;
+  --text: #f1f5f9;
+  --text2: #94a3b8;
+  --text3: #64748b;
+  --accent: #3b82f6;
+  --green: #10b981;
+  --purple: #8b5cf6;
+  --amber: #f59e0b;
+  --red: #ef4444;
+  --cyan: #06b6d4;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Segoe UI',system-ui,-apple-system,sans-serif; background:var(--bg); color:var(--text); min-height:100vh; }
+
+.topbar {
+  background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);
+  border-bottom:1px solid var(--border);
+  padding:16px 24px;
+  display:flex; align-items:center; justify-content:space-between;
+  position:sticky; top:0; z-index:100;
+}
+.topbar h1 { font-size:1.4rem; }
+.topbar h1 span { color:var(--cyan); }
+.topbar-right { display:flex; gap:12px; align-items:center; }
+.topbar-right a { color:var(--accent); text-decoration:none; font-size:.85rem; }
+.topbar-right a:hover { text-decoration:underline; }
+
+.container { max-width:800px; margin:0 auto; padding:32px 24px; }
+
+.stats-row {
+  display:flex; gap:16px; margin-bottom:32px; flex-wrap:wrap;
+}
+.stat-card {
+  flex:1; min-width:150px;
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:16px; text-align:center;
+}
+.stat-card .value { font-size:2rem; font-weight:700; }
+.stat-card .label { color:var(--text2); font-size:.8rem; margin-top:4px; }
+.stat-card.green .value { color:var(--green); }
+.stat-card.purple .value { color:var(--purple); }
+.stat-card.amber .value { color:var(--amber); }
+.stat-card.cyan .value { color:var(--cyan); }
+
+.section-title {
+  font-size:1.1rem; color:var(--accent); margin:24px 0 16px;
+  border-bottom:1px solid var(--border); padding-bottom:8px;
+}
+
+.empty-state {
+  text-align:center; padding:60px 20px; color:var(--text2);
+}
+.empty-state h3 { margin-bottom:8px; color:var(--text); }
+
+.timeline { position:relative; padding-left:32px; }
+.timeline::before {
+  content:''; position:absolute; left:12px; top:8px; bottom:8px;
+  width:2px; background:var(--border);
+}
+
+.notif {
+  position:relative; margin-bottom:20px;
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:16px 20px; transition:border-color .2s;
+}
+.notif:hover { border-color:var(--accent); }
+.notif::before {
+  content:''; position:absolute; left:-24px; top:20px;
+  width:10px; height:10px; border-radius:50%;
+  background:var(--accent); border:2px solid var(--bg);
+}
+.notif.drill::before { background:var(--green); }
+.notif.knowledge-base::before { background:var(--purple); }
+.notif.market-scan::before { background:var(--amber); }
+
+.notif-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; flex-wrap:wrap; gap:8px; }
+.notif-title { font-size:.95rem; font-weight:600; }
+.notif-time { color:var(--text3); font-size:.75rem; }
+.notif-type {
+  display:inline-block; padding:2px 10px; border-radius:12px;
+  font-size:.7rem; font-weight:600;
+}
+.notif-type.drill { background:#10b98120; color:#34d399; }
+.notif-type.knowledge-base { background:#8b5cf620; color:#a78bfa; }
+.notif-type.market-scan { background:#f59e0b20; color:#fbbf24; }
+
+.notif-body { color:var(--text2); font-size:.85rem; line-height:1.6; }
+.notif-body ul { margin:8px 0 0 16px; }
+.notif-body li { margin-bottom:4px; }
+
+.notif-meta { display:flex; gap:12px; margin-top:10px; flex-wrap:wrap; }
+.notif-meta .chip {
+  background:var(--surface2); color:var(--text2); padding:3px 10px;
+  border-radius:4px; font-size:.7rem;
+}
+
+.setup-card {
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:20px; margin-bottom:16px;
+}
+.setup-card h4 { margin-bottom:8px; }
+.setup-card p { color:var(--text2); font-size:.85rem; line-height:1.6; }
+.setup-card code {
+  background:var(--bg); padding:2px 8px; border-radius:4px;
+  font-size:.8rem; color:var(--cyan);
+}
+.setup-card .step {
+  display:flex; gap:12px; align-items:flex-start; margin:12px 0;
+}
+.setup-card .step-num {
+  background:var(--accent); color:#fff; min-width:24px; height:24px;
+  border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-size:.75rem; font-weight:700; flex-shrink:0;
+}
+.setup-card .step-text { color:var(--text2); font-size:.85rem; line-height:1.5; }
+
+.refresh-btn {
+  background:var(--accent); color:#fff; border:none; padding:8px 16px;
+  border-radius:6px; cursor:pointer; font-size:.85rem;
+}
+.refresh-btn:hover { background:#2563eb; }
+
+@media(max-width:600px) {
+  .stats-row { flex-direction:column; }
+  .notif-header { flex-direction:column; align-items:flex-start; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <h1><span>Vision Quest</span> Notifications</h1>
+  <div class="topbar-right">
+    <a href="index.html">Quest Tracker</a>
+    <a href="knowledge-base.html">Knowledge Base</a>
+    <button class="refresh-btn" onclick="loadNotifications()">Refresh</button>
+  </div>
+</div>
+
+<div class="container">
+  <div class="stats-row">
+    <div class="stat-card green"><div class="value" id="totalRuns">0</div><div class="label">Total Runs</div></div>
+    <div class="stat-card purple"><div class="value" id="kbUpdates">0</div><div class="label">KB Updates</div></div>
+    <div class="stat-card amber"><div class="value" id="marketScans">0</div><div class="label">Market Scans</div></div>
+    <div class="stat-card cyan"><div class="value" id="drillCount">0</div><div class="label">Drills Added</div></div>
+  </div>
+
+  <h3 class="section-title">Setup — Get Notified on Your Phone</h3>
+  <div class="setup-card">
+    <h4>Push Notifications via ntfy.sh</h4>
+    <p>Free, open-source push notifications. No account needed.</p>
+    <div class="step"><span class="step-num">1</span><span class="step-text">Install the <strong>ntfy</strong> app on your phone (<a href="https://play.google.com/store/apps/details?id=io.heckel.ntfy" style="color:var(--accent)">Android</a> / <a href="https://apps.apple.com/us/app/ntfy/id1625396347" style="color:var(--accent)">iOS</a>)</span></div>
+    <div class="step"><span class="step-num">2</span><span class="step-text">Subscribe to topic: <code>vision-quest-diwang</code></span></div>
+    <div class="step"><span class="step-num">3</span><span class="step-text">Done! You'll get push notifications when the Daily Knowledge Engine runs.</span></div>
+  </div>
+
+  <h3 class="section-title">Update History</h3>
+  <div id="timeline" class="timeline"></div>
+</div>
+
+<script>
+async function loadNotifications() {
+  const timeline = document.getElementById('timeline');
+
+  try {
+    const res = await fetch('db/notifications.json');
+    const data = await res.json();
+    const entries = (data.entries || []).slice().reverse();
+
+    // Stats
+    document.getElementById('totalRuns').textContent = entries.length;
+    document.getElementById('kbUpdates').textContent = entries.filter(e => e.type === 'knowledge-base').length;
+    document.getElementById('marketScans').textContent = entries.filter(e => e.type === 'market-scan').length;
+    document.getElementById('drillCount').textContent = entries.filter(e => e.type === 'drill' || e.tasks?.includes('drill')).length;
+
+    if (entries.length === 0) {
+      timeline.innerHTML = `
+        <div class="empty-state">
+          <h3>No notifications yet</h3>
+          <p>The Daily Knowledge Engine runs weekdays at 4PM UTC.<br>
+          Notifications will appear here after the first run.</p>
+        </div>`;
+      return;
+    }
+
+    timeline.innerHTML = entries.map(e => {
+      const typeClass = e.type || 'drill';
+      const date = new Date(e.timestamp);
+      const timeStr = date.toLocaleDateString('en-US', {
+        weekday: 'short', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
+      });
+
+      const tasks = (e.tasks || []).map(t =>
+        `<span class="chip">${t}</span>`
+      ).join('');
+
+      const items = (e.items_added || []).map(i => `<li>${i}</li>`).join('');
+      const itemsHTML = items ? `<ul>${items}</ul>` : '';
+
+      return `
+        <div class="notif ${typeClass}">
+          <div class="notif-header">
+            <span class="notif-title">${e.title || 'Update'}</span>
+            <span class="notif-time">${timeStr}</span>
+          </div>
+          <span class="notif-type ${typeClass}">${typeClass.replace('-', ' ')}</span>
+          <div class="notif-body">
+            ${e.summary || ''}
+            ${itemsHTML}
+          </div>
+          ${tasks ? `<div class="notif-meta">${tasks}</div>` : ''}
+        </div>`;
+    }).join('');
+
+  } catch (err) {
+    timeline.innerHTML = `
+      <div class="empty-state">
+        <h3>Could not load notifications</h3>
+        <p>${err.message}</p>
+      </div>`;
+  }
+}
+
+loadNotifications();
+// Auto-refresh every 5 minutes
+setInterval(loadNotifications, 5 * 60 * 1000);
+</script>
+</body>
+</html>
