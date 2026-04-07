@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Architecture — Vision Quest</title>
+<style>
+:root {
+  --bg: #0f172a;
+  --surface: #1e293b;
+  --surface2: #334155;
+  --border: #475569;
+  --text: #f1f5f9;
+  --text2: #94a3b8;
+  --accent: #3b82f6;
+  --green: #10b981;
+  --purple: #8b5cf6;
+  --amber: #f59e0b;
+  --red: #ef4444;
+  --cyan: #06b6d4;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Segoe UI',system-ui,sans-serif; background:var(--bg); color:var(--text); min-height:100vh; }
+
+.topbar {
+  background:linear-gradient(135deg,#1e293b,#0f172a);
+  border-bottom:1px solid var(--border); padding:16px 24px;
+  display:flex; align-items:center; justify-content:space-between;
+  position:sticky; top:0; z-index:100;
+}
+.topbar h1 { font-size:1.4rem; }
+.topbar h1 span { color:var(--accent); }
+.topbar-nav { display:flex; gap:12px; }
+.topbar-nav a { color:var(--accent); text-decoration:none; font-size:.85rem; }
+
+.container { max-width:1200px; margin:0 auto; padding:24px; }
+
+.section { margin-bottom:32px; }
+.section h2 { font-size:1.2rem; color:var(--accent); margin-bottom:16px; border-bottom:1px solid var(--border); padding-bottom:8px; }
+.section h3 { font-size:1rem; color:var(--text2); margin:20px 0 12px; }
+
+/* Architecture diagram */
+.arch-diagram {
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:32px; overflow-x:auto;
+}
+.arch-row { display:flex; align-items:center; justify-content:center; gap:16px; margin:12px 0; flex-wrap:wrap; }
+.arch-box {
+  background:var(--surface2); border:1px solid var(--border); border-radius:8px;
+  padding:12px 20px; text-align:center; min-width:140px; transition:border-color .2s;
+}
+.arch-box:hover { border-color:var(--accent); }
+.arch-box .label { font-size:.7rem; color:var(--text2); text-transform:uppercase; letter-spacing:.5px; margin-bottom:4px; }
+.arch-box .name { font-size:.85rem; font-weight:600; }
+.arch-box.highlight { border-color:var(--accent); background:#3b82f610; }
+.arch-box.green { border-color:var(--green); }
+.arch-box.purple { border-color:var(--purple); }
+.arch-box.amber { border-color:var(--amber); }
+.arch-arrow { color:var(--text2); font-size:1.2rem; }
+.arch-arrow-down { text-align:center; color:var(--text2); font-size:1.2rem; padding:4px 0; }
+.arch-divider { border-top:1px dashed var(--border); margin:20px 0; position:relative; }
+.arch-divider span {
+  position:absolute; top:-10px; left:50%; transform:translateX(-50%);
+  background:var(--surface); padding:0 12px; font-size:.7rem; color:var(--text2);
+  text-transform:uppercase; letter-spacing:1px;
+}
+
+/* Commit log */
+.commit-log { list-style:none; }
+.commit-log li {
+  padding:12px 16px; border-left:2px solid var(--border); margin-left:8px;
+  position:relative; margin-bottom:4px;
+}
+.commit-log li::before {
+  content:''; position:absolute; left:-6px; top:16px;
+  width:10px; height:10px; border-radius:50%; background:var(--accent); border:2px solid var(--bg);
+}
+.commit-log .hash { color:var(--amber); font-family:monospace; font-size:.8rem; }
+.commit-log .msg { font-size:.85rem; margin-top:4px; }
+.commit-log .date { color:var(--text2); font-size:.75rem; margin-top:2px; }
+
+/* Tech stack */
+.stack-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px; }
+.stack-card {
+  background:var(--surface); border:1px solid var(--border); border-radius:8px;
+  padding:14px; transition:border-color .2s;
+}
+.stack-card:hover { border-color:var(--accent); }
+.stack-card .cat { font-size:.65rem; color:var(--text2); text-transform:uppercase; letter-spacing:.5px; margin-bottom:6px; }
+.stack-card .tech { font-size:.9rem; font-weight:600; margin-bottom:4px; }
+.stack-card .why { font-size:.8rem; color:var(--text2); }
+
+/* Trigger status */
+.trigger-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:16px; }
+.trigger-card {
+  background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:16px;
+}
+.trigger-card h4 { font-size:.9rem; margin-bottom:8px; }
+.trigger-card .meta { color:var(--text2); font-size:.8rem; line-height:1.6; }
+.trigger-card .status { display:inline-block; padding:2px 8px; border-radius:4px; font-size:.7rem; font-weight:600; }
+.trigger-card .status.active { background:#10b98120; color:#34d399; }
+.trigger-card .cron { font-family:monospace; background:var(--surface2); padding:2px 8px; border-radius:4px; font-size:.8rem; }
+
+/* Preview iframe */
+.preview-frame {
+  width:100%; height:500px; border:1px solid var(--border); border-radius:8px;
+  background:var(--bg);
+}
+.preview-tabs { display:flex; gap:0; margin-bottom:-1px; }
+.preview-tabs button {
+  background:var(--surface); border:1px solid var(--border); border-bottom:none;
+  color:var(--text2); padding:10px 20px; font-size:.85rem; cursor:pointer;
+  border-radius:8px 8px 0 0;
+}
+.preview-tabs button.active { color:var(--accent); background:var(--bg); border-bottom-color:var(--bg); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <h1><span>Architecture</span> & Plan</h1>
+  <div class="topbar-nav">
+    <a href="index.html">Quest Tracker</a>
+    <a href="knowledge-base.html">Knowledge Base</a>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ARCHITECTURE DIAGRAM -->
+<div class="section">
+  <h2>System Architecture</h2>
+  <div class="arch-diagram">
+
+    <div class="arch-row">
+      <div class="arch-box amber">
+        <div class="label">Scheduled Agent</div>
+        <div class="name">Knowledge Base Update</div>
+      </div>
+      <div class="arch-box amber">
+        <div class="label">Scheduled Agent</div>
+        <div class="name">Daily Drill Coach</div>
+      </div>
+      <div class="arch-box amber">
+        <div class="label">Scheduled Agent</div>
+        <div class="name">Market Signal Scan</div>
+      </div>
+    </div>
+
+    <div class="arch-arrow-down">web search + fetch</div>
+
+    <div class="arch-divider"><span>Ingestion Layer</span></div>
+
+    <div class="arch-row">
+      <div class="arch-box green">
+        <div class="label">Web Sources</div>
+        <div class="name">YouTube, arXiv, TechCrunch, Eng Blogs</div>
+      </div>
+      <div class="arch-arrow">&#8594;</div>
+      <div class="arch-box highlight">
+        <div class="label">Claude Agent</div>
+        <div class="name">Search + Validate + Append</div>
+      </div>
+      <div class="arch-arrow">&#8594;</div>
+      <div class="arch-box purple">
+        <div class="label">Git Push</div>
+        <div class="name">origin/master</div>
+      </div>
+    </div>
+
+    <div class="arch-arrow-down">auto-deploy</div>
+
+    <div class="arch-divider"><span>Data Layer</span></div>
+
+    <div class="arch-row">
+      <div class="arch-box" style="border-color:var(--cyan)">
+        <div class="label">db/</div>
+        <div class="name">system-design.json</div>
+      </div>
+      <div class="arch-box" style="border-color:var(--cyan)">
+        <div class="label">db/</div>
+        <div class="name">ml-systems.json</div>
+      </div>
+      <div class="arch-box" style="border-color:var(--cyan)">
+        <div class="label">db/</div>
+        <div class="name">business-problems.json</div>
+      </div>
+      <div class="arch-box" style="border-color:var(--cyan)">
+        <div class="label">db/</div>
+        <div class="name">impact-axes.json</div>
+      </div>
+      <div class="arch-box" style="border-color:var(--cyan)">
+        <div class="label">db/</div>
+        <div class="name">org-decisions.json</div>
+      </div>
+      <div class="arch-box" style="border-color:var(--cyan)">
+        <div class="label">db/</div>
+        <div class="name">tech-talks.json</div>
+      </div>
+      <div class="arch-box" style="border-color:var(--cyan)">
+        <div class="label">db/</div>
+        <div class="name">production-drills.json</div>
+      </div>
+    </div>
+
+    <div class="arch-arrow-down">fetch() at load time</div>
+
+    <div class="arch-divider"><span>Presentation Layer</span></div>
+
+    <div class="arch-row">
+      <div class="arch-box highlight">
+        <div class="label">Web App</div>
+        <div class="name">knowledge-base.html</div>
+      </div>
+      <div class="arch-box highlight">
+        <div class="label">Web App</div>
+        <div class="name">index.html (Quest Tracker)</div>
+      </div>
+      <div class="arch-box highlight">
+        <div class="label">You Are Here</div>
+        <div class="name">architecture.html</div>
+      </div>
+    </div>
+
+    <div class="arch-arrow-down">GitHub Pages</div>
+
+    <div class="arch-row">
+      <div class="arch-box green">
+        <div class="label">Hosting</div>
+        <div class="name">octarine5.github.io</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TECH STACK -->
+<div class="section">
+  <h2>Tech Stack</h2>
+  <div class="stack-grid">
+    <div class="stack-card">
+      <div class="cat">Data Store</div>
+      <div class="tech">JSON Files (db/)</div>
+      <div class="why">No server needed. Git-versioned. Agent-friendly read/write.</div>
+    </div>
+    <div class="stack-card">
+      <div class="cat">Frontend</div>
+      <div class="tech">Vanilla HTML/CSS/JS</div>
+      <div class="why">Zero build step. Instant deploy. No dependencies to break.</div>
+    </div>
+    <div class="stack-card">
+      <div class="cat">Hosting</div>
+      <div class="tech">GitHub Pages</div>
+      <div class="why">Free. Auto-deploys on push. CDN-backed. Custom domain ready.</div>
+    </div>
+    <div class="stack-card">
+      <div class="cat">CI/CD</div>
+      <div class="tech">GitHub Actions</div>
+      <div class="why">Push to master = live in 30s. No config needed.</div>
+    </div>
+    <div class="stack-card">
+      <div class="cat">Ingestion</div>
+      <div class="tech">Claude Scheduled Triggers</div>
+      <div class="why">Autonomous agents with web search. Append-only JSON updates.</div>
+    </div>
+    <div class="stack-card">
+      <div class="cat">Version Control</div>
+      <div class="tech">Git + GitHub</div>
+      <div class="why">Every change tracked. Rollback any agent mistake in one command.</div>
+    </div>
+    <div class="stack-card">
+      <div class="cat">Schema</div>
+      <div class="tech">JSON with conventions</div>
+      <div class="why">Each file has metadata header. Agents follow ingest-prompt.md schema.</div>
+    </div>
+    <div class="stack-card">
+      <div class="cat">Remote Access</div>
+      <div class="tech">Claude Remote Control</div>
+      <div class="why">Full Claude Code from phone via QR code. Local env access.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SCHEDULED TRIGGERS -->
+<div class="section">
+  <h2>Scheduled Agents</h2>
+  <div class="trigger-grid" id="triggerGrid">
+    <div class="trigger-card">
+      <h4>Weekly Knowledge Base + Tech Talks</h4>
+      <div class="meta">
+        <span class="status active">Active</span>
+        <span class="cron">0 16 * * 1</span><br>
+        Every Monday 9am PT<br>
+        Searches all categories + YouTube channels for new talks<br>
+        ~45K tokens/run, ~$0.50/month
+      </div>
+    </div>
+    <div class="trigger-card">
+      <h4>Daily Production Drill</h4>
+      <div class="meta">
+        <span class="status active">Active</span>
+        <span class="cron">0 16 * * 1-5</span><br>
+        Weekdays 9am PT<br>
+        Generates one new hotfix/metrics scenario daily<br>
+        ~13K tokens/run, ~$2/month
+      </div>
+    </div>
+    <div class="trigger-card">
+      <h4>Weekly Market Signal Scan</h4>
+      <div class="meta">
+        <span class="status active">Active</span>
+        <span class="cron">0 20 * * 5</span><br>
+        Fridays 1pm PT<br>
+        Funding rounds, acquisitions, talent moves, watchlist updates<br>
+        ~18K tokens/run, ~$0.50/month
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COMMIT HISTORY -->
+<div class="section">
+  <h2>Commit History</h2>
+  <ul class="commit-log" id="commitLog">
+    <li><span class="hash">loading...</span></li>
+  </ul>
+</div>
+
+<!-- LIVE PREVIEW -->
+<div class="section">
+  <h2>Live Preview</h2>
+  <div class="preview-tabs">
+    <button class="active" onclick="switchPreview('knowledge-base.html',this)">Knowledge Base</button>
+    <button onclick="switchPreview('index.html',this)">Quest Tracker</button>
+  </div>
+  <iframe class="preview-frame" id="previewFrame" src="knowledge-base.html"></iframe>
+</div>
+
+</div>
+
+<script>
+function switchPreview(src, btn) {
+  document.getElementById('previewFrame').src = src;
+  document.querySelectorAll('.preview-tabs button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// Load commit history from git (when served locally) or show static
+const commits = [
+  { hash: 'fb416fe', msg: 'Add GitHub Pages deployment workflow', date: '2026-04-07' },
+  { hash: '8544659', msg: 'Add production drills tab with 25 hands-on exercises', date: '2026-04-07' },
+  { hash: '2bade5c', msg: 'Decouple knowledge base: separate data layer from presentation', date: '2026-04-07' },
+  { hash: 'ed3a3ad', msg: 'Initial commit: career knowledge base and quest tracker', date: '2026-04-07' }
+];
+document.getElementById('commitLog').innerHTML = commits.map(c =>
+  `<li><span class="hash">${c.hash}</span><div class="msg">${c.msg}</div><div class="date">${c.date}</div></li>`
+).join('');
+</script>
+</body>
+</html>
