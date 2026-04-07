@@ -1,0 +1,121 @@
+{
+  "metadata": {
+    "category": "system-design",
+    "display_name": "System Design",
+    "layout": "table",
+    "columns": ["#", "Topic", "Key Concepts", "Tags", "Resources"],
+    "last_updated": "2026-04-07"
+  },
+  "sections": [
+    {
+      "title": "Distributed Systems Fundamentals",
+      "items": [
+        {"topic": "URL Shortener (TinyURL)", "concepts": "Hashing, base62, read-heavy, 301 vs 302", "tags": ["infra"], "resources": [{"title": "systemdesign.one", "url": "https://systemdesign.one/url-shortening-system-design"}], "added": "2026-04-07"},
+        {"topic": "Paste Bin", "concepts": "Object storage, content-addressable, TTL", "tags": ["infra"], "resources": [{"title": "design-primer", "url": "https://github.com/donnemartin/system-design-primer"}], "added": "2026-04-07"},
+        {"topic": "Rate Limiter", "concepts": "Token bucket, sliding window, distributed counters", "tags": ["infra", "scale"], "resources": [{"title": "Stripe Blog", "url": "https://stripe.com/blog/rate-limiters"}], "added": "2026-04-07"},
+        {"topic": "Consistent Hashing", "concepts": "Virtual nodes, ring topology, rebalancing", "tags": ["infra"], "resources": [{"title": "Toptal", "url": "https://www.toptal.com/big-data/consistent-hashing"}], "added": "2026-04-07"},
+        {"topic": "Key-Value Store", "concepts": "LSM trees, SSTables, compaction, bloom filters", "tags": ["data"], "resources": [{"title": "DDIA Ch3", "url": "https://www.oreilly.com/library/view/designing-data-intensive-applications/9781491903063/"}], "added": "2026-04-07"},
+        {"topic": "Distributed ID Generator", "concepts": "Snowflake, UUID, clock skew, ordering", "tags": ["infra"], "resources": [{"title": "Twitter Snowflake", "url": "https://blog.twitter.com/engineering/en_us/a/2010/announcing-snowflake"}], "added": "2026-04-07"},
+        {"topic": "Notification System", "concepts": "Push/pull, pub-sub, fan-out, priority queues", "tags": ["infra"], "resources": [{"title": "InfoQ Talk", "url": "https://www.youtube.com/watch?v=bBTPZ9NdSk8"}], "added": "2026-04-07"},
+        {"topic": "News Feed / Timeline", "concepts": "Fan-out on write vs read, ranking, caching", "tags": ["data", "scale"], "resources": [{"title": "Facebook Eng", "url": "https://www.infoq.com/presentations/Facebook-News-Feed/"}], "added": "2026-04-07"},
+        {"topic": "Chat System (WhatsApp)", "concepts": "WebSockets, message queues, delivery receipts, E2E encryption", "tags": ["infra"], "resources": [{"title": "High Scalability", "url": "https://highscalability.com/blog/2014/2/26/the-whatsapp-architecture-facebook-bought-for-19-billion.html"}], "added": "2026-04-07"},
+        {"topic": "Search Autocomplete / Typeahead", "concepts": "Trie, prefix tree, ranking, personalization", "tags": ["data"], "resources": [{"title": "Prefixy Case Study", "url": "https://prefixy.github.io/"}], "added": "2026-04-07"}
+      ]
+    },
+    {
+      "title": "Data Systems & Storage",
+      "items": [
+        {"topic": "Distributed Cache (Redis/Memcached)", "concepts": "Cache eviction (LRU/LFU), cache aside, write-through/back", "tags": ["data", "scale"], "resources": [{"title": "Redis Docs", "url": "https://redis.io/docs/manual/"}], "added": "2026-04-07"},
+        {"topic": "CDN Design", "concepts": "Edge caching, PoPs, origin shield, cache invalidation", "tags": ["infra", "scale"], "resources": [{"title": "Cloudflare", "url": "https://www.cloudflare.com/learning/cdn/what-is-a-cdn/"}], "added": "2026-04-07"},
+        {"topic": "Blob/Object Storage (S3)", "concepts": "Erasure coding, metadata service, multipart upload", "tags": ["infra", "data"], "resources": [{"title": "Werner Vogels", "url": "https://www.allthingsdistributed.com/2023/07/building-and-operating-a-pretty-big-storage-system.html"}], "added": "2026-04-07"},
+        {"topic": "Distributed Message Queue (Kafka)", "concepts": "Partitions, consumer groups, exactly-once, log compaction", "tags": ["data", "infra"], "resources": [{"title": "Kafka Docs", "url": "https://kafka.apache.org/documentation/"}], "added": "2026-04-07"},
+        {"topic": "Time-Series Database", "concepts": "Downsampling, retention policies, columnar storage", "tags": ["data"], "resources": [{"title": "Timescale Blog", "url": "https://www.timescale.com/blog/time-series-data-why-and-how-to-use-a-relational-database-instead-of-nosql-d0cd6975d87c/"}], "added": "2026-04-07"},
+        {"topic": "Search Engine (Elasticsearch)", "concepts": "Inverted index, sharding, TF-IDF, BM25", "tags": ["data"], "resources": [{"title": "Elastic Docs", "url": "https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html"}], "added": "2026-04-07"},
+        {"topic": "Graph Database", "concepts": "Adjacency lists, graph partitioning, traversal algorithms", "tags": ["data"], "resources": [{"title": "Neo4j", "url": "https://neo4j.com/developer/graph-database/"}], "added": "2026-04-07"},
+        {"topic": "Data Lake / Lakehouse", "concepts": "Schema-on-read, Parquet/ORC, Delta Lake, Iceberg", "tags": ["data"], "resources": [{"title": "Databricks", "url": "https://www.databricks.com/blog/2020/01/30/what-is-a-data-lakehouse.html"}], "added": "2026-04-07"},
+        {"topic": "Distributed SQL (CockroachDB/Spanner)", "concepts": "TrueTime, Raft consensus, serializable isolation", "tags": ["data", "scale"], "resources": [{"title": "Spanner Paper", "url": "https://research.google/pubs/pub39966/"}], "added": "2026-04-07"},
+        {"topic": "Change Data Capture (CDC)", "concepts": "Log-based CDC, Debezium, event sourcing, outbox pattern", "tags": ["data"], "resources": [{"title": "Debezium", "url": "https://debezium.io/documentation/reference/stable/tutorial.html"}], "added": "2026-04-07"}
+      ]
+    },
+    {
+      "title": "Large-Scale Web & Application Systems",
+      "items": [
+        {"topic": "Web Crawler", "concepts": "Politeness, URL frontier, dedup, robots.txt", "tags": ["infra"], "resources": [{"title": "Design Primer", "url": "https://github.com/donnemartin/system-design-primer#design-a-web-crawler"}], "added": "2026-04-07"},
+        {"topic": "YouTube / Video Streaming", "concepts": "Adaptive bitrate, transcoding pipeline, CDN, chunking", "tags": ["infra", "scale"], "resources": [{"title": "YouTube Architecture", "url": "https://www.youtube.com/watch?v=lYoSd2WCJTo"}], "added": "2026-04-07"},
+        {"topic": "Google Drive / Dropbox", "concepts": "File sync, conflict resolution, chunked upload, dedup", "tags": ["infra"], "resources": [{"title": "Dropbox Tech", "url": "https://dropbox.tech/infrastructure/magic-pocket-infrastructure"}], "added": "2026-04-07"},
+        {"topic": "Google Maps", "concepts": "Quad-tree, geohashing, Dijkstra/A*, tile rendering", "tags": ["data"], "resources": [{"title": "Mapbox", "url": "https://blog.mapbox.com/a-dive-into-spatial-search-algorithms-ebd0c5e39d2a"}], "added": "2026-04-07"},
+        {"topic": "Uber / Ride-Sharing", "concepts": "Geospatial indexing, matching, ETA, surge pricing", "tags": ["infra", "ml"], "resources": [{"title": "Uber Eng Blog", "url": "https://www.uber.com/blog/engineering/"}], "added": "2026-04-07"},
+        {"topic": "E-Commerce Platform (Amazon)", "concepts": "Catalog, cart, checkout, inventory, payments", "tags": ["infra", "biz"], "resources": [{"title": "All Things Distributed", "url": "https://www.allthingsdistributed.com/"}], "added": "2026-04-07"},
+        {"topic": "Hotel / Flight Booking", "concepts": "Distributed locking, double-booking prevention, saga pattern", "tags": ["infra"], "resources": [{"title": "Airbnb Eng", "url": "https://medium.com/airbnb-engineering"}], "added": "2026-04-07"},
+        {"topic": "Ticketing System (Ticketmaster)", "concepts": "Virtual queue, inventory hold, seat maps, flash sale", "tags": ["scale"], "resources": [{"title": "systemdesign.one", "url": "https://newsletter.systemdesign.one/p/design-ticketmaster"}], "added": "2026-04-07"},
+        {"topic": "Social Network (Facebook/LinkedIn)", "concepts": "Graph storage, news feed, privacy, friend suggestions", "tags": ["data", "scale"], "resources": [{"title": "Meta Engineering", "url": "https://engineering.fb.com/"}], "added": "2026-04-07"},
+        {"topic": "Twitter / Microblogging", "concepts": "Fan-out, timeline, trending, real-time delivery", "tags": ["scale"], "resources": [{"title": "Twitter Eng", "url": "https://blog.twitter.com/engineering"}], "added": "2026-04-07"}
+      ]
+    },
+    {
+      "title": "Infrastructure & Platform",
+      "items": [
+        {"topic": "API Gateway", "concepts": "Routing, auth, throttling, request transformation", "tags": ["infra"], "resources": [{"title": "NGINX", "url": "https://www.nginx.com/learn/api-gateway/"}], "added": "2026-04-07"},
+        {"topic": "Load Balancer", "concepts": "L4 vs L7, round robin, least connections, health checks", "tags": ["infra"], "resources": [{"title": "Visual Guide", "url": "https://samwho.dev/load-balancing/"}], "added": "2026-04-07"},
+        {"topic": "Service Mesh (Istio/Envoy)", "concepts": "Sidecar proxy, mTLS, circuit breaking, observability", "tags": ["infra"], "resources": [{"title": "Istio Docs", "url": "https://istio.io/latest/docs/concepts/"}], "added": "2026-04-07"},
+        {"topic": "Container Orchestration (K8s)", "concepts": "Pods, services, scheduling, autoscaling, rolling deploys", "tags": ["infra"], "resources": [{"title": "K8s Docs", "url": "https://kubernetes.io/docs/concepts/"}], "added": "2026-04-07"},
+        {"topic": "CI/CD Pipeline", "concepts": "Build, test, deploy stages, canary, blue-green, feature flags", "tags": ["infra"], "resources": [{"title": "Fowler", "url": "https://martinfowler.com/articles/continuousIntegration.html"}], "added": "2026-04-07"},
+        {"topic": "Distributed Tracing (Jaeger/Zipkin)", "concepts": "Span context, trace propagation, sampling strategies", "tags": ["infra"], "resources": [{"title": "OpenTelemetry", "url": "https://opentelemetry.io/docs/"}], "added": "2026-04-07"},
+        {"topic": "Logging & Monitoring at Scale", "concepts": "Log aggregation, metrics pipeline, alerting, dashboards", "tags": ["infra"], "resources": [{"title": "Google SRE", "url": "https://sre.google/sre-book/monitoring-distributed-systems/"}], "added": "2026-04-07"},
+        {"topic": "DNS Design", "concepts": "Recursive/authoritative, caching, anycast, DNSSEC", "tags": ["infra"], "resources": [{"title": "Cloudflare DNS", "url": "https://www.cloudflare.com/learning/dns/what-is-dns/"}], "added": "2026-04-07"},
+        {"topic": "Distributed Configuration (etcd/ZooKeeper)", "concepts": "Consensus, watches, leader election, distributed locks", "tags": ["infra"], "resources": [{"title": "etcd Docs", "url": "https://etcd.io/docs/"}], "added": "2026-04-07"},
+        {"topic": "Workflow Orchestration (Temporal/Airflow)", "concepts": "DAGs, retries, idempotency, long-running workflows", "tags": ["infra"], "resources": [{"title": "Temporal", "url": "https://temporal.io/how-temporal-works"}], "added": "2026-04-07"}
+      ]
+    },
+    {
+      "title": "Reliability & Advanced Patterns",
+      "items": [
+        {"topic": "Distributed Consensus (Raft/Paxos)", "concepts": "Leader election, log replication, split-brain", "tags": ["infra"], "resources": [{"title": "Raft Visualization", "url": "https://raft.github.io/"}], "added": "2026-04-07"},
+        {"topic": "CQRS & Event Sourcing", "concepts": "Command/query separation, event store, projections", "tags": ["data"], "resources": [{"title": "Fowler CQRS", "url": "https://martinfowler.com/bliki/CQRS.html"}], "added": "2026-04-07"},
+        {"topic": "Saga Pattern", "concepts": "Choreography vs orchestration, compensating transactions", "tags": ["infra"], "resources": [{"title": "Microservices.io", "url": "https://microservices.io/patterns/data/saga.html"}], "added": "2026-04-07"},
+        {"topic": "Circuit Breaker", "concepts": "Failure detection, fallback, half-open state", "tags": ["infra"], "resources": [{"title": "Fowler", "url": "https://martinfowler.com/bliki/CircuitBreaker.html"}], "added": "2026-04-07"},
+        {"topic": "Bulkhead Pattern", "concepts": "Resource isolation, thread pools, failure containment", "tags": ["infra"], "resources": [{"title": "Azure Patterns", "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/bulkhead"}], "added": "2026-04-07"},
+        {"topic": "Back-Pressure & Flow Control", "concepts": "Reactive streams, bounded queues, load shedding", "tags": ["scale"], "resources": [{"title": "Reactive Manifesto", "url": "https://www.reactivemanifesto.org/"}], "added": "2026-04-07"},
+        {"topic": "Chaos Engineering", "concepts": "Fault injection, game days, steady state hypothesis", "tags": ["infra"], "resources": [{"title": "Principles of Chaos", "url": "https://principlesofchaos.org/"}], "added": "2026-04-07"},
+        {"topic": "Disaster Recovery & Multi-Region", "concepts": "RPO/RTO, active-active, failover, data replication", "tags": ["infra", "scale"], "resources": [{"title": "AWS DR", "url": "https://aws.amazon.com/blogs/architecture/disaster-recovery-dr-architecture-on-aws-part-i/"}], "added": "2026-04-07"},
+        {"topic": "Feature Flag System", "concepts": "Gradual rollouts, kill switches, user targeting", "tags": ["infra"], "resources": [{"title": "LaunchDarkly", "url": "https://launchdarkly.com/blog/what-are-feature-flags/"}], "added": "2026-04-07"},
+        {"topic": "Distributed Locking", "concepts": "Redlock, fencing tokens, lease-based locks", "tags": ["infra"], "resources": [{"title": "Kleppmann", "url": "https://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html"}], "added": "2026-04-07"}
+      ]
+    },
+    {
+      "title": "Domain-Specific Systems",
+      "items": [
+        {"topic": "Payment System (Stripe)", "concepts": "Idempotency, PCI compliance, ledger, reconciliation", "tags": ["biz", "infra"], "resources": [{"title": "Stripe Docs", "url": "https://stripe.com/docs/payments"}], "added": "2026-04-07"},
+        {"topic": "Ad Serving System", "concepts": "Real-time bidding, ad ranking, frequency capping, attribution", "tags": ["ml", "biz"], "resources": [{"title": "Google Ad System", "url": "https://research.google/pubs/pub36955/"}], "added": "2026-04-07"},
+        {"topic": "Gaming Leaderboard", "concepts": "Sorted sets, real-time ranking, sharding by game", "tags": ["data"], "resources": [{"title": "Redis Sorted Sets", "url": "https://redis.io/docs/data-types/sorted-sets/"}], "added": "2026-04-07"},
+        {"topic": "Stock Exchange / Order Matching", "concepts": "Order book, matching engine, FIFO, market/limit orders", "tags": ["infra", "biz"], "resources": [{"title": "Jane Street Talks", "url": "https://web.archive.org/web/2024/https://jane-street.com/tech-talks/"}], "added": "2026-04-07"},
+        {"topic": "Email Service (Gmail)", "concepts": "SMTP pipeline, spam filtering, storage, search", "tags": ["infra"], "resources": [{"title": "Google Bigtable", "url": "https://research.google/pubs/pub36632/"}], "added": "2026-04-07"},
+        {"topic": "Photo Sharing (Instagram)", "concepts": "Image pipeline, storage tiering, feed, explore", "tags": ["scale"], "resources": [{"title": "Instagram Eng", "url": "https://instagram-engineering.com/"}], "added": "2026-04-07"},
+        {"topic": "Food Delivery (DoorDash)", "concepts": "Real-time dispatch, ETA prediction, logistics optimization", "tags": ["ml", "biz"], "resources": [{"title": "DoorDash Eng", "url": "https://doordash.engineering/"}], "added": "2026-04-07"},
+        {"topic": "Proximity Service / Nearby", "concepts": "Geohash, R-tree, spatial indexing", "tags": ["data"], "resources": [{"title": "Uber H3", "url": "https://www.uber.com/blog/h3/"}], "added": "2026-04-07"},
+        {"topic": "Digital Wallet", "concepts": "Double-entry bookkeeping, transaction log, settlement", "tags": ["biz"], "resources": [{"title": "Grab Eng", "url": "https://engineering.grab.com/"}], "added": "2026-04-07"},
+        {"topic": "Online Judge / Code Execution", "concepts": "Sandboxing, resource limits, queue, grading", "tags": ["infra"], "resources": [{"title": "LeetCode Discuss", "url": "https://leetcode.com/discuss/"}], "added": "2026-04-07"}
+      ]
+    },
+    {
+      "title": "Modern & Emerging",
+      "items": [
+        {"topic": "Vector Database (Pinecone/Weaviate)", "concepts": "ANN search, HNSW, quantization, embedding storage", "tags": ["ml", "data"], "resources": [{"title": "Pinecone Learn", "url": "https://www.pinecone.io/learn/"}], "added": "2026-04-07"},
+        {"topic": "LLM Serving Infrastructure", "concepts": "KV cache, batching, speculative decoding, model parallelism", "tags": ["ml", "infra"], "resources": [{"title": "vLLM", "url": "https://vllm.ai/"}], "added": "2026-04-07"},
+        {"topic": "RAG Pipeline", "concepts": "Retrieval, chunking, embedding, re-ranking, generation", "tags": ["ml"], "resources": [{"title": "LlamaIndex", "url": "https://docs.llamaindex.ai/"}], "added": "2026-04-07"},
+        {"topic": "Real-Time Collaboration (Google Docs)", "concepts": "OT/CRDT, conflict resolution, cursor sync", "tags": ["infra"], "resources": [{"title": "CRDT.tech", "url": "https://crdt.tech/"}], "added": "2026-04-07"},
+        {"topic": "Streaming Processing (Flink)", "concepts": "Windowing, watermarks, checkpointing, exactly-once", "tags": ["data"], "resources": [{"title": "Flink Docs", "url": "https://flink.apache.org/what-is-flink/flink-architecture/"}], "added": "2026-04-07"},
+        {"topic": "Multi-Tenant SaaS Platform", "concepts": "Tenant isolation, noisy neighbor, data partitioning", "tags": ["infra", "biz"], "resources": [{"title": "Azure Multi-tenant", "url": "https://learn.microsoft.com/en-us/azure/architecture/guide/multitenant/overview"}], "added": "2026-04-07"},
+        {"topic": "Edge Computing Platform", "concepts": "Edge nodes, latency routing, sync, offline-first", "tags": ["infra"], "resources": [{"title": "Cloudflare Edge", "url": "https://www.cloudflare.com/learning/serverless/glossary/what-is-edge-computing/"}], "added": "2026-04-07"},
+        {"topic": "IoT Data Platform", "concepts": "Device registry, telemetry ingestion, edge processing", "tags": ["data", "infra"], "resources": [{"title": "AWS IoT", "url": "https://aws.amazon.com/iot/"}], "added": "2026-04-07"},
+        {"topic": "Secrets Management (Vault)", "concepts": "Encryption as service, dynamic secrets, access policies", "tags": ["infra"], "resources": [{"title": "Vault Docs", "url": "https://www.vaultproject.io/docs"}], "added": "2026-04-07"},
+        {"topic": "Identity & Auth (OAuth2/OIDC)", "concepts": "Token flows, PKCE, federation, MFA", "tags": ["infra"], "resources": [{"title": "Auth0 Docs", "url": "https://auth0.com/docs"}], "added": "2026-04-07"},
+        {"topic": "Data Pipeline Orchestration", "concepts": "DAGs, backfill, data quality, lineage", "tags": ["data"], "resources": [{"title": "Airflow Docs", "url": "https://airflow.apache.org/docs/"}], "added": "2026-04-07"},
+        {"topic": "Content Moderation System", "concepts": "ML classifiers, human-in-loop, appeals, policy engine", "tags": ["ml", "biz"], "resources": [{"title": "Meta Transparency", "url": "https://transparency.meta.com/"}], "added": "2026-04-07"},
+        {"topic": "A/B Testing Platform", "concepts": "Experiment assignment, statistical significance, metrics", "tags": ["data", "ml"], "resources": [{"title": "Microsoft Exp", "url": "https://www.exp-platform.com/Documents/2009-ExPpitfalls.pdf"}], "added": "2026-04-07"},
+        {"topic": "Batch Processing (MapReduce/Spark)", "concepts": "Shuffle, partitioning, fault tolerance, DAG execution", "tags": ["data"], "resources": [{"title": "Spark Docs", "url": "https://spark.apache.org/docs/latest/"}], "added": "2026-04-07"},
+        {"topic": "Blockchain / Distributed Ledger", "concepts": "Consensus (PoW/PoS), Merkle trees, smart contracts", "tags": ["infra"], "resources": [{"title": "Ethereum Docs", "url": "https://ethereum.org/en/developers/docs/"}], "added": "2026-04-07"}
+      ]
+    }
+  ]
+}

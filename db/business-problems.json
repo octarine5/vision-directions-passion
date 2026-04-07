@@ -1,0 +1,76 @@
+{
+  "metadata": {
+    "category": "business-problems",
+    "display_name": "Business Problems",
+    "layout": "table",
+    "columns": ["#", "Problem", "Enterprise Example", "Market Fit Signal", "TAM", "Tags"],
+    "last_updated": "2026-04-07"
+  },
+  "sections": [
+    {
+      "title": "AI & Software Infrastructure",
+      "items": [
+        {"problem": "LLM inference cost reduction", "enterprise": "Fireworks AI, Together AI, Groq", "market_fit": "Every enterprise deploying AI needs cheaper inference", "tam": "$50B+", "tags": ["ml", "infra"], "added": "2026-04-07"},
+        {"problem": "Enterprise knowledge search", "enterprise": "Glean, Moveworks", "market_fit": "Workers spend 20% of time searching for info", "tam": "$15B", "tags": ["ml", "biz"], "added": "2026-04-07"},
+        {"problem": "AI code generation & developer tools", "enterprise": "GitHub Copilot, Cursor, Replit", "market_fit": "10x developer productivity, massive adoption", "tam": "$30B", "tags": ["ml"], "added": "2026-04-07"},
+        {"problem": "Data infrastructure modernization", "enterprise": "Snowflake, Databricks, Fivetran", "market_fit": "Every company becoming data-driven", "tam": "$80B", "tags": ["data"], "added": "2026-04-07"},
+        {"problem": "API management & integration", "enterprise": "Kong, Postman, MuleSoft", "market_fit": "Microservices explosion = API sprawl", "tam": "$10B", "tags": ["infra"], "added": "2026-04-07"},
+        {"problem": "Observability & monitoring", "enterprise": "Datadog, Grafana, Honeycomb", "market_fit": "Cloud complexity demands better visibility", "tam": "$25B", "tags": ["infra"], "added": "2026-04-07"},
+        {"problem": "Cloud cost optimization", "enterprise": "Vantage, CloudZero, Spot.io", "market_fit": "Cloud spend is the new #2 expense line", "tam": "$10B", "tags": ["infra", "biz"], "added": "2026-04-07"},
+        {"problem": "DevSecOps & software supply chain", "enterprise": "Snyk, Chainguard, Semgrep", "market_fit": "Regulatory pressure on software security", "tam": "$15B", "tags": ["infra"], "added": "2026-04-07"}
+      ]
+    },
+    {
+      "title": "Vertical AI Applications",
+      "items": [
+        {"problem": "AI-powered customer support", "enterprise": "Intercom Fin, Sierra, Decagon", "market_fit": "Support costs 5-15% of revenue, AI cuts 50%+", "tam": "$20B", "tags": ["ml", "biz"], "added": "2026-04-07"},
+        {"problem": "Healthcare clinical documentation", "enterprise": "Abridge, Nuance DAX, Suki", "market_fit": "Physicians spend 2hr/day on notes", "tam": "$12B", "tags": ["ml"], "added": "2026-04-07"},
+        {"problem": "Legal document analysis", "enterprise": "Harvey, CoCounsel (Thomson Reuters)", "market_fit": "Associates spend 60% on doc review", "tam": "$8B", "tags": ["ml"], "added": "2026-04-07"},
+        {"problem": "Financial risk & compliance", "enterprise": "Featurespace, Hawk AI, Hummingbird", "market_fit": "Banks spend $50B/yr on compliance", "tam": "$15B", "tags": ["ml", "biz"], "added": "2026-04-07"},
+        {"problem": "Drug discovery & molecular design", "enterprise": "Recursion, Isomorphic Labs, Insilico", "market_fit": "Pre-clinical costs $1B+ per drug", "tam": "$20B", "tags": ["ml"], "added": "2026-04-07"},
+        {"problem": "Autonomous vehicles & robotaxi", "enterprise": "Waymo, Cruise, Zoox", "market_fit": "$4T mobility market disruption", "tam": "$100B+", "tags": ["ml"], "added": "2026-04-07"},
+        {"problem": "AI-powered sales (outbound, CRM)", "enterprise": "11x, Artisan, Clay", "market_fit": "SDR cost $80K+ each, AI replaces top of funnel", "tam": "$10B", "tags": ["ml", "biz"], "added": "2026-04-07"},
+        {"problem": "Education personalization", "enterprise": "Khan Academy (Khanmigo), Duolingo", "market_fit": "Every student learns differently, 1:1 tutoring scales", "tam": "$8B", "tags": ["ml"], "added": "2026-04-07"}
+      ]
+    },
+    {
+      "title": "Enterprise Operations & Automation",
+      "items": [
+        {"problem": "Robotic process automation (RPA) + AI", "enterprise": "UiPath, Automation Anywhere", "market_fit": "Enterprises have millions of manual workflows", "tam": "$15B", "tags": ["biz"], "added": "2026-04-07"},
+        {"problem": "Supply chain optimization", "enterprise": "Flexport, FourKites, project44", "market_fit": "$2T lost annually to supply chain inefficiency", "tam": "$20B", "tags": ["biz", "ml"], "added": "2026-04-07"},
+        {"problem": "Workforce planning & HR analytics", "enterprise": "Workday, Eightfold AI, Visier", "market_fit": "Talent is largest cost center", "tam": "$12B", "tags": ["biz"], "added": "2026-04-07"},
+        {"problem": "Document processing (IDP)", "enterprise": "Hyperscience, Rossum, ABBYY", "market_fit": "Enterprises process billions of documents/yr", "tam": "$8B", "tags": ["ml"], "added": "2026-04-07"},
+        {"problem": "Revenue intelligence", "enterprise": "Gong, Clari, People.ai", "market_fit": "Sales leaders want data-driven forecasting", "tam": "$6B", "tags": ["biz"], "added": "2026-04-07"},
+        {"problem": "Procurement & spend management", "enterprise": "Coupa, Zip, Fairmarkit", "market_fit": "Enterprises overspend 15-20% on procurement", "tam": "$10B", "tags": ["biz"], "added": "2026-04-07"}
+      ]
+    },
+    {
+      "title": "Security, Identity & Trust",
+      "items": [
+        {"problem": "Identity & access management", "enterprise": "Okta, Auth0, CyberArk", "market_fit": "Zero-trust mandates in every enterprise", "tam": "$20B", "tags": ["infra"], "added": "2026-04-07"},
+        {"problem": "AI security & guardrails", "enterprise": "Robust Intelligence, Protect AI, Lakera", "market_fit": "Every company deploying LLMs needs safety", "tam": "$5B", "tags": ["ml"], "added": "2026-04-07"},
+        {"problem": "Data privacy & compliance", "enterprise": "OneTrust, BigID, Securiti", "market_fit": "GDPR/CCPA fines + new AI regulations", "tam": "$10B", "tags": ["biz"], "added": "2026-04-07"},
+        {"problem": "Endpoint detection & response", "enterprise": "CrowdStrike, SentinelOne", "market_fit": "Ransomware attacks up 300% YoY", "tam": "$15B", "tags": ["infra"], "added": "2026-04-07"},
+        {"problem": "Fraud prevention (payments)", "enterprise": "Stripe Radar, Sardine, Unit21", "market_fit": "$40B+ lost to payment fraud annually", "tam": "$12B", "tags": ["ml", "biz"], "added": "2026-04-07"}
+      ]
+    },
+    {
+      "title": "Frontier & Emerging Markets",
+      "items": [
+        {"problem": "Humanoid robotics & general-purpose robots", "enterprise": "Figure AI, 1X Technologies, Tesla Optimus", "market_fit": "Labor shortage + aging population", "tam": "$100B+", "tags": ["ml"], "added": "2026-04-07"},
+        {"problem": "Digital twins & simulation", "enterprise": "NVIDIA Omniverse, Siemens Xcelerator", "market_fit": "Manufacturing optimization at scale", "tam": "$15B", "tags": ["infra"], "added": "2026-04-07"},
+        {"problem": "Spatial computing & AR/VR", "enterprise": "Apple Vision Pro, Meta Quest, Snap", "market_fit": "Next computing platform paradigm shift", "tam": "$50B", "tags": ["infra"], "added": "2026-04-07"},
+        {"problem": "Climate tech & energy optimization", "enterprise": "Crusoe Energy, Arcadia, Span.IO", "market_fit": "$5T needed for net-zero by 2050", "tam": "$30B", "tags": ["biz"], "added": "2026-04-07"},
+        {"problem": "Synthetic data generation", "enterprise": "Gretel, Mostly AI, Tonic", "market_fit": "Privacy regulations + data scarcity for ML", "tam": "$5B", "tags": ["ml", "data"], "added": "2026-04-07"},
+        {"problem": "AI chip & hardware design", "enterprise": "Cerebras, Groq, d-Matrix, Tenstorrent", "market_fit": "GPU shortage + specialized AI compute demand", "tam": "$50B", "tags": ["infra"], "added": "2026-04-07"},
+        {"problem": "Voice AI & conversational commerce", "enterprise": "ElevenLabs, Hume AI, Bland AI", "market_fit": "Call centers are $400B market, AI replaces 80%", "tam": "$20B", "tags": ["ml", "biz"], "added": "2026-04-07"},
+        {"problem": "AI-native CRM", "enterprise": "Salesforce Einstein, Attio, Folk", "market_fit": "CRM reimagined with AI-first architecture", "tam": "$25B", "tags": ["biz"], "added": "2026-04-07"},
+        {"problem": "AI content creation (video/image)", "enterprise": "Runway, Pika, Midjourney", "market_fit": "Content demand outpaces creator capacity", "tam": "$15B", "tags": ["ml"], "added": "2026-04-07"},
+        {"problem": "Biotech platform (protein/genomics)", "enterprise": "AbSci, Evo, Profluent", "market_fit": "AI designs proteins faster than wet labs", "tam": "$30B", "tags": ["ml"], "added": "2026-04-07"},
+        {"problem": "Real-time translation & localization", "enterprise": "DeepL, Translated (Pi)", "market_fit": "Global commerce needs real-time multilingual", "tam": "$8B", "tags": ["ml"], "added": "2026-04-07"},
+        {"problem": "Construction & AEC tech", "enterprise": "Procore, OpenSpace, Buildots", "market_fit": "$10T industry, 1% IT spend", "tam": "$12B", "tags": ["biz"], "added": "2026-04-07"},
+        {"problem": "AI-powered cybersecurity SOC", "enterprise": "Torq, Tines, Swimlane", "market_fit": "Alert fatigue: 80% of SOC alerts are false positives", "tam": "$10B", "tags": ["ml", "infra"], "added": "2026-04-07"}
+      ]
+    }
+  ]
+}

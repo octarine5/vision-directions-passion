@@ -1,0 +1,111 @@
+{
+  "metadata": {
+    "category": "impact-axes",
+    "display_name": "Impact Axes",
+    "layout": "table",
+    "columns": ["#", "Impact Axis", "Example Initiative", "Level Signal"],
+    "last_updated": "2026-04-07"
+  },
+  "sections": [
+    {
+      "title": "Technical Excellence & Architecture",
+      "items": [
+        {"axis": "Platform consolidation", "example": "Unify 5 internal ML serving frameworks into one", "level": "Principal: cross-org architecture", "added": "2026-04-07"},
+        {"axis": "Latency reduction (P99)", "example": "Reduce API P99 from 500ms to 50ms", "level": "Staff: deep systems work", "added": "2026-04-07"},
+        {"axis": "Cost efficiency at scale", "example": "Save $10M/yr in compute via inference optimization", "level": "Sr Staff: business + technical", "added": "2026-04-07"},
+        {"axis": "Reliability improvement", "example": "Move service from 99.9% to 99.99% SLA", "level": "Staff: SRE + architecture", "added": "2026-04-07"},
+        {"axis": "Data architecture modernization", "example": "Migrate batch pipelines to streaming", "level": "Sr Staff: cross-team migration", "added": "2026-04-07"},
+        {"axis": "API design & developer experience", "example": "Design new public API that 100+ teams adopt", "level": "Staff: influence through design", "added": "2026-04-07"},
+        {"axis": "Technical debt elimination", "example": "Decompose monolith into microservices", "level": "Staff: sustained execution", "added": "2026-04-07"},
+        {"axis": "Performance optimization", "example": "10x throughput improvement in core pipeline", "level": "Staff: deep technical", "added": "2026-04-07"},
+        {"axis": "Security hardening", "example": "Implement zero-trust architecture across org", "level": "Sr Staff: org-wide impact", "added": "2026-04-07"},
+        {"axis": "Infrastructure migration", "example": "Multi-cloud or cloud-native migration", "level": "Principal: company strategy", "added": "2026-04-07"},
+        {"axis": "Build vs buy framework", "example": "Create decision framework saving $5M in wrong builds", "level": "Sr Staff: strategic thinking", "added": "2026-04-07"},
+        {"axis": "Observability platform", "example": "Unified metrics/logs/traces reducing MTTR by 60%", "level": "Staff: cross-cutting infrastructure", "added": "2026-04-07"},
+        {"axis": "Edge deployment architecture", "example": "Enable ML inference on edge devices at scale", "level": "Sr Staff: new capability", "added": "2026-04-07"},
+        {"axis": "Real-time feature serving", "example": "Sub-10ms feature serving for ML models", "level": "Staff: ML infrastructure", "added": "2026-04-07"},
+        {"axis": "Capacity planning system", "example": "Automated capacity forecasting saving 30% over-provisioning", "level": "Staff: infrastructure + ML", "added": "2026-04-07"}
+      ]
+    },
+    {
+      "title": "Product & Business Impact",
+      "items": [
+        {"axis": "Revenue-driving feature", "example": "Build personalization engine lifting revenue 15%", "level": "Sr Staff: direct business impact", "added": "2026-04-07"},
+        {"axis": "New product line enablement", "example": "Build platform enabling 3 new product launches", "level": "Principal: strategic platform", "added": "2026-04-07"},
+        {"axis": "Conversion optimization", "example": "ML-driven funnel optimization increasing signup 25%", "level": "Staff: applied ML + product", "added": "2026-04-07"},
+        {"axis": "User engagement improvement", "example": "Redesign notification system increasing DAU 20%", "level": "Staff: product + systems", "added": "2026-04-07"},
+        {"axis": "Market expansion enablement", "example": "Internationalization platform for 10 new markets", "level": "Sr Staff: business + eng", "added": "2026-04-07"},
+        {"axis": "Customer retention system", "example": "Churn prediction reducing attrition 30%", "level": "Staff: ML + business metrics", "added": "2026-04-07"},
+        {"axis": "Pricing optimization", "example": "Dynamic pricing increasing margin 10%", "level": "Sr Staff: ML + revenue", "added": "2026-04-07"},
+        {"axis": "Self-service platform", "example": "Reduce support tickets 50% with self-service tools", "level": "Staff: product engineering", "added": "2026-04-07"},
+        {"axis": "Marketplace trust & safety", "example": "Fraud detection saving $50M/yr in losses", "level": "Sr Staff: ML + risk", "added": "2026-04-07"},
+        {"axis": "Data monetization", "example": "Build data products generating new revenue stream", "level": "Principal: new business line", "added": "2026-04-07"}
+      ]
+    },
+    {
+      "title": "Engineering Productivity & Culture",
+      "items": [
+        {"axis": "Developer productivity platform", "example": "Internal tooling reducing deploy time from 1hr to 5min", "level": "Staff: DX improvement", "added": "2026-04-07"},
+        {"axis": "Testing infrastructure", "example": "CI pipeline reducing test time 80%, increasing coverage", "level": "Staff: engineering quality", "added": "2026-04-07"},
+        {"axis": "On-call health improvement", "example": "Reduce pages 70% through better alerting + automation", "level": "Staff: reliability culture", "added": "2026-04-07"},
+        {"axis": "Engineering standards & RFCs", "example": "Establish RFC process adopted by 200+ engineers", "level": "Sr Staff: culture influence", "added": "2026-04-07"},
+        {"axis": "Internal education program", "example": "ML bootcamp upskilling 50 engineers", "level": "Sr Staff: force multiplier", "added": "2026-04-07"},
+        {"axis": "Code quality initiative", "example": "Automated code review reducing bugs 40%", "level": "Staff: tooling + process", "added": "2026-04-07"},
+        {"axis": "Documentation overhaul", "example": "Knowledge base reducing onboarding time from 3mo to 1mo", "level": "Staff: enablement", "added": "2026-04-07"},
+        {"axis": "Incident response improvement", "example": "Incident framework reducing MTTR from 4hr to 30min", "level": "Staff: reliability", "added": "2026-04-07"},
+        {"axis": "Migration playbook", "example": "Create reusable migration framework used by 10 teams", "level": "Sr Staff: leverage", "added": "2026-04-07"},
+        {"axis": "Open-source contribution strategy", "example": "Open-source internal tool, gain 5K+ stars, hire pipeline", "level": "Sr Staff: employer brand", "added": "2026-04-07"}
+      ]
+    },
+    {
+      "title": "Organizational & Strategic",
+      "items": [
+        {"axis": "Technical vision document", "example": "3-year architecture vision aligning 5 teams", "level": "Principal: strategic direction", "added": "2026-04-07"},
+        {"axis": "M&A technical diligence", "example": "Lead technical evaluation for $100M+ acquisition", "level": "Principal: business judgment", "added": "2026-04-07"},
+        {"axis": "Vendor evaluation framework", "example": "Save $20M by systematic build vs buy analysis", "level": "Sr Staff: strategic", "added": "2026-04-07"},
+        {"axis": "Cross-functional alignment", "example": "Align engineering, product, data science on ML strategy", "level": "Principal: org leadership", "added": "2026-04-07"},
+        {"axis": "Talent strategy", "example": "Define technical ladder, retain 95% of senior ICs", "level": "Principal: org building", "added": "2026-04-07"},
+        {"axis": "Technical branding", "example": "Establish company as thought leader via blog + talks", "level": "Sr Staff: external influence", "added": "2026-04-07"},
+        {"axis": "Compliance & regulation response", "example": "GDPR/SOC2/AI Act implementation across org", "level": "Sr Staff: cross-cutting", "added": "2026-04-07"},
+        {"axis": "Partnership & ecosystem", "example": "Build integration ecosystem with 50+ partners", "level": "Principal: business development", "added": "2026-04-07"},
+        {"axis": "Post-incident systemic fix", "example": "After major outage, redesign system preventing class of failures", "level": "Staff: turning crisis into improvement", "added": "2026-04-07"},
+        {"axis": "Org design & team topology", "example": "Restructure teams for better ownership boundaries", "level": "Principal: org architecture", "added": "2026-04-07"}
+      ]
+    },
+    {
+      "title": "Innovation & Future Bets",
+      "items": [
+        {"axis": "New technology adoption", "example": "Evaluate and pilot LLM integration across products", "level": "Sr Staff: technical judgment", "added": "2026-04-07"},
+        {"axis": "Research-to-production pipeline", "example": "Take research prototype to production in 3 months", "level": "Staff: execution speed", "added": "2026-04-07"},
+        {"axis": "Platform extensibility", "example": "Plugin architecture enabling 3rd-party extensions", "level": "Sr Staff: ecosystem thinking", "added": "2026-04-07"},
+        {"axis": "Autonomous systems", "example": "Self-healing infrastructure reducing manual intervention 90%", "level": "Staff: automation", "added": "2026-04-07"},
+        {"axis": "Green computing initiative", "example": "Reduce compute carbon footprint 40%", "level": "Sr Staff: sustainability", "added": "2026-04-07"},
+        {"axis": "Privacy-preserving ML", "example": "Implement federated learning for sensitive data use cases", "level": "Staff: specialized expertise", "added": "2026-04-07"},
+        {"axis": "Real-time personalization", "example": "Sub-100ms personalization across all surfaces", "level": "Staff: ML + systems", "added": "2026-04-07"},
+        {"axis": "Multi-modal AI integration", "example": "Unify text, image, video understanding in one platform", "level": "Sr Staff: architecture", "added": "2026-04-07"},
+        {"axis": "AI safety framework", "example": "Build guardrails and evaluation suite for AI products", "level": "Sr Staff: responsible AI", "added": "2026-04-07"},
+        {"axis": "Embedded AI on-device", "example": "Ship ML models on mobile/edge with <10ms latency", "level": "Staff: specialized systems", "added": "2026-04-07"},
+        {"axis": "Data flywheel design", "example": "Architecture where more users = better models automatically", "level": "Principal: strategic moat", "added": "2026-04-07"},
+        {"axis": "Zero-downtime migration", "example": "Migrate 1B+ records with zero customer impact", "level": "Staff: operational excellence", "added": "2026-04-07"},
+        {"axis": "Internal AI assistant", "example": "Build Copilot for internal tools boosting productivity 30%", "level": "Sr Staff: leverage play", "added": "2026-04-07"},
+        {"axis": "Unified experimentation platform", "example": "A/B testing + ML experiments in one platform", "level": "Sr Staff: cross-team infra", "added": "2026-04-07"},
+        {"axis": "Customer data platform", "example": "360-degree customer view powering all personalization", "level": "Sr Staff: data architecture", "added": "2026-04-07"},
+        {"axis": "Event-driven architecture migration", "example": "Shift org from request-response to event-driven", "level": "Principal: paradigm shift", "added": "2026-04-07"},
+        {"axis": "GraphQL federation", "example": "Unified graph API across 20+ microservices", "level": "Staff: API architecture", "added": "2026-04-07"},
+        {"axis": "Automated capacity management", "example": "ML-driven autoscaling saving 40% compute cost", "level": "Staff: ML + infra", "added": "2026-04-07"},
+        {"axis": "Multi-region active-active", "example": "Enable global active-active for disaster resilience", "level": "Sr Staff: reliability", "added": "2026-04-07"},
+        {"axis": "Developer onboarding platform", "example": "New hire productive in week 1, not month 3", "level": "Staff: enablement", "added": "2026-04-07"},
+        {"axis": "Deprecation strategy", "example": "Successfully sunset legacy system with 500+ consumers", "level": "Sr Staff: change management", "added": "2026-04-07"},
+        {"axis": "Service ownership model", "example": "Clear ownership for 200+ services reducing toil 50%", "level": "Sr Staff: org design", "added": "2026-04-07"},
+        {"axis": "Cost attribution system", "example": "Per-team cloud cost visibility driving 25% reduction", "level": "Staff: finops", "added": "2026-04-07"},
+        {"axis": "API versioning strategy", "example": "Backward-compatible API evolution at scale", "level": "Staff: design excellence", "added": "2026-04-07"},
+        {"axis": "ML model marketplace", "example": "Internal model registry enabling cross-team reuse", "level": "Sr Staff: ML platform", "added": "2026-04-07"},
+        {"axis": "Streaming-first architecture", "example": "Real-time data products replacing batch ETL", "level": "Sr Staff: data strategy", "added": "2026-04-07"},
+        {"axis": "Accessibility at scale", "example": "Automated a11y testing + remediation across products", "level": "Staff: product quality", "added": "2026-04-07"},
+        {"axis": "Progressive delivery", "example": "Canary + feature flags reducing rollback incidents 80%", "level": "Staff: deployment safety", "added": "2026-04-07"},
+        {"axis": "AI governance framework", "example": "Model cards + bias testing for all production models", "level": "Sr Staff: responsible AI", "added": "2026-04-07"},
+        {"axis": "Technical debt quantification", "example": "Systematic debt tracking tied to velocity metrics", "level": "Sr Staff: engineering economics", "added": "2026-04-07"}
+      ]
+    }
+  ]
+}

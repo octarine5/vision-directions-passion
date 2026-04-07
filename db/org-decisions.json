@@ -1,0 +1,126 @@
+{
+  "metadata": {
+    "category": "org-decisions",
+    "display_name": "Org & Lifecycle",
+    "layout": "table",
+    "columns": ["#", "Decision / Topic", "Key Considerations", "Phase"],
+    "last_updated": "2026-04-07"
+  },
+  "sections": [
+    {
+      "title": "Project Ideation & Discovery (Phase 0)",
+      "items": [
+        {"topic": "Problem framing & scoping", "considerations": "User pain severity, frequency, willingness to pay", "phase": "Discovery", "added": "2026-04-07"},
+        {"topic": "Build vs buy vs partner", "considerations": "Core competency, time-to-market, TCO, vendor risk", "phase": "Discovery", "added": "2026-04-07"},
+        {"topic": "Market sizing (TAM/SAM/SOM)", "considerations": "Top-down vs bottom-up, growth assumptions", "phase": "Discovery", "added": "2026-04-07"},
+        {"topic": "Competitive landscape mapping", "considerations": "Direct/indirect competitors, substitutes, moats", "phase": "Discovery", "added": "2026-04-07"},
+        {"topic": "Customer discovery interviews", "considerations": "Jobs-to-be-done, unmet needs, willingness to switch", "phase": "Discovery", "added": "2026-04-07"},
+        {"topic": "Technical feasibility spike", "considerations": "Prototype key risk, validate assumptions early", "phase": "Discovery", "added": "2026-04-07"},
+        {"topic": "Opportunity cost analysis", "considerations": "What won't you build? Resource allocation tradeoffs", "phase": "Discovery", "added": "2026-04-07"},
+        {"topic": "Stakeholder mapping", "considerations": "Who has budget, who blocks, who champions", "phase": "Discovery", "added": "2026-04-07"}
+      ]
+    },
+    {
+      "title": "Planning & Design (Phase 1)",
+      "items": [
+        {"topic": "RFC / design doc process", "considerations": "When to write, who reviews, approval gates", "phase": "Planning", "added": "2026-04-07"},
+        {"topic": "Architecture decision records (ADRs)", "considerations": "Document trade-offs, revisit conditions, alternatives rejected", "phase": "Planning", "added": "2026-04-07"},
+        {"topic": "Team staffing & composition", "considerations": "Skills needed, embedded vs matrix, contractor vs FTE", "phase": "Planning", "added": "2026-04-07"},
+        {"topic": "Roadmap prioritization framework", "considerations": "RICE, ICE, weighted scoring, stack ranking", "phase": "Planning", "added": "2026-04-07"},
+        {"topic": "OKR / goal setting", "considerations": "Outcome vs output, leading vs lagging metrics", "phase": "Planning", "added": "2026-04-07"},
+        {"topic": "Dependency management", "considerations": "Cross-team blockers, critical path, de-risking", "phase": "Planning", "added": "2026-04-07"},
+        {"topic": "Scope negotiation", "considerations": "MVP definition, must-have vs nice-to-have, time-boxing", "phase": "Planning", "added": "2026-04-07"},
+        {"topic": "Risk register", "considerations": "Technical, organizational, market, regulatory risks", "phase": "Planning", "added": "2026-04-07"},
+        {"topic": "Migration strategy selection", "considerations": "Big bang vs strangler fig vs parallel run", "phase": "Planning", "added": "2026-04-07"},
+        {"topic": "API contract design", "considerations": "Backward compatibility, versioning, schema evolution", "phase": "Planning", "added": "2026-04-07"}
+      ]
+    },
+    {
+      "title": "Execution & Development (Phase 2)",
+      "items": [
+        {"topic": "Sprint vs kanban vs shape-up", "considerations": "Team maturity, work type, predictability needs", "phase": "Execution", "added": "2026-04-07"},
+        {"topic": "Code review culture", "considerations": "Review speed, thoroughness, mentoring vs gatekeeping", "phase": "Execution", "added": "2026-04-07"},
+        {"topic": "Branch strategy (trunk-based vs gitflow)", "considerations": "Release cadence, team size, integration pain", "phase": "Execution", "added": "2026-04-07"},
+        {"topic": "Testing strategy", "considerations": "Test pyramid, integration vs unit, flaky test policy", "phase": "Execution", "added": "2026-04-07"},
+        {"topic": "Tech debt budgeting", "considerations": "20% rule, debt sprints, tracking velocity impact", "phase": "Execution", "added": "2026-04-07"},
+        {"topic": "Pair programming / mob programming", "considerations": "When it helps vs overhead, knowledge sharing", "phase": "Execution", "added": "2026-04-07"},
+        {"topic": "Microservice boundaries", "considerations": "Domain-driven design, service granularity, data ownership", "phase": "Execution", "added": "2026-04-07"},
+        {"topic": "Monorepo vs polyrepo", "considerations": "Build times, dependency management, team autonomy", "phase": "Execution", "added": "2026-04-07"},
+        {"topic": "Database schema evolution", "considerations": "Migrations, backward compat, expand-contract pattern", "phase": "Execution", "added": "2026-04-07"},
+        {"topic": "Feature flag lifecycle", "considerations": "Rollout strategy, cleanup, flag debt, kill switches", "phase": "Execution", "added": "2026-04-07"}
+      ]
+    },
+    {
+      "title": "Launch & Rollout (Phase 3)",
+      "items": [
+        {"topic": "Launch readiness review", "considerations": "SLO defined, runbook exists, rollback plan tested", "phase": "Launch", "added": "2026-04-07"},
+        {"topic": "Canary vs blue-green vs rolling deploy", "considerations": "Risk tolerance, rollback speed, stateful services", "phase": "Launch", "added": "2026-04-07"},
+        {"topic": "Gradual rollout strategy", "considerations": "1% -> 10% -> 50% -> 100%, metrics to watch", "phase": "Launch", "added": "2026-04-07"},
+        {"topic": "Launch communication plan", "considerations": "Internal stakeholders, customers, docs, changelog", "phase": "Launch", "added": "2026-04-07"},
+        {"topic": "Data migration execution", "considerations": "Backfill, dual-write, validation, cutover", "phase": "Launch", "added": "2026-04-07"},
+        {"topic": "Backward compatibility period", "considerations": "Deprecation timeline, customer migration support", "phase": "Launch", "added": "2026-04-07"},
+        {"topic": "Performance benchmarking", "considerations": "Load testing, soak testing, capacity planning", "phase": "Launch", "added": "2026-04-07"},
+        {"topic": "Security review & pen testing", "considerations": "Threat model, OWASP, auth flows, data classification", "phase": "Launch", "added": "2026-04-07"}
+      ]
+    },
+    {
+      "title": "Operate & Scale (Phase 4)",
+      "items": [
+        {"topic": "SLO/SLA definition", "considerations": "Which metrics, error budgets, consequences", "phase": "Operate", "added": "2026-04-07"},
+        {"topic": "On-call structure", "considerations": "Rotation, escalation, compensation, burnout prevention", "phase": "Operate", "added": "2026-04-07"},
+        {"topic": "Incident management process", "considerations": "Severity levels, communication, post-mortems, action items", "phase": "Operate", "added": "2026-04-07"},
+        {"topic": "Runbook creation & maintenance", "considerations": "When to automate vs document, freshness", "phase": "Operate", "added": "2026-04-07"},
+        {"topic": "Capacity planning & autoscaling", "considerations": "Headroom, burst capacity, cost vs availability", "phase": "Operate", "added": "2026-04-07"},
+        {"topic": "Cost optimization cycles", "considerations": "Reserved instances, spot, right-sizing, FinOps", "phase": "Operate", "added": "2026-04-07"},
+        {"topic": "Observability maturity", "considerations": "Metrics -> logs -> traces -> profiling -> RCA automation", "phase": "Operate", "added": "2026-04-07"},
+        {"topic": "Disaster recovery testing", "considerations": "Game days, failover drills, RTO/RPO validation", "phase": "Operate", "added": "2026-04-07"},
+        {"topic": "Dependency upgrades & patching", "considerations": "Security patches, breaking changes, automated upgrades", "phase": "Operate", "added": "2026-04-07"}
+      ]
+    },
+    {
+      "title": "Growth & Maturity (Phase 5)",
+      "items": [
+        {"topic": "Platform team formation", "considerations": "When to centralize, internal product mindset, SLAs", "phase": "Growth", "added": "2026-04-07"},
+        {"topic": "Scaling team beyond 8-10", "considerations": "Two-pizza teams, communication overhead, sub-teams", "phase": "Growth", "added": "2026-04-07"},
+        {"topic": "Knowledge management", "considerations": "Wiki, design docs, tribal knowledge capture", "phase": "Growth", "added": "2026-04-07"},
+        {"topic": "Engineering metrics & health", "considerations": "DORA metrics, velocity, quality, developer satisfaction", "phase": "Growth", "added": "2026-04-07"},
+        {"topic": "Technical interview process", "considerations": "Bar calibration, interviewer training, structured evaluation", "phase": "Growth", "added": "2026-04-07"},
+        {"topic": "Architecture review board", "considerations": "When needed, composition, decision authority", "phase": "Growth", "added": "2026-04-07"},
+        {"topic": "Engineering brand & recruiting", "considerations": "Blog, talks, open-source, referral culture", "phase": "Growth", "added": "2026-04-07"},
+        {"topic": "Mentorship & sponsorship programs", "considerations": "1:1 pairing, skip-levels, career conversations", "phase": "Growth", "added": "2026-04-07"},
+        {"topic": "Reorg & team restructuring", "considerations": "Conway's law, minimize blast radius, communication", "phase": "Growth", "added": "2026-04-07"},
+        {"topic": "IC vs manager career track", "considerations": "Dual ladder, expectations, switching between tracks", "phase": "Growth", "added": "2026-04-07"}
+      ]
+    },
+    {
+      "title": "Sunset & Transition (Phase 6)",
+      "items": [
+        {"topic": "Deprecation strategy", "considerations": "Timeline, customer communication, migration support", "phase": "Sunset", "added": "2026-04-07"},
+        {"topic": "Data retention & archival", "considerations": "Compliance, cost, accessibility, legal holds", "phase": "Sunset", "added": "2026-04-07"},
+        {"topic": "Knowledge transfer", "considerations": "Tribal knowledge capture, documentation sprint", "phase": "Sunset", "added": "2026-04-07"},
+        {"topic": "Post-mortem & retrospective", "considerations": "What worked, what didn't, learnings for next project", "phase": "Sunset", "added": "2026-04-07"},
+        {"topic": "Team reallocation", "considerations": "Skills mapping to new projects, retention risk", "phase": "Sunset", "added": "2026-04-07"}
+      ]
+    },
+    {
+      "title": "Cross-Cutting Organizational Decisions",
+      "items": [
+        {"topic": "Remote vs hybrid vs in-person", "considerations": "Collaboration needs, talent pool, culture impact", "phase": "Cross-cutting", "added": "2026-04-07"},
+        {"topic": "Vendor / cloud provider selection", "considerations": "Lock-in risk, cost, feature set, support quality", "phase": "Cross-cutting", "added": "2026-04-07"},
+        {"topic": "Open-source vs proprietary", "considerations": "Community, licensing, support, competitive advantage", "phase": "Cross-cutting", "added": "2026-04-07"},
+        {"topic": "Compliance framework adoption", "considerations": "SOC2, HIPAA, GDPR, FedRAMP — which and when", "phase": "Cross-cutting", "added": "2026-04-07"},
+        {"topic": "Budget allocation across teams", "considerations": "Revenue-generating vs cost-center, strategic bets", "phase": "Cross-cutting", "added": "2026-04-07"},
+        {"topic": "Communication tooling & rituals", "considerations": "All-hands, standups, async-first, documentation culture", "phase": "Cross-cutting", "added": "2026-04-07"},
+        {"topic": "Cross-team project governance", "considerations": "RACI, program management, status reporting", "phase": "Cross-cutting", "added": "2026-04-07"},
+        {"topic": "Engineering principles codification", "considerations": "Values like ship fast vs ship right, ownership", "phase": "Cross-cutting", "added": "2026-04-07"},
+        {"topic": "Acquisition integration playbook", "considerations": "Tech stack merge, culture integration, retention", "phase": "Cross-cutting", "added": "2026-04-07"},
+        {"topic": "Internal tooling investment", "considerations": "When to build tools, ROI justification, maintenance cost", "phase": "Cross-cutting", "added": "2026-04-07"},
+        {"topic": "Multi-product architecture", "considerations": "Shared services, bounded contexts, data isolation", "phase": "Cross-cutting", "added": "2026-04-07"},
+        {"topic": "Internationalization strategy", "considerations": "i18n/l10n, data residency, local compliance", "phase": "Cross-cutting", "added": "2026-04-07"},
+        {"topic": "Developer experience (DX) investment", "considerations": "Build times, local dev, toolchain, IDE support", "phase": "Cross-cutting", "added": "2026-04-07"},
+        {"topic": "AI adoption strategy for the org", "considerations": "Training, tools, governance, risk management", "phase": "Cross-cutting", "added": "2026-04-07"},
+        {"topic": "Engineering culture & values", "considerations": "Blameless culture, learning org, psychological safety", "phase": "Cross-cutting", "added": "2026-04-07"}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "metadata": {
+    "category": "ml-systems",
+    "display_name": "ML Systems",
+    "layout": "table",
+    "columns": ["#", "Topic", "Key Concepts", "Tags", "Resources"],
+    "last_updated": "2026-04-07"
+  },
+  "sections": [
+    {
+      "title": "Core ML Infrastructure",
+      "items": [
+        {"topic": "Feature Store Design", "concepts": "Online/offline serving, feature registry, point-in-time joins", "tags": ["ml", "data"], "resources": [{"title": "Feast", "url": "https://feast.dev/"}], "added": "2026-04-07"},
+        {"topic": "ML Training Pipeline", "concepts": "Data ingestion, preprocessing, distributed training, checkpointing", "tags": ["ml"], "resources": [{"title": "MLflow", "url": "https://mlflow.org/"}], "added": "2026-04-07"},
+        {"topic": "Model Serving at Scale", "concepts": "Batching, GPU sharing, model warm-up, A/B routing", "tags": ["ml", "infra"], "resources": [{"title": "TFX Serving", "url": "https://www.tensorflow.org/tfx/guide/serving"}], "added": "2026-04-07"},
+        {"topic": "Experiment Tracking & Model Registry", "concepts": "Versioning, lineage, reproducibility, metadata", "tags": ["ml"], "resources": [{"title": "Weights & Biases", "url": "https://wandb.ai/"}], "added": "2026-04-07"},
+        {"topic": "Data Labeling Pipeline", "concepts": "Active learning, label quality, human-in-loop, consensus", "tags": ["ml"], "resources": [{"title": "Scale AI", "url": "https://scale.com/"}], "added": "2026-04-07"},
+        {"topic": "ML Monitoring & Observability", "concepts": "Data drift, model degradation, feature importance shift", "tags": ["ml"], "resources": [{"title": "WhyLabs", "url": "https://docs.whylabs.ai/"}], "added": "2026-04-07"},
+        {"topic": "GPU Cluster Management", "concepts": "Job scheduling, preemption, multi-tenancy, NCCL", "tags": ["ml", "infra"], "resources": [{"title": "SLURM", "url": "https://slurm.schedmd.com/"}], "added": "2026-04-07"},
+        {"topic": "Distributed Training (Data/Model Parallel)", "concepts": "AllReduce, pipeline parallelism, ZeRO, FSDP", "tags": ["ml"], "resources": [{"title": "DeepSpeed", "url": "https://www.deepspeed.ai/"}], "added": "2026-04-07"},
+        {"topic": "Model Compression & Optimization", "concepts": "Quantization, pruning, distillation, ONNX", "tags": ["ml"], "resources": [{"title": "HF Optimum", "url": "https://huggingface.co/docs/optimum/"}], "added": "2026-04-07"},
+        {"topic": "Edge ML Inference", "concepts": "TFLite, CoreML, ONNX Runtime, on-device adaptation", "tags": ["ml", "infra"], "resources": [{"title": "LiteRT", "url": "https://ai.google.dev/edge/litert"}], "added": "2026-04-07"}
+      ]
+    },
+    {
+      "title": "Applied ML Systems",
+      "items": [
+        {"topic": "Recommendation System", "concepts": "Collaborative filtering, content-based, two-tower, ranking", "tags": ["ml", "biz"], "resources": [{"title": "YouTube Deep Rec", "url": "https://research.google/pubs/pub45530/"}], "added": "2026-04-07"},
+        {"topic": "Search Ranking System", "concepts": "Learning to rank, query understanding, relevance, semantic search", "tags": ["ml"], "resources": [{"title": "MS LTR", "url": "https://www.microsoft.com/en-us/research/project/mslr/"}], "added": "2026-04-07"},
+        {"topic": "Ads Click Prediction", "concepts": "CTR prediction, feature crosses, embedding tables, calibration", "tags": ["ml", "biz"], "resources": [{"title": "DLRM Paper", "url": "https://research.facebook.com/publications/deep-learning-recommendation-model-for-personalization-and-recommendation-systems/"}], "added": "2026-04-07"},
+        {"topic": "Fraud Detection System", "concepts": "Anomaly detection, graph features, real-time scoring, feedback loops", "tags": ["ml", "biz"], "resources": [{"title": "Stripe Radar", "url": "https://stripe.com/radar"}], "added": "2026-04-07"},
+        {"topic": "NLP Pipeline (NER, Classification, Summarization)", "concepts": "Tokenization, fine-tuning, prompt engineering, evaluation", "tags": ["ml"], "resources": [{"title": "HuggingFace", "url": "https://huggingface.co/docs/transformers/"}], "added": "2026-04-07"},
+        {"topic": "Computer Vision Pipeline", "concepts": "Object detection, segmentation, tracking, video understanding", "tags": ["ml"], "resources": [{"title": "Detectron2", "url": "https://github.com/facebookresearch/detectron2"}], "added": "2026-04-07"},
+        {"topic": "Speech Recognition System (ASR)", "concepts": "CTC, attention-based, streaming, language model fusion", "tags": ["ml"], "resources": [{"title": "Whisper", "url": "https://github.com/openai/whisper"}], "added": "2026-04-07"},
+        {"topic": "Conversational AI / Chatbot", "concepts": "Intent detection, dialog management, retrieval, generation", "tags": ["ml"], "resources": [{"title": "Rasa", "url": "https://rasa.com/docs/"}], "added": "2026-04-07"},
+        {"topic": "Content Moderation ML", "concepts": "Multi-label classification, toxicity, NSFW, appeal handling", "tags": ["ml"], "resources": [{"title": "Meta AI Safety", "url": "https://ai.meta.com/blog/community-standards-enforcement-report/"}], "added": "2026-04-07"},
+        {"topic": "Personalization Engine", "concepts": "User embeddings, contextual bandits, cold-start, real-time features", "tags": ["ml", "biz"], "resources": [{"title": "Netflix Tech Blog", "url": "https://netflixtechblog.com/"}], "added": "2026-04-07"}
+      ]
+    },
+    {
+      "title": "LLM & Generative AI Systems",
+      "items": [
+        {"topic": "LLM Pre-Training Infrastructure", "concepts": "Data pipeline, tokenizer, distributed training, checkpointing", "tags": ["ml"], "resources": [{"title": "Chinchilla Paper", "url": "https://arxiv.org/abs/2203.15556"}], "added": "2026-04-07"},
+        {"topic": "RLHF / Alignment Pipeline", "concepts": "Reward modeling, PPO, DPO, human preferences", "tags": ["ml"], "resources": [{"title": "InstructGPT", "url": "https://arxiv.org/abs/2203.02155"}], "added": "2026-04-07"},
+        {"topic": "RAG System Design", "concepts": "Chunking strategies, retrieval, re-ranking, citation", "tags": ["ml"], "resources": [{"title": "RAG Survey", "url": "https://arxiv.org/abs/2312.10997"}], "added": "2026-04-07"},
+        {"topic": "LLM Agent Framework", "concepts": "Tool use, planning, memory, multi-agent orchestration", "tags": ["ml"], "resources": [{"title": "Agent Survey", "url": "https://arxiv.org/abs/2308.11432"}], "added": "2026-04-07"},
+        {"topic": "Fine-Tuning Pipeline (LoRA/QLoRA)", "concepts": "Parameter-efficient, adapter layers, data curation", "tags": ["ml"], "resources": [{"title": "LoRA Paper", "url": "https://arxiv.org/abs/2106.09685"}], "added": "2026-04-07"},
+        {"topic": "LLM Evaluation Framework", "concepts": "Benchmarks, human eval, automated eval, safety testing", "tags": ["ml"], "resources": [{"title": "LM Eval Harness", "url": "https://github.com/EleutherAI/lm-evaluation-harness"}], "added": "2026-04-07"},
+        {"topic": "Image Generation System (Diffusion)", "concepts": "Latent diffusion, conditioning, guidance, safety filters", "tags": ["ml"], "resources": [{"title": "Stable Diffusion", "url": "https://arxiv.org/abs/2112.10752"}], "added": "2026-04-07"},
+        {"topic": "Embedding Service", "concepts": "Batch/online embedding, caching, versioning, similarity search", "tags": ["ml", "infra"], "resources": [{"title": "OpenAI Embeddings", "url": "https://openai.com/index/new-embedding-models-and-api-updates/"}], "added": "2026-04-07"},
+        {"topic": "Prompt Management Platform", "concepts": "Versioning, A/B testing, guardrails, cost optimization", "tags": ["ml"], "resources": [{"title": "LangChain", "url": "https://www.langchain.com/"}], "added": "2026-04-07"},
+        {"topic": "Multi-Modal AI System", "concepts": "Vision-language models, cross-modal alignment, fusion", "tags": ["ml"], "resources": [{"title": "LLaVA", "url": "https://arxiv.org/abs/2304.08485"}], "added": "2026-04-07"}
+      ]
+    },
+    {
+      "title": "ML Platform & Operations",
+      "items": [
+        {"topic": "ML Platform (Michelangelo/Cortex)", "concepts": "End-to-end MLOps, self-service, governance", "tags": ["ml", "infra"], "resources": [{"title": "Uber Michelangelo", "url": "https://www.uber.com/blog/michelangelo-machine-learning-platform/"}], "added": "2026-04-07"},
+        {"topic": "Data Quality & Validation", "concepts": "Schema enforcement, statistical tests, anomaly detection", "tags": ["data", "ml"], "resources": [{"title": "TFDV", "url": "https://www.tensorflow.org/tfx/data_validation/get_started"}], "added": "2026-04-07"},
+        {"topic": "Online Learning System", "concepts": "Real-time model updates, concept drift, warm-starting", "tags": ["ml"], "resources": [{"title": "Vowpal Wabbit", "url": "https://vowpalwabbit.org/"}], "added": "2026-04-07"},
+        {"topic": "Causal Inference Platform", "concepts": "Uplift modeling, treatment effects, counterfactuals", "tags": ["ml", "biz"], "resources": [{"title": "CausalML", "url": "https://causalml.readthedocs.io/"}], "added": "2026-04-07"},
+        {"topic": "Time-Series Forecasting System", "concepts": "Seasonality, trend, exogenous variables, ensemble", "tags": ["ml"], "resources": [{"title": "Prophet", "url": "https://facebook.github.io/prophet/"}], "added": "2026-04-07"},
+        {"topic": "Knowledge Graph Construction", "concepts": "Entity resolution, relation extraction, graph embeddings", "tags": ["ml", "data"], "resources": [{"title": "KG Survey", "url": "https://arxiv.org/abs/2003.02320"}], "added": "2026-04-07"},
+        {"topic": "Autonomous Driving ML Stack", "concepts": "Perception, prediction, planning, simulation", "tags": ["ml"], "resources": [{"title": "Planning Survey", "url": "https://arxiv.org/abs/2206.02474"}], "added": "2026-04-07"},
+        {"topic": "Reinforcement Learning Infrastructure", "concepts": "Environment simulation, replay buffers, distributed rollouts", "tags": ["ml"], "resources": [{"title": "RLlib", "url": "https://docs.ray.io/en/latest/rllib/index.html"}], "added": "2026-04-07"},
+        {"topic": "Federated Learning System", "concepts": "Privacy, aggregation, communication efficiency, heterogeneity", "tags": ["ml"], "resources": [{"title": "Flower", "url": "https://flower.ai/"}], "added": "2026-04-07"},
+        {"topic": "Robotics ML Pipeline", "concepts": "Sim-to-real, imitation learning, grasping, manipulation", "tags": ["ml"], "resources": [{"title": "RT-X", "url": "https://robotics-transformer-x.github.io/"}], "added": "2026-04-07"}
+      ]
+    }
+  ]
+}
