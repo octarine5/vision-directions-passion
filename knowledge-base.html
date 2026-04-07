@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Staff+ Knowledge Base — Vision Quest</title>
+<style>
+:root {
+  --bg: #0f172a;
+  --surface: #1e293b;
+  --surface2: #334155;
+  --border: #475569;
+  --text: #f1f5f9;
+  --text2: #94a3b8;
+  --accent: #3b82f6;
+  --green: #10b981;
+  --purple: #8b5cf6;
+  --amber: #f59e0b;
+  --red: #ef4444;
+  --pink: #ec4899;
+  --cyan: #06b6d4;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Segoe UI',system-ui,-apple-system,sans-serif; background:var(--bg); color:var(--text); min-height:100vh; }
+
+.topbar {
+  background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);
+  border-bottom:1px solid var(--border);
+  padding:16px 24px;
+  display:flex; align-items:center; justify-content:space-between;
+  position:sticky; top:0; z-index:100;
+}
+.topbar h1 { font-size:1.4rem; }
+.topbar h1 span { color:var(--accent); }
+.topbar-right { display:flex; gap:12px; align-items:center; }
+.topbar-right a { color:var(--accent); text-decoration:none; font-size:.85rem; }
+.topbar-right a:hover { text-decoration:underline; }
+.last-updated { color:var(--text2); font-size:.75rem; }
+
+.tab-bar {
+  display:flex; gap:0; background:var(--surface); border-bottom:2px solid var(--border);
+  overflow-x:auto; padding:0 16px;
+}
+.tab-bar button {
+  background:none; border:none; color:var(--text2); padding:14px 20px;
+  font-size:.85rem; cursor:pointer; white-space:nowrap; border-bottom:2px solid transparent;
+  margin-bottom:-2px; transition:all .2s;
+}
+.tab-bar button:hover { color:var(--text); background:var(--surface2); }
+.tab-bar button.active { color:var(--accent); border-bottom-color:var(--accent); }
+.count-badge {
+  background:var(--accent); color:#fff; padding:2px 10px; border-radius:12px;
+  font-size:.75rem; font-weight:600; margin-left:8px;
+}
+
+.search-bar {
+  padding:16px 24px; background:var(--surface);
+  border-bottom:1px solid var(--border);
+}
+.search-bar input {
+  width:100%; max-width:600px; padding:10px 16px; border-radius:8px;
+  background:var(--bg); border:1px solid var(--border); color:var(--text);
+  font-size:.9rem; outline:none;
+}
+.search-bar input:focus { border-color:var(--accent); }
+
+.tab-content { display:none; padding:24px; }
+.tab-content.active { display:block; }
+
+.section-title {
+  font-size:1.1rem; color:var(--accent); margin:24px 0 12px 0;
+  border-bottom:1px solid var(--border); padding-bottom:8px;
+}
+.section-title:first-child { margin-top:0; }
+
+table { width:100%; border-collapse:collapse; margin-bottom:24px; }
+th { text-align:left; padding:10px 12px; background:var(--surface2); color:var(--text2);
+     font-size:.75rem; text-transform:uppercase; letter-spacing:.5px;
+     border-bottom:1px solid var(--border); position:sticky; top:0; }
+td { padding:10px 12px; border-bottom:1px solid var(--border); font-size:.85rem; vertical-align:top; }
+tr:hover td { background:var(--surface); }
+td a { color:var(--accent); text-decoration:none; }
+td a:hover { text-decoration:underline; }
+
+.tag {
+  display:inline-block; padding:2px 8px; border-radius:4px; font-size:.7rem;
+  margin:2px; font-weight:500;
+}
+.tag-infra { background:#3b82f620; color:#60a5fa; }
+.tag-ml { background:#8b5cf620; color:#a78bfa; }
+.tag-biz { background:#f59e0b20; color:#fbbf24; }
+.tag-org { background:#10b98120; color:#34d399; }
+.tag-data { background:#06b6d420; color:#22d3ee; }
+.tag-scale { background:#ef444420; color:#f87171; }
+
+.card-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:16px; }
+.card {
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:16px; transition:border-color .2s;
+}
+.card:hover { border-color:var(--accent); }
+.card h4 { font-size:.9rem; margin-bottom:6px; }
+.card h4 a { color:var(--text); text-decoration:none; }
+.card h4 a:hover { color:var(--accent); }
+.card .meta { color:var(--text2); font-size:.75rem; margin-bottom:8px; }
+.card p { color:var(--text2); font-size:.8rem; line-height:1.5; }
+
+/* Drill cards */
+.drill-card {
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:20px; margin-bottom:16px; transition:border-color .2s;
+}
+.drill-card:hover { border-color:var(--accent); }
+.drill-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; flex-wrap:wrap; gap:8px; }
+.drill-header h4 { font-size:1rem; margin:0; }
+.drill-meta { display:flex; gap:8px; align-items:center; }
+.drill-layer { background:var(--surface2); color:var(--text2); padding:3px 10px; border-radius:4px; font-size:.7rem; }
+.drill-difficulty { padding:3px 10px; border-radius:4px; font-size:.7rem; font-weight:600; }
+.drill-difficulty.Easy { background:#10b98120; color:#34d399; }
+.drill-difficulty.Medium { background:#f59e0b20; color:#fbbf24; }
+.drill-difficulty.Hard { background:#ef444420; color:#f87171; }
+.drill-scenario { background:var(--bg); border-left:3px solid var(--amber); padding:12px 16px;
+  border-radius:0 6px 6px 0; margin:12px 0; color:var(--text2); font-size:.85rem; line-height:1.6; }
+.drill-exercise { padding:8px 0; font-size:.85rem; line-height:1.8; white-space:pre-line; color:var(--text); font-family:'SF Mono',Monaco,Consolas,monospace; }
+
+.loading { text-align:center; padding:60px; color:var(--text2); }
+
+@media(max-width:768px) {
+  .tab-bar button { padding:10px 14px; font-size:.8rem; }
+  td, th { padding:8px; font-size:.8rem; }
+  .card-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <h1><span>Staff+</span> Knowledge Base</h1>
+  <div class="topbar-right">
+    <a href="index.html">Quest Tracker</a>
+    <span class="last-updated">Updated: <span id="lastUpdated">loading...</span></span>
+  </div>
+</div>
+
+<div class="tab-bar" id="tabBar"></div>
+
+<div class="search-bar">
+  <input type="text" id="searchInput" placeholder="Search across all topics...">
+</div>
+
+<div id="contentArea"></div>
+
+<script>
+const DATA_FILES = [
+  { id: 'system-design', file: 'db/system-design.json' },
+  { id: 'ml-systems', file: 'db/ml-systems.json' },
+  { id: 'business', file: 'db/business-problems.json' },
+  { id: 'impact', file: 'db/impact-axes.json' },
+  { id: 'org-decisions', file: 'db/org-decisions.json' },
+  { id: 'tech-talks', file: 'db/tech-talks.json' },
+  { id: 'production-drills', file: 'db/production-drills.json' }
+];
+
+let allData = {};
+let activeTab = null;
+
+// --- Renderers ---
+
+function renderTags(tags) {
+  return tags.map(t => `<span class="tag tag-${t}">${t}</span>`).join('');
+}
+
+function renderResources(resources) {
+  return resources.map(r => `<a href="${r.url}" target="_blank">${r.title}</a>`).join(', ');
+}
+
+function renderTableSection(section, category, startIdx) {
+  const meta = category.metadata;
+  let idx = startIdx;
+  let rows = '';
+
+  for (const item of section.items) {
+    idx++;
+    switch (meta.category) {
+      case 'system-design':
+      case 'ml-systems':
+        rows += `<tr data-search="${item.topic} ${item.concepts} ${(item.tags||[]).join(' ')}">
+          <td>${idx}</td><td>${item.topic}</td><td>${item.concepts}</td>
+          <td>${renderTags(item.tags||[])}</td><td>${renderResources(item.resources||[])}</td></tr>`;
+        break;
+      case 'business-problems':
+        rows += `<tr data-search="${item.problem} ${item.enterprise} ${item.market_fit} ${(item.tags||[]).join(' ')}">
+          <td>${idx}</td><td>${item.problem}</td><td>${item.enterprise}</td>
+          <td>${item.market_fit}</td><td>${item.tam}</td><td>${renderTags(item.tags||[])}</td></tr>`;
+        break;
+      case 'impact-axes':
+        rows += `<tr data-search="${item.axis} ${item.example} ${item.level}">
+          <td>${idx}</td><td>${item.axis}</td><td>${item.example}</td><td>${item.level}</td></tr>`;
+        break;
+      case 'org-decisions':
+        rows += `<tr data-search="${item.topic} ${item.considerations} ${item.phase}">
+          <td>${idx}</td><td>${item.topic}</td><td>${item.considerations}</td><td>${item.phase}</td></tr>`;
+        break;
+    }
+  }
+
+  const headers = meta.columns.map(c => `<th>${c}</th>`).join('');
+  return { html: `<h3 class="section-title">${section.title}</h3>
+    <table><tr>${headers}</tr>${rows}</table>`, nextIdx: idx };
+}
+
+function renderDrillSection(section) {
+  const drills = section.items.map(item => `
+    <div class="drill-card" data-search="${item.drill} ${item.layer} ${item.scenario} ${item.exercise} ${(item.tags||[]).join(' ')}">
+      <div class="drill-header">
+        <h4>${item.drill}</h4>
+        <div class="drill-meta">
+          <span class="drill-layer">${item.layer}</span>
+          <span class="drill-difficulty ${item.difficulty}">${item.difficulty}</span>
+          ${renderTags(item.tags||[])}
+        </div>
+      </div>
+      <div class="drill-scenario">${item.scenario}</div>
+      <details><summary style="cursor:pointer;color:var(--accent);font-size:.85rem;padding:8px 0;">Exercise Steps</summary>
+        <div class="drill-exercise">${item.exercise}</div>
+      </details>
+    </div>`).join('');
+  return `<h3 class="section-title">${section.title}</h3>${drills}`;
+}
+
+function renderCardSection(section) {
+  const cards = section.items.map(item => `
+    <div class="card" data-search="${item.title} ${item.speaker} ${item.venue} ${item.description}">
+      <h4><a href="${item.url}" target="_blank">${item.title}</a></h4>
+      <div class="meta">${item.speaker}${item.venue ? ' \u2022 ' + item.venue : ''}</div>
+      <p>${item.description}</p>
+    </div>`).join('');
+  return `<h3 class="section-title">${section.title}</h3><div class="card-grid">${cards}</div>`;
+}
+
+function renderTab(dataKey) {
+  const category = allData[dataKey];
+  if (!category) return '<div class="loading">No data loaded</div>';
+
+  const content = document.createElement('div');
+  let html = '';
+  let idx = 0;
+
+  for (const section of category.sections) {
+    if (category.metadata.layout === 'drills') {
+      html += renderDrillSection(section);
+    } else if (category.metadata.layout === 'cards') {
+      html += renderCardSection(section);
+    } else {
+      const result = renderTableSection(section, category, idx);
+      html += result.html;
+      idx = result.nextIdx;
+    }
+  }
+  return html;
+}
+
+function countItems(category) {
+  if (!category) return 0;
+  return category.sections.reduce((sum, s) => sum + s.items.length, 0);
+}
+
+function switchTab(tabId) {
+  activeTab = tabId;
+  document.querySelectorAll('.tab-bar button').forEach(b => {
+    b.classList.toggle('active', b.dataset.tab === tabId);
+  });
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  let el = document.getElementById('tab-' + tabId);
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'tab-' + tabId;
+    el.className = 'tab-content';
+    el.innerHTML = renderTab(tabId);
+    document.getElementById('contentArea').appendChild(el);
+  }
+  el.classList.add('active');
+}
+
+// --- Search ---
+document.getElementById('searchInput').addEventListener('input', e => {
+  const q = e.target.value.toLowerCase();
+  document.querySelectorAll('.tab-content').forEach(tab => {
+    tab.querySelectorAll('tr[data-search], .card[data-search]').forEach(el => {
+      el.style.display = !q || el.dataset.search.toLowerCase().includes(q) ? '' : 'none';
+    });
+  });
+  // If searching, show all tabs content
+  if (q) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.add('active'));
+  } else {
+    document.querySelectorAll('.tab-content').forEach(t => {
+      t.classList.toggle('active', t.id === 'tab-' + activeTab);
+    });
+  }
+});
+
+// --- Load ---
+async function init() {
+  const tabBar = document.getElementById('tabBar');
+  let latestDate = '';
+
+  await Promise.all(DATA_FILES.map(async ({ id, file }) => {
+    try {
+      const res = await fetch(file);
+      allData[id] = await res.json();
+      if (allData[id].metadata.last_updated > latestDate) {
+        latestDate = allData[id].metadata.last_updated;
+      }
+    } catch (err) {
+      console.error(`Failed to load ${file}:`, err);
+    }
+  }));
+
+  // Build tabs
+  for (const { id } of DATA_FILES) {
+    const cat = allData[id];
+    if (!cat) continue;
+    const btn = document.createElement('button');
+    btn.dataset.tab = id;
+    btn.innerHTML = `${cat.metadata.display_name} <span class="count-badge">${countItems(cat)}</span>`;
+    btn.addEventListener('click', () => switchTab(id));
+    tabBar.appendChild(btn);
+  }
+
+  document.getElementById('lastUpdated').textContent = latestDate || new Date().toISOString().split('T')[0];
+
+  // Show first tab
+  if (DATA_FILES.length > 0) switchTab(DATA_FILES[0].id);
+}
+
+init();
+</script>
+</body>
+</html>
