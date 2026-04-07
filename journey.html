@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vision Quest — Passion to Public Company Journey</title>
+<style>
+:root {
+  --bg: #0a0e1a;
+  --surface: #141b2d;
+  --surface2: #1e293b;
+  --surface3: #283348;
+  --border: #334155;
+  --text: #f1f5f9;
+  --text2: #94a3b8;
+  --text3: #64748b;
+  --accent: #3b82f6;
+  --green: #10b981;
+  --purple: #8b5cf6;
+  --amber: #f59e0b;
+  --red: #ef4444;
+  --pink: #ec4899;
+  --cyan: #06b6d4;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
+
+/* ===== TOP BAR ===== */
+.topbar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 100;
+}
+.topbar h1 { font-size: 18px; background: linear-gradient(135deg, var(--cyan), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.topbar-stats { display: flex; gap: 16px; align-items: center; }
+.stat-pill { background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; padding: 4px 14px; font-size: 13px; display: flex; align-items: center; gap: 6px; }
+.stat-pill .val { font-weight: 700; }
+.back-link { color: var(--accent); text-decoration: none; font-size: 13px; }
+.back-link:hover { text-decoration: underline; }
+
+/* ===== JOURNEY MAP ===== */
+.journey-container { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+
+.journey-header { text-align: center; margin-bottom: 40px; }
+.journey-header h2 { font-size: 28px; margin-bottom: 8px; }
+.journey-header p { color: var(--text2); font-size: 15px; max-width: 600px; margin: 0 auto; }
+
+/* The vertical road */
+.road { position: relative; padding-left: 60px; }
+.road::before {
+  content: ''; position: absolute; left: 29px; top: 0; bottom: 0; width: 3px;
+  background: linear-gradient(to bottom, var(--cyan), var(--accent), var(--purple), var(--pink), var(--amber), var(--green));
+  border-radius: 2px;
+}
+
+/* Stage node */
+.stage {
+  position: relative; margin-bottom: 0; padding-bottom: 24px;
+  opacity: 0; transform: translateY(20px);
+  animation: fadeInUp 0.5s forwards;
+}
+.stage:nth-child(1) { animation-delay: 0.1s; }
+.stage:nth-child(2) { animation-delay: 0.2s; }
+.stage:nth-child(3) { animation-delay: 0.3s; }
+.stage:nth-child(4) { animation-delay: 0.4s; }
+.stage:nth-child(5) { animation-delay: 0.5s; }
+.stage:nth-child(6) { animation-delay: 0.6s; }
+.stage:nth-child(7) { animation-delay: 0.7s; }
+.stage:nth-child(8) { animation-delay: 0.8s; }
+.stage:nth-child(9) { animation-delay: 0.9s; }
+.stage:nth-child(10) { animation-delay: 1.0s; }
+
+@keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+
+/* Circle on the road */
+.stage-dot {
+  position: absolute; left: -41px; top: 16px;
+  width: 24px; height: 24px; border-radius: 50%;
+  border: 3px solid var(--border); background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; z-index: 2; transition: all 0.3s;
+}
+.stage.unlocked .stage-dot { border-color: var(--accent); background: var(--surface); }
+.stage.active .stage-dot { border-color: var(--cyan); background: var(--cyan); box-shadow: 0 0 16px rgba(6,182,212,0.5); animation: glow 2s infinite; }
+.stage.completed .stage-dot { border-color: var(--green); background: var(--green); }
+@keyframes glow { 0%,100% { box-shadow: 0 0 16px rgba(6,182,212,0.4); } 50% { box-shadow: 0 0 28px rgba(6,182,212,0.7); } }
+
+/* Stage card */
+.stage-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+  overflow: hidden; transition: all 0.3s; cursor: pointer;
+}
+.stage-card:hover { border-color: var(--accent); transform: translateX(4px); }
+.stage.active .stage-card { border-color: var(--cyan); box-shadow: 0 0 30px rgba(6,182,212,0.1); }
+.stage.completed .stage-card { border-color: var(--green); }
+.stage.locked .stage-card { opacity: 0.4; pointer-events: none; }
+
+.stage-card-header {
+  padding: 16px 20px; display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+}
+.stage-card-header h3 { font-size: 16px; display: flex; align-items: center; gap: 10px; }
+.stage-number { font-size: 11px; background: var(--surface2); border-radius: 10px; padding: 2px 8px; color: var(--text2); }
+.stage-badge {
+  font-size: 11px; padding: 3px 10px; border-radius: 10px; font-weight: 600;
+}
+.badge-locked { background: var(--surface2); color: var(--text3); }
+.badge-active { background: rgba(6,182,212,0.15); color: var(--cyan); }
+.badge-completed { background: rgba(16,185,129,0.15); color: var(--green); }
+
+.stage-card-body { padding: 16px 20px; display: none; }
+.stage-card.expanded .stage-card-body { display: block; }
+
+.stage-desc { font-size: 14px; color: var(--text2); line-height: 1.6; margin-bottom: 16px; }
+.stage-meta { display: flex; gap: 16px; margin-bottom: 16px; flex-wrap: wrap; }
+.meta-tag { font-size: 12px; padding: 4px 10px; border-radius: 8px; background: var(--surface2); color: var(--text2); }
+
+/* Progress bar inside stage */
+.stage-progress { margin-bottom: 16px; }
+.stage-progress-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--text2); margin-bottom: 6px; }
+.stage-progress-bar { height: 6px; background: var(--surface3); border-radius: 3px; overflow: hidden; }
+.stage-progress-fill { height: 100%; border-radius: 3px; transition: width 0.5s; }
+
+/* Drill list inside stage */
+.drill-list { display: flex; flex-direction: column; gap: 8px; }
+.drill-item {
+  display: flex; align-items: center; gap: 12px; padding: 12px 16px;
+  background: var(--surface2); border-radius: 10px; border: 1px solid transparent;
+  cursor: pointer; transition: all 0.2s; user-select: none;
+}
+.drill-item:hover { border-color: var(--accent); background: var(--surface3); }
+.drill-item.done { border-color: var(--green); background: rgba(16,185,129,0.05); }
+
+.drill-check-box {
+  width: 22px; height: 22px; border-radius: 6px; border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  font-size: 13px; transition: all 0.2s;
+}
+.drill-item.done .drill-check-box { background: var(--green); border-color: var(--green); color: white; }
+
+.drill-text { flex: 1; }
+.drill-text h5 { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+.drill-text p { font-size: 12px; color: var(--text3); }
+.drill-xp-badge { font-size: 12px; font-weight: 700; color: var(--amber); }
+
+/* Simulation panel */
+.sim-panel {
+  margin-top: 16px; padding: 16px; background: var(--bg); border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.sim-panel h4 { font-size: 13px; color: var(--cyan); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+.sim-scenario {
+  font-size: 13px; color: var(--text2); line-height: 1.6; margin-bottom: 12px;
+  padding: 12px; background: var(--surface2); border-radius: 8px; border-left: 3px solid var(--cyan);
+}
+.sim-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.sim-btn {
+  padding: 8px 16px; border-radius: 8px; border: 1px solid var(--border);
+  background: var(--surface2); color: var(--text); cursor: pointer; font-size: 13px;
+  transition: all 0.2s;
+}
+.sim-btn:hover { background: var(--surface3); border-color: var(--accent); }
+.sim-btn.selected { background: var(--accent); border-color: var(--accent); }
+.sim-result {
+  margin-top: 12px; padding: 12px; border-radius: 8px; font-size: 13px; line-height: 1.5;
+  display: none;
+}
+.sim-result.show { display: block; }
+.sim-result.good { background: rgba(16,185,129,0.1); border: 1px solid var(--green); color: var(--green); }
+.sim-result.okay { background: rgba(245,158,11,0.1); border: 1px solid var(--amber); color: var(--amber); }
+.sim-result.bad { background: rgba(239,68,68,0.1); border: 1px solid var(--red); color: var(--red); }
+
+/* Overall progress */
+.overall-progress {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+  padding: 24px; margin-bottom: 32px;
+}
+.overall-bar-container { margin: 16px 0; }
+.overall-bar { height: 12px; background: var(--surface2); border-radius: 6px; overflow: hidden; position: relative; }
+.overall-fill {
+  height: 100%; border-radius: 6px;
+  background: linear-gradient(90deg, var(--cyan), var(--accent), var(--purple), var(--pink), var(--amber), var(--green));
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
+  transition: width 0.5s;
+}
+@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+.overall-stages {
+  display: flex; justify-content: space-between; margin-top: 8px; font-size: 11px; color: var(--text3);
+}
+
+/* Toast */
+.toast {
+  position: fixed; bottom: 24px; right: 24px; padding: 14px 24px;
+  border-radius: 12px; font-size: 14px; font-weight: 600; z-index: 300;
+  transform: translateY(100px); opacity: 0; transition: all 0.3s;
+}
+.toast.show { transform: translateY(0); opacity: 1; }
+.toast-xp { background: linear-gradient(135deg, var(--amber), #d97706); color: white; }
+.toast-level { background: linear-gradient(135deg, var(--purple), var(--pink)); color: white; }
+.toast-complete { background: linear-gradient(135deg, var(--green), #059669); color: white; }
+
+/* Modal for drill detail */
+.modal-overlay {
+  display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+  z-index: 200; align-items: center; justify-content: center;
+}
+.modal-overlay.active { display: flex; }
+.modal {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+  padding: 28px; width: 90%; max-width: 560px; max-height: 85vh; overflow-y: auto;
+}
+.modal h2 { margin-bottom: 4px; font-size: 20px; }
+.modal .subtitle { color: var(--text2); font-size: 14px; margin-bottom: 20px; }
+.modal-section { margin-bottom: 20px; }
+.modal-section h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--cyan); margin-bottom: 8px; }
+.modal-section p { font-size: 14px; color: var(--text2); line-height: 1.6; }
+.modal-section ul { list-style: none; }
+.modal-section ul li { padding: 6px 0; font-size: 14px; color: var(--text2); padding-left: 16px; position: relative; }
+.modal-section ul li::before { content: '>'; position: absolute; left: 0; color: var(--accent); }
+.modal textarea {
+  width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--border);
+  background: var(--bg); color: var(--text); font-size: 14px; font-family: inherit;
+  min-height: 100px; resize: vertical; margin-top: 8px;
+}
+.modal-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 20px; }
+.btn {
+  padding: 10px 20px; border-radius: 8px; border: 1px solid var(--border);
+  background: var(--surface2); color: var(--text); cursor: pointer; font-size: 14px; transition: all 0.2s;
+}
+.btn:hover { background: var(--surface3); }
+.btn-primary { background: var(--accent); border-color: var(--accent); }
+.btn-primary:hover { background: #2563eb; }
+.btn-green { background: var(--green); border-color: var(--green); }
+.btn-green:hover { background: #059669; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .journey-container { padding: 16px 12px; }
+  .road { padding-left: 48px; }
+  .road::before { left: 21px; }
+  .stage-dot { left: -37px; width: 20px; height: 20px; }
+  .stage-meta { flex-direction: column; gap: 8px; }
+  .topbar-stats { gap: 8px; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div style="display: flex; align-items: center; gap: 16px;">
+    <a href="index.html" class="back-link">< Dashboard</a>
+    <h1>Passion to Public Company</h1>
+  </div>
+  <div class="topbar-stats">
+    <div class="stat-pill"><span>XP</span> <span class="val" id="topXP">0</span></div>
+    <div class="stat-pill"><span>Stage</span> <span class="val" id="topStage">1/10</span></div>
+    <div class="stat-pill"><span>Drills</span> <span class="val" id="topDrills">0</span></div>
+  </div>
+</div>
+
+<div class="journey-container">
+  <div class="journey-header">
+    <h2>The Road from Passion to IPO</h2>
+    <p>10 stages. 50+ drills. Each stage unlocks when you complete enough drills in the previous one. Simulate real decisions at every stop.</p>
+  </div>
+
+  <!-- Overall progress -->
+  <div class="overall-progress">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <h3 style="font-size: 16px;">Journey Progress</h3>
+      <span style="font-size: 14px; color: var(--cyan);" id="overallPct">0%</span>
+    </div>
+    <div class="overall-bar-container">
+      <div class="overall-bar"><div class="overall-fill" id="overallFill" style="width: 0%"></div></div>
+      <div class="overall-stages">
+        <span>Passion</span><span>Idea</span><span>Prototype</span><span>Team</span><span>Seed</span><span>Product</span><span>Growth</span><span>Scale</span><span>Late</span><span>IPO</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Journey stages rendered by JS -->
+  <div class="road" id="roadMap"></div>
+</div>
+
+<!-- Drill Detail Modal -->
+<div class="modal-overlay" id="drillModal">
+  <div class="modal">
+    <h2 id="dmTitle"></h2>
+    <p class="subtitle" id="dmSubtitle"></p>
+    <div class="modal-section">
+      <h4>Why This Matters</h4>
+      <p id="dmWhy"></p>
+    </div>
+    <div class="modal-section">
+      <h4>How To Practice</h4>
+      <ul id="dmSteps"></ul>
+    </div>
+    <div class="modal-section">
+      <h4>Resources</h4>
+      <ul id="dmResources"></ul>
+    </div>
+    <div class="modal-section">
+      <h4>Your Notes / Reflection</h4>
+      <textarea id="dmNotes" placeholder="Write your practice notes, reflections, or outcomes here..."></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="btn" onclick="closeDrillModal()">Close</button>
+      <button class="btn btn-primary" onclick="saveDrillNotes()">Save Notes</button>
+      <button class="btn btn-green" id="dmCompleteBtn" onclick="completeDrillFromModal()">Mark Complete (+XP)</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ===================== DATA =====================
+const STAGES = [
+  {
+    id: 1, name: "Passion Discovery", icon: "&#x1f525;", color: "#ef4444",
+    desc: "Crystallize your passion. Your north star: personalized intelligence served on any body — human or robot. This stage is about going from vague excitement to a sharp, defensible thesis.",
+    meta: ["Timeline: Week 1-2", "Revenue: $0", "Risk: Low"],
+    simulation: {
+      scenario: "You're at a dinner party and someone asks: 'So what are you working on?' You have 30 seconds. Which pitch do you give?",
+      options: [
+        { text: "I'm building AI stuff", result: "Too vague. Nobody remembers this. You lose a potential advisor.", type: "bad" },
+        { text: "I'm building personalized intelligence that runs on any device — your phone, a robot, a kiosk — adapting to each user in real-time", result: "Sharp, memorable, and specific. The person introduces you to their friend who runs an edge AI startup. +1 connection.", type: "good" },
+        { text: "I want to start a company someday in ML or something", result: "Sounds like you don't know what you want yet. They nod politely and change the subject.", type: "okay" }
+      ]
+    },
+    drills: [
+      { id: "1-1", name: "Write Your Passion Thesis", desc: "1-page doc: what you believe, why it matters, why you", xp: 20, why: "Without a written thesis, your passion stays fuzzy. Writing forces clarity. Every great company started with a thesis the founder could articulate in their sleep.", steps: ["Write: 'I believe [X] because [Y]'", "List 3 trends that support your thesis", "Explain why YOU are uniquely positioned", "Read it aloud — does it give you energy?"], resources: ["Paul Graham: 'How to Get Startup Ideas'", "Peter Thiel: 'Zero to One' Ch. 1-3", "Your own career history and unique insights"] },
+      { id: "1-2", name: "30-Second Elevator Pitch", desc: "Practice articulating your vision in 30 seconds", xp: 15, why: "If you can't explain it in 30 seconds, you don't understand it well enough. Every fundraise, hire, and partnership starts with a pitch.", steps: ["Write 3 versions of your pitch", "Record yourself delivering each", "Time it — must be under 30 seconds", "Test on 2 people and note their reactions"], resources: ["YC: 'How to Pitch Your Startup'", "Record with Voice Memos or Loom"] },
+      { id: "1-3", name: "Competitive Landscape Map", desc: "Map every company in your space and find the gap", xp: 25, why: "You need to know the battlefield. Who's building what, where the gaps are, and why existing solutions fail for the specific problem you see.", steps: ["List 20+ companies in adjacent spaces", "Categorize: direct competitors, adjacent, potential", "Draw a 2x2 matrix (personalization vs. device-agnostic)", "Identify the empty quadrant — that's your opportunity"], resources: ["Crunchbase for company data", "CB Insights market maps", "a16z, Sequoia market analyses"] },
+      { id: "1-4", name: "Personal Edge Inventory", desc: "List your unfair advantages and experience moats", xp: 15, why: "Investors and talent join founders who have an unfair advantage. Your technical depth + domain knowledge = your moat.", steps: ["List every relevant skill, project, and connection", "Rate each: how rare is this combination?", "Identify 3 things only YOU can build", "Write: 'My unfair advantage is...'"], resources: ["Reid Hoffman: 'The Start-up of You'", "Your resume and project portfolio"] },
+      { id: "1-5", name: "Passion vs. Market Fit Check", desc: "Validate that your passion intersects with real demand", xp: 20, why: "Passion without market demand is a hobby. You need evidence that people will pay for what you want to build.", steps: ["Find 5 job postings requiring your exact skill intersection", "Find 3 enterprise RFPs or procurement signals", "Find 2 VC theses that align with your area", "Score: passion (1-10) x market demand (1-10) = opportunity"], resources: ["LinkedIn job search", "Government procurement databases", "VC thesis blog posts (a16z, Sequoia, Greylock)"] }
+    ]
+  },
+  {
+    id: 2, name: "Idea Validation", icon: "&#x1f4a1;", color: "#f59e0b",
+    desc: "Turn your passion into a specific product idea. Talk to 30+ potential users. Find the hair-on-fire problem that people will pay to solve RIGHT NOW.",
+    meta: ["Timeline: Week 3-6", "Revenue: $0", "Risk: Medium"],
+    simulation: {
+      scenario: "You've talked to 15 potential customers. 10 say 'that sounds cool!' but only 2 say 'I need this NOW, can I pay you today?' What do you do?",
+      options: [
+        { text: "Build for the 10 who said it's cool — bigger market!", result: "'Cool' ≠ will buy. You build for 6 months and nobody converts. The 2 urgent buyers found a competitor.", type: "bad" },
+        { text: "Double down on the 2 urgent buyers — understand their exact pain", result: "Correct. You discover they share a specific workflow pain. You build for that exact pain. They become your first paying customers and refer 8 more.", type: "good" },
+        { text: "Talk to 15 more people to get more data", result: "Not terrible, but you're procrastinating. You already have a signal. More research won't change the answer — the 2 urgent buyers are your wedge.", type: "okay" }
+      ]
+    },
+    drills: [
+      { id: "2-1", name: "Customer Discovery Interviews (x10)", desc: "Talk to 10 potential users about their pain points", xp: 30, why: "The #1 reason startups fail: building something nobody wants. Customer interviews are your insurance policy against this.", steps: ["Prepare 5 open-ended questions (no leading!)", "Schedule 10 calls this week", "Ask: 'What's the hardest part about [X]?'", "Ask: 'How do you solve this today?'", "Ask: 'Would you pay $X for a solution?'", "Document patterns across interviews"], resources: ["'The Mom Test' by Rob Fitzpatrick", "YC: 'How to Talk to Users'"] },
+      { id: "2-2", name: "Problem Statement Sharpening", desc: "Refine your problem to razor-sharp specificity", xp: 20, why: "Vague problems lead to vague solutions. The tighter your problem statement, the better your product.", steps: ["Write: '[Persona] struggles with [problem] when [context]'", "Can you name 5 real people with this problem?", "What's the cost of NOT solving it? (time, money, frustration)", "Is this a vitamin (nice-to-have) or painkiller (must-have)?"], resources: ["Strategyzer Value Proposition Canvas", "Jobs-to-be-Done framework"] },
+      { id: "2-3", name: "Competitive Positioning Doc", desc: "Write how you'll be 10x better than alternatives", xp: 25, why: "You must be 10x better, not 10% better. Incremental improvements don't change behavior.", steps: ["List top 3 alternatives (including 'do nothing')", "For each: what's broken?", "Your advantage: how are you 10x better on one axis?", "Write a positioning statement: 'For [who], [product] is the only [category] that [unique value]'"], resources: ["'Obviously Awesome' by April Dunford", "'Crossing the Chasm' by Geoffrey Moore"] },
+      { id: "2-4", name: "TAM/SAM/SOM Analysis", desc: "Size your market with real numbers", xp: 25, why: "If you can't size the market, you can't raise money, prioritize, or plan. Investors expect this.", steps: ["TAM: Total addressable market (everyone who could use it)", "SAM: Serviceable addressable (your target segment)", "SOM: Serviceable obtainable (realistic year 1)", "Bottom-up: # of customers x price x frequency", "Sanity-check against public market data"], resources: ["Gartner, IDC, Statista for market data", "Public company 10-Ks for revenue benchmarks"] },
+      { id: "2-5", name: "One-Pager Product Spec", desc: "Write a 1-page spec of what you'll build first", xp: 20, why: "Constraints create clarity. One page forces you to cut everything non-essential and focus on the core value.", steps: ["Problem (2 sentences)", "Solution (2 sentences)", "Key features (max 3)", "Success metric (1 number)", "Anti-goals (what you WON'T build)"], resources: ["Amazon 6-pager format (adapted to 1 page)", "Shape Up: 'Appetite' concept"] }
+    ]
+  },
+  {
+    id: 3, name: "Prototype & MVP", icon: "&#x1f6e0;&#xfe0f;", color: "#10b981",
+    desc: "Build the simplest thing that delivers your core value proposition. Ship it to your first 5 users. Get feedback in days, not months.",
+    meta: ["Timeline: Week 7-14", "Revenue: $0-1K", "Risk: Medium"],
+    simulation: {
+      scenario: "You've been building your MVP for 3 weeks. It's 60% done but already solves the core problem. A potential customer asks for a demo. What do you do?",
+      options: [
+        { text: "Wait until it's polished — first impressions matter", result: "You spend 4 more weeks polishing. Meanwhile, the customer found another solution. You lost your first potential champion.", type: "bad" },
+        { text: "Demo what you have, be transparent about what's missing", result: "They love the core! They point out 2 things they actually need (different from what you planned). You pivot early and save months. They become your design partner.", type: "good" },
+        { text: "Send them a mockup instead of the real thing", result: "They like the mockup but can't evaluate if it actually works. No real signal. You still don't know if your core tech delivers.", type: "okay" }
+      ]
+    },
+    drills: [
+      { id: "3-1", name: "Build Core Feature in 1 Week", desc: "Ship the single most important feature", xp: 35, why: "Speed is your advantage over incumbents. Ship fast, learn fast. The prototype doesn't need to be pretty — it needs to prove the thesis.", steps: ["Pick the ONE feature that proves your thesis", "Set a hard 1-week deadline", "No auth, no billing, no polish — just the core", "Deploy to a URL you can share", "Send to 3 people and watch them use it"], resources: ["Vercel/Railway for instant deployment", "Cursor/Copilot for speed coding"] },
+      { id: "3-2", name: "Design Partner Program", desc: "Get 3-5 users who'll co-develop with you", xp: 25, why: "Design partners give you real-time feedback, validate your direction, and become your first case studies and champions.", steps: ["Identify 5 ideal early users from your interviews", "Offer: free product + direct access to you", "In return: weekly feedback, 30-min calls, testimonial", "Create a Slack/Discord channel for them"], resources: ["First Round: 'Design Partners' guide", "Examples: Notion, Figma, Linear all used this"] },
+      { id: "3-3", name: "User Feedback Loop Setup", desc: "Instrument your MVP to capture every interaction", xp: 20, why: "If you can't measure it, you can't improve it. Instrument from day 1.", steps: ["Add basic analytics (Mixpanel, PostHog, or simple logging)", "Track: signups, core action, retention, errors", "Set up a weekly review ritual", "Create a feedback capture form for users"], resources: ["PostHog (open-source analytics)", "Hotjar for session recording"] },
+      { id: "3-4", name: "Technical Architecture Doc", desc: "Document your system design for scale", xp: 25, why: "You'll need this for hiring, fundraising, and your own clarity. A Staff+ engineer can architect for 10x scale from day 1.", steps: ["Draw system diagram (3-5 components max)", "Data model: what entities, what relationships?", "API design: what are the key endpoints?", "Scale plan: what breaks at 10x, 100x users?", "Tech debt: what shortcuts did you take and why?"], resources: ["C4 Model for diagramming", "Arc42 template"] },
+      { id: "3-5", name: "Demo Day Presentation", desc: "Present your MVP to a mock audience", xp: 20, why: "Every fundraise, every partnership, every major hire requires you to present. Practice the narrative: problem, solution, demo, traction, ask.", steps: ["Build 8-10 slide deck", "3 min: problem + why now", "3 min: live demo", "2 min: traction + market", "2 min: team + ask", "Present to 2 friends and incorporate feedback"], resources: ["Sequoia pitch deck template", "YC Demo Day examples"] }
+    ]
+  },
+  {
+    id: 4, name: "Founding Team", icon: "&#x1f91d;", color: "#8b5cf6",
+    desc: "Find your co-founder(s). Build the founding team that covers your gaps. The team you build now determines your company's DNA forever.",
+    meta: ["Timeline: Month 3-6", "Revenue: $1-10K", "Risk: High"],
+    simulation: {
+      scenario: "You have 2 co-founder candidates: (A) Your best friend who's a great engineer but has never shipped a product to customers. (B) Someone you met 3 months ago who shipped 2 products, has complementary skills, but you don't know them deeply. Who do you pick?",
+      options: [
+        { text: "Best friend (A) — trust is everything", result: "Trust is necessary but not sufficient. 6 months in, you realize they can't handle ambiguity, customer pressure, or hard product decisions. The friendship makes it impossible to have the hard conversations. You lose both the co-founder and the friend.", type: "okay" },
+        { text: "Experienced builder (B) — but do a 2-week trial project first", result: "Smart. The trial reveals you work well under pressure together, they push back constructively, and they bring GTM skills you lack. After the trial, you both commit. The complementary skills accelerate your fundraise by 3 months.", type: "good" },
+        { text: "Go solo — I'll hire when I raise money", result: "Solo founders can work, but VCs fund teams. You'll move slower, burn out faster, and have no one to reality-check your decisions. Many top accelerators won't accept solo founders.", type: "bad" }
+      ]
+    },
+    drills: [
+      { id: "4-1", name: "Co-Founder Requirements Doc", desc: "Define exactly what skills/values you need in a co-founder", xp: 20, why: "Most startup failures trace back to co-founder conflict. Being intentional about what you need prevents the #1 killer.", steps: ["List your strengths and weaknesses honestly", "Define 3 must-have skills for your co-founder", "Define 3 must-have values/work-style traits", "Define 3 red flags / dealbreakers"], resources: ["YC: 'How to Find a Co-Founder'", "First Round: 'Co-Founder Compatibility'"] },
+      { id: "4-2", name: "Co-Founder Trial Project", desc: "Work with a candidate on a 2-week project before committing", xp: 30, why: "Dating before marriage. A trial reveals how someone handles ambiguity, conflict, and pressure.", steps: ["Define a 2-week project with clear deliverables", "Work together daily", "Intentionally create a stressful moment", "Debrief: How did conflict get resolved?", "Both parties give honest feedback after"], resources: ["'The Hard Thing About Hard Things' (Horowitz)", "YC co-founder matching events"] },
+      { id: "4-3", name: "Equity Split Negotiation", desc: "Practice the hardest conversation in startups", xp: 25, why: "Equity conversations reveal character. Getting this right early prevents catastrophic splits later.", steps: ["Research standard equity splits (50/50, 60/40, vesting)", "Draft a vesting schedule (4 years, 1 year cliff)", "Role-play the negotiation with a friend", "Write down your BATNA (best alternative)"], resources: ["Slicing Pie methodology", "YC: 'Splitting Equity'", "Clerky/Stripe Atlas for legal setup"] },
+      { id: "4-4", name: "First 10 Hires Plan", desc: "Plan your first 10 hires and their sequence", xp: 20, why: "The first 10 hires set your culture. Getting the sequence right means you're never bottlenecked.", steps: ["List the 10 roles in priority order", "For each: what milestone triggers this hire?", "For each: what's the profile? (senior vs. junior)", "Where will you find these people?"], resources: ["'Who' by Geoff Smart", "Elad Gil: 'High Growth Handbook' Ch. 2"] },
+      { id: "4-5", name: "Operating Agreement Draft", desc: "Draft the key operating principles for your founding team", xp: 20, why: "Written agreements prevent unwritten assumptions from destroying the company.", steps: ["Decision-making: how will you make decisions?", "Roles: who owns what?", "Conflict resolution: what's the process?", "Exit: what happens if someone leaves?", "Working norms: hours, communication, meetings"], resources: ["Founder Institute: 'Co-Founder Agreement'", "Legal templates from Clerky"] }
+    ]
+  },
+  {
+    id: 5, name: "Seed Fundraise", icon: "&#x1f4b0;", color: "#f59e0b",
+    desc: "Raise your first $1-4M. Build the pitch, the financial model, the narrative. This is where your articulation and business impact drills pay off.",
+    meta: ["Timeline: Month 6-9", "Revenue: $10-50K ARR", "Risk: High"],
+    simulation: {
+      scenario: "You're pitching a top-tier VC. They say: 'This is a cool demo, but how does this become a $1B company?' How do you respond?",
+      options: [
+        { text: "We'll figure out the business model later — right now we're focused on building great tech", result: "Immediate pass. VCs invest in businesses, not science projects. You need to show a path to massive scale.", type: "bad" },
+        { text: "Here's our wedge: personalized AI for [specific use case]. We start there, then expand to any embodied device. The TAM for edge AI inference is $38B by 2028. Here's how we capture 2% in 5 years.", result: "Strong. You showed a credible wedge, expansion path, and market backing. The VC asks for a follow-up meeting. You're in the top 5% of pitches they've seen this week.", type: "good" },
+        { text: "The edge AI market is huge — everyone needs this", result: "'Everyone' means 'no one specific.' Without a wedge use case, the VC can't see how you get initial traction. They'll pass for now but say 'keep us updated.'", type: "okay" }
+      ]
+    },
+    drills: [
+      { id: "5-1", name: "Pitch Deck (10 slides)", desc: "Build your fundraising deck", xp: 30, why: "Your deck is your #1 fundraising tool. It must tell a compelling story in 10 slides.", steps: ["Slide 1: One-line company description", "Slide 2: Problem", "Slide 3: Solution", "Slide 4: Product (demo screenshots)", "Slide 5: Traction / validation", "Slide 6: Market size (TAM/SAM/SOM)", "Slide 7: Business model", "Slide 8: Competition", "Slide 9: Team", "Slide 10: The ask"], resources: ["Sequoia pitch deck template", "YC Series A guide", "pitch.com or Figma for design"] },
+      { id: "5-2", name: "Financial Model (3-Year)", desc: "Build a bottoms-up financial projection", xp: 30, why: "VCs want to see you can think about unit economics. A bottoms-up model shows you understand your business.", steps: ["Revenue: # customers x ARPU x growth rate", "COGS: infrastructure, support costs", "Gross margin target: 70%+", "OpEx: headcount plan x avg salary + tools", "Cash runway: monthly burn vs. raise amount", "Key assumptions clearly stated"], resources: ["Standard SaaS financial model templates", "Carta total comp benchmarks"] },
+      { id: "5-3", name: "VC Target List (50 firms)", desc: "Research and rank 50 VCs who invest in your space", xp: 25, why: "Warm intros to the right VCs are 10x more effective than cold outreach. Targeting saves months.", steps: ["List 50 VCs who've invested in AI/edge/personalization", "For each: check stage, check size, recent deals", "Rank by fit (1-5)", "Find warm intro paths (LinkedIn, advisors)", "Create a CRM spreadsheet to track outreach"], resources: ["Signal (NFX)", "Crunchbase Pro", "OpenVC.app"] },
+      { id: "5-4", name: "Practice Pitch (5 dry runs)", desc: "Deliver your pitch 5 times to different audiences", xp: 25, why: "The first 5 times you pitch, you'll be terrible. Get the bad pitches out of the way before real VCs.", steps: ["Pitch to a founder friend", "Pitch to a non-technical friend", "Pitch to an angel investor", "Pitch to a current VC-backed founder", "Record yourself and watch the recording"], resources: ["YC Startup School office hours", "Local founder meetups"] },
+      { id: "5-5", name: "Term Sheet Negotiation Sim", desc: "Understand and negotiate seed-stage terms", xp: 20, why: "Bad terms in the seed round compound. Understanding SAFEs, dilution, and pro-rata rights protects your equity.", steps: ["Read 3 SAFE / convertible note templates", "Key terms: valuation cap, discount, pro-rata, MFN", "What's standard vs. aggressive?", "Role-play: VC offers $2M at $8M cap. Counter?", "What are your walk-away terms?"], resources: ["YC SAFE documents", "Brad Feld: 'Venture Deals'", "Clerky for legal"] }
+    ]
+  },
+  {
+    id: 6, name: "Product-Market Fit", icon: "&#x1f3af;", color: "#3b82f6",
+    desc: "The most important milestone. Ship, measure, iterate until 40%+ of users say they'd be 'very disappointed' without your product.",
+    meta: ["Timeline: Month 9-18", "Revenue: $100K-500K ARR", "Risk: Critical"],
+    simulation: {
+      scenario: "Your PMF survey shows: 22% 'very disappointed', 40% 'somewhat disappointed', 38% 'not disappointed'. You're below the 40% threshold. What do you do?",
+      options: [
+        { text: "Pivot to a completely different product", result: "Premature. 22% is a signal — you have something. Pivoting throws away everything you've learned. Dig into WHO that 22% is.", type: "bad" },
+        { text: "Segment: find WHO the 22% are, double down on them, cut features the 38% use", result: "Perfect PMF move. You discover the 22% are all in manufacturing. You cut 3 features, add 2 manufacturing-specific ones. In 3 months: 45% 'very disappointed.' PMF achieved.", type: "good" },
+        { text: "Add more features to try to increase the percentage", result: "Feature bloat. More features dilute your core value. The 22% don't need more features — they need DEEPER value on the features they love.", type: "okay" }
+      ]
+    },
+    drills: [
+      { id: "6-1", name: "Sean Ellis PMF Survey", desc: "Run the canonical PMF survey on your user base", xp: 25, why: "The Sean Ellis test is the gold standard: 'How would you feel if you could no longer use [product]?' You need 40%+ 'very disappointed.'", steps: ["Send survey to all active users", "Question: 'How would you feel if you could no longer use [product]?'", "Options: Very disappointed / Somewhat / Not disappointed", "Segment results by user type / use case", "Act on the data within 1 week"], resources: ["Superhuman PMF Engine article", "Sean Ellis blog: 'PMF Survey'"] },
+      { id: "6-2", name: "Cohort Retention Analysis", desc: "Track weekly/monthly retention by cohort", xp: 30, why: "PMF shows up in retention curves. If your curves flatten (don't go to zero), you have PMF for that cohort.", steps: ["Define your 'active user' metric", "Build cohort retention chart (week 1, 2, 4, 8, 12)", "Compare cohorts over time — is retention improving?", "Identify: which cohort retains best? Why?", "Double down on that cohort's use case"], resources: ["Amplitude or Mixpanel cohort analysis", "Lenny's Newsletter: 'What is good retention?'"] },
+      { id: "6-3", name: "Iteration Sprint (2-week)", desc: "Ship 1 meaningful improvement per sprint based on user feedback", xp: 25, why: "PMF is found through rapid iteration, not one big release. Each sprint should move your PMF metric.", steps: ["Pick the #1 feature request from your 'very disappointed' users", "Scope it to 2 weeks", "Ship it", "Measure: did PMF % improve?", "If not, try the next request"], resources: ["Shape Up methodology (Basecamp)", "Intercom: 'Ship fast, learn fast'"] },
+      { id: "6-4", name: "Pricing Experiment", desc: "Test 3 pricing tiers and find willingness to pay", xp: 25, why: "Pricing is a feature. The right price signals value and filters for serious users.", steps: ["Design 3 tiers (Free, Pro, Enterprise)", "A/B test pricing page", "Track: conversion rate, revenue per user, churn by tier", "Interview 5 users who upgraded: why?", "Interview 5 who didn't: what stopped you?"], resources: ["Patrick Campbell (Profitwell): Pricing strategy", "'Monetizing Innovation' by Ramanujam"] },
+      { id: "6-5", name: "Referral/Viral Loop Design", desc: "Build organic growth into the product", xp: 20, why: "If users love you enough, they'll bring friends. But you have to design for it — virality doesn't happen by accident.", steps: ["Map the user journey: where's the natural 'share' moment?", "Design the referral mechanic (invite = value for both sides)", "Measure viral coefficient (invites per user)", "Target: K-factor > 0.5 initially", "Iterate on the referral UX weekly"], resources: ["Andrew Chen: 'The Cold Start Problem'", "Dropbox, Notion, and Figma referral case studies"] }
+    ]
+  },
+  {
+    id: 7, name: "Series A & Growth", icon: "&#x1f680;", color: "#06b6d4",
+    desc: "You have PMF. Now pour fuel on the fire. Raise Series A ($5-15M), build the growth engine, and start scaling the team.",
+    meta: ["Timeline: Month 18-30", "Revenue: $1-5M ARR", "Risk: Medium-High"],
+    simulation: {
+      scenario: "You just raised $10M Series A. Your board says 'triple revenue in 12 months.' Your eng team says 'we need 6 months to fix tech debt first.' What do you do?",
+      options: [
+        { text: "All-in on growth — tech debt can wait", result: "You 3x revenue but the product breaks constantly. Churn spikes to 8%/month. By month 9, net revenue growth is negative. You have to do a down-round Series B.", type: "bad" },
+        { text: "Split: 70% growth, 30% platform — ship reliability improvements alongside growth features", result: "Balanced execution. You 2.5x revenue (slightly below target) but churn stays at 3%. The board is happy because net revenue retention is 130%+. You're in a strong Series B position.", type: "good" },
+        { text: "6 months tech debt, 6 months growth", result: "The board loses confidence at month 3 when there's no revenue growth. Your best sales rep leaves because there's nothing new to sell. Even if the platform is better, you've lost momentum.", type: "okay" }
+      ]
+    },
+    drills: [
+      { id: "7-1", name: "Series A Deck + Narrative", desc: "Build the 'why now, why us, how big' story", xp: 30, why: "Series A is about proving you've found PMF and can scale. The narrative shifts from 'we think' to 'we know — here's the data.'", steps: ["Update deck with real metrics", "Key slide: PMF proof (retention, NPS, Sean Ellis)", "Key slide: unit economics (LTV/CAC > 3)", "Key slide: growth trajectory", "Key slide: use of funds / hiring plan"], resources: ["YC Series A guide", "Christoph Janz: 'Five ways to build a $100M business'"] },
+      { id: "7-2", name: "Growth Model Buildout", desc: "Build a repeatable growth engine", xp: 30, why: "Series A VCs invest in growth engines, not one-time spikes. You need a model that compounds.", steps: ["Identify your primary growth channel", "Build the funnel: awareness > activation > revenue > retention > referral", "For each stage: what's the conversion rate?", "Where's the biggest drop-off? Fix that first.", "Set up weekly growth metrics review"], resources: ["Brian Balfour: 'Growth Framework'", "Reforge Growth Series"] },
+      { id: "7-3", name: "Hiring Plan Execution", desc: "Build your first 20-person team", xp: 25, why: "After Series A, you'll hire fast. Having a plan prevents panic-hiring.", steps: ["Map roles to revenue milestones", "Build job descriptions for next 10 hires", "Set up structured interview process", "Define culture values and screen for them", "Target: 2-3 hires per month"], resources: ["'Who' by Geoff Smart", "Greenhouse or Lever for ATS"] },
+      { id: "7-4", name: "Sales Playbook v1", desc: "Document your sales process so it's repeatable", xp: 25, why: "Founder-led sales got you here. A playbook lets others sell too.", steps: ["Document: ICP (ideal customer profile)", "Document: discovery questions", "Document: demo script", "Document: objection handling", "Document: pricing and negotiation guidelines", "Train your first sales hire on the playbook"], resources: ["'Founding Sales' by Pete Kazanjy", "Gong for sales call analysis"] },
+      { id: "7-5", name: "Org Design & Culture Doc", desc: "Design the org structure and codify culture", xp: 20, why: "At 20+ people, culture doesn't happen organically. You must be intentional.", steps: ["Draw org chart for current + next 6 months", "Write 3-5 core values (with anti-values)", "Define decision-making framework (DACI/RACI)", "Set up all-hands, retrospectives, 1:1 cadence", "Write an internal handbook page"], resources: ["'An Elegant Puzzle' by Will Larsen", "GitLab Handbook (open-source example)"] }
+    ]
+  },
+  {
+    id: 8, name: "Scale & Moat", icon: "&#x1f3f0;", color: "#8b5cf6",
+    desc: "Build defensibility. Network effects, data moats, switching costs, and brand. Become the category leader that's impossible to displace.",
+    meta: ["Timeline: Year 2-4", "Revenue: $5-30M ARR", "Risk: Medium"],
+    simulation: {
+      scenario: "A FAANG company launches a competing feature. Your board panics. What do you do?",
+      options: [
+        { text: "Panic and pivot to avoid competition", result: "You abandon your position of strength and enter a new market where you're starting from zero. Meanwhile, the FAANG feature is mediocre and your customers would have stayed.", type: "bad" },
+        { text: "Double down on your niche — go deeper where FAANG can't", result: "You become the best solution for your specific use case. FAANG's feature is generic and surface-level. Your customers see the depth difference and stay. Your churn doesn't change. The press coverage actually drives awareness of your category.", type: "good" },
+        { text: "Try to match their feature set", result: "You can't outspend FAANG. You spread thin trying to match features and your core product quality drops. Your niche advantage erodes.", type: "bad" }
+      ]
+    },
+    drills: [
+      { id: "8-1", name: "Moat Analysis", desc: "Identify and strengthen your competitive moats", xp: 30, why: "Without a moat, you'll be commoditized. The time to build moats is while you're ahead.", steps: ["Data moat: do you get better with more users?", "Network effects: does each user make it better for others?", "Switching costs: how painful is it to leave?", "Brand/trust: are you the category default?", "Score each 1-5 and plan improvements"], resources: ["Hamilton Helmer: '7 Powers'", "NFX: 'The Network Effects Manual'"] },
+      { id: "8-2", name: "Platform Strategy", desc: "Design your platform/ecosystem play", xp: 30, why: "The biggest companies are platforms, not products. Platforms create value that you can't build alone.", steps: ["What can third parties build on top of you?", "Design API/SDK for developers", "Create marketplace or integration ecosystem", "Identify 3 high-value integrations to build first", "Developer docs and community plan"], resources: ["'Platform Revolution' by Parker, Van Alstyne", "Stripe, Twilio platform playbooks"] },
+      { id: "8-3", name: "International Expansion Plan", desc: "Plan your first non-domestic market", xp: 25, why: "International expansion is a growth multiplier but has hidden complexity. Plan carefully.", steps: ["Pick market #1 (usually UK/Canada/EU for US companies)", "Legal: data residency, GDPR, local regulations", "Product: what needs localization?", "GTM: hire local or remote team?", "Timeline and milestones for first 6 months"], resources: ["Stripe Atlas for international setup", "Notion's international expansion case study"] },
+      { id: "8-4", name: "Enterprise Sales Motion", desc: "Build the enterprise sales process ($100K+ deals)", xp: 30, why: "Enterprise deals are where the real revenue is. But they require a fundamentally different sales process.", steps: ["Build enterprise pricing (seat-based vs. platform fee)", "Security questionnaire prep (SOC 2, GDPR)", "Multi-threaded selling (3+ stakeholders per deal)", "Procurement process navigation", "Implementation/onboarding playbook"], resources: ["'The Challenger Sale'", "'Enterprise Sales for Startups' (Heavybit)"] },
+      { id: "8-5", name: "Executive Team Build-out", desc: "Hire VP-level leaders for each function", xp: 25, why: "To scale past $10M ARR, you need experienced leaders. The founding team can't do everything.", steps: ["Priority: VP Eng, VP Sales, VP Product", "For each: write a detailed role spec", "For each: what's the 90-day plan?", "Reference check process (6+ references)", "Onboarding plan for each executive"], resources: ["'High Growth Handbook' by Elad Gil", "First Round: 'Executive Hiring'"] }
+    ]
+  },
+  {
+    id: 9, name: "Late Stage & Pre-IPO", icon: "&#x1f4c8;", color: "#ec4899",
+    desc: "Series C/D territory. $30-100M+ ARR. Build the machine that runs without you in every meeting. Prepare for the public stage.",
+    meta: ["Timeline: Year 4-6", "Revenue: $30-100M+ ARR", "Risk: Medium-Low"],
+    simulation: {
+      scenario: "Your CFO says you can IPO in 12 months if you hit $100M ARR. You're at $70M. Do you push for IPO or raise another private round?",
+      options: [
+        { text: "Push for IPO — the market window is open now", result: "You stretch to hit $100M but growth rate drops from 80% to 50% to get there. The IPO prices lower than expected because investors see decelerating growth. Stock drops 30% in 6 months.", type: "okay" },
+        { text: "Raise one more private round, grow to $150M ARR naturally, then IPO from strength", result: "You raise at a premium valuation (private markets), use the capital to invest in growth and efficiency. IPO at $150M ARR growing 60%. Stock pops 40% on day 1. You time the public debut perfectly.", type: "good" },
+        { text: "Stay private forever", result: "Your early employees and investors need liquidity. Top talent leaves for companies with IPO timelines. You lose leverage in recruiting and M&A.", type: "bad" }
+      ]
+    },
+    drills: [
+      { id: "9-1", name: "Board Management", desc: "Learn to run an effective board meeting", xp: 25, why: "At this stage, your board includes professional VCs. An effective board accelerates your strategy; a mismanaged board becomes an obstacle.", steps: ["Send board packet 5 days before meeting", "Packet: financials, KPIs, strategic updates, asks", "Meeting: 20% reporting, 80% discussion", "Have 2-3 specific decisions/asks for the board", "Follow up with action items within 24 hours"], resources: ["Brad Feld: 'Startup Boards'", "YC: 'How to Run a Board Meeting'"] },
+      { id: "9-2", name: "IPO Readiness Checklist", desc: "Audit your company against public-company requirements", xp: 30, why: "IPO readiness takes 12-18 months of preparation. Start early.", steps: ["Financial: 3 years of audited financials", "Legal: IP clean, no pending litigation", "Compliance: SOX readiness, internal controls", "People: CFO + General Counsel hired", "Narrative: S-1 story drafted", "Banker selection process started"], resources: ["'IPO Playbook' by Morgan Stanley", "Stripe, GitLab, and Ramp S-1 filings"] },
+      { id: "9-3", name: "Secondary Market / Liquidity", desc: "Provide liquidity to early employees", xp: 20, why: "Your earliest employees have been waiting years. Providing secondary liquidity retains them and signals confidence.", steps: ["Research secondary platforms (Carta, EquityZen, Forge)", "Design a tender offer program", "Tax implications for employees (ISOs, NSOs)", "Board approval process", "Communication plan for team"], resources: ["Carta SecondMarket", "a16z: 'Secondary Sales for Startups'"] },
+      { id: "9-4", name: "Public Company Narrative", desc: "Craft the S-1 story — who you are for public investors", xp: 30, why: "Public investors are different from VCs. They want predictability, TAM, competitive moats, and a path to profitability.", steps: ["Write the 'Letter from the CEO' (like Bezos letters)", "Mission statement: 1 sentence", "Market: $Xbn TAM with proof points", "Competitive advantages: 3-5 moats", "Financial trajectory: path to Rule of 40", "Risk factors: be honest but frame constructively"], resources: ["Great S-1 examples: Snowflake, Datadog, Cloudflare", "Bill Gurley: 'Going Public'"] },
+      { id: "9-5", name: "Operational Excellence Audit", desc: "Ensure every function runs at public-company standards", xp: 25, why: "Public companies face scrutiny on every metric. Operational excellence isn't optional anymore.", steps: ["Eng: uptime, incident response, deployment frequency", "Sales: pipeline metrics, forecast accuracy", "Finance: monthly close in < 5 days", "HR: comp benchmarking, retention metrics", "Security: SOC 2 Type II, penetration testing"], resources: ["'Measure What Matters' by John Doerr", "Datadog S-1 for metrics examples"] }
+    ]
+  },
+  {
+    id: 10, name: "IPO & Beyond", icon: "&#x1f451;", color: "#10b981",
+    desc: "Ring the bell. Your passion is now a public company. But this is a beginning, not an end. The hardest part: staying excellent while public.",
+    meta: ["Timeline: Year 6+", "Revenue: $100M+ ARR", "Market Cap: $1B+"],
+    simulation: {
+      scenario: "It's IPO day. The stock pops 60%. You're a paper billionaire. An acquirer offers 2x your market cap to buy the company. What do you do?",
+      options: [
+        { text: "Take the acquisition — guaranteed wealth", result: "You get rich but lose control of your vision. The acquirer integrates your product into their ecosystem and your personalized intelligence thesis gets diluted. Your early team leaves.", type: "okay" },
+        { text: "Decline and build — this is about the mission, not the money", result: "You stay independent. 3 years later, you're the category-defining company in personalized intelligence. Your market cap is 10x what the acquirer offered. You set the standard for the industry. Your early team becomes wealthy AND fulfilled.", type: "good" },
+        { text: "Negotiate for 5x", result: "The acquirer walks away. Now your board questions your judgment. The distraction cost you a quarter of execution. But ultimately you refocus and the company recovers.", type: "okay" }
+      ]
+    },
+    drills: [
+      { id: "10-1", name: "IPO Day Preparation", desc: "Plan the most important day in your company's history", xp: 30, why: "IPO day sets the tone for your public company life. It's also incredibly emotional — prepare for both the logistics and the feelings.", steps: ["Select exchange (NYSE vs NASDAQ)", "Plan bell-ringing ceremony", "Prepare media talking points", "Employee communication: what to say, what not to say", "Day-of: who's with you? What's the plan if it goes badly?"], resources: ["Exchange listing requirements", "CEO interviews from recent IPOs"] },
+      { id: "10-2", name: "Quarterly Earnings Prep", desc: "Practice running your first earnings call", xp: 30, why: "Every quarter, you'll present to analysts and investors. Being good at this directly impacts your stock price.", steps: ["Write the earnings script (CFO + CEO sections)", "Prepare for top 10 analyst questions", "Practice the call with your IR team", "Key metrics: revenue, growth, margins, guidance", "What NOT to say (forward-looking statements)"], resources: ["Listen to 5 earnings calls from companies you admire", "Datadog, Cloudflare earnings transcripts"] },
+      { id: "10-3", name: "Long-Term Vision (10-Year)", desc: "Write your company's 10-year vision as a public company", xp: 25, why: "Public markets reward long-term thinkers. Bezos, Zuck, and Nadella all communicated 10-year visions that guided their companies.", steps: ["Where is personalized intelligence in 10 years?", "What does your company look like at $10B revenue?", "What new categories will you create?", "What will you choose NOT to do?", "Write an annual letter to shareholders"], resources: ["Bezos shareholder letters", "Satya Nadella: 'Hit Refresh'"] },
+      { id: "10-4", name: "Giving Back & Legacy", desc: "Design your impact beyond the company", xp: 20, why: "The greatest founders think about legacy. How will you use your platform, wealth, and influence?", steps: ["Foundation or philanthropic plan", "Open-source contributions back to the ecosystem", "Mentoring next generation of founders", "Policy advocacy for responsible AI", "Personal: what matters most to you?"], resources: ["Mackenzie Scott's giving model", "Schmidt Futures", "Open Philanthropy"] },
+      { id: "10-5", name: "What's Next?", desc: "Reflect: is this the end or a new beginning?", xp: 20, why: "Many founders feel lost after IPO. Having a 'what's next' prevents the post-success depression.", steps: ["Are you still the best CEO for the next phase?", "Do you want to stay, hire a CEO, or start something new?", "What problems still keep you up at night?", "What would you build if you started over today?", "Write a letter to your past self from Day 1"], resources: ["'The Ride of a Lifetime' by Bob Iger", "Elon Musk's multi-company approach"] }
+    ]
+  }
+];
+
+// ===================== STATE =====================
+const STORAGE_KEY = 'visionquest-journey';
+let state = loadState();
+
+function getDefaultState() {
+  const s = { totalXP: 0, level: 1, currentStage: 1, drills: {}, notes: {}, simChoices: {} };
+  STAGES.forEach(st => st.drills.forEach(d => { s.drills[d.id] = false; }));
+  return s;
+}
+
+function loadState() {
+  try { const s = localStorage.getItem(STORAGE_KEY); if (s) return JSON.parse(s); } catch(e) {}
+  return getDefaultState();
+}
+
+function saveState() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+
+// ===================== LOGIC =====================
+function getStageStatus(stage) {
+  const completed = stage.drills.filter(d => state.drills[d.id]).length;
+  const total = stage.drills.length;
+  if (completed === total) return 'completed';
+  if (stage.id <= state.currentStage) return stage.id === state.currentStage ? 'active' : 'completed';
+  if (stage.id === state.currentStage + 1 && getStageStatus(STAGES[stage.id - 2]) === 'completed') return 'unlocked';
+  if (stage.id <= state.currentStage) return 'unlocked';
+  return 'locked';
+}
+
+function getStageProgress(stage) {
+  const completed = stage.drills.filter(d => state.drills[d.id]).length;
+  return { completed, total: stage.drills.length, pct: Math.round((completed / stage.drills.length) * 100) };
+}
+
+function checkStageAdvance() {
+  const current = STAGES[state.currentStage - 1];
+  if (!current) return;
+  const prog = getStageProgress(current);
+  if (prog.completed >= Math.ceil(prog.total * 0.6)) { // 60% to unlock next
+    if (state.currentStage < STAGES.length) {
+      state.currentStage++;
+      saveState();
+      showToast(`Stage ${state.currentStage} Unlocked!`, 'level');
+    }
+  }
+}
+
+function completeDrill(drillId) {
+  if (state.drills[drillId]) return;
+  const drill = findDrill(drillId);
+  if (!drill) return;
+  state.drills[drillId] = true;
+  state.totalXP += drill.xp;
+  state.level = Math.floor(state.totalXP / 100) + 1;
+  saveState();
+  checkStageAdvance();
+  render();
+  showToast(`+${drill.xp} XP — ${drill.name}`, 'xp');
+}
+
+function findDrill(id) {
+  for (const s of STAGES) for (const d of s.drills) if (d.id === id) return d;
+  return null;
+}
+
+function findStageForDrill(id) {
+  for (const s of STAGES) for (const d of s.drills) if (d.id === id) return s;
+  return null;
+}
+
+// ===================== SIMULATION =====================
+function chooseSim(stageId, optionIdx) {
+  state.simChoices[stageId] = optionIdx;
+  saveState();
+  render();
+}
+
+// ===================== DRILL MODAL =====================
+let currentModalDrill = null;
+
+function openDrillModal(drillId) {
+  const drill = findDrill(drillId);
+  if (!drill) return;
+  currentModalDrill = drillId;
+  document.getElementById('dmTitle').textContent = drill.name;
+  document.getElementById('dmSubtitle').textContent = drill.desc;
+  document.getElementById('dmWhy').textContent = drill.why;
+  document.getElementById('dmSteps').innerHTML = drill.steps.map(s => `<li>${s}</li>`).join('');
+  document.getElementById('dmResources').innerHTML = drill.resources.map(r => `<li>${r}</li>`).join('');
+  document.getElementById('dmNotes').value = state.notes[drillId] || '';
+  const btn = document.getElementById('dmCompleteBtn');
+  if (state.drills[drillId]) {
+    btn.textContent = 'Completed';
+    btn.disabled = true;
+    btn.style.opacity = '0.5';
+  } else {
+    btn.textContent = `Mark Complete (+${drill.xp} XP)`;
+    btn.disabled = false;
+    btn.style.opacity = '1';
+  }
+  document.getElementById('drillModal').classList.add('active');
+}
+
+function closeDrillModal() {
+  document.getElementById('drillModal').classList.remove('active');
+  currentModalDrill = null;
+}
+
+function saveDrillNotes() {
+  if (!currentModalDrill) return;
+  state.notes[currentModalDrill] = document.getElementById('dmNotes').value;
+  saveState();
+  showToast('Notes saved', 'complete');
+}
+
+function completeDrillFromModal() {
+  if (!currentModalDrill || state.drills[currentModalDrill]) return;
+  saveDrillNotes();
+  completeDrill(currentModalDrill);
+  closeDrillModal();
+}
+
+// ===================== TOAST =====================
+function showToast(msg, type) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = `toast toast-${type || 'xp'} show`;
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ===================== RENDER =====================
+function render() {
+  renderRoad();
+  renderTopBar();
+  renderOverall();
+}
+
+function renderTopBar() {
+  document.getElementById('topXP').textContent = state.totalXP;
+  document.getElementById('topStage').textContent = `${state.currentStage}/${STAGES.length}`;
+  const totalDrills = Object.values(state.drills).filter(Boolean).length;
+  document.getElementById('topDrills').textContent = totalDrills;
+}
+
+function renderOverall() {
+  const totalDrills = STAGES.reduce((s, st) => s + st.drills.length, 0);
+  const completedDrills = Object.values(state.drills).filter(Boolean).length;
+  const pct = Math.round((completedDrills / totalDrills) * 100);
+  document.getElementById('overallPct').textContent = `${pct}%`;
+  document.getElementById('overallFill').style.width = `${pct}%`;
+}
+
+function renderRoad() {
+  const road = document.getElementById('roadMap');
+  road.innerHTML = '';
+
+  STAGES.forEach(stage => {
+    const status = getStageStatus(stage);
+    const prog = getStageProgress(stage);
+    const isExpanded = status === 'active' || status === 'unlocked';
+
+    const stageEl = document.createElement('div');
+    stageEl.className = `stage ${status}`;
+    stageEl.style.animationDelay = `${stage.id * 0.1}s`;
+
+    let simHTML = '';
+    if (stage.simulation) {
+      const chosen = state.simChoices[stage.id];
+      simHTML = `
+        <div class="sim-panel">
+          <h4>Decision Simulator</h4>
+          <div class="sim-scenario">${stage.simulation.scenario}</div>
+          <div class="sim-actions">
+            ${stage.simulation.options.map((opt, i) => `
+              <div class="sim-btn ${chosen === i ? 'selected' : ''}" onclick="event.stopPropagation(); chooseSim(${stage.id}, ${i})">${opt.text}</div>
+            `).join('')}
+          </div>
+          ${chosen !== undefined ? `
+            <div class="sim-result show ${stage.simulation.options[chosen].type}">
+              ${stage.simulation.options[chosen].result}
+            </div>
+          ` : ''}
+        </div>
+      `;
+    }
+
+    stageEl.innerHTML = `
+      <div class="stage-dot">${status === 'completed' ? '&#10003;' : status === 'active' ? '&#9658;' : stage.id}</div>
+      <div class="stage-card ${isExpanded ? 'expanded' : ''}" onclick="this.classList.toggle('expanded')">
+        <div class="stage-card-header">
+          <h3>
+            <span class="stage-number">STAGE ${stage.id}</span>
+            <span>${stage.icon} ${stage.name}</span>
+          </h3>
+          <span class="stage-badge badge-${status}">${status === 'completed' ? 'COMPLETED' : status === 'active' ? 'ACTIVE' : status === 'unlocked' ? 'UNLOCKED' : 'LOCKED'}</span>
+        </div>
+        <div class="stage-card-body">
+          <p class="stage-desc">${stage.desc}</p>
+          <div class="stage-meta">
+            ${stage.meta.map(m => `<span class="meta-tag">${m}</span>`).join('')}
+          </div>
+          <div class="stage-progress">
+            <div class="stage-progress-label">
+              <span>Drills completed</span>
+              <span>${prog.completed}/${prog.total} (${prog.pct}%)</span>
+            </div>
+            <div class="stage-progress-bar">
+              <div class="stage-progress-fill" style="width: ${prog.pct}%; background: ${stage.color};"></div>
+            </div>
+          </div>
+          <div class="drill-list">
+            ${stage.drills.map(d => `
+              <div class="drill-item ${state.drills[d.id] ? 'done' : ''}" onclick="event.stopPropagation(); openDrillModal('${d.id}')">
+                <div class="drill-check-box">${state.drills[d.id] ? '&#10003;' : ''}</div>
+                <div class="drill-text">
+                  <h5>${d.name}</h5>
+                  <p>${d.desc}</p>
+                </div>
+                <div class="drill-xp-badge">+${d.xp} XP</div>
+              </div>
+            `).join('')}
+          </div>
+          ${simHTML}
+        </div>
+      </div>
+    `;
+
+    road.appendChild(stageEl);
+  });
+}
+
+// Close modal on overlay click
+document.getElementById('drillModal').addEventListener('click', function(e) {
+  if (e.target === this) closeDrillModal();
+});
+
+// Init
+render();
+</script>
+</body>
+</html>
