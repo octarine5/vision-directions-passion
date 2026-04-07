@@ -1,0 +1,270 @@
+{
+  "metadata": {
+    "category": "production-drills",
+    "display_name": "Production Drills",
+    "layout": "drills",
+    "last_updated": "2026-04-07"
+  },
+  "sections": [
+    {
+      "title": "Hotfix Drills — API & Request Path",
+      "items": [
+        {
+          "drill": "Cascading Timeout Failure",
+          "layer": "API Gateway / Service Mesh",
+          "difficulty": "Medium",
+          "scenario": "Service A calls B calls C. Service C starts responding in 5s instead of 200ms. B's thread pool fills up. A starts returning 503s. Users see full outage despite A and B being healthy.",
+          "exercise": "1. Reproduce: Write a 3-service mock (Python/Go) where C injects latency\n2. Diagnose: Use distributed traces to pinpoint C as root cause vs misleading B errors\n3. Fix: Implement circuit breaker on B→C with fallback response\n4. Validate: Verify A stays healthy when C degrades\n5. Prevent: Add timeout budgets and per-hop deadlines",
+          "tags": ["api", "timeout", "circuit-breaker"],
+          "added": "2026-04-07"
+        },
+        {
+          "drill": "Memory Leak in Long-Running Service",
+          "layer": "Application Server",
+          "difficulty": "Hard",
+          "scenario": "API service memory grows 50MB/hour. No OOM yet but approaching container limit. Restarts buy time but leak returns. Heap dumps show growing HashMap of user sessions that aren't being evicted.",
+          "exercise": "1. Reproduce: Write a Flask/Express app with an in-memory cache that never evicts\n2. Diagnose: Use pprof (Go) or memory_profiler (Python) to identify the leak source\n3. Hotfix: Add TTL-based eviction, deploy without downtime\n4. Validate: Monitor RSS over 30 min to confirm flat memory curve\n5. Root fix: Replace in-memory cache with Redis, add max-size bounds",
+          "tags": ["memory", "debugging", "profiling"],
+          "added": "2026-04-07"
+        },
+        {
+          "drill": "Poison Pill Request",
+          "layer": "API / Input Validation",
+          "difficulty": "Medium",
+          "scenario": "One user's request contains a 50MB JSON body. It passes validation but causes the handler to OOM. The request retries infinitely from a queue, crashing workers in a loop.",
+          "exercise": "1. Reproduce: Send oversized payload to a mock API, observe worker crash + retry loop\n2. Diagnose: Correlate crash timestamps with specific request IDs in logs\n3. Hotfix: Add request body size limit at API gateway, dead-letter the poison message\n4. Validate: Confirm normal requests flow, poison pill is quarantined\n5. Prevent: Add payload size limits, circuit breaker on repeated failures from same message",
+          "tags": ["api", "validation", "queue"],
+          "added": "2026-04-07"
+        },
+        {
+          "drill": "Rate Limit Bypass",
+          "layer": "API Gateway",
+          "difficulty": "Medium",
+          "scenario": "A bot is hitting your API at 10K rps from rotating IPs. Per-IP rate limiting is ineffective. The bot is scraping user profiles and your database CPU is at 95%.",
+          "exercise": "1. Reproduce: Script a multi-IP load generator against a mock API with per-IP rate limits\n2. Diagnose: Identify the pattern — same user-agent, sequential profile IDs, no auth tokens\n3. Hotfix: Add compound rate limiting (IP + user-agent + endpoint), temporary block on /profiles\n4. Validate: Legitimate users unaffected, bot traffic drops\n5. Harden: Add fingerprinting, CAPTCHA challenges, read replicas for scrape-heavy endpoints",
+          "tags": ["api", "security", "rate-limiting"],
+          "added": "2026-04-07"
+        }
+      ]
+    },
+    {
+      "title": "Hotfix Drills — Database & Storage",
+      "items": [
+        {
+          "drill": "Slow Query Bringing Down the Database",
+          "layer": "Database (PostgreSQL/MySQL)",
+          "difficulty": "Medium",
+          "scenario": "A new feature shipped a query with a missing index. It does a full table scan on a 500M row table. DB CPU pegs at 100%, all other queries queue behind it. Dashboard shows P99 latency spike from 50ms to 12s.",
+          "exercise": "1. Reproduce: Create a 1M row table, run a SELECT without index, observe EXPLAIN ANALYZE\n2. Diagnose: Use pg_stat_activity / SHOW PROCESSLIST to find the offending query\n3. Hotfix: Kill long-running queries, add index with CREATE INDEX CONCURRENTLY (no downtime)\n4. Validate: Confirm P99 drops back, no lock contention during index build\n5. Prevent: Add query plan review to CI, slow query log alerting",
+          "tags": ["database", "query", "indexing"],
+          "added": "2026-04-07"
+        },
+        {
+          "drill": "Disk Full on Primary Database",
+          "layer": "Database / Storage",
+          "difficulty": "Hard",
+          "scenario": "Primary Postgres disk hits 95%. WAL segments are piling up because a replication slot for a dead replica is holding them. Writes will fail at 100%.",
+          "exercise": "1. Reproduce: Set up Postgres with replication, kill replica, watch WAL accumulate\n2. Diagnose: Check pg_replication_slots, pg_wal_lsn_diff, disk usage breakdown\n3. Hotfix: Drop the dead replication slot to release WAL, verify disk drops\n4. Validate: Primary writes resume, remaining replicas unaffected\n5. Prevent: Alert on replication slot lag, auto-drop slots with >X GB lag",
+          "tags": ["database", "disk", "replication"],
+          "added": "2026-04-07"
+        },
+        {
+          "drill": "Cache Stampede / Thundering Herd",
+          "layer": "Cache (Redis) + Database",
+          "difficulty": "Hard",
+          "scenario": "A popular cache key expires. 10K requests simultaneously miss cache and hit the database. DB connection pool exhausts, cascading failure across all endpoints.",
+          "exercise": "1. Reproduce: Set a hot key in Redis with short TTL, simulate concurrent requests on expiry\n2. Diagnose: Monitor cache hit/miss ratio, DB connection pool exhaustion, request queue depth\n3. Hotfix: Implement cache lock (singleflight) — only one request rebuilds, others wait\n4. Validate: On expiry, exactly 1 DB query fires, others serve from refreshed cache\n5. Harden: Add jittered TTLs, background refresh before expiry, stale-while-revalidate",
+          "tags": ["cache", "database", "concurrency"],
+          "added": "2026-04-07"
+        },
+        {
+          "drill": "Data Corruption from Concurrent Writes",
+          "layer": "Database / Application Logic",
+          "difficulty": "Hard",
+          "scenario": "Two API servers process the same order simultaneously. Both read balance=$100, both deduct $80, both write balance=$20. Customer was charged $160 but balance shows $20 instead of -$60. Money is lost.",
+          "exercise": "1. Reproduce: Simulate two concurrent read-modify-write cycles on same row without locking\n2. Diagnose: Identify the lost update — both reads see stale state, last write wins\n3. Hotfix: Add SELECT FOR UPDATE or optimistic locking with version column\n4. Validate: Concurrent deductions correctly fail or serialize\n5. Design: Implement idempotency keys for payment operations",
+          "tags": ["database", "concurrency", "transactions"],
+          "added": "2026-04-07"
+        }
+      ]
+    },
+    {
+      "title": "Hotfix Drills — Infrastructure & Networking",
+      "items": [
+        {
+          "drill": "DNS Resolution Failure",
+          "layer": "DNS / Networking",
+          "difficulty": "Medium",
+          "scenario": "Internal service discovery starts returning NXDOMAIN for service-b.internal. Half of service-a instances can't reach service-b. The other half work fine because they have cached DNS entries.",
+          "exercise": "1. Reproduce: Set up CoreDNS or dnsmasq, remove a record, observe partial failure\n2. Diagnose: Check DNS TTL, which pods have cached vs expired entries, dig/nslookup\n3. Hotfix: Restore DNS record, force flush caches on affected pods\n4. Validate: All instances resolve correctly, no more connection errors\n5. Harden: Lower DNS TTL for critical services, add DNS monitoring, client-side retry with backoff",
+          "tags": ["networking", "dns", "service-discovery"],
+          "added": "2026-04-07"
+        },
+        {
+          "drill": "Certificate Expiry Outage",
+          "layer": "TLS / Load Balancer",
+          "difficulty": "Easy",
+          "scenario": "Friday 11pm: your TLS cert expires. All HTTPS traffic gets ERR_CERT_DATE_INVALID. Customers see security warnings. Automated renewal failed silently 3 days ago.",
+          "exercise": "1. Reproduce: Generate a self-signed cert with 1-minute expiry, serve HTTPS, watch it fail\n2. Diagnose: Check cert expiry with openssl s_client, review cert-manager logs\n3. Hotfix: Manually renew cert, update load balancer / ingress, verify with curl\n4. Validate: HTTPS works, cert chain is valid, no mixed content\n5. Prevent: Alert on certs expiring within 14 days, test renewal in staging monthly",
+          "tags": ["tls", "networking", "operations"],
+          "added": "2026-04-07"
+        },
+        {
+          "drill": "Container OOMKilled in Production",
+          "layer": "Kubernetes / Container Runtime",
+          "difficulty": "Medium",
+          "scenario": "Pods keep getting OOMKilled. Kubernetes restarts them but they crash again within minutes. Resource limits are set to 512MB but the app needs 800MB under load due to a recent feature adding image processing.",
+          "exercise": "1. Reproduce: Deploy an app with memory limit 256MB, trigger load that exceeds it\n2. Diagnose: kubectl describe pod (OOMKilled reason), check resource requests vs actual usage\n3. Hotfix: Increase memory limit, rolling restart, verify pods stabilize\n4. Validate: Monitor memory usage under load, no more OOMKill events\n5. Root fix: Profile the image processing — stream instead of buffer, add memory-bounded queue",
+          "tags": ["kubernetes", "memory", "containers"],
+          "added": "2026-04-07"
+        },
+        {
+          "drill": "Deployment Rollback Under Pressure",
+          "layer": "CI/CD / Kubernetes",
+          "difficulty": "Medium",
+          "scenario": "New deploy shipped 5 minutes ago. Error rate jumped from 0.1% to 15%. PagerDuty firing. The deploy has a database migration that already ran. Simple kubectl rollout undo won't work.",
+          "exercise": "1. Reproduce: Deploy v2 with a bug + a migration that adds a column, observe errors\n2. Diagnose: Confirm error spike correlates with deploy timestamp, identify the breaking change\n3. Hotfix: Feature-flag the new code path off (v2 stays deployed but old behavior restored)\n4. Validate: Error rate drops, new column is unused but harmless\n5. Design: Expand-contract migration pattern so rollbacks are always safe",
+          "tags": ["deployment", "rollback", "database"],
+          "added": "2026-04-07"
+        }
+      ]
+    },
+    {
+      "title": "Hotfix Drills — Distributed Systems",
+      "items": [
+        {
+          "drill": "Message Queue Backlog Explosion",
+          "layer": "Kafka / SQS / RabbitMQ",
+          "difficulty": "Hard",
+          "scenario": "Consumer lag on a Kafka topic jumped from 0 to 2M messages. Consumers are alive but processing at 1/10th normal speed. A downstream API they call is throttling them.",
+          "exercise": "1. Reproduce: Set up Kafka + consumer, add latency to downstream call, watch lag grow\n2. Diagnose: Check consumer group lag, consumer throughput, downstream API response times\n3. Hotfix: Increase consumer instances, add async processing with local buffer, bypass throttled API for non-critical messages\n4. Validate: Lag starts decreasing, consumer throughput restored\n5. Design: Add backpressure mechanism, dead-letter queue for repeatedly failing messages",
+          "tags": ["kafka", "queue", "backpressure"],
+          "added": "2026-04-07"
+        },
+        {
+          "drill": "Split-Brain in Distributed Cache",
+          "layer": "Redis Cluster / Distributed State",
+          "difficulty": "Hard",
+          "scenario": "Network partition splits your 6-node Redis cluster. Both sides elect a master. Writes go to both sides. When partition heals, data conflicts — some users see stale data, some see correct data.",
+          "exercise": "1. Reproduce: Set up Redis Sentinel, use iptables to simulate network partition\n2. Diagnose: Check cluster info, identify which nodes became master, find conflicting keys\n3. Hotfix: Force cluster to single master, rebuild replicas from authoritative source\n4. Validate: All reads return consistent data, cluster topology is correct\n5. Design: Configure min-replicas-to-write, add cluster health monitoring, consider CP vs AP tradeoffs",
+          "tags": ["redis", "distributed", "consistency"],
+          "added": "2026-04-07"
+        },
+        {
+          "drill": "Retry Storm / Amplification",
+          "layer": "Microservices",
+          "difficulty": "Hard",
+          "scenario": "Service A retries 3x to B, B retries 3x to C. C is slow. One user request generates 9 calls to C. Multiply by 1K concurrent users = 9K calls overwhelming C, making it slower, causing more retries.",
+          "exercise": "1. Reproduce: Chain 3 services with retry logic, inject latency in C, observe exponential amplification\n2. Diagnose: Trace request fan-out, count actual calls to C per user request\n3. Hotfix: Add retry budget (max 10% of requests can be retries), circuit breaker on B→C\n4. Validate: C load drops to manageable level, successful requests still complete\n5. Design: Implement hedged requests instead of retries, add jittered exponential backoff",
+          "tags": ["microservices", "retry", "cascading-failure"],
+          "added": "2026-04-07"
+        }
+      ]
+    },
+    {
+      "title": "Metrics Drills — SLI Definition & Measurement",
+      "items": [
+        {
+          "drill": "Define SLIs for a REST API",
+          "layer": "API Service",
+          "difficulty": "Easy",
+          "scenario": "You own a user profile API (GET/PUT /users/:id). Define what 'healthy' means in measurable terms. Currently there are no SLOs — the team just 'feels' when things are bad.",
+          "exercise": "1. Identify the 4 golden signals: latency, error rate, throughput, saturation\n2. Write Prometheus queries for each:\n   - Latency: histogram_quantile(0.99, rate(http_request_duration_seconds_bucket{service='users'}[5m]))\n   - Error rate: sum(rate(http_requests_total{status=~'5..'}[5m])) / sum(rate(http_requests_total[5m]))\n   - Throughput: sum(rate(http_requests_total[5m]))\n   - Saturation: container_memory_working_set_bytes / container_spec_memory_limit_bytes\n3. Build a Grafana dashboard with these 4 panels\n4. Set SLO targets: P99 < 200ms, error rate < 0.1%, availability > 99.9%\n5. Calculate: 99.9% over 30 days = 43 min downtime budget",
+          "tags": ["sli", "prometheus", "grafana"],
+          "added": "2026-04-07"
+        },
+        {
+          "drill": "Define SLIs for an Async Pipeline",
+          "layer": "Data Pipeline / Queue Consumer",
+          "difficulty": "Medium",
+          "scenario": "You own an event processing pipeline: Kafka → Consumer → Database → Notification. Latency SLIs don't apply the same way as a sync API. How do you measure 'healthy'?",
+          "exercise": "1. Identify pipeline-specific SLIs:\n   - Freshness: time from event produced to processed (end-to-end lag)\n   - Correctness: % of events processed without error\n   - Coverage: % of events that reach the end vs dropped/dead-lettered\n   - Throughput: events/sec processed vs produced\n2. Write metrics for each: consumer_lag, processing_errors_total, dead_letter_count, processing_rate\n3. Set SLOs: freshness < 30s for P99, correctness > 99.99%, coverage > 99.9%\n4. Build alerting on lag > 5min (burn rate), dead-letter rate spike\n5. Design: How to measure freshness when events don't carry timestamps?",
+          "tags": ["sli", "pipeline", "kafka"],
+          "added": "2026-04-07"
+        },
+        {
+          "drill": "SLI for an ML Model Serving Endpoint",
+          "layer": "ML Inference Service",
+          "difficulty": "Medium",
+          "scenario": "You serve a recommendation model at /recommendations. Standard latency/error SLIs exist, but how do you measure model quality degradation in production?",
+          "exercise": "1. Define operational SLIs: P99 latency < 100ms, error rate < 0.01%, GPU utilization < 80%\n2. Define quality SLIs:\n   - Prediction coverage: % of requests returning non-empty recommendations\n   - Feature freshness: staleness of feature store data feeding the model\n   - Confidence distribution: track prediction confidence scores, alert on distribution shift\n3. Set up A/B metrics: CTR, conversion rate as lagging quality indicators\n4. Build a drift detection dashboard: feature value distributions vs training data baseline\n5. Alert design: quality SLO breach (coverage drops below 95%) triggers model rollback",
+          "tags": ["sli", "ml", "model-serving"],
+          "added": "2026-04-07"
+        }
+      ]
+    },
+    {
+      "title": "Metrics Drills — Error Budget & Burn Rate",
+      "items": [
+        {
+          "drill": "Error Budget Calculation & Policy",
+          "layer": "SRE Practice",
+          "difficulty": "Medium",
+          "scenario": "Your service has a 99.9% availability SLO (30-day window). It's day 10 and you've already consumed 60% of your error budget due to two incidents. Should you freeze deploys?",
+          "exercise": "1. Calculate: 99.9% over 30 days = 43.2 min total budget. 60% consumed = 25.9 min used, 17.3 min remaining\n2. Compute burn rate: 25.9 min used in 10 days = 2.59 min/day. Budget allows 1.44 min/day. Burn rate = 1.8x (unsustainable)\n3. Decision framework: At current burn rate, budget exhausts by day 17. Ship only reliability fixes.\n4. Write the error budget policy: >1.5x burn rate → deploy freeze except hotfixes, >2x → all hands on reliability\n5. Automate: Write a script that reads Prometheus uptime data and outputs burn rate + days remaining",
+          "tags": ["error-budget", "slo", "policy"],
+          "added": "2026-04-07"
+        },
+        {
+          "drill": "Multi-Window Burn Rate Alerting",
+          "layer": "Alerting / Prometheus",
+          "difficulty": "Hard",
+          "scenario": "Simple threshold alerts fire too late (after budget is gone) or too often (transient blips). Design a multi-window burn rate alert that catches real incidents without alert fatigue.",
+          "exercise": "1. Understand the math: burn rate = (error rate observed) / (error rate allowed by SLO)\n2. Implement 4-tier alerts in Prometheus:\n   - 14.4x burn rate over 1hr + 5min (pages: budget gone in 2.5 days)\n   - 6x burn rate over 6hr + 30min (pages: budget gone in 5 days)\n   - 3x burn rate over 1day + 2hr (tickets: budget at risk)\n   - 1x burn rate over 3day + 6hr (log: on track to exhaust)\n3. Write the PromQL: (1 - (sum(rate(success[1h])) / sum(rate(total[1h])))) / (1 - 0.999) > 14.4\n4. Test: Inject errors at different rates, verify correct alert tier fires\n5. Tune: Adjust windows to minimize false positives while catching 5-min outages",
+          "tags": ["alerting", "prometheus", "burn-rate"],
+          "added": "2026-04-07"
+        },
+        {
+          "drill": "Incident Impact Quantification",
+          "layer": "SRE Practice / Business",
+          "difficulty": "Medium",
+          "scenario": "A 45-minute outage just ended. Leadership asks: how many users were affected? What was the revenue impact? How much error budget did we burn? You need to answer with data, not guesses.",
+          "exercise": "1. Time window: Identify exact start/end from monitoring (first alert to recovery confirmation)\n2. User impact: Query affected requests — sum(rate(http_requests_total{status=~'5..'}[45m])) — and unique users from access logs\n3. Revenue impact: Cross-reference with checkout/conversion events during the window vs same-window baseline\n4. Error budget: 45 min of partial outage (say 30% error rate) = 0.30 * 45 = 13.5 equivalent-minutes of full outage\n5. Write the postmortem impact section with these numbers, compare to SLO budget remaining",
+          "tags": ["incident", "quantification", "business"],
+          "added": "2026-04-07"
+        }
+      ]
+    },
+    {
+      "title": "Metrics Drills — System Behavior Validation",
+      "items": [
+        {
+          "drill": "Load Test & Capacity Boundary Finding",
+          "layer": "Full Stack",
+          "difficulty": "Medium",
+          "scenario": "Your service handles 500 rps in production. Product wants to launch a feature expected to 3x traffic. Will the system hold? What breaks first?",
+          "exercise": "1. Baseline: Run k6/Locust at current production rate (500 rps), record latency, error rate, resource usage\n2. Ramp: Increase to 1000, 1500, 2000 rps in 5-min steps, recording metrics at each level\n3. Find the cliff: Identify the rps where P99 latency degrades >2x or errors appear (the saturation point)\n4. Root cause the bottleneck: Is it CPU, memory, DB connections, thread pool, or downstream service?\n5. Report: 'System handles 1200 rps before DB connection pool saturates. Need to increase pool from 20→50 and add read replica for the 1500 rps target.'",
+          "tags": ["load-testing", "capacity", "performance"],
+          "added": "2026-04-07"
+        },
+        {
+          "drill": "Dependency Failure Validation",
+          "layer": "Microservices / Resilience",
+          "difficulty": "Hard",
+          "scenario": "Your service depends on 5 downstream services. What happens when each one fails? Do you degrade gracefully or crash entirely? Most teams don't know until production tells them.",
+          "exercise": "1. Map all dependencies and classify: critical (must work) vs degradable (can serve partial response)\n2. For each dependency, simulate failure (return 500, timeout, connection refused) one at a time\n3. Observe: Does your service return errors? Partial data? Does it hang? Does it cascade?\n4. Fix gaps: Add circuit breakers for degradable deps, timeouts for all, fallback responses where possible\n5. Document in a dependency matrix: [Dep] → [Failure Mode] → [Expected Behavior] → [Verified Y/N]",
+          "tags": ["resilience", "chaos", "dependencies"],
+          "added": "2026-04-07"
+        },
+        {
+          "drill": "Canary Metrics Validation",
+          "layer": "Deployment / Observability",
+          "difficulty": "Medium",
+          "scenario": "You're deploying a new version to 5% of traffic (canary). How do you statistically determine if the canary is healthy vs the baseline? Eyeballing dashboards isn't good enough.",
+          "exercise": "1. Define comparison metrics: P50/P99 latency, error rate, business metrics (conversion, cart adds)\n2. Collect 30 min of baseline vs canary data side by side\n3. Statistical comparison: Use Mann-Whitney U test for latency distributions, chi-squared for error rates\n4. Automate: Write a script that pulls Prometheus data for both cohorts and outputs pass/fail with confidence interval\n5. Set thresholds: auto-rollback if canary error rate > baseline + 0.5% with p < 0.05",
+          "tags": ["canary", "statistics", "deployment"],
+          "added": "2026-04-07"
+        },
+        {
+          "drill": "Synthetic Monitoring & Invariant Checking",
+          "layer": "Observability / Testing in Prod",
+          "difficulty": "Medium",
+          "scenario": "Your monitoring only detects failures when users hit them. By then, it's too late. Build proactive checks that catch issues before users do.",
+          "exercise": "1. Define 5 critical user journeys (signup, login, checkout, search, profile load)\n2. Write synthetic checks: HTTP requests that run every 60s and assert on status + response body content\n3. Add invariant checks: account balance >= 0, order total matches line items, timestamps are monotonic\n4. Deploy as a CronJob or use Checkly/Datadog Synthetics\n5. Alert on first synthetic failure — this is your 'canary in the coal mine' before real users complain",
+          "tags": ["synthetic", "monitoring", "testing-in-prod"],
+          "added": "2026-04-07"
+        }
+      ]
+    }
+  ]
+}
