@@ -2,7 +2,16 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-04-07"
+    "last_updated": "2026-04-08"
   },
-  "entries": []
+  "entries": [
+    {
+      "timestamp": "2026-04-08T16:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: vLLM KV-Cache Exhaustion Under Traffic Burst",
+      "summary": "Added a Hard-difficulty ML Serving hotfix drill covering vLLM KV-cache exhaustion on A100 GPUs triggered by a marketing email blast. Scenario includes exact CUDA OOM error messages, Prometheus metric names, and a 5-step exercise from triage through root-fix with HPA autoscaling.",
+      "tasks": ["drill"],
+      "items_added": ["vLLM KV-Cache Exhaustion Under Traffic Burst"]
+    }
+  ]
 }

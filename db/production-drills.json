@@ -3,7 +3,7 @@
     "category": "production-drills",
     "display_name": "Production Drills",
     "layout": "drills",
-    "last_updated": "2026-04-07"
+    "last_updated": "2026-04-08"
   },
   "sections": [
     {
@@ -126,6 +126,20 @@
           "exercise": "1. Reproduce: Deploy v2 with a bug + a migration that adds a column, observe errors\n2. Diagnose: Confirm error spike correlates with deploy timestamp, identify the breaking change\n3. Hotfix: Feature-flag the new code path off (v2 stays deployed but old behavior restored)\n4. Validate: Error rate drops, new column is unused but harmless\n5. Design: Expand-contract migration pattern so rollbacks are always safe",
           "tags": ["deployment", "rollback", "database"],
           "added": "2026-04-07"
+        }
+      ]
+    },
+    {
+      "title": "Hotfix Drills — ML Serving",
+      "items": [
+        {
+          "drill": "vLLM KV-Cache Exhaustion Under Traffic Burst",
+          "layer": "ML Serving (vLLM / NVIDIA A100)",
+          "difficulty": "Hard",
+          "scenario": "At 14:23 PST, PagerDuty fires: 'llm-serving-prod error rate 28.4% (threshold: 5%)'. Your vLLM cluster (4× A100-80GB, GKE) serves Llama-3-70B via /v1/completions. Grafana shows `vllm:gpu_kv_cache_usage_perc` at 99.8% across all nodes, `vllm:num_queued_requests` spiking to 340. Logs flood with: `torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 2.34 GiB (GPU 0; 79.20 GiB total capacity; 71.42 GiB already allocated; 2.01 GiB free; 72.18 GiB reserved in total by PyTorch)`. Concurrency jumped from 18→52 req/s after a marketing email blast at 14:15 PST. P99 latency: 1.2s → 47s timeout. Model weights (35 GB) are fine — KV cache for in-flight sequences consumed the remaining VRAM.",
+          "exercise": "1. Triage: Query Prometheus for vllm:num_running_requests, vllm:num_queued_requests, vllm:gpu_kv_cache_usage_perc — confirm KV cache is the bottleneck, not model weights or CUDA fragmentation\n2. Hotfix: Patch vLLM deployment ConfigMap — reduce max_num_seqs from 256→48 and max_num_batched_tokens from 8192→4096. Rolling-restart pods one at a time (kubectl rollout restart, 1 unavailable) to preserve partial capacity\n3. Load shedding: Apply nginx rate limit (limit_req_zone, 40 r/s burst=20) at the Istio ingress gateway to prevent re-saturation during restarts\n4. Validate: KV cache utilization stabilizes at ~65%, P99 returns to 1.6s, error rate < 0.8% within 8 minutes of first pod restart completing\n5. Root fix: Calculate correct max_num_seqs = floor((total_gpu_mem - model_weights_mem - overhead) / (max_model_len × num_layers × head_dim × 2 × dtype_bytes)). Add HPA rule: scale out when vllm:num_queued_requests > 15 for 60s. Add pre-scaling hook tied to marketing campaign scheduler.",
+          "tags": ["ml-serving", "vllm", "gpu", "oom", "kubernetes"],
+          "added": "2026-04-08"
         }
       ]
     },
