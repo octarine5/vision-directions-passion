@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-04-08"
+    "last_updated": "2026-04-09"
   },
   "entries": [
     {
@@ -12,6 +12,14 @@
       "summary": "Added a Hard-difficulty ML Serving hotfix drill covering vLLM KV-cache exhaustion on A100 GPUs triggered by a marketing email blast. Scenario includes exact CUDA OOM error messages, Prometheus metric names, and a 5-step exercise from triage through root-fix with HPA autoscaling.",
       "tasks": ["drill"],
       "items_added": ["vLLM KV-Cache Exhaustion Under Traffic Burst"]
+    },
+    {
+      "timestamp": "2026-04-09T12:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: Triton Inference Server Silent Fallback — Model Config/Weight Shape Mismatch",
+      "summary": "Added a Hard-difficulty ML Serving hotfix drill: Triton silently falls back to stale model weights after a config/weight shape mismatch breaks hot-reload from S3. Scenario includes exact Triton error log lines, SageMaker Feature Store context, GitHub Actions CI bug, and a 6-step exercise from triage to prevention.",
+      "tasks": ["drill"],
+      "items_added": ["Triton Inference Server Silent Fallback — Model Config/Weight Shape Mismatch"]
     }
   ]
 }

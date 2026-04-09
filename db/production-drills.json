@@ -3,7 +3,7 @@
     "category": "production-drills",
     "display_name": "Production Drills",
     "layout": "drills",
-    "last_updated": "2026-04-08"
+    "last_updated": "2026-04-09"
   },
   "sections": [
     {
@@ -132,6 +132,15 @@
     {
       "title": "Hotfix Drills — ML Serving",
       "items": [
+        {
+          "drill": "Triton Inference Server Silent Fallback — Model Config/Weight Shape Mismatch",
+          "layer": "ML Serving (Triton / AWS EKS / SageMaker Feature Store)",
+          "difficulty": "Hard",
+          "scenario": "At 09:47 UTC, PagerDuty fires: 'fraud-model-triton error_rate 12.3% (threshold: 2%)'. Your Triton Inference Server cluster (6× NVIDIA T4-16GB on AWS EKS, us-east-1) serves a fraud detection ONNX model at /v2/models/fraud_detector/infer. The model was automatically retrained overnight (weekly cycle) and new weights uploaded to s3://ml-models-prod/fraud_detector/v2.3.1/. Triton polls S3 every 30 min for hot-reloads. Triton logs flood with:\n\n  E0409 09:03:14.221847 1 model_repository_manager.cc:1741] failed to load 'fraud_detector' version 3: [StatusCode::INVALID_ARGUMENT] model config input 'input__0': the model expect tensor shape [1,512] but the configuration specified shape [1,256]\n  E0409 09:03:14.221859 1 model_repository_manager.cc:1744] ModelRepositoryManager::LoadModels() failed for model 'fraud_detector'\n\nTriton silently fell back to v2.3.0 (old weights, 256-dim input), but the upstream SageMaker Feature Store pipeline was already migrated to produce 512-dim feature vectors for v2.3.1. 12% of requests hit a code path that passes new vectors to the old model, causing shape mismatch errors. The remaining 88% still hit the legacy feature path and serve stale predictions from a 6-day-old model. Business alert: chargeback rate jumped from 0.8% → 1.2% ($280K daily revenue impact). The CI/CD pipeline (GitHub Actions) shows the model export job succeeded but config.pbtxt was never updated — a shape detection bug in the config generation script failed silently on dynamic ONNX axes.",
+          "exercise": "1. Triage: Check nv_inference_request_failure and nv_model_load_duration_us in Prometheus. GET /v2/models/fraud_detector to confirm which version is READY (expect v2 = READY, v3 = UNAVAILABLE). Check CloudWatch Logs for S3 sync events — confirm weights arrived but config update failed.\n2. Immediate mitigation: Roll back the SageMaker Feature Group to produce 256-dim vectors (flip feature pipeline version env var, redeploy SageMaker Processing Job). This restores consistency with the old weights. Error rate should drop to ~0% within 2 min as new feature batches flow through.\n3. Root cause: Inspect config.pbtxt in s3://ml-models-prod/fraud_detector/v2.3.1/ — input shape still shows [1,256]. Review generate_config.py in CI: the dynamic axis detection calls onnx.checker.check_model() but reads input shape from the first symbolic dim, which is 'batch_size', not the feature dim. Bug introduced in commit a3f8d2c.\n4. Fix: Correct generate_config.py to read input shape from dim[1] instead of dim[0]. Regenerate config.pbtxt with correct shape [1,512], upload both config and weights to S3. Trigger manual reload: POST /v2/repository/models/fraud_detector/load (body: {\"parameters\": {\"config\": \"\"}}). Wait for model version 3 status = READY.\n5. Validate: GET /v2/models/fraud_detector/versions/3 → READY. Re-enable 512-dim feature pipeline. Confirm nv_inference_request_failure drops to 0. Monitor chargeback rate returns to 0.8% baseline within 2–4 hours.\n6. Prevent: Add model config validation step in GitHub Actions before S3 upload — compare all config.pbtxt input/output shapes against actual ONNX graph shapes using onnx.load().graph.input[i].type.tensor_type.shape. Alert on any Triton model load failure event (not just on inference errors), and add a liveness check that validates the expected model version is READY after every retraining pipeline run.",
+          "tags": ["ml-serving", "triton", "model-versioning", "onnx", "aws", "feature-store"],
+          "added": "2026-04-09"
+        },
         {
           "drill": "vLLM KV-Cache Exhaustion Under Traffic Burst",
           "layer": "ML Serving (vLLM / NVIDIA A100)",
