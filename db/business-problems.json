@@ -4,7 +4,7 @@
     "display_name": "Business Problems",
     "layout": "table",
     "columns": ["#", "Problem", "Enterprise Example", "Market Fit Signal", "TAM", "Tags"],
-    "last_updated": "2026-04-07"
+    "last_updated": "2026-04-10"
   },
   "sections": [
     {
@@ -14,6 +14,7 @@
         {"problem": "Enterprise knowledge search", "enterprise": "Glean, Moveworks", "market_fit": "Workers spend 20% of time searching for info", "tam": "$15B", "tags": ["ml", "biz"], "added": "2026-04-07"},
         {"problem": "AI code generation & developer tools", "enterprise": "GitHub Copilot, Cursor, Replit", "market_fit": "10x developer productivity, massive adoption", "tam": "$30B", "tags": ["ml"], "added": "2026-04-07"},
         {"problem": "Data infrastructure modernization", "enterprise": "Snowflake, Databricks, Fivetran", "market_fit": "Every company becoming data-driven", "tam": "$80B", "tags": ["data"], "added": "2026-04-07"},
+        {"problem": "AI data center networking & interconnects", "enterprise": "Nexthop AI, Enfabrica, Celestial AI", "market_fit": "GPU clusters need ultra-low-latency switching; network is the new bottleneck after compute. Nexthop AI raised $500M Series B (Apr 2026) led by Lightspeed + a16z.", "tam": "$30B", "tags": ["infra", "ml"], "added": "2026-04-10"},
         {"problem": "API management & integration", "enterprise": "Kong, Postman, MuleSoft", "market_fit": "Microservices explosion = API sprawl", "tam": "$10B", "tags": ["infra"], "added": "2026-04-07"},
         {"problem": "Observability & monitoring", "enterprise": "Datadog, Grafana, Honeycomb", "market_fit": "Cloud complexity demands better visibility", "tam": "$25B", "tags": ["infra"], "added": "2026-04-07"},
         {"problem": "Cloud cost optimization", "enterprise": "Vantage, CloudZero, Spot.io", "market_fit": "Cloud spend is the new #2 expense line", "tam": "$10B", "tags": ["infra", "biz"], "added": "2026-04-07"},
@@ -67,6 +68,9 @@
         {"problem": "AI-native CRM", "enterprise": "Salesforce Einstein, Attio, Folk", "market_fit": "CRM reimagined with AI-first architecture", "tam": "$25B", "tags": ["biz"], "added": "2026-04-07"},
         {"problem": "AI content creation (video/image)", "enterprise": "Runway, Pika, Midjourney", "market_fit": "Content demand outpaces creator capacity", "tam": "$15B", "tags": ["ml"], "added": "2026-04-07"},
         {"problem": "Biotech platform (protein/genomics)", "enterprise": "AbSci, Evo, Profluent", "market_fit": "AI designs proteins faster than wet labs", "tam": "$30B", "tags": ["ml"], "added": "2026-04-07"},
+        {"problem": "On-device / local personal AI", "enterprise": "OpenClaw (210K GitHub stars Apr 2026), Ollama, LM Studio", "market_fit": "Privacy regulations + latency requirements drive AI to the edge; OpenClaw grew from 9K to 60K stars in days post-viral, 50+ native integrations", "tam": "$20B", "tags": ["ml", "infra"], "added": "2026-04-10"},
+        {"problem": "Industrial physical AI (cobots & factory automation)", "enterprise": "Mind Robotics ($500M Series A Apr 2026), Covariant, Machina Labs", "market_fit": "Labor shortage + reshoring drives demand for AI-native robots in manufacturing; VC poured $22B into robotics in 2025 (+69% YoY)", "tam": "$60B", "tags": ["ml"], "added": "2026-04-10"},
+        {"problem": "AI-native inference chips", "enterprise": "Rebellions ($400M pre-IPO 2026), Inferact ($150M seed), Groq", "market_fit": "Inference is 2/3 of all AI compute in 2026; inference-optimized chip market growing to $50B+ this year per Deloitte", "tam": "$50B", "tags": ["infra", "ml"], "added": "2026-04-10"},
         {"problem": "Real-time translation & localization", "enterprise": "DeepL, Translated (Pi)", "market_fit": "Global commerce needs real-time multilingual", "tam": "$8B", "tags": ["ml"], "added": "2026-04-07"},
         {"problem": "Construction & AEC tech", "enterprise": "Procore, OpenSpace, Buildots", "market_fit": "$10T industry, 1% IT spend", "tam": "$12B", "tags": ["biz"], "added": "2026-04-07"},
         {"problem": "AI-powered cybersecurity SOC", "enterprise": "Torq, Tines, Swimlane", "market_fit": "Alert fatigue: 80% of SOC alerts are false positives", "tam": "$10B", "tags": ["ml", "infra"], "added": "2026-04-07"}

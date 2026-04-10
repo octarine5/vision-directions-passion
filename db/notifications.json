@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-04-09"
+    "last_updated": "2026-04-10"
   },
   "entries": [
     {
@@ -20,6 +20,20 @@
       "summary": "Added a Hard-difficulty ML Serving hotfix drill: Triton silently falls back to stale model weights after a config/weight shape mismatch breaks hot-reload from S3. Scenario includes exact Triton error log lines, SageMaker Feature Store context, GitHub Actions CI bug, and a 6-step exercise from triage to prevention.",
       "tasks": ["drill"],
       "items_added": ["Triton Inference Server Silent Fallback — Model Config/Weight Shape Mismatch"]
+    },
+    {
+      "timestamp": "2026-04-10T16:00:00Z",
+      "type": "market-scan",
+      "title": "Friday update: drill + market signal scan",
+      "summary": "Added a Hard hotfix drill for Azure Cosmos DB hot-partition RU exhaustion triggered by viral celebrity traffic. Ran market signal scan: added 4 new business problems covering AI data center networking (Nexthop AI $500M Series B), on-device local AI (OpenClaw 210K stars), industrial physical AI (Mind Robotics $500M Series A), and AI-native inference chips (Rebellions $400M pre-IPO, Inferact $150M seed).",
+      "tasks": ["drill", "market-scan"],
+      "items_added": [
+        "Azure Cosmos DB Hot Partition — RU Exhaustion on Viral Traffic",
+        "AI data center networking & interconnects",
+        "On-device / local personal AI",
+        "Industrial physical AI (cobots & factory automation)",
+        "AI-native inference chips"
+      ]
     }
   ]
 }

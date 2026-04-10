@@ -3,7 +3,7 @@
     "category": "production-drills",
     "display_name": "Production Drills",
     "layout": "drills",
-    "last_updated": "2026-04-09"
+    "last_updated": "2026-04-10"
   },
   "sections": [
     {
@@ -155,6 +155,15 @@
     {
       "title": "Hotfix Drills — Distributed Systems",
       "items": [
+        {
+          "drill": "Azure Cosmos DB Hot Partition — RU Exhaustion on Viral Traffic",
+          "layer": "Database (Azure Cosmos DB) / Distributed",
+          "difficulty": "Hard",
+          "scenario": "At 16:42 UTC, PagerDuty fires: 'cosmos-prod request-rate-too-large 23.7% (threshold: 1%)'. Your Azure Cosmos DB (West US 2, SQL API) stores 2B+ documents serving a social feed service. Partition key is user_id, container provisioned throughput is 50,000 RU/s. A viral post from a celebrity account (user_id: usr_0XF8A2, 42M followers) generates 180K requests/minute. All hit the same physical partition. SDK errors flood: CosmosException: Status 429 (TooManyRequests), SubStatusCode: 3200 (RequestRateTooLarge), RetryAfter: 2000ms, ActivityId: d4f1e8a3-9c2b-47e1-b3f5-8a190c344d21. Azure Monitor shows partition range 15 consuming 78% of total RU, starving all other tenants. P99 feed-load latency: 340ms → 8.2s. Business alert: engagement drop 34%, estimated $190K/hr ad revenue impact.",
+          "exercise": "1. Triage: Query Azure Monitor Diagnostic Logs — table CDBPartitionKeyRUConsumption — filter PartitionKeyRangeId='15', sum(RequestCharge) by 1-min bins. Confirm 1% of partitions consuming >70% of provisioned RU. Cross-check with CDBDataPlaneRequests to identify top callers (feed-reader service + notification fanout jobs).\n2. Immediate mitigation: Upgrade container from fixed 50K RU to autoscale (10K–100K RU). This is a live change, zero downtime, completes in <2 min. Buys breathing room while designing durable fix.\n3. Short-term cache bypass: Deploy a Redis read-through cache for top-500 hot accounts (sorted set by follower count, refreshed every 60s). Route GET /feed?user_id={celebrity} to Redis with 5s TTL. Cache hit ratio drops hot-partition reads by ~85% within 3 min of rollout.\n4. Root cause analysis: partition_key=user_id is an anti-pattern for high-cardinality celebrities. Fan-out writes (followers' timeline updates) + fan-out reads both land on the same physical shard. Review SDK request logs — 2,200 reads/s and 180 writes/s both targeting usr_0XF8A2.\n5. Root fix: Redesign partition key to composite: user_id|date_bucket (e.g., 'usr_0XF8A2|20260410'). Distribute temporal reads across multiple partitions. For accounts with follower_count > 500K, pre-compute feed via fan-out-on-write (write to each follower's timeline at post creation, not at read time). Store celebrity feeds in a separate high-throughput container (200K RU autoscale).\n6. Prevent: Add 'celebrity_tier' flag in user metadata. Route flagged accounts to hot-path container at onboarding. Alert rule: any PartitionKeyRangeId consuming >50% of container RU for >90s triggers PagerDuty P1.",
+          "tags": ["cosmosdb", "azure", "hot-partition", "distributed", "database"],
+          "added": "2026-04-10"
+        },
         {
           "drill": "Message Queue Backlog Explosion",
           "layer": "Kafka / SQS / RabbitMQ",
