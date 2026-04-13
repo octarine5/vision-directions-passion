@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-04-10"
+    "last_updated": "2026-04-13"
   },
   "entries": [
     {
@@ -33,6 +33,24 @@
         "On-device / local personal AI",
         "Industrial physical AI (cobots & factory automation)",
         "AI-native inference chips"
+      ]
+    }
+  ,
+    {
+      "timestamp": "2026-04-13T10:00:00Z",
+      "type": "knowledge-base",
+      "title": "Monday update: drill + knowledge base refresh",
+      "summary": "Added a Hard distributed-systems drill for Cassandra compaction storm on GCP (all 6 nodes doing concurrent STCS major compaction, saturating disk I/O at 99%, ReadStage pending=2847). KB refresh: 3 new ML systems entries (prefill-decode disaggregation, P-EAGLE parallel speculative decoding, context engineering for agents), 1 new system design entry (AI agent orchestration via MCP), and 3 new org-decision entries (AI agent production readiness, staff engineers in the AI era, AI agent governance framework).",
+      "tasks": ["drill", "knowledge-base"],
+      "items_added": [
+        "Cassandra Compaction Storm During Write-Heavy Migration",
+        "Prefill-Decode Disaggregation for LLM Serving",
+        "Parallel Speculative Decoding (P-EAGLE)",
+        "Context Engineering for LLM Agents",
+        "AI Agent Orchestration Platform (MCP)",
+        "Staff engineers and AI-assisted development",
+        "AI agent governance and evaluation framework",
+        "AI agent production readiness checklist"
       ]
     }
   ]

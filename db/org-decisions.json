@@ -4,7 +4,7 @@
     "display_name": "Org & Lifecycle",
     "layout": "table",
     "columns": ["#", "Decision / Topic", "Key Considerations", "Phase"],
-    "last_updated": "2026-04-07"
+    "last_updated": "2026-04-13"
   },
   "sections": [
     {
@@ -74,7 +74,8 @@
         {"topic": "Cost optimization cycles", "considerations": "Reserved instances, spot, right-sizing, FinOps", "phase": "Operate", "added": "2026-04-07"},
         {"topic": "Observability maturity", "considerations": "Metrics -> logs -> traces -> profiling -> RCA automation", "phase": "Operate", "added": "2026-04-07"},
         {"topic": "Disaster recovery testing", "considerations": "Game days, failover drills, RTO/RPO validation", "phase": "Operate", "added": "2026-04-07"},
-        {"topic": "Dependency upgrades & patching", "considerations": "Security patches, breaking changes, automated upgrades", "phase": "Operate", "added": "2026-04-07"}
+        {"topic": "Dependency upgrades & patching", "considerations": "Security patches, breaking changes, automated upgrades", "phase": "Operate", "added": "2026-04-07"},
+        {"topic": "AI agent production readiness checklist", "considerations": "Define SLOs for agents (task success rate, latency, cost/call); runbooks for agent failure modes (tool errors, context overflow, hallucination spikes); incident response for autonomous actions gone wrong; shadow mode before live deployment; gradual rollout with automated evals as gate", "phase": "Operate", "added": "2026-04-13"}
       ]
     },
     {
@@ -119,7 +120,9 @@
         {"topic": "Internationalization strategy", "considerations": "i18n/l10n, data residency, local compliance", "phase": "Cross-cutting", "added": "2026-04-07"},
         {"topic": "Developer experience (DX) investment", "considerations": "Build times, local dev, toolchain, IDE support", "phase": "Cross-cutting", "added": "2026-04-07"},
         {"topic": "AI adoption strategy for the org", "considerations": "Training, tools, governance, risk management", "phase": "Cross-cutting", "added": "2026-04-07"},
-        {"topic": "Engineering culture & values", "considerations": "Blameless culture, learning org, psychological safety", "phase": "Cross-cutting", "added": "2026-04-07"}
+        {"topic": "Engineering culture & values", "considerations": "Blameless culture, learning org, psychological safety", "phase": "Cross-cutting", "added": "2026-04-07"},
+        {"topic": "Staff engineers and AI-assisted development", "considerations": "AI tools lower cost of direct implementation; staying hands-on builds technical credibility and faster decision loops; recalibrate when to code vs delegate; avoid over-indexing on pure influence at the expense of technical depth; use AI coding assistants to stay current in the codebase", "phase": "Cross-cutting", "added": "2026-04-13"},
+        {"topic": "AI agent governance and evaluation framework", "considerations": "Eval frameworks for non-deterministic agents; human-in-loop approval gates for high-stakes actions; agent observability (multi-step traces, tool call logs, decision replay); model version governance across agents; safety guardrails and output validators; rollback/kill-switch mechanisms; LLM-as-judge eval at scale", "phase": "Cross-cutting", "added": "2026-04-13"}
       ]
     }
   ]
