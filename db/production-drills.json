@@ -3,7 +3,7 @@
     "category": "production-drills",
     "display_name": "Production Drills",
     "layout": "drills",
-    "last_updated": "2026-04-14"
+    "last_updated": "2026-04-15"
   },
   "sections": [
     {
@@ -208,6 +208,15 @@
           "exercise": "1. Reproduce: Chain 3 services with retry logic, inject latency in C, observe exponential amplification\n2. Diagnose: Trace request fan-out, count actual calls to C per user request\n3. Hotfix: Add retry budget (max 10% of requests can be retries), circuit breaker on B→C\n4. Validate: C load drops to manageable level, successful requests still complete\n5. Design: Implement hedged requests instead of retries, add jittered exponential backoff",
           "tags": ["microservices", "retry", "cascading-failure"],
           "added": "2026-04-07"
+        },
+        {
+          "drill": "Kafka Preferred Leader Election Drift After Broker Restart",
+          "layer": "Kafka / AWS MSK",
+          "difficulty": "Medium",
+          "scenario": "At 22:14 UTC, PagerDuty fires: 'checkout-events consumer lag > 480K messages (threshold: 50K)'. Your checkout-events Kafka topic has 24 partitions on AWS MSK (3 brokers, kafka.m5.4xlarge, us-east-1). Grafana shows lag spiking on partitions 0–7 only; partitions 8–23 are nominal at ~200 messages. Broker b-2.checkout-kafka.us-east-1.amazonaws.com restarted at 22:09 UTC after disk I/O saturation (CloudWatch VolumeWriteOps write latency: 4.2s). After broker 2 recovered, preferred leader re-election did not trigger automatically. All 8 partitions originally owned by broker 2 are now led by broker 1. Broker 1 now handles 16 of 24 partitions: CPU at 89%, NetworkOut at 1.78 Gbps (near 2 Gbps ENI limit). Consumer group checkout-consumer-prod (12 Java instances, Confluent Kafka Client 7.4.0) shows fetch-latency-avg 2.1s vs normal 80ms. Broker 1 logs: 'Exhausted available fetch sessions, creating a new one; numPartitions=16' repeating 340 times/min.",
+          "exercise": "1. Confirm imbalance: Run kafka-topics.sh --describe --topic checkout-events | grep Leader — count partitions per broker. Verify broker 1 leads 16/24 partitions vs expected 8/24.\n2. Identify root cause: Check auto.leader.rebalance.enable and leader.imbalance.check.interval.seconds (default 300). Inspect controller logs: grep 'Preferred leader not elected' /var/log/kafka/controller.log. Determine why automatic rebalance did not fire after broker 2 recovered.\n3. Hotfix: Trigger manual preferred leader election — kafka-leader-election.sh --bootstrap-server b-1.checkout-kafka.us-east-1.amazonaws.com:9092 --election-type PREFERRED --all-topic-partitions. This is zero-downtime; consumers transparently follow new leaders without offset reset.\n4. Validate: Re-run kafka-topics.sh --describe, confirm 8 partitions per broker. Watch Grafana: broker 1 CPU drops 89%→~45% within 2 min, consumer fetch-latency-avg returns to <100ms, lag drains at normal rate (~40K msgs/min).\n5. Prevent: Confirm auto.leader.rebalance.enable=true in MSK cluster configuration. Add CloudWatch alarm on custom metric partition-leader-skew > 1.5x. Add 'trigger preferred leader election' step to broker-restart runbook and validate rebalance completed before closing incident.",
+          "tags": ["kafka", "distributed", "aws-msk", "leader-election"],
+          "added": "2026-04-15"
         }
       ]
     },

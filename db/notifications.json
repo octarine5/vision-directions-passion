@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-04-14"
+    "last_updated": "2026-04-15"
   },
   "entries": [
     {
@@ -34,15 +34,6 @@
         "Industrial physical AI (cobots & factory automation)",
         "AI-native inference chips"
       ]
-    }
-  ,
-    {
-      "timestamp": "2026-04-14T10:00:00Z",
-      "type": "drill",
-      "title": "Daily drill: Kafka Consumer Livelock — max.poll.interval.ms Breach During Downstream Throttle",
-      "summary": "Added a Hard-difficulty distributed-systems hotfix drill: a Java Kafka consumer group on AWS EKS enters an infinite livelock when a SendGrid API slowdown (48ms → 11.2s) causes batch processing to exceed max.poll.interval.ms=300s. All 6 consumers repeatedly get ejected and rejoin without committing offsets, growing lag at 195K messages/minute across 120 partitions. Exercise covers triage via JMX rebalance-rate metrics, immediate mitigation by reducing max.poll.records, circuit-breaker isolation of the downstream, and prevention via dynamic poll sizing and rebalance-rate alerting.",
-      "tasks": ["drill"],
-      "items_added": ["Kafka Consumer Livelock — max.poll.interval.ms Breach During Downstream Throttle"]
     },
     {
       "timestamp": "2026-04-13T10:00:00Z",
@@ -60,6 +51,22 @@
         "AI agent governance and evaluation framework",
         "AI agent production readiness checklist"
       ]
+    },
+    {
+      "timestamp": "2026-04-14T10:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: Kafka Consumer Livelock — max.poll.interval.ms Breach During Downstream Throttle",
+      "summary": "Added a Hard-difficulty distributed-systems hotfix drill: a Java Kafka consumer group on AWS EKS enters an infinite livelock when a SendGrid API slowdown (48ms → 11.2s) causes batch processing to exceed max.poll.interval.ms=300s. All 6 consumers repeatedly get ejected and rejoin without committing offsets, growing lag at 195K messages/minute across 120 partitions. Exercise covers triage via JMX rebalance-rate metrics, immediate mitigation by reducing max.poll.records, circuit-breaker isolation of the downstream, and prevention via dynamic poll sizing and rebalance-rate alerting.",
+      "tasks": ["drill"],
+      "items_added": ["Kafka Consumer Livelock — max.poll.interval.ms Breach During Downstream Throttle"]
+    },
+    {
+      "timestamp": "2026-04-15T12:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: Kafka Preferred Leader Election Drift After Broker Restart",
+      "summary": "Added a Medium-difficulty distributed systems hotfix drill covering Kafka partition leader imbalance on AWS MSK after a broker restart, with exact CloudWatch metrics, consumer lag figures, and a 5-step exercise from diagnosis through prevention using preferred leader election.",
+      "tasks": ["drill"],
+      "items_added": ["Kafka Preferred Leader Election Drift After Broker Restart"]
     }
   ]
 }
