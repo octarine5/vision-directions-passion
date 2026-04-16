@@ -2,9 +2,17 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-04-15"
+    "last_updated": "2026-04-16"
   },
   "entries": [
+    {
+      "timestamp": "2026-04-16T00:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: Cassandra Tombstone Accumulation Kills Feature Store Reads",
+      "summary": "Added a Hard-difficulty Cassandra hotfix drill covering tombstone accumulation in an ML feature store table after 9 months of DELETE+INSERT writes. Scenario includes exact ReadTimeoutException messages, nodetool tablehistograms output (p99 tombstones_scanned: 218,432), G1GC pause timings, and a 5-step exercise from compaction hotfix through TWCS migration.",
+      "tasks": ["drill"],
+      "items_added": ["Cassandra Tombstone Accumulation Kills Feature Store Reads"]
+    },
     {
       "timestamp": "2026-04-08T16:00:00Z",
       "type": "drill",

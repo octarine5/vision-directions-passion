@@ -3,7 +3,7 @@
     "category": "production-drills",
     "display_name": "Production Drills",
     "layout": "drills",
-    "last_updated": "2026-04-15"
+    "last_updated": "2026-04-16"
   },
   "sections": [
     {
@@ -85,6 +85,15 @@
           "exercise": "1. Reproduce: Simulate two concurrent read-modify-write cycles on same row without locking\n2. Diagnose: Identify the lost update — both reads see stale state, last write wins\n3. Hotfix: Add SELECT FOR UPDATE or optimistic locking with version column\n4. Validate: Concurrent deductions correctly fail or serialize\n5. Design: Implement idempotency keys for payment operations",
           "tags": ["database", "concurrency", "transactions"],
           "added": "2026-04-07"
+        },
+        {
+          "drill": "Cassandra Tombstone Accumulation Kills Feature Store Reads",
+          "layer": "Database (Cassandra) / ML Feature Store",
+          "difficulty": "Hard",
+          "scenario": "At 09:47 UTC, PagerDuty fires: 'feature-store-service error rate 12.3% (threshold: 2%)'. Your Cassandra 4.1 cluster (12-node, AWS EC2 i4i.4xlarge, us-east-1) backs the user_preferences feature table consumed by three ML ranking models. Error logs flood with: `com.datastax.driver.core.exceptions.ReadTimeoutException: Cassandra timeout during read query at consistency LOCAL_QUORUM (2 responses were required but only 1 was obtained)`. The query `SELECT feature_vector FROM feature_store.user_preferences WHERE user_id=? ORDER BY updated_at DESC LIMIT 10` is scanning an average of 218,000 tombstones per partition to return 10 live rows — confirmed by `nodetool tablehistograms feature_store user_preferences` (p99 tombstones_scanned: 218432). The table has been live for 9 months and the application uses a DELETE-then-INSERT pattern on every user preference update (~42K writes/sec). `nodetool tpstats` shows ReadStage: pending=1,102, blocked=287. GC logs on coordinator nodes reveal back-to-back G1GC full pauses of 5.8s, 6.1s, 4.9s starting at 09:44 UTC. P99 read latency: 9ms → 6.8s. The three ML models are now serving stale cached features from 35 minutes ago.",
+          "exercise": "1. Diagnose: Run `nodetool tablehistograms feature_store user_preferences` to confirm tombstone histogram (p50/p99/pMax). Cross-check with `nodetool cfstats feature_store.user_preferences | grep -iE 'tombstone|live'`. Check compaction strategy — likely SizeTieredCompactionStrategy (STCS) which defers compaction and lets tombstones accumulate\n2. Hotfix (immediate): Reduce gc_grace_seconds from 864000 to 86400 on the table: `ALTER TABLE feature_store.user_preferences WITH gc_grace_seconds=86400;`. Then trigger rolling compaction node by node: `nodetool compact feature_store user_preferences` (monitor ReadStage clearing before proceeding to next node). This should clear 80–90% of tombstones within 20–30 min per node\n3. Application fix: Replace DELETE+INSERT pattern with INSERT USING TTL — `INSERT INTO user_preferences (user_id, updated_at, feature_vector) VALUES (?, ?, ?) USING TTL 604800;` (7-day TTL). Rows now expire via SSTable TTL metadata — zero tombstone writes. Deploy this change before compaction completes on remaining nodes\n4. Validate: After compaction on first 3 nodes, rerun `nodetool tablehistograms` — tombstones_scanned p99 should drop below 500. ReadStage pending clears. P99 read latency returns to ~12ms within 8 minutes of node 1 compaction completing\n5. Long-term: Switch compaction strategy to TimeWindowCompactionStrategy (TWCS) which is purpose-built for time-series with TTLs and compacts within time buckets to avoid cross-bucket tombstone amplification. Add Datadog alert on `cassandra.db.tombstone_scanned_histogram.p99 > 5000` per table. Establish a monthly `nodetool tablehistograms` review as part of SRE capacity review",
+          "tags": ["cassandra", "database", "tombstones", "ml-feature-store", "compaction"],
+          "added": "2026-04-16"
         }
       ]
     },
