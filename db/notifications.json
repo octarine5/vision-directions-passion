@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-04-16"
+    "last_updated": "2026-04-17"
   },
   "entries": [
     {
@@ -75,6 +75,21 @@
       "summary": "Added a Medium-difficulty distributed systems hotfix drill covering Kafka partition leader imbalance on AWS MSK after a broker restart, with exact CloudWatch metrics, consumer lag figures, and a 5-step exercise from diagnosis through prevention using preferred leader election.",
       "tasks": ["drill"],
       "items_added": ["Kafka Preferred Leader Election Drift After Broker Restart"]
+    },
+    {
+      "timestamp": "2026-04-17T08:00:00Z",
+      "type": "market-scan",
+      "title": "Friday update: drill + market signal scan",
+      "summary": "Added a Hard ML Serving hotfix drill: TorchServe worker enters zombie state after a CUDA device-side assert (OOV product category ID) poisons the CUDA context, blocking GPU reuse for 22 minutes on SageMaker. Market scan added 3 new business problems (serverless AI inference PaaS, AI agent SDK tooling, wafer-scale AI chip IPO wave) and updated the enterpriseWatchlist with Cerebras (Pre-IPO CBRS targeting April 2026 Nasdaq at $22-25B) and Baseten (Series D, $2.15B).",
+      "tasks": ["drill", "market-scan"],
+      "items_added": [
+        "TorchServe Worker Zombie — CUDA Context Poisoned by OOV Embedding Lookup",
+        "Serverless AI inference PaaS",
+        "AI agent development SDKs & orchestration tooling",
+        "AI hardware public-market maturation (wafer-scale chips)",
+        "Cerebras (watchlist)",
+        "Baseten (watchlist)"
+      ]
     }
   ]
 }

@@ -38,7 +38,9 @@
     { "name": "Cohere", "domain": "Enterprise AI Platform", "stage": "Series D", "signal": "stable", "notes": "Enterprise RAG and embeddings" },
     { "name": "Physical Intelligence", "domain": "Embodied AI / Robotics", "stage": "Series A", "signal": "hot", "notes": "Foundation models for physical intelligence" },
     { "name": "Modular/Mojo", "domain": "AI Infrastructure", "stage": "Series B", "signal": "watch", "notes": "Next-gen AI programming language and runtime" },
-    { "name": "Together AI", "domain": "Model Serving", "stage": "Series A", "signal": "watch", "notes": "Open-source model training and serving" }
+    { "name": "Together AI", "domain": "Model Serving", "stage": "Series A", "signal": "watch", "notes": "Open-source model training and serving" },
+    { "name": "Cerebras", "domain": "AI Compute Infrastructure / Wafer-Scale Chips", "stage": "Pre-IPO (CBRS, targeting April 2026 Nasdaq)", "signal": "hot", "notes": "WSE-3 wafer-scale chip (4T transistors, 900K cores), $10B OpenAI compute deal, first AI chip company targeting public markets at $22-25B valuation" },
+    { "name": "Baseten", "domain": "AI Inference Platform (Serverless)", "stage": "Series D ($2.15B valuation)", "signal": "hot", "notes": "Serverless ML model deployment; $150M Series D Apr 2026; abstracts GPU fleet for enterprise inference workloads; competes with Modal Labs, Parasail" }
   ],
   "careerMilestones": [
     { "level": "Senior", "requirement": "Own features end-to-end", "status": "current", "xpThreshold": 0 },
