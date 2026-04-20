@@ -3,7 +3,7 @@
     "category": "tech-talks",
     "display_name": "Tech Talks",
     "layout": "cards",
-    "last_updated": "2026-04-07"
+    "last_updated": "2026-04-20"
   },
   "sections": [
     {
@@ -63,7 +63,8 @@
         {"title": "Spotify's ML Infrastructure", "url": "https://www.youtube.com/watch?v=jPamKOb_abU", "speaker": "Spotify Engineering", "venue": "QCon", "description": "Personalization, podcast recommendations, Hendrix platform", "added": "2026-04-07"},
         {"title": "On-Device ML at Google", "url": "https://www.youtube.com/watch?v=OwPSuHXmiPw", "speaker": "Google AI", "venue": "TF Summit", "description": "TFLite, model optimization, federated learning, privacy", "added": "2026-04-07"},
         {"title": "RT-2: Vision-Language-Action Models", "url": "https://www.youtube.com/watch?v=r4Ogt2U8NGA", "speaker": "Google DeepMind", "venue": "Robotics", "description": "Transferring web knowledge to robot control via VLMs", "added": "2026-04-07"},
-        {"title": "Mixture of Experts Explained", "url": "https://www.youtube.com/watch?v=Fquj2u7ay40", "speaker": "Yannic Kilcher", "venue": "YouTube", "description": "MoE architecture, routing, sparse computation, Mixtral", "added": "2026-04-07"}
+        {"title": "Mixture of Experts Explained", "url": "https://www.youtube.com/watch?v=Fquj2u7ay40", "speaker": "Yannic Kilcher", "venue": "YouTube", "description": "MoE architecture, routing, sparse computation, Mixtral", "added": "2026-04-07"},
+        {"title": "What is Agentic AI Engineering (Meta Staff Engineer Explains)", "url": "https://www.youtube.com/watch?v=FqPwHHrN1bg", "speaker": "Meta Staff Engineer", "venue": "YouTube 2026", "description": "A Meta staff engineer breaks down agentic AI engineering — what it means in practice, how multi-agent systems are restructuring the SDLC, and what staff+ engineers need to understand about orchestrating agents vs. writing code", "added": "2026-04-20"}
       ]
     },
     {

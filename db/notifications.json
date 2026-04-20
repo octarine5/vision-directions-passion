@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-04-17"
+    "last_updated": "2026-04-20"
   },
   "entries": [
     {
@@ -89,6 +89,21 @@
         "AI hardware public-market maturation (wafer-scale chips)",
         "Cerebras (watchlist)",
         "Baseten (watchlist)"
+      ]
+    },
+    {
+      "timestamp": "2026-04-20T10:00:00Z",
+      "type": "knowledge-base",
+      "title": "Monday update: drill + knowledge base refresh",
+      "summary": "Added a Hard distributed-systems drill for a Nomad allocation restart livelock caused by a Consul health check grace period misconfiguration during a rolling deploy of a Go payment service (pgx v5 lazy connection pooling takes 18s to warm up, but Consul check fires at 5s). KB refresh added 2 new ML systems entries (llm-d CNCF Kubernetes-native disaggregated inference, NVIDIA Dynamo 1.0 production-ready framework), 2 new org-decision entries (agentic engineering as multi-agent SDLC model with Cisco/LangChain pilot data, DX Q1 2026 AI engineering productivity benchmarks), and 1 new tech talk (Meta staff engineer on agentic AI engineering).",
+      "tasks": ["drill", "knowledge-base"],
+      "items_added": [
+        "Nomad Allocation Restart Loop — Consul Health Check Grace Period Misconfiguration",
+        "llm-d: Kubernetes-Native Distributed LLM Inference",
+        "NVIDIA Dynamo: Datacenter-Scale Disaggregated Inference",
+        "Agentic engineering as multi-agent SDLC delivery model",
+        "Measuring AI-assisted engineering ROI with productivity benchmarks",
+        "What is Agentic AI Engineering (Meta Staff Engineer Explains)"
       ]
     }
   ]
