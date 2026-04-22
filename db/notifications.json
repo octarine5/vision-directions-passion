@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-04-21"
+    "last_updated": "2026-04-22"
   },
   "entries": [
     {
@@ -83,6 +83,14 @@
       "summary": "Added a Medium-difficulty distributed systems hotfix drill covering Kafka partition leader imbalance on AWS MSK after a broker restart, with exact CloudWatch metrics, consumer lag figures, and a 5-step exercise from diagnosis through prevention using preferred leader election.",
       "tasks": ["drill"],
       "items_added": ["Kafka Preferred Leader Election Drift After Broker Restart"]
+    },
+    {
+      "timestamp": "2026-04-22T04:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: PostgreSQL Transaction ID Wraparound — Emergency Vacuum Under Active Blocker",
+      "summary": "Added a Hard-difficulty PostgreSQL hotfix drill: a fintech ledger's transactions table (1.1B rows, 1.8TB) approaches TXID wraparound (~39 minutes to hard shutdown) after an 11.6-hour analytics ETL query blocks autovacuum workers on AWS RDS. Scenario includes exact Postgres WARNING log lines, pg_stat_activity blocker chain, and a 6-step exercise covering pg_terminate_backend emergency, manual VACUUM FREEZE, autovacuum cost throttle bypass, and prevention via idle_in_transaction_session_timeout and relfrozenxid age alerting.",
+      "tasks": ["drill"],
+      "items_added": ["PostgreSQL Transaction ID Wraparound — Emergency Vacuum Under Active Blocker"]
     },
     {
       "timestamp": "2026-04-17T08:00:00Z",
