@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-04-22"
+    "last_updated": "2026-04-23"
   },
   "entries": [
     {
@@ -106,6 +106,14 @@
         "Cerebras (watchlist)",
         "Baseten (watchlist)"
       ]
+    },
+    {
+      "timestamp": "2026-04-23T12:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: gRPC Context Leak — Goroutine Accumulation from Unbound Background Workers",
+      "summary": "Added a Hard-difficulty distributed-systems hotfix drill: a Go 1.22 gRPC ranking service on AWS EKS accumulates 22,400 goroutines (from a baseline of 1,100) over 47 minutes after an ElastiCache Redis failover causes background workers spawned with context.Background() to block for their full 5s socket timeout instead of respecting the client's 500ms deadline. Exercise covers pprof goroutine triage, rolling-restart mitigation, context propagation fix, Redis circuit breaker, and goroutine leak prevention via goleak and staticcheck.",
+      "tasks": ["drill"],
+      "items_added": ["gRPC Context Leak — Goroutine Accumulation from Unbound Background Workers"]
     },
     {
       "timestamp": "2026-04-20T10:00:00Z",
