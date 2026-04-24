@@ -40,7 +40,9 @@
     { "name": "Modular/Mojo", "domain": "AI Infrastructure", "stage": "Series B", "signal": "watch", "notes": "Next-gen AI programming language and runtime" },
     { "name": "Together AI", "domain": "Model Serving", "stage": "Series A", "signal": "watch", "notes": "Open-source model training and serving" },
     { "name": "Cerebras", "domain": "AI Compute Infrastructure / Wafer-Scale Chips", "stage": "Pre-IPO (CBRS, targeting April 2026 Nasdaq)", "signal": "hot", "notes": "WSE-3 wafer-scale chip (4T transistors, 900K cores), $10B OpenAI compute deal, first AI chip company targeting public markets at $22-25B valuation" },
-    { "name": "Baseten", "domain": "AI Inference Platform (Serverless)", "stage": "Series D ($2.15B valuation)", "signal": "hot", "notes": "Serverless ML model deployment; $150M Series D Apr 2026; abstracts GPU fleet for enterprise inference workloads; competes with Modal Labs, Parasail" }
+    { "name": "Baseten", "domain": "AI Inference Platform (Serverless)", "stage": "Series D ($2.15B valuation)", "signal": "hot", "notes": "Serverless ML model deployment; $150M Series D Apr 2026; abstracts GPU fleet for enterprise inference workloads; competes with Modal Labs, Parasail" },
+    { "name": "Cursor", "domain": "AI Developer Tools (IDE / Coding Agent)", "stage": "Series C (in talks, $2B raise at $50B+ valuation, Apr 2026)", "signal": "hot", "notes": "AI-native code editor with 400K+ paying developers; in talks to raise $2B led by a16z + NVIDIA at $50B+ valuation (Apr 19, 2026); signals developer tools reaching infrastructure-tier valuations; direct competitor to GitHub Copilot and new agent coding frameworks" },
+    { "name": "MatX", "domain": "AI Training Silicon (LLM chip)", "stage": "Series B ($500M, Feb 2026)", "signal": "watch", "notes": "Ex-Google TPU founders; $500M Series B led by Jane Street + Situational Awareness (Leopold Aschenbrenner); targeting 10x LLM training perf over H100; TSMC-fabbed, first shipments 2027; credible non-NVIDIA training chip challenger" }
   ],
   "careerMilestones": [
     { "level": "Senior", "requirement": "Own features end-to-end", "status": "current", "xpThreshold": 0 },

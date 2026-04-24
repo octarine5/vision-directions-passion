@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-04-23"
+    "last_updated": "2026-04-24"
   },
   "entries": [
     {
@@ -128,6 +128,21 @@
         "Agentic engineering as multi-agent SDLC delivery model",
         "Measuring AI-assisted engineering ROI with productivity benchmarks",
         "What is Agentic AI Engineering (Meta Staff Engineer Explains)"
+      ]
+    },
+    {
+      "timestamp": "2026-04-24T12:00:00Z",
+      "type": "market-scan",
+      "title": "Friday update: drill + market signal scan",
+      "summary": "Added a Hard infra hotfix drill: EKS spot interruption wave exhausts VPC CNI subnet IPs causing Cluster Autoscaler silent scale failure (InsufficientFreeAddressesInSubnet). Market scan added 3 new business problems (LLM training silicon diversification via MatX $500M, Anthropic $800B+ platform lock-in & IPO trajectory, AI agent observability as new infra category) and updated the enterpriseWatchlist with Cursor ($50B+ valuation, AI coding) and MatX (LLM training chips).",
+      "tasks": ["drill", "market-scan"],
+      "items_added": [
+        "AWS EKS VPC CNI Subnet IP Exhaustion — Silent Scale Failure During Spot Interruption Wave",
+        "LLM training silicon diversification (non-NVIDIA alternatives)",
+        "Frontier AI lab platform lock-in & enterprise moat-building",
+        "AI agent observability & production reliability",
+        "Cursor (watchlist)",
+        "MatX (watchlist)"
       ]
     }
   ]
