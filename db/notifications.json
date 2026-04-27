@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-04-24"
+    "last_updated": "2026-04-27"
   },
   "entries": [
     {
@@ -128,6 +128,20 @@
         "Agentic engineering as multi-agent SDLC delivery model",
         "Measuring AI-assisted engineering ROI with productivity benchmarks",
         "What is Agentic AI Engineering (Meta Staff Engineer Explains)"
+      ]
+    },
+    {
+      "timestamp": "2026-04-27T10:00:00Z",
+      "type": "knowledge-base",
+      "title": "Monday update: drill + knowledge base refresh",
+      "summary": "Added a Hard-difficulty MongoDB Atlas hotfix drill: an unindexed analytics aggregation runs 4.6 hours on a secondary, exceeding the 90-minute oplog window, triggering a full resync cascade and a 6-minute w:majority write outage when Atlas maintenance collides with the resync. KB refresh: 2 new ML systems entries (Meta KernelEvolve agentic kernel optimization with 60%+ throughput gain, Uber Ray on Kubernetes 1.5–4× training speedup), 1 new system design entry (Meta multi-agent tribal knowledge capture for data pipelines), and 1 new org decision entry (Amazon's real-world lessons for evaluating AI agents in production).",
+      "tasks": ["drill", "knowledge-base"],
+      "items_added": [
+        "MongoDB Atlas Replica Set — Oplog Window Exhausted by Unindexed Analytics Query Triggering Resync Cascade",
+        "Agentic GPU Kernel Optimization (KernelEvolve)",
+        "Ray on Kubernetes for Production ML at Scale (Uber)",
+        "Multi-Agent Tribal Knowledge Capture for Data Pipelines (Meta)",
+        "Evaluating AI agents in production: lessons from Amazon agentic systems"
       ]
     },
     {

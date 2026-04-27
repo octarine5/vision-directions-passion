@@ -4,7 +4,7 @@
     "display_name": "System Design",
     "layout": "table",
     "columns": ["#", "Topic", "Key Concepts", "Tags", "Resources"],
-    "last_updated": "2026-04-13"
+    "last_updated": "2026-04-27"
   },
   "sections": [
     {
@@ -115,7 +115,8 @@
         {"topic": "A/B Testing Platform", "concepts": "Experiment assignment, statistical significance, metrics", "tags": ["data", "ml"], "resources": [{"title": "Microsoft Exp", "url": "https://www.exp-platform.com/Documents/2009-ExPpitfalls.pdf"}], "added": "2026-04-07"},
         {"topic": "Batch Processing (MapReduce/Spark)", "concepts": "Shuffle, partitioning, fault tolerance, DAG execution", "tags": ["data"], "resources": [{"title": "Spark Docs", "url": "https://spark.apache.org/docs/latest/"}], "added": "2026-04-07"},
         {"topic": "Blockchain / Distributed Ledger", "concepts": "Consensus (PoW/PoS), Merkle trees, smart contracts", "tags": ["infra"], "resources": [{"title": "Ethereum Docs", "url": "https://ethereum.org/en/developers/docs/"}], "added": "2026-04-07"},
-        {"topic": "AI Agent Orchestration Platform (MCP)", "concepts": "Model Context Protocol as universal tool/data API; agent memory (episodic, semantic, procedural); multi-agent orchestration; non-determinism handling; structured tool registries; agent observability via distributed traces; stateful vs stateless agents; guardrails and human-in-loop gates; 10K+ public MCP servers as of 2026", "tags": ["ml", "infra"], "resources": [{"title": "MCP 2026 Roadmap", "url": "https://blog.modelcontextprotocol.io/posts/2026-mcp-roadmap/"}], "added": "2026-04-13"}
+        {"topic": "AI Agent Orchestration Platform (MCP)", "concepts": "Model Context Protocol as universal tool/data API; agent memory (episodic, semantic, procedural); multi-agent orchestration; non-determinism handling; structured tool registries; agent observability via distributed traces; stateful vs stateless agents; guardrails and human-in-loop gates; 10K+ public MCP servers as of 2026", "tags": ["ml", "infra"], "resources": [{"title": "MCP 2026 Roadmap", "url": "https://blog.modelcontextprotocol.io/posts/2026-mcp-roadmap/"}], "added": "2026-04-13"},
+        {"topic": "Multi-Agent Tribal Knowledge Capture for Data Pipelines (Meta)", "concepts": "Swarm of 50+ specialized AI agents that systematically read every file in large-scale data pipeline codebases and produce concise context files encoding tribal knowledge; pre-compute engine runs agents that specialize by artifact type (schema docs, lineage traces, transformation logic, SLA annotations, ownership mappings); output context files are indexed and searchable — used for automated code review assistance, new engineer onboarding, and incident root cause acceleration; agents use retrieval augmentation rather than ad-hoc LLM calls to ensure consistent output quality across thousands of pipeline files; system reduces tribal knowledge loss from engineer attrition and shrinks mean-time-to-debug on data pipelines by enabling engineers to quickly understand undocumented dependencies; deployed at Meta across petabyte-scale data infrastructure (April 2026)", "tags": ["data", "ml", "infra"], "resources": [{"title": "Meta Engineering Blog (Apr 2026)", "url": "https://engineering.fb.com/2026/04/06/developer-tools/how-meta-used-ai-to-map-tribal-knowledge-in-large-scale-data-pipelines/"}], "added": "2026-04-27"}
       ]
     }
   ]
