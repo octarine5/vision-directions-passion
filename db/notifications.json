@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-04-27"
+    "last_updated": "2026-05-06"
   },
   "entries": [
     {
@@ -158,6 +158,14 @@
         "Cursor (watchlist)",
         "MatX (watchlist)"
       ]
+    },
+    {
+      "timestamp": "2026-05-06T10:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: vLLM Speculative Decoding Draft Model Vocab Mismatch — Corrupted Responses After Target Model Rollout",
+      "summary": "Added a Hard-difficulty ML Serving hotfix drill on GKE: vLLM 0.4.2 speculative decoding returns HTTP 200 but only 7–9 token truncated responses after a target model upgrade expands the tokenizer vocab from 32K to 36K while the draft model remains at 32K. A vLLM engine off-by-one bug in the spec-decode rejection rollback loop corrupts the output buffer pointer on last-token rejections. Exercise covers spec-decode metric triage (acceptance_rate→0.00), disabling spec-decode as immediate mitigation, upgrading to vLLM 0.4.3, and adding ArgoCD PreSync vocab-parity hooks and synthetic quality canaries.",
+      "tasks": ["drill"],
+      "items_added": ["vLLM Speculative Decoding Draft Model Vocab Mismatch — Corrupted Responses After Target Model Rollout"]
     }
   ]
 }
