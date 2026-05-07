@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-05-06"
+    "last_updated": "2026-05-07"
   },
   "entries": [
     {
@@ -158,6 +158,14 @@
         "Cursor (watchlist)",
         "MatX (watchlist)"
       ]
+    },
+    {
+      "timestamp": "2026-05-07T08:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: Apache Flink RocksDB Checkpoint Timeout — L0 Compaction I/O Starvation on Feature Pipeline",
+      "summary": "Added a Hard-difficulty distributed systems hotfix drill: a Flink 1.18.1 streaming feature pipeline (32 TMs on GKE, RocksDB state backend) experiences 3 consecutive checkpoint failures when an upstream Pub/Sub publisher quadruples event batch size (128KB→512KB), triggering simultaneous L0 compaction across all 32 TaskManagers and saturating PD-SSD write bandwidth at 1.78 GB/s. Flink restarts from a 13-minute-old checkpoint, serving stale features to 14 ML ranking models for 14 minutes. Exercise covers RocksDB L0 stall triage via Flink Prometheus metrics, compaction thread throttle as immediate mitigation, upstream batch size reversion, local NVMe migration, and managed memory configuration.",
+      "tasks": ["drill"],
+      "items_added": ["Apache Flink RocksDB Checkpoint Timeout — L0 Compaction I/O Starvation on Feature Pipeline"]
     },
     {
       "timestamp": "2026-05-06T10:00:00Z",
