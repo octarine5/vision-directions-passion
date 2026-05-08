@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-05-07"
+    "last_updated": "2026-05-08"
   },
   "entries": [
     {
@@ -157,6 +157,21 @@
         "AI agent observability & production reliability",
         "Cursor (watchlist)",
         "MatX (watchlist)"
+      ]
+    },
+    {
+      "timestamp": "2026-05-08T08:00:00Z",
+      "type": "market-scan",
+      "title": "Friday update: drill + market signal scan",
+      "summary": "Added a Hard distributed-systems drill: AWS Kinesis ShardIterator expiry silent audit gap — Python consumer recovers with LATEST iterator type after a SIGSTOP maintenance pause, silently skipping 17,280 ML inference audit records (SOC 2 violation, $180K remediation cost). Market scan added 3 new business problems (GPU-native AI factory cloud, agentic SDLC automation, sovereign AI infrastructure) and updated the watchlist with Cerebras live IPO roadshow details and new entry Lambda Labs ($2.5B+ capital for gigawatt AI factories).",
+      "tasks": ["drill", "market-scan"],
+      "items_added": [
+        "AWS Kinesis ShardIterator Expiry — Silent Audit Gap from LATEST Recovery Bug After Maintenance Pause",
+        "GPU-native cloud / AI factory infrastructure (non-hyperscaler)",
+        "Agentic software engineering & autonomous SDLC automation",
+        "Sovereign AI infrastructure & national compute reserves",
+        "Cerebras (watchlist update: IPO roadshow, $26.6B valuation)",
+        "Lambda Labs (watchlist)"
       ]
     },
     {
