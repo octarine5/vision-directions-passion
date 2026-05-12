@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-05-08"
+    "last_updated": "2026-05-12"
   },
   "entries": [
     {
@@ -173,6 +173,14 @@
         "Cerebras (watchlist update: IPO roadshow, $26.6B valuation)",
         "Lambda Labs (watchlist)"
       ]
+    },
+    {
+      "timestamp": "2026-05-12T10:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: MySQL InnoDB Gap Lock Deadlock Storm — Inventory Reservation Cascade During Flash Sale",
+      "summary": "Added a Hard-difficulty MySQL 8.0 hotfix drill: a Java Spring Boot inventory service hits a 34.7% error rate when InnoDB gap locks on an out-of-stock range query deadlock with Insert Intention Locks from concurrent order inserts during a flash sale (8,400 concurrent writes). Covers exact INNODB STATUS deadlock output, READ COMMITTED isolation fix, SELECT FOR UPDATE SKIP LOCKED pattern, and retry amplification mitigation.",
+      "tasks": ["drill"],
+      "items_added": ["MySQL InnoDB Gap Lock Deadlock Storm — Inventory Reservation Cascade During Flash Sale"]
     },
     {
       "timestamp": "2026-05-07T08:00:00Z",
