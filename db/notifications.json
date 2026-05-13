@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-05-12"
+    "last_updated": "2026-05-13"
   },
   "entries": [
     {
@@ -197,6 +197,14 @@
       "summary": "Added a Hard-difficulty ML Serving hotfix drill on GKE: vLLM 0.4.2 speculative decoding returns HTTP 200 but only 7–9 token truncated responses after a target model upgrade expands the tokenizer vocab from 32K to 36K while the draft model remains at 32K. A vLLM engine off-by-one bug in the spec-decode rejection rollback loop corrupts the output buffer pointer on last-token rejections. Exercise covers spec-decode metric triage (acceptance_rate→0.00), disabling spec-decode as immediate mitigation, upgrading to vLLM 0.4.3, and adding ArgoCD PreSync vocab-parity hooks and synthetic quality canaries.",
       "tasks": ["drill"],
       "items_added": ["vLLM Speculative Decoding Draft Model Vocab Mismatch — Corrupted Responses After Target Model Rollout"]
+    },
+    {
+      "timestamp": "2026-05-13T08:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: Tokio Ack Handler Shutdown Race — Pub/Sub Redelivery Storm During GKE Rolling Update",
+      "summary": "Added a Hard-difficulty distributed-systems hotfix drill: a Rust/Tokio Pub/Sub consumer on GKE causes a 340K-message redelivery storm when fire-and-forget tokio::spawn ack tasks are dropped by Tokio's shutdown_timeout during a rolling update, leaving 847 messages unacknowledged per pod across 8 simultaneous pod terminations. Exercise covers structured concurrency fix via JoinSet, SIGTERM drain guard, terminationGracePeriodSeconds tuning, and CI enforcement via Pub/Sub emulator integration tests.",
+      "tasks": ["drill"],
+      "items_added": ["Tokio Ack Handler Shutdown Race — Pub/Sub Redelivery Storm During GKE Rolling Update"]
     }
   ]
 }
