@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-05-13"
+    "last_updated": "2026-05-14"
   },
   "entries": [
     {
@@ -205,6 +205,14 @@
       "summary": "Added a Hard-difficulty distributed-systems hotfix drill: a Rust/Tokio Pub/Sub consumer on GKE causes a 340K-message redelivery storm when fire-and-forget tokio::spawn ack tasks are dropped by Tokio's shutdown_timeout during a rolling update, leaving 847 messages unacknowledged per pod across 8 simultaneous pod terminations. Exercise covers structured concurrency fix via JoinSet, SIGTERM drain guard, terminationGracePeriodSeconds tuning, and CI enforcement via Pub/Sub emulator integration tests.",
       "tasks": ["drill"],
       "items_added": ["Tokio Ack Handler Shutdown Race — Pub/Sub Redelivery Storm During GKE Rolling Update"]
+    },
+    {
+      "timestamp": "2026-05-14T08:30:00Z",
+      "type": "drill",
+      "title": "Daily drill: Azure AKS CoreDNS ndots:5 Storm — DNS Search Domain Amplification Kills Kafka and Service Mesh Connectivity",
+      "summary": "Added a Hard-difficulty infrastructure hotfix drill: on Azure AKS, Kubernetes ndots:5 default causes 180 Java pods to generate 28,512 upstream DNS queries/sec (28× the Azure Private DNS Resolver quota of 1,000 QPS) after a KEDA scale-out for a product launch, killing Kafka connectivity and exhausting HikariCP database connection pools. Covers FQDN trailing-dot immediate fix, ndots:1 dnsConfig as durable solution, CoreDNS NXDOMAIN alerting, and NodeLocal DNSCache for long-term DNS throughput scaling.",
+      "tasks": ["drill"],
+      "items_added": ["Azure AKS CoreDNS ndots:5 Storm — DNS Search Domain Amplification Kills Kafka and Service Mesh Connectivity"]
     }
   ]
 }
