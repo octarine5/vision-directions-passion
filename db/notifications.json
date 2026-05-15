@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-05-14"
+    "last_updated": "2026-05-15"
   },
   "entries": [
     {
@@ -205,6 +205,22 @@
       "summary": "Added a Hard-difficulty distributed-systems hotfix drill: a Rust/Tokio Pub/Sub consumer on GKE causes a 340K-message redelivery storm when fire-and-forget tokio::spawn ack tasks are dropped by Tokio's shutdown_timeout during a rolling update, leaving 847 messages unacknowledged per pod across 8 simultaneous pod terminations. Exercise covers structured concurrency fix via JoinSet, SIGTERM drain guard, terminationGracePeriodSeconds tuning, and CI enforcement via Pub/Sub emulator integration tests.",
       "tasks": ["drill"],
       "items_added": ["Tokio Ack Handler Shutdown Race — Pub/Sub Redelivery Storm During GKE Rolling Update"]
+    },
+    {
+      "timestamp": "2026-05-15T14:00:00Z",
+      "type": "market-scan",
+      "title": "Friday update: drill + market signal scan",
+      "summary": "Added a Hard ML Serving hotfix drill: vLLM 0.5.1 tensor-parallel serving silently deadlocks after AWS EFA driver 1.31.0 upgrades efa_use_device_rdma default, switching NCCL from Ring to Double Binary Tree algorithm on 8× A100 p4d instances — all 8 TP ranks block in an AllReduce barrier with 0% GPU utilization and 0% error rate. Market scan: Cerebras CBRS IPO priced at $185 (raised $5.55B, $56.4B val, Day 1 trading ~$100B implied); added 3 new business problems (Project Prometheus $10B physical-AI factory round, Sunday Robotics $165M household-robot Series B, managed inference consolidation via Nebius/Eigen AI + DigitalOcean); added Project Prometheus and Sunday Robotics to enterprise watchlist.",
+      "tasks": ["drill", "market-scan"],
+      "items_added": [
+        "NCCL AllReduce Deadlock — Tensor Parallel vLLM Silent Hang After EFA Driver Upgrade",
+        "Physical AI for industrial manufacturing simulation (factory automation)",
+        "Household / personal service robots (consumer robotics)",
+        "Managed AI inference consolidation & platform commoditization",
+        "Cerebras (watchlist update: CBRS IPO priced $185, $5.55B raised, Day 1 ~$100B implied)",
+        "Project Prometheus (watchlist)",
+        "Sunday Robotics (watchlist)"
+      ]
     },
     {
       "timestamp": "2026-05-14T08:30:00Z",
