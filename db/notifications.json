@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-05-15"
+    "last_updated": "2026-05-18"
   },
   "entries": [
     {
@@ -220,6 +220,21 @@
         "Cerebras (watchlist update: CBRS IPO priced $185, $5.55B raised, Day 1 ~$100B implied)",
         "Project Prometheus (watchlist)",
         "Sunday Robotics (watchlist)"
+      ]
+    },
+    {
+      "timestamp": "2026-05-18T12:00:00Z",
+      "type": "knowledge-base",
+      "title": "Monday update: drill + knowledge base refresh",
+      "summary": "Added a Hard database hotfix drill: Redis Sentinel split-brain during AWS AZ partial partition causes dual primary writes — 23 duplicate payment charges ($47,200) over 126 seconds. KB refresh: 2 new ML systems entries (Five Eras of KV Cache tiered offloading, Google Cloud AI Hypercomputer & TPU 8th gen inference architecture), 2 new tech talks from QCon AI Boston 2026 (DoorDash GenAI platform, context engineering for production AI), and 1 new org decision entry (staff+ engineers as the key to enterprise AI adoption).",
+      "tasks": ["drill", "knowledge-base"],
+      "items_added": [
+        "Redis Sentinel Split-Brain — Dual Primary Writes During AWS AZ Partial Partition",
+        "Five Eras of KV Cache: Tiered Offloading & Distributed KV Sharing",
+        "Google Cloud AI Hypercomputer & TPU 8th Gen Inference Architecture",
+        "Building GenAI Platform at DoorDash (QCon AI Boston 2026)",
+        "Beyond Prompting: Context Engineering for Production-Grade AI (QCon AI Boston 2026)",
+        "Staff+ engineers as the key to enterprise AI adoption"
       ]
     },
     {
