@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-05-18"
+    "last_updated": "2026-05-19"
   },
   "entries": [
     {
@@ -236,6 +236,14 @@
         "Beyond Prompting: Context Engineering for Production-Grade AI (QCon AI Boston 2026)",
         "Staff+ engineers as the key to enterprise AI adoption"
       ]
+    },
+    {
+      "timestamp": "2026-05-19T12:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: SQS Visibility Timeout Race — Lambda Duration Spike Causes Duplicate Payment Charges During Flash Sale",
+      "summary": "Added a Hard-difficulty distributed-systems hotfix drill: AWS Lambda Node.js payment processor on SQS has its Duration P99 pushed from 17s to 31s when Stripe degrades to 1.2s and a SageMaker fraud endpoint saturates at 9.8s P99 during a flash sale — exceeding the 30s SQS VisibilityTimeout. Combined with an idempotency ordering bug (Stripe called before the DynamoDB conditional write), 847 customers are double-charged ($158,389 total). Exercise covers X-Ray dependency triage, VisibilityTimeout increase, Lambda concurrency throttle, idempotency-first reordering with DynamoDB PutItem as a distributed mutex, and Stripe native idempotency keys as defense-in-depth.",
+      "tasks": ["drill"],
+      "items_added": ["SQS Visibility Timeout Race — Lambda Duration Spike Causes Duplicate Payment Charges During Flash Sale"]
     },
     {
       "timestamp": "2026-05-14T08:30:00Z",
