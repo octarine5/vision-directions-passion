@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-05-19"
+    "last_updated": "2026-05-20"
   },
   "entries": [
     {
@@ -236,6 +236,14 @@
         "Beyond Prompting: Context Engineering for Production-Grade AI (QCon AI Boston 2026)",
         "Staff+ engineers as the key to enterprise AI adoption"
       ]
+    },
+    {
+      "timestamp": "2026-05-20T10:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: Elasticsearch Disk Flood Stage — force_merge Segment Merge Overhead Triggers Mass Index Read-Only Lockout",
+      "summary": "Added a Hard-difficulty distributed-systems hotfix drill: an automated force_merge on 280GB of aging Elasticsearch indices generates temporary merge-overhead disk usage that, combined with a G1GC Full GC pause deferring segment release, crosses the 95% flood-stage watermark and applies read_only_allow_delete=true to all indices cluster-wide. Standard cluster health shows GREEN throughout; 847 writes/sec return HTTP 403 for 6 minutes with 304,920 events dropped before the on-call discovers the cause. Exercise covers index-block triage via settings API (invisible to standard health checks), immediate block-clear, safe force_merge strategy, and automated flood-stage remediation Lambda.",
+      "tasks": ["drill"],
+      "items_added": ["Elasticsearch Disk Flood Stage — force_merge Segment Merge Overhead Triggers Mass Index Read-Only Lockout"]
     },
     {
       "timestamp": "2026-05-19T12:00:00Z",
