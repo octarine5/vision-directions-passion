@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-05-20"
+    "last_updated": "2026-05-21"
   },
   "entries": [
     {
@@ -252,6 +252,14 @@
       "summary": "Added a Hard-difficulty distributed-systems hotfix drill: AWS Lambda Node.js payment processor on SQS has its Duration P99 pushed from 17s to 31s when Stripe degrades to 1.2s and a SageMaker fraud endpoint saturates at 9.8s P99 during a flash sale — exceeding the 30s SQS VisibilityTimeout. Combined with an idempotency ordering bug (Stripe called before the DynamoDB conditional write), 847 customers are double-charged ($158,389 total). Exercise covers X-Ray dependency triage, VisibilityTimeout increase, Lambda concurrency throttle, idempotency-first reordering with DynamoDB PutItem as a distributed mutex, and Stripe native idempotency keys as defense-in-depth.",
       "tasks": ["drill"],
       "items_added": ["SQS Visibility Timeout Race — Lambda Duration Spike Causes Duplicate Payment Charges During Flash Sale"]
+    },
+    {
+      "timestamp": "2026-05-21T08:30:00Z",
+      "type": "drill",
+      "title": "Daily drill: Vault Dynamic Secret max_ttl Reduction — Synchronized Lease Expiry Causes Mass PostgreSQL Auth Failure",
+      "summary": "Added a Hard-difficulty infrastructure hotfix drill: a Vault operator shortens the PostgreSQL secrets engine max_ttl from 24h to 1h on production roles, causing all 96 Go service pods' vault-agent leases to expire simultaneously 1 hour later. The Go pgx v5 pool is static (initialized once at startup) and doesn't reinitialize when vault-agent writes new credentials, leaving all 12 services unable to connect to RDS PostgreSQL for 22 minutes. Exercise covers credential-vs-network triage, rolling restart mitigation, fsnotify-based hot credential rotation fix, and Vault lease staggering prevention.",
+      "tasks": ["drill"],
+      "items_added": ["Vault Dynamic Secret max_ttl Reduction — Synchronized Lease Expiry Causes Mass PostgreSQL Auth Failure"]
     },
     {
       "timestamp": "2026-05-14T08:30:00Z",
