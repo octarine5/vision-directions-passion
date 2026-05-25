@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-05-21"
+    "last_updated": "2026-05-25"
   },
   "entries": [
     {
@@ -268,6 +268,21 @@
       "summary": "Added a Hard-difficulty infrastructure hotfix drill: on Azure AKS, Kubernetes ndots:5 default causes 180 Java pods to generate 28,512 upstream DNS queries/sec (28× the Azure Private DNS Resolver quota of 1,000 QPS) after a KEDA scale-out for a product launch, killing Kafka connectivity and exhausting HikariCP database connection pools. Covers FQDN trailing-dot immediate fix, ndots:1 dnsConfig as durable solution, CoreDNS NXDOMAIN alerting, and NodeLocal DNSCache for long-term DNS throughput scaling.",
       "tasks": ["drill"],
       "items_added": ["Azure AKS CoreDNS ndots:5 Storm — DNS Search Domain Amplification Kills Kafka and Service Mesh Connectivity"]
+    },
+    {
+      "timestamp": "2026-05-25T08:00:00Z",
+      "type": "knowledge-base",
+      "title": "Monday update: drill + knowledge base refresh",
+      "summary": "Added a Hard metrics drill exposing Prometheus histogram bucket saturation that caused 6 days of phantom SLO compliance for a vLLM TTFT endpoint (true P99 was 23.4s but Prometheus reported 9.2s due to 34% of requests exceeding the 10s max bucket). KB refresh: 2 new ML systems entries (Meta ARM request-centric inference routing, Kubernetes Gateway API Inference Extension v1.4.0 GA), 1 new system design entry (Airbnb identity graph at scale on JanusGraph+DynamoDB), and 2 new org decision entries (platform engineering as agentic governance layer from KubeCon EU 2026, EU Cyber Resilience Act compliance for engineering teams).",
+      "tasks": ["drill", "knowledge-base"],
+      "items_added": [
+        "Prometheus Histogram Bucket Saturation — Phantom SLO Compliance in LLM TTFT Monitoring",
+        "Meta Adaptive Ranking Model (ARM) — Request-Centric LLM-Scale Inference",
+        "Kubernetes Gateway API Inference Extension (GIE) — Model-Aware LLM Traffic Routing",
+        "Identity Graph at Scale for Fraud, Inventory & Lineage (Airbnb)",
+        "Platform engineering as governance and control plane for agentic AI systems",
+        "EU Cyber Resilience Act (CRA) compliance for engineering teams building software products"
+      ]
     }
   ]
 }
