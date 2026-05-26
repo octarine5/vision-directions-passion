@@ -2,9 +2,17 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-05-25"
+    "last_updated": "2026-05-26"
   },
   "entries": [
+    {
+      "timestamp": "2026-05-26T08:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: GCP Cloud Bigtable Timestamp-Prefix Row Key Hotspot — Sequential Write Concentration Saturates Tablet Servers",
+      "summary": "Added a Hard-difficulty database hotfix drill: a GCP Cloud Bigtable feature store for 3 ML recommendation models experiences 20× SLO breach (P99 4,210ms vs 200ms target) when a marketing campaign 2.1× write-rate increase pushes 2 of 6 tablet servers to 96% CPU. Root cause is the classic timestamp-prefix anti-pattern — monotonically increasing keys concentrate 100% of current writes on the same lexicographic range. Exercise covers Key Visualizer hotspot triage, Dataflow throttle as immediate mitigation, reversed-timestamp key redesign for balanced distribution with per-user recency ordering, and zero-downtime dual-write migration to the new table.",
+      "tasks": ["drill"],
+      "items_added": ["GCP Cloud Bigtable Timestamp-Prefix Row Key Hotspot — Sequential Write Concentration Saturates Tablet Servers, Feature Store P99 Latency 20× SLO"]
+    },
     {
       "timestamp": "2026-04-21T06:00:00Z",
       "type": "drill",
