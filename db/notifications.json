@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-05-26"
+    "last_updated": "2026-05-27"
   },
   "entries": [
     {
@@ -276,6 +276,14 @@
       "summary": "Added a Hard-difficulty infrastructure hotfix drill: on Azure AKS, Kubernetes ndots:5 default causes 180 Java pods to generate 28,512 upstream DNS queries/sec (28× the Azure Private DNS Resolver quota of 1,000 QPS) after a KEDA scale-out for a product launch, killing Kafka connectivity and exhausting HikariCP database connection pools. Covers FQDN trailing-dot immediate fix, ndots:1 dnsConfig as durable solution, CoreDNS NXDOMAIN alerting, and NodeLocal DNSCache for long-term DNS throughput scaling.",
       "tasks": ["drill"],
       "items_added": ["Azure AKS CoreDNS ndots:5 Storm — DNS Search Domain Amplification Kills Kafka and Service Mesh Connectivity"]
+    },
+    {
+      "timestamp": "2026-05-27T08:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: RabbitMQ Quorum Queue Memory Alarm — Celery Prefetch Surge OOM Wave Blocks All Pika Producers on GKE",
+      "summary": "Added a Hard-difficulty distributed-systems hotfix drill: a Celery `worker_prefetch_multiplier` bump from 100→2000 causes 4 of 24 GKE worker pods to OOMKill, returning 8,000 unacked messages to RabbitMQ and triggering a memory alarm (41.8% of 64 GB) that blocks all 14 Pika producer connections. The coordinator's `wait_for_confirms_or_die(timeout=5.0)` treats the transient block as a fatal error, causing 100% error rate for 17 minutes; a misrouted liveness probe cascades into a coordinator pod restart storm. Exercise covers memory-alarm triage via `rabbitmqctl`, Celery scale-to-zero as immediate relief, `CELERYD_PREFETCH_MULTIPLIER=1` for long-running tasks, Pika `Connection.Blocked` callback handling, lazy queue mode to decouple depth from RAM, and prefetch guard at container startup.",
+      "tasks": ["drill"],
+      "items_added": ["RabbitMQ Quorum Queue Memory Alarm — Celery worker_prefetch_multiplier Surge Triggers OOM Wave and Blocks All Pika Producers on GKE"]
     },
     {
       "timestamp": "2026-05-25T08:00:00Z",
