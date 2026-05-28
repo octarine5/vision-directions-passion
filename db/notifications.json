@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-05-27"
+    "last_updated": "2026-05-28"
   },
   "entries": [
     {
@@ -284,6 +284,14 @@
       "summary": "Added a Hard-difficulty distributed-systems hotfix drill: a Celery `worker_prefetch_multiplier` bump from 100→2000 causes 4 of 24 GKE worker pods to OOMKill, returning 8,000 unacked messages to RabbitMQ and triggering a memory alarm (41.8% of 64 GB) that blocks all 14 Pika producer connections. The coordinator's `wait_for_confirms_or_die(timeout=5.0)` treats the transient block as a fatal error, causing 100% error rate for 17 minutes; a misrouted liveness probe cascades into a coordinator pod restart storm. Exercise covers memory-alarm triage via `rabbitmqctl`, Celery scale-to-zero as immediate relief, `CELERYD_PREFETCH_MULTIPLIER=1` for long-running tasks, Pika `Connection.Blocked` callback handling, lazy queue mode to decouple depth from RAM, and prefetch guard at container startup.",
       "tasks": ["drill"],
       "items_added": ["RabbitMQ Quorum Queue Memory Alarm — Celery worker_prefetch_multiplier Surge Triggers OOM Wave and Blocks All Pika Producers on GKE"]
+    },
+    {
+      "timestamp": "2026-05-28T08:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: Temporal Workflow Sticky Queue Drain Stall — ML Training Pipeline Timeout Cascade During Worker Rolling Restart",
+      "summary": "Added a Hard-difficulty distributed-systems hotfix drill: a dormant Go SDK misconfiguration (StickyScheduleToStartTimeout=0 maps to infinite wait, not 'disabled') causes 92 Temporal TrainModelWorkflow instances to hang on terminated-pod sticky queues during a GKE 1.28→1.29 rolling restart. Workflows time out after 5 minutes, while their orphaned A100-80GB training activities continue burning $32.77/hr each — accumulating $17,499 in orphaned GPU compute before the on-call terminates them. Exercise covers sticky queue triage via tctl, orphaned GPU termination, StickyScheduleToStartTimeout fix (set to 10s or omit for server default), bulk workflow reset, and a pre-rolling-restart queue-depth gate in CI/CD.",
+      "tasks": ["drill"],
+      "items_added": ["Temporal Workflow Sticky Queue Drain Stall — ML Training Pipeline Timeout Cascade During Worker Rolling Restart"]
     },
     {
       "timestamp": "2026-05-25T08:00:00Z",
