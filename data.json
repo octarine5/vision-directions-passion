@@ -9,48 +9,299 @@
     "level": 1
   },
   "skillTrees": {
-    "architect": { "name": "Architect", "icon": "🏗️", "xp": 0, "level": 1, "color": "#3b82f6" },
-    "strategist": { "name": "Strategist", "icon": "♟️", "xp": 0, "level": 1, "color": "#8b5cf6" },
-    "communicator": { "name": "Communicator", "icon": "📡", "xp": 0, "level": 1, "color": "#f59e0b" },
-    "innovator": { "name": "Innovator", "icon": "🔬", "xp": 0, "level": 1, "color": "#10b981" }
+    "architect": {
+      "name": "Architect",
+      "icon": "🏗️",
+      "xp": 0,
+      "level": 1,
+      "color": "#3b82f6"
+    },
+    "strategist": {
+      "name": "Strategist",
+      "icon": "♟️",
+      "xp": 0,
+      "level": 1,
+      "color": "#8b5cf6"
+    },
+    "communicator": {
+      "name": "Communicator",
+      "icon": "📡",
+      "xp": 0,
+      "level": 1,
+      "color": "#f59e0b"
+    },
+    "innovator": {
+      "name": "Innovator",
+      "icon": "🔬",
+      "xp": 0,
+      "level": 1,
+      "color": "#10b981"
+    }
   },
   "drills": [
-    { "id": 1, "name": "Articulation", "tree": "communicator", "xp": 15, "frequency": "daily", "streak": 0, "totalCompleted": 0 },
-    { "id": 2, "name": "System Design", "tree": "architect", "xp": 25, "frequency": "weekly", "streak": 0, "totalCompleted": 0 },
-    { "id": 3, "name": "Early Phase Proposals", "tree": "strategist", "xp": 25, "frequency": "weekly", "streak": 0, "totalCompleted": 0 },
-    { "id": 4, "name": "Org Navigation & Influence", "tree": "communicator", "xp": 20, "frequency": "weekly", "streak": 0, "totalCompleted": 0 },
-    { "id": 5, "name": "Business Impact Sizing", "tree": "strategist", "xp": 25, "frequency": "weekly", "streak": 0, "totalCompleted": 0 },
-    { "id": 6, "name": "Launch & Impact Posts", "tree": "communicator", "xp": 20, "frequency": "per-milestone", "streak": 0, "totalCompleted": 0 },
-    { "id": 7, "name": "Reliability & Landing Change", "tree": "architect", "xp": 20, "frequency": "weekly", "streak": 0, "totalCompleted": 0 },
-    { "id": 8, "name": "Personalized Intelligence Deep Dive", "tree": "innovator", "xp": 30, "frequency": "weekly", "streak": 0, "totalCompleted": 0 },
-    { "id": 9, "name": "Pre-IPO & Market Signals", "tree": "innovator", "xp": 20, "frequency": "weekly", "streak": 0, "totalCompleted": 0 },
-    { "id": 10, "name": "Reflection & Signal Integration", "tree": "strategist", "xp": 15, "frequency": "weekly", "streak": 0, "totalCompleted": 0 },
-    { "id": 11, "name": "Production Hotfix", "tree": "architect", "xp": 30, "frequency": "weekly", "streak": 0, "totalCompleted": 0 },
-    { "id": 12, "name": "Production Metrics & SLA Quantification", "tree": "architect", "xp": 25, "frequency": "weekly", "streak": 0, "totalCompleted": 0 }
+    {
+      "id": 1,
+      "name": "Articulation",
+      "tree": "communicator",
+      "xp": 15,
+      "frequency": "daily",
+      "streak": 0,
+      "totalCompleted": 0
+    },
+    {
+      "id": 2,
+      "name": "System Design",
+      "tree": "architect",
+      "xp": 25,
+      "frequency": "weekly",
+      "streak": 0,
+      "totalCompleted": 0
+    },
+    {
+      "id": 3,
+      "name": "Early Phase Proposals",
+      "tree": "strategist",
+      "xp": 25,
+      "frequency": "weekly",
+      "streak": 0,
+      "totalCompleted": 0
+    },
+    {
+      "id": 4,
+      "name": "Org Navigation & Influence",
+      "tree": "communicator",
+      "xp": 20,
+      "frequency": "weekly",
+      "streak": 0,
+      "totalCompleted": 0
+    },
+    {
+      "id": 5,
+      "name": "Business Impact Sizing",
+      "tree": "strategist",
+      "xp": 25,
+      "frequency": "weekly",
+      "streak": 0,
+      "totalCompleted": 0
+    },
+    {
+      "id": 6,
+      "name": "Launch & Impact Posts",
+      "tree": "communicator",
+      "xp": 20,
+      "frequency": "per-milestone",
+      "streak": 0,
+      "totalCompleted": 0
+    },
+    {
+      "id": 7,
+      "name": "Reliability & Landing Change",
+      "tree": "architect",
+      "xp": 20,
+      "frequency": "weekly",
+      "streak": 0,
+      "totalCompleted": 0
+    },
+    {
+      "id": 8,
+      "name": "Personalized Intelligence Deep Dive",
+      "tree": "innovator",
+      "xp": 30,
+      "frequency": "weekly",
+      "streak": 0,
+      "totalCompleted": 0
+    },
+    {
+      "id": 9,
+      "name": "Pre-IPO & Market Signals",
+      "tree": "innovator",
+      "xp": 20,
+      "frequency": "weekly",
+      "streak": 0,
+      "totalCompleted": 0
+    },
+    {
+      "id": 10,
+      "name": "Reflection & Signal Integration",
+      "tree": "strategist",
+      "xp": 15,
+      "frequency": "weekly",
+      "streak": 0,
+      "totalCompleted": 0
+    },
+    {
+      "id": 11,
+      "name": "Production Hotfix",
+      "tree": "architect",
+      "xp": 30,
+      "frequency": "weekly",
+      "streak": 0,
+      "totalCompleted": 0
+    },
+    {
+      "id": 12,
+      "name": "Production Metrics & SLA Quantification",
+      "tree": "architect",
+      "xp": 25,
+      "frequency": "weekly",
+      "streak": 0,
+      "totalCompleted": 0
+    }
   ],
   "completionLog": [],
   "impactProposals": [],
   "enterpriseWatchlist": [
-    { "name": "Figure AI", "domain": "Embodied AI / Humanoid Robots", "stage": "Series B", "signal": "hot", "notes": "General-purpose humanoid robot, backed by OpenAI/Microsoft" },
-    { "name": "Groq", "domain": "Model Serving Infrastructure", "stage": "Series D", "signal": "hot", "notes": "LPU inference chips, fastest LLM serving" },
-    { "name": "Rabbit", "domain": "Personalized AI Agent", "stage": "Series B", "signal": "watch", "notes": "LAM (Large Action Model) for personal AI" },
-    { "name": "Mistral", "domain": "Open Models / Edge AI", "stage": "Series B", "signal": "hot", "notes": "Open-weight models, edge deployment focus" },
-    { "name": "Cohere", "domain": "Enterprise AI Platform", "stage": "Series D", "signal": "stable", "notes": "Enterprise RAG and embeddings" },
-    { "name": "Physical Intelligence", "domain": "Embodied AI / Robotics", "stage": "Series A", "signal": "hot", "notes": "Foundation models for physical intelligence" },
-    { "name": "Modular/Mojo", "domain": "AI Infrastructure", "stage": "Series B", "signal": "watch", "notes": "Next-gen AI programming language and runtime" },
-    { "name": "Together AI", "domain": "Model Serving", "stage": "Series A", "signal": "watch", "notes": "Open-source model training and serving" },
-    { "name": "Cerebras", "domain": "AI Compute Infrastructure / Wafer-Scale Chips", "stage": "Public (CBRS on Nasdaq; IPO priced May 13, 2026 at $185/share; $5.55B raised; $56.4B fully diluted valuation; began trading May 14, 2026 with early prints implying ~$100B market cap)", "signal": "hot", "notes": "WSE-3 wafer-scale chip; $510M 2025 revenue; $10B OpenAI compute deal; priced at $185 (well above $150-160 revised range); raised $5.55B — largest AI chip IPO in history; Day 1 trading (May 14) showed early prints near $350/share (~$100B implied market cap); validates pure-play AI infrastructure as public market category; NVIDIA alternatives now investor-credible at scale" },
-    { "name": "Baseten", "domain": "AI Inference Platform (Serverless)", "stage": "Series D ($2.15B valuation)", "signal": "hot", "notes": "Serverless ML model deployment; $150M Series D Apr 2026; abstracts GPU fleet for enterprise inference workloads; competes with Modal Labs, Parasail" },
-    { "name": "Cursor", "domain": "AI Developer Tools (IDE / Coding Agent)", "stage": "Series C (in talks, $2B raise at $50B+ valuation, Apr 2026)", "signal": "hot", "notes": "AI-native code editor with 400K+ paying developers; in talks to raise $2B led by a16z + NVIDIA at $50B+ valuation (Apr 19, 2026); signals developer tools reaching infrastructure-tier valuations; direct competitor to GitHub Copilot and new agent coding frameworks" },
-    { "name": "MatX", "domain": "AI Training Silicon (LLM chip)", "stage": "Series B ($500M, Feb 2026)", "signal": "watch", "notes": "Ex-Google TPU founders; $500M Series B led by Jane Street + Situational Awareness (Leopold Aschenbrenner); targeting 10x LLM training perf over H100; TSMC-fabbed, first shipments 2027; credible non-NVIDIA training chip challenger" },
-    { "name": "Lambda Labs", "domain": "GPU Cloud / AI Factory Infrastructure", "stage": "Series E ($1.5B, Nov 2025) + $1B credit facility (May 2026)", "signal": "hot", "notes": "'Superintelligence Cloud' positioning; $2.5B+ total capital deployed to build gigawatt-scale AI factories (10K Blackwell Ultra GPUs in KC facility); J.P. Morgan-led $1B credit facility announced May 7, 2026; competes with CoreWeave (CRWV, IPO'd) for GPU-native cloud market below hyperscalers" },
-    { "name": "Project Prometheus", "domain": "Physical AI for Industrial Manufacturing Simulation", "stage": "$10B round at $38B valuation (closed Apr 2026, JPMorgan + BlackRock co-led)", "signal": "hot", "notes": "Co-CEOs Jeff Bezos + Vik Bajaj; builds AI simulation models to automate chip fabs, automotive assembly, and aerospace manufacturing; launched with $6.2B, added $10B round at $38B val in Apr 2026; Bezos also targeting $100B acquisition fund for industrial companies; bifurcates from 'embodied robotics' into factory process simulation — $16T manufacturing TAM with <2% AI penetration" },
-    { "name": "Sunday Robotics", "domain": "Consumer Household Robotics (Personal Service Robots)", "stage": "Series B ($165M, $1.15B valuation, May 2026)", "signal": "watch", "notes": "Building 'Memo', a household robot entering beta later in 2026; $165M Series B at $1.15B valuation — first consumer robotics unicorn in this category; targets sub-$5K price point; competes with labor costs (cleaning services, elder care); Mountain View, CA. Category signal: if Memo ships, it validates consumer robotics as mass market (analogous to Roomba → iPhone step change)" }
+    {
+      "name": "Figure AI",
+      "domain": "Embodied AI / Humanoid Robots",
+      "stage": "Series B",
+      "signal": "hot",
+      "notes": "General-purpose humanoid robot, backed by OpenAI/Microsoft"
+    },
+    {
+      "name": "Groq",
+      "domain": "Model Serving Infrastructure",
+      "stage": "Series D",
+      "signal": "hot",
+      "notes": "LPU inference chips, fastest LLM serving"
+    },
+    {
+      "name": "Rabbit",
+      "domain": "Personalized AI Agent",
+      "stage": "Series B",
+      "signal": "watch",
+      "notes": "LAM (Large Action Model) for personal AI"
+    },
+    {
+      "name": "Mistral",
+      "domain": "Open Models / Edge AI",
+      "stage": "Series B",
+      "signal": "hot",
+      "notes": "Open-weight models, edge deployment focus"
+    },
+    {
+      "name": "Cohere",
+      "domain": "Enterprise AI Platform",
+      "stage": "Series D",
+      "signal": "stable",
+      "notes": "Enterprise RAG and embeddings"
+    },
+    {
+      "name": "Physical Intelligence",
+      "domain": "Embodied AI / Robotics",
+      "stage": "Series A",
+      "signal": "hot",
+      "notes": "Foundation models for physical intelligence"
+    },
+    {
+      "name": "Modular/Mojo",
+      "domain": "AI Infrastructure",
+      "stage": "Series B",
+      "signal": "watch",
+      "notes": "Next-gen AI programming language and runtime"
+    },
+    {
+      "name": "Together AI",
+      "domain": "Model Serving",
+      "stage": "Series A",
+      "signal": "watch",
+      "notes": "Open-source model training and serving"
+    },
+    {
+      "name": "Cerebras",
+      "domain": "AI Compute Infrastructure / Wafer-Scale Chips",
+      "stage": "Public (CBRS on Nasdaq; IPO priced May 13, 2026 at $185/share; $5.55B raised; $56.4B fully diluted valuation; began trading May 14, 2026 with early prints implying ~$100B market cap)",
+      "signal": "hot",
+      "notes": "WSE-3 wafer-scale chip; $510M 2025 revenue; $10B OpenAI compute deal; priced at $185 (well above $150-160 revised range); raised $5.55B — largest AI chip IPO in history; Day 1 trading (May 14) showed early prints near $350/share (~$100B implied market cap); validates pure-play AI infrastructure as public market category; NVIDIA alternatives now investor-credible at scale"
+    },
+    {
+      "name": "Baseten",
+      "domain": "AI Inference Platform (Serverless)",
+      "stage": "Series D ($2.15B valuation)",
+      "signal": "hot",
+      "notes": "Serverless ML model deployment; $150M Series D Apr 2026; abstracts GPU fleet for enterprise inference workloads; competes with Modal Labs, Parasail"
+    },
+    {
+      "name": "Cursor",
+      "domain": "AI Developer Tools (IDE / Coding Agent)",
+      "stage": "Series C (in talks, $2B raise at $50B+ valuation, Apr 2026)",
+      "signal": "hot",
+      "notes": "AI-native code editor with 400K+ paying developers; in talks to raise $2B led by a16z + NVIDIA at $50B+ valuation (Apr 19, 2026); signals developer tools reaching infrastructure-tier valuations; direct competitor to GitHub Copilot and new agent coding frameworks"
+    },
+    {
+      "name": "MatX",
+      "domain": "AI Training Silicon (LLM chip)",
+      "stage": "Series B ($500M, Feb 2026)",
+      "signal": "watch",
+      "notes": "Ex-Google TPU founders; $500M Series B led by Jane Street + Situational Awareness (Leopold Aschenbrenner); targeting 10x LLM training perf over H100; TSMC-fabbed, first shipments 2027; credible non-NVIDIA training chip challenger"
+    },
+    {
+      "name": "Lambda Labs",
+      "domain": "GPU Cloud / AI Factory Infrastructure",
+      "stage": "Series E ($1.5B, Nov 2025) + $1B credit facility (May 2026)",
+      "signal": "hot",
+      "notes": "'Superintelligence Cloud' positioning; $2.5B+ total capital deployed to build gigawatt-scale AI factories (10K Blackwell Ultra GPUs in KC facility); J.P. Morgan-led $1B credit facility announced May 7, 2026; competes with CoreWeave (CRWV, IPO'd) for GPU-native cloud market below hyperscalers"
+    },
+    {
+      "name": "Project Prometheus",
+      "domain": "Physical AI for Industrial Manufacturing Simulation",
+      "stage": "$10B round at $38B valuation (closed Apr 2026, JPMorgan + BlackRock co-led)",
+      "signal": "hot",
+      "notes": "Co-CEOs Jeff Bezos + Vik Bajaj; builds AI simulation models to automate chip fabs, automotive assembly, and aerospace manufacturing; launched with $6.2B, added $10B round at $38B val in Apr 2026; Bezos also targeting $100B acquisition fund for industrial companies; bifurcates from 'embodied robotics' into factory process simulation — $16T manufacturing TAM with <2% AI penetration"
+    },
+    {
+      "name": "Sunday Robotics",
+      "domain": "Consumer Household Robotics (Personal Service Robots)",
+      "stage": "Series B ($165M, $1.15B valuation, May 2026)",
+      "signal": "watch",
+      "notes": "Building 'Memo', a household robot entering beta later in 2026; $165M Series B at $1.15B valuation — first consumer robotics unicorn in this category; targets sub-$5K price point; competes with labor costs (cleaning services, elder care); Mountain View, CA. Category signal: if Memo ships, it validates consumer robotics as mass market (analogous to Roomba → iPhone step change)"
+    },
+    {
+      "name": "Nous Research / Hermes Agent",
+      "domain": "AI Agent Infrastructure (Persistent Memory & Self-Improvement)",
+      "stage": "Open Source / Venture-backed research lab",
+      "signal": "hot",
+      "notes": "Hermes Agent reached 160K+ GitHub stars in May 2026 -- fastest-growing open-source agent framework of the year, beating OpenClaw's star velocity at equivalent age. Key innovation: persistent cross-session memory + automatic skill file generation from successful task completions. Agents accumulate proprietary workflow knowledge as organizational IP. Distinct from orchestration-layer agents (LangGraph, CrewAI): this is the memory + self-improvement persistence layer. Signal: enterprise dev tooling adoption velocity indicates the 'agent memory' infrastructure layer is becoming a standard requirement for production agents."
+    },
+    {
+      "name": "Skild AI",
+      "domain": "AI-Native Multi-Form-Factor Robotics (Warehouse Automation)",
+      "stage": "Growth (acquired Zebra Technologies Robotics Automation, Apr 2026)",
+      "signal": "hot",
+      "notes": "Acquired Zebra Technologies' Robotics Automation business (Symmetry platform + Fetch Robotics AMRs) in April 2026 to create the first end-to-end AI-native warehouse automation stack. Skild's omni-bodied foundation model controls humanoids, robotic dogs, arms, and AMRs from a single AI brain -- no per-robot reprogramming. Zebra received cash + equity stake. Positions Skild as the full-stack robotics vendor for logistics: hardware-agnostic AI orchestration across all warehouse robot form factors. Category signal: physical AI for logistics is consolidating from specialized to generalist foundation models."
+    },
+    {
+      "name": "Rhoda AI",
+      "domain": "Video-Predictive Control for General-Purpose Robotics",
+      "stage": "Series A ($450M, $1.7B valuation, Mar 2026)",
+      "signal": "watch",
+      "notes": "Exited stealth March 2026 with $450M Series A (Khosla, Mayfield, Temasek, John Doerr) to build FutureVision -- a Direct Video Action (DVA) model pre-trained on hundreds of millions of internet videos. Rather than teleoperated trajectory data, Rhoda trains on video to learn physics, motion, and physical interaction priors, then post-trains on small amounts of robot-specific data. The DVA model continuously observes environment, predicts future states as video, converts predictions to robot actions every few hundred milliseconds in a closed loop. Key differentiation: generalization across novel environments without re-training. Watch: DVA architecture could be the foundation model approach that finally bridges the robotics reality gap."
+    }
   ],
   "careerMilestones": [
-    { "level": "Senior", "requirement": "Own features end-to-end", "status": "current", "xpThreshold": 0 },
-    { "level": "Staff", "requirement": "Cross-team system ownership + business impact", "status": "next", "xpThreshold": 500 },
-    { "level": "Senior Staff", "requirement": "Org-wide technical strategy", "status": "locked", "xpThreshold": 2000 },
-    { "level": "Principal", "requirement": "Company-wide direction + external influence", "status": "locked", "xpThreshold": 5000 }
+    {
+      "level": "Senior",
+      "requirement": "Own features end-to-end",
+      "status": "current",
+      "xpThreshold": 0
+    },
+    {
+      "level": "Staff",
+      "requirement": "Cross-team system ownership + business impact",
+      "status": "next",
+      "xpThreshold": 500
+    },
+    {
+      "level": "Senior Staff",
+      "requirement": "Org-wide technical strategy",
+      "status": "locked",
+      "xpThreshold": 2000
+    },
+    {
+      "level": "Principal",
+      "requirement": "Company-wide direction + external influence",
+      "status": "locked",
+      "xpThreshold": 5000
+    }
   ]
 }
