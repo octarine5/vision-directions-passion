@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-05-29"
+    "last_updated": "2026-06-01"
   },
   "entries": [
     {
@@ -431,6 +431,24 @@
         "Nous Research / Hermes Agent (watchlist)",
         "Skild AI (watchlist)",
         "Rhoda AI (watchlist)"
+      ]
+    },
+    {
+      "timestamp": "2026-06-01T08:00:00Z",
+      "type": "knowledge-base",
+      "title": "Monday update: drill + knowledge base refresh",
+      "summary": "Added a Hard metrics drill exposing OTEL Collector exporter queue saturation that causes selective long-span dropping masking an LLM TTFT P99 regression (true P99 8.4s vs reported 2.2s). KB refresh: 2 new ML systems entries (NVIDIA Dynamo agentic inference optimizations with 97.2% cache hit rate, Meta Unified AI Agents for capacity efficiency at hyperscale), 1 new system design entry (Netflix UDA Model Once Represent Everywhere), 1 new org decision entry (autonomous AI agents on production infrastructure), and 1 new tech talk (Meta Engineering YouTube on capacity efficiency agents).",
+      "tasks": [
+        "drill",
+        "knowledge-base"
+      ],
+      "items_added": [
+        "OpenTelemetry Collector Exporter Queue Saturation — Selective Long-Span Drop Masks LLM TTFT P99 Regression",
+        "NVIDIA Dynamo Agentic Inference — Full-Stack Optimizations for Multi-Turn Agent Workflows",
+        "Meta Unified AI Agents for Capacity Efficiency at Hyperscale",
+        "Netflix Unified Data Architecture (UDA) — Model Once, Represent Everywhere",
+        "Deploying autonomous AI agents on production infrastructure: ownership, safety, and operational model",
+        "Capacity Efficiency at Meta: How Unified AI Agents Optimize Performance at Hyperscale (tech talk)"
       ]
     }
   ]

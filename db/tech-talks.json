@@ -3,7 +3,7 @@
     "category": "tech-talks",
     "display_name": "Tech Talks",
     "layout": "cards",
-    "last_updated": "2026-05-18"
+    "last_updated": "2026-06-01"
   },
   "sections": [
     {
@@ -66,7 +66,8 @@
         {"title": "Mixture of Experts Explained", "url": "https://www.youtube.com/watch?v=Fquj2u7ay40", "speaker": "Yannic Kilcher", "venue": "YouTube", "description": "MoE architecture, routing, sparse computation, Mixtral", "added": "2026-04-07"},
         {"title": "What is Agentic AI Engineering (Meta Staff Engineer Explains)", "url": "https://www.youtube.com/watch?v=FqPwHHrN1bg", "speaker": "Meta Staff Engineer", "venue": "YouTube 2026", "description": "A Meta staff engineer breaks down agentic AI engineering — what it means in practice, how multi-agent systems are restructuring the SDLC, and what staff+ engineers need to understand about orchestrating agents vs. writing code", "added": "2026-04-20"},
         {"title": "Building GenAI Platform at DoorDash", "url": "https://boston.qcon.ai/presentation/boston2026/building-genai-platform-doordash", "speaker": "Siddharth Kodwani / Sudeep Das (DoorDash)", "venue": "QCon AI Boston 2026", "description": "How DoorDash built internal GenAI infrastructure to support AI capabilities across engineering teams at scale — retries, fallbacks, prompt versioning, cost tracking, and trust/safety checks in a real-time 3-sided marketplace. Engineering deep-dive on the internal developer platform that makes AI features reliable, observable, and cost-controlled in production", "added": "2026-05-18"},
-        {"title": "Beyond Prompting: Context Engineering for Production-Grade AI", "url": "https://boston.qcon.ai/presentation/boston2026/beyond-prompting-context-engineering-production-grade-ai", "speaker": "QCon AI Boston 2026 Speaker", "venue": "QCon AI Boston 2026", "description": "Context engineering as an architectural discipline — treating the LLM context window as a first-class resource to design, optimize, and manage. Covers KV cache prefix reuse, memory hierarchies for long multi-turn sessions, tool result compression, retrieval-augmented context injection, and why disciplined context management delivers more consistent task success than prompt engineering alone", "added": "2026-05-18"}
+        {"title": "Beyond Prompting: Context Engineering for Production-Grade AI", "url": "https://boston.qcon.ai/presentation/boston2026/beyond-prompting-context-engineering-production-grade-ai", "speaker": "QCon AI Boston 2026 Speaker", "venue": "QCon AI Boston 2026", "description": "Context engineering as an architectural discipline — treating the LLM context window as a first-class resource to design, optimize, and manage. Covers KV cache prefix reuse, memory hierarchies for long multi-turn sessions, tool result compression, retrieval-augmented context injection, and why disciplined context management delivers more consistent task success than prompt engineering alone", "added": "2026-05-18"},
+        {"title": "Capacity Efficiency at Meta: How Unified AI Agents Optimize Performance at Hyperscale", "url": "https://www.youtube.com/watch?v=rV9Dy39nqdk", "speaker": "Meta Engineering", "venue": "Meta Engineering YouTube 2026", "description": "Meta's AI agent platform for autonomous infrastructure capacity optimization — how MCP Tools and encoded engineer Skills power offense (proactive savings discovery) and defense (AI Regression Solver auto-detects regressions and generates PRs), recovering hundreds of megawatts of compute. Covers the architecture, safety boundaries, and how the same foundation scaled from one efficiency application to an entire agentic program. Published April 28, 2026.", "added": "2026-06-01"}
       ]
     },
     {
