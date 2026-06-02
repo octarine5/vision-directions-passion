@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-06-01"
+    "last_updated": "2026-06-02"
   },
   "entries": [
     {
@@ -431,6 +431,18 @@
         "Nous Research / Hermes Agent (watchlist)",
         "Skild AI (watchlist)",
         "Rhoda AI (watchlist)"
+      ]
+    },
+    {
+      "timestamp": "2026-06-02T08:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: TGI Streaming Zombie Sessions — iOS Background TCP Suspension Exhausts KV Cache Pool",
+      "summary": "Added a Hard-difficulty ML Serving hotfix drill: iOS 4.2.0 ships a background-fetch feature that suspends TCP sockets without sending FIN, causing TGI 2.1.0 Rust streaming tasks to block indefinitely on poll_write (EAGAIN). Over 4h 14min, 2,847 zombie SSE sessions accumulate and exhaust the entire 8.5 GB A10G KV cache pool on SageMaker, producing 89.3% error rate with near-zero GPU utilization. Exercise covers zombie-session triage via GPU memory vs utilization disparity, SageMaker endpoint cycling as immediate mitigation, TGI 2.2.0 --client-idle-timeout fix, iOS app TCP FIN remediation, and a compound CloudWatch alarm targeting the unique high-VRAM/low-compute fingerprint.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "TGI Streaming Zombie Sessions — iOS Background TCP Suspension Exhausts KV Cache Pool"
       ]
     },
     {
