@@ -2,31 +2,31 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-06-02"
+    "last_updated": "2026-06-03"
   },
   "entries": [
     {
       "timestamp": "2026-05-26T08:00:00Z",
       "type": "drill",
-      "title": "Daily drill: GCP Cloud Bigtable Timestamp-Prefix Row Key Hotspot — Sequential Write Concentration Saturates Tablet Servers",
-      "summary": "Added a Hard-difficulty database hotfix drill: a GCP Cloud Bigtable feature store for 3 ML recommendation models experiences 20× SLO breach (P99 4,210ms vs 200ms target) when a marketing campaign 2.1× write-rate increase pushes 2 of 6 tablet servers to 96% CPU. Root cause is the classic timestamp-prefix anti-pattern — monotonically increasing keys concentrate 100% of current writes on the same lexicographic range. Exercise covers Key Visualizer hotspot triage, Dataflow throttle as immediate mitigation, reversed-timestamp key redesign for balanced distribution with per-user recency ordering, and zero-downtime dual-write migration to the new table.",
+      "title": "Daily drill: GCP Cloud Bigtable Timestamp-Prefix Row Key Hotspot \u2014 Sequential Write Concentration Saturates Tablet Servers",
+      "summary": "Added a Hard-difficulty database hotfix drill: a GCP Cloud Bigtable feature store for 3 ML recommendation models experiences 20\u00d7 SLO breach (P99 4,210ms vs 200ms target) when a marketing campaign 2.1\u00d7 write-rate increase pushes 2 of 6 tablet servers to 96% CPU. Root cause is the classic timestamp-prefix anti-pattern \u2014 monotonically increasing keys concentrate 100% of current writes on the same lexicographic range. Exercise covers Key Visualizer hotspot triage, Dataflow throttle as immediate mitigation, reversed-timestamp key redesign for balanced distribution with per-user recency ordering, and zero-downtime dual-write migration to the new table.",
       "tasks": [
         "drill"
       ],
       "items_added": [
-        "GCP Cloud Bigtable Timestamp-Prefix Row Key Hotspot — Sequential Write Concentration Saturates Tablet Servers, Feature Store P99 Latency 20× SLO"
+        "GCP Cloud Bigtable Timestamp-Prefix Row Key Hotspot \u2014 Sequential Write Concentration Saturates Tablet Servers, Feature Store P99 Latency 20\u00d7 SLO"
       ]
     },
     {
       "timestamp": "2026-04-21T06:00:00Z",
       "type": "drill",
-      "title": "Daily drill: Ray Serve Head Node Preemption — Stale GCS Actor Handles Zombie All GPU Workers",
+      "title": "Daily drill: Ray Serve Head Node Preemption \u2014 Stale GCS Actor Handles Zombie All GPU Workers",
       "summary": "Added a Hard-difficulty ML Serving hotfix drill: Azure AKS spot VM preemption kills the Ray head node, causing GCS epoch rollover. All 8 GPU worker replicas (Mistral-7B on A100-40GB) become zombie actors holding 36.4 GB GPU memory each with 0% utilization, blocking all 14,200 active WebSocket sessions for 22 minutes. Exercise covers epoch-mismatch triage via ray status, immediate mitigation via daemonset rollout restart, and long-term fixes including Redis-backed GCS persistence and IMDS eviction alerting.",
       "tasks": [
         "drill"
       ],
       "items_added": [
-        "Ray Serve Head Node Preemption — Stale GCS Actor Handles Zombie All GPU Workers"
+        "Ray Serve Head Node Preemption \u2014 Stale GCS Actor Handles Zombie All GPU Workers"
       ]
     },
     {
@@ -56,13 +56,13 @@
     {
       "timestamp": "2026-04-09T12:00:00Z",
       "type": "drill",
-      "title": "Daily drill: Triton Inference Server Silent Fallback — Model Config/Weight Shape Mismatch",
+      "title": "Daily drill: Triton Inference Server Silent Fallback \u2014 Model Config/Weight Shape Mismatch",
       "summary": "Added a Hard-difficulty ML Serving hotfix drill: Triton silently falls back to stale model weights after a config/weight shape mismatch breaks hot-reload from S3. Scenario includes exact Triton error log lines, SageMaker Feature Store context, GitHub Actions CI bug, and a 6-step exercise from triage to prevention.",
       "tasks": [
         "drill"
       ],
       "items_added": [
-        "Triton Inference Server Silent Fallback — Model Config/Weight Shape Mismatch"
+        "Triton Inference Server Silent Fallback \u2014 Model Config/Weight Shape Mismatch"
       ]
     },
     {
@@ -75,7 +75,7 @@
         "market-scan"
       ],
       "items_added": [
-        "Azure Cosmos DB Hot Partition — RU Exhaustion on Viral Traffic",
+        "Azure Cosmos DB Hot Partition \u2014 RU Exhaustion on Viral Traffic",
         "AI data center networking & interconnects",
         "On-device / local personal AI",
         "Industrial physical AI (cobots & factory automation)",
@@ -105,13 +105,13 @@
     {
       "timestamp": "2026-04-14T10:00:00Z",
       "type": "drill",
-      "title": "Daily drill: Kafka Consumer Livelock — max.poll.interval.ms Breach During Downstream Throttle",
-      "summary": "Added a Hard-difficulty distributed-systems hotfix drill: a Java Kafka consumer group on AWS EKS enters an infinite livelock when a SendGrid API slowdown (48ms → 11.2s) causes batch processing to exceed max.poll.interval.ms=300s. All 6 consumers repeatedly get ejected and rejoin without committing offsets, growing lag at 195K messages/minute across 120 partitions. Exercise covers triage via JMX rebalance-rate metrics, immediate mitigation by reducing max.poll.records, circuit-breaker isolation of the downstream, and prevention via dynamic poll sizing and rebalance-rate alerting.",
+      "title": "Daily drill: Kafka Consumer Livelock \u2014 max.poll.interval.ms Breach During Downstream Throttle",
+      "summary": "Added a Hard-difficulty distributed-systems hotfix drill: a Java Kafka consumer group on AWS EKS enters an infinite livelock when a SendGrid API slowdown (48ms \u2192 11.2s) causes batch processing to exceed max.poll.interval.ms=300s. All 6 consumers repeatedly get ejected and rejoin without committing offsets, growing lag at 195K messages/minute across 120 partitions. Exercise covers triage via JMX rebalance-rate metrics, immediate mitigation by reducing max.poll.records, circuit-breaker isolation of the downstream, and prevention via dynamic poll sizing and rebalance-rate alerting.",
       "tasks": [
         "drill"
       ],
       "items_added": [
-        "Kafka Consumer Livelock — max.poll.interval.ms Breach During Downstream Throttle"
+        "Kafka Consumer Livelock \u2014 max.poll.interval.ms Breach During Downstream Throttle"
       ]
     },
     {
@@ -129,13 +129,13 @@
     {
       "timestamp": "2026-04-22T04:00:00Z",
       "type": "drill",
-      "title": "Daily drill: PostgreSQL Transaction ID Wraparound — Emergency Vacuum Under Active Blocker",
+      "title": "Daily drill: PostgreSQL Transaction ID Wraparound \u2014 Emergency Vacuum Under Active Blocker",
       "summary": "Added a Hard-difficulty PostgreSQL hotfix drill: a fintech ledger's transactions table (1.1B rows, 1.8TB) approaches TXID wraparound (~39 minutes to hard shutdown) after an 11.6-hour analytics ETL query blocks autovacuum workers on AWS RDS. Scenario includes exact Postgres WARNING log lines, pg_stat_activity blocker chain, and a 6-step exercise covering pg_terminate_backend emergency, manual VACUUM FREEZE, autovacuum cost throttle bypass, and prevention via idle_in_transaction_session_timeout and relfrozenxid age alerting.",
       "tasks": [
         "drill"
       ],
       "items_added": [
-        "PostgreSQL Transaction ID Wraparound — Emergency Vacuum Under Active Blocker"
+        "PostgreSQL Transaction ID Wraparound \u2014 Emergency Vacuum Under Active Blocker"
       ]
     },
     {
@@ -148,7 +148,7 @@
         "market-scan"
       ],
       "items_added": [
-        "TorchServe Worker Zombie — CUDA Context Poisoned by OOV Embedding Lookup",
+        "TorchServe Worker Zombie \u2014 CUDA Context Poisoned by OOV Embedding Lookup",
         "Serverless AI inference PaaS",
         "AI agent development SDKs & orchestration tooling",
         "AI hardware public-market maturation (wafer-scale chips)",
@@ -159,13 +159,13 @@
     {
       "timestamp": "2026-04-23T12:00:00Z",
       "type": "drill",
-      "title": "Daily drill: gRPC Context Leak — Goroutine Accumulation from Unbound Background Workers",
+      "title": "Daily drill: gRPC Context Leak \u2014 Goroutine Accumulation from Unbound Background Workers",
       "summary": "Added a Hard-difficulty distributed-systems hotfix drill: a Go 1.22 gRPC ranking service on AWS EKS accumulates 22,400 goroutines (from a baseline of 1,100) over 47 minutes after an ElastiCache Redis failover causes background workers spawned with context.Background() to block for their full 5s socket timeout instead of respecting the client's 500ms deadline. Exercise covers pprof goroutine triage, rolling-restart mitigation, context propagation fix, Redis circuit breaker, and goroutine leak prevention via goleak and staticcheck.",
       "tasks": [
         "drill"
       ],
       "items_added": [
-        "gRPC Context Leak — Goroutine Accumulation from Unbound Background Workers"
+        "gRPC Context Leak \u2014 Goroutine Accumulation from Unbound Background Workers"
       ]
     },
     {
@@ -178,7 +178,7 @@
         "knowledge-base"
       ],
       "items_added": [
-        "Nomad Allocation Restart Loop — Consul Health Check Grace Period Misconfiguration",
+        "Nomad Allocation Restart Loop \u2014 Consul Health Check Grace Period Misconfiguration",
         "llm-d: Kubernetes-Native Distributed LLM Inference",
         "NVIDIA Dynamo: Datacenter-Scale Disaggregated Inference",
         "Agentic engineering as multi-agent SDLC delivery model",
@@ -190,13 +190,13 @@
       "timestamp": "2026-04-27T10:00:00Z",
       "type": "knowledge-base",
       "title": "Monday update: drill + knowledge base refresh",
-      "summary": "Added a Hard-difficulty MongoDB Atlas hotfix drill: an unindexed analytics aggregation runs 4.6 hours on a secondary, exceeding the 90-minute oplog window, triggering a full resync cascade and a 6-minute w:majority write outage when Atlas maintenance collides with the resync. KB refresh: 2 new ML systems entries (Meta KernelEvolve agentic kernel optimization with 60%+ throughput gain, Uber Ray on Kubernetes 1.5–4× training speedup), 1 new system design entry (Meta multi-agent tribal knowledge capture for data pipelines), and 1 new org decision entry (Amazon's real-world lessons for evaluating AI agents in production).",
+      "summary": "Added a Hard-difficulty MongoDB Atlas hotfix drill: an unindexed analytics aggregation runs 4.6 hours on a secondary, exceeding the 90-minute oplog window, triggering a full resync cascade and a 6-minute w:majority write outage when Atlas maintenance collides with the resync. KB refresh: 2 new ML systems entries (Meta KernelEvolve agentic kernel optimization with 60%+ throughput gain, Uber Ray on Kubernetes 1.5\u20134\u00d7 training speedup), 1 new system design entry (Meta multi-agent tribal knowledge capture for data pipelines), and 1 new org decision entry (Amazon's real-world lessons for evaluating AI agents in production).",
       "tasks": [
         "drill",
         "knowledge-base"
       ],
       "items_added": [
-        "MongoDB Atlas Replica Set — Oplog Window Exhausted by Unindexed Analytics Query Triggering Resync Cascade",
+        "MongoDB Atlas Replica Set \u2014 Oplog Window Exhausted by Unindexed Analytics Query Triggering Resync Cascade",
         "Agentic GPU Kernel Optimization (KernelEvolve)",
         "Ray on Kubernetes for Production ML at Scale (Uber)",
         "Multi-Agent Tribal Knowledge Capture for Data Pipelines (Meta)",
@@ -213,7 +213,7 @@
         "market-scan"
       ],
       "items_added": [
-        "AWS EKS VPC CNI Subnet IP Exhaustion — Silent Scale Failure During Spot Interruption Wave",
+        "AWS EKS VPC CNI Subnet IP Exhaustion \u2014 Silent Scale Failure During Spot Interruption Wave",
         "LLM training silicon diversification (non-NVIDIA alternatives)",
         "Frontier AI lab platform lock-in & enterprise moat-building",
         "AI agent observability & production reliability",
@@ -225,13 +225,13 @@
       "timestamp": "2026-05-08T08:00:00Z",
       "type": "market-scan",
       "title": "Friday update: drill + market signal scan",
-      "summary": "Added a Hard distributed-systems drill: AWS Kinesis ShardIterator expiry silent audit gap — Python consumer recovers with LATEST iterator type after a SIGSTOP maintenance pause, silently skipping 17,280 ML inference audit records (SOC 2 violation, $180K remediation cost). Market scan added 3 new business problems (GPU-native AI factory cloud, agentic SDLC automation, sovereign AI infrastructure) and updated the watchlist with Cerebras live IPO roadshow details and new entry Lambda Labs ($2.5B+ capital for gigawatt AI factories).",
+      "summary": "Added a Hard distributed-systems drill: AWS Kinesis ShardIterator expiry silent audit gap \u2014 Python consumer recovers with LATEST iterator type after a SIGSTOP maintenance pause, silently skipping 17,280 ML inference audit records (SOC 2 violation, $180K remediation cost). Market scan added 3 new business problems (GPU-native AI factory cloud, agentic SDLC automation, sovereign AI infrastructure) and updated the watchlist with Cerebras live IPO roadshow details and new entry Lambda Labs ($2.5B+ capital for gigawatt AI factories).",
       "tasks": [
         "drill",
         "market-scan"
       ],
       "items_added": [
-        "AWS Kinesis ShardIterator Expiry — Silent Audit Gap from LATEST Recovery Bug After Maintenance Pause",
+        "AWS Kinesis ShardIterator Expiry \u2014 Silent Audit Gap from LATEST Recovery Bug After Maintenance Pause",
         "GPU-native cloud / AI factory infrastructure (non-hyperscaler)",
         "Agentic software engineering & autonomous SDLC automation",
         "Sovereign AI infrastructure & national compute reserves",
@@ -242,62 +242,62 @@
     {
       "timestamp": "2026-05-12T10:00:00Z",
       "type": "drill",
-      "title": "Daily drill: MySQL InnoDB Gap Lock Deadlock Storm — Inventory Reservation Cascade During Flash Sale",
+      "title": "Daily drill: MySQL InnoDB Gap Lock Deadlock Storm \u2014 Inventory Reservation Cascade During Flash Sale",
       "summary": "Added a Hard-difficulty MySQL 8.0 hotfix drill: a Java Spring Boot inventory service hits a 34.7% error rate when InnoDB gap locks on an out-of-stock range query deadlock with Insert Intention Locks from concurrent order inserts during a flash sale (8,400 concurrent writes). Covers exact INNODB STATUS deadlock output, READ COMMITTED isolation fix, SELECT FOR UPDATE SKIP LOCKED pattern, and retry amplification mitigation.",
       "tasks": [
         "drill"
       ],
       "items_added": [
-        "MySQL InnoDB Gap Lock Deadlock Storm — Inventory Reservation Cascade During Flash Sale"
+        "MySQL InnoDB Gap Lock Deadlock Storm \u2014 Inventory Reservation Cascade During Flash Sale"
       ]
     },
     {
       "timestamp": "2026-05-07T08:00:00Z",
       "type": "drill",
-      "title": "Daily drill: Apache Flink RocksDB Checkpoint Timeout — L0 Compaction I/O Starvation on Feature Pipeline",
-      "summary": "Added a Hard-difficulty distributed systems hotfix drill: a Flink 1.18.1 streaming feature pipeline (32 TMs on GKE, RocksDB state backend) experiences 3 consecutive checkpoint failures when an upstream Pub/Sub publisher quadruples event batch size (128KB→512KB), triggering simultaneous L0 compaction across all 32 TaskManagers and saturating PD-SSD write bandwidth at 1.78 GB/s. Flink restarts from a 13-minute-old checkpoint, serving stale features to 14 ML ranking models for 14 minutes. Exercise covers RocksDB L0 stall triage via Flink Prometheus metrics, compaction thread throttle as immediate mitigation, upstream batch size reversion, local NVMe migration, and managed memory configuration.",
+      "title": "Daily drill: Apache Flink RocksDB Checkpoint Timeout \u2014 L0 Compaction I/O Starvation on Feature Pipeline",
+      "summary": "Added a Hard-difficulty distributed systems hotfix drill: a Flink 1.18.1 streaming feature pipeline (32 TMs on GKE, RocksDB state backend) experiences 3 consecutive checkpoint failures when an upstream Pub/Sub publisher quadruples event batch size (128KB\u2192512KB), triggering simultaneous L0 compaction across all 32 TaskManagers and saturating PD-SSD write bandwidth at 1.78 GB/s. Flink restarts from a 13-minute-old checkpoint, serving stale features to 14 ML ranking models for 14 minutes. Exercise covers RocksDB L0 stall triage via Flink Prometheus metrics, compaction thread throttle as immediate mitigation, upstream batch size reversion, local NVMe migration, and managed memory configuration.",
       "tasks": [
         "drill"
       ],
       "items_added": [
-        "Apache Flink RocksDB Checkpoint Timeout — L0 Compaction I/O Starvation on Feature Pipeline"
+        "Apache Flink RocksDB Checkpoint Timeout \u2014 L0 Compaction I/O Starvation on Feature Pipeline"
       ]
     },
     {
       "timestamp": "2026-05-06T10:00:00Z",
       "type": "drill",
-      "title": "Daily drill: vLLM Speculative Decoding Draft Model Vocab Mismatch — Corrupted Responses After Target Model Rollout",
-      "summary": "Added a Hard-difficulty ML Serving hotfix drill on GKE: vLLM 0.4.2 speculative decoding returns HTTP 200 but only 7–9 token truncated responses after a target model upgrade expands the tokenizer vocab from 32K to 36K while the draft model remains at 32K. A vLLM engine off-by-one bug in the spec-decode rejection rollback loop corrupts the output buffer pointer on last-token rejections. Exercise covers spec-decode metric triage (acceptance_rate→0.00), disabling spec-decode as immediate mitigation, upgrading to vLLM 0.4.3, and adding ArgoCD PreSync vocab-parity hooks and synthetic quality canaries.",
+      "title": "Daily drill: vLLM Speculative Decoding Draft Model Vocab Mismatch \u2014 Corrupted Responses After Target Model Rollout",
+      "summary": "Added a Hard-difficulty ML Serving hotfix drill on GKE: vLLM 0.4.2 speculative decoding returns HTTP 200 but only 7\u20139 token truncated responses after a target model upgrade expands the tokenizer vocab from 32K to 36K while the draft model remains at 32K. A vLLM engine off-by-one bug in the spec-decode rejection rollback loop corrupts the output buffer pointer on last-token rejections. Exercise covers spec-decode metric triage (acceptance_rate\u21920.00), disabling spec-decode as immediate mitigation, upgrading to vLLM 0.4.3, and adding ArgoCD PreSync vocab-parity hooks and synthetic quality canaries.",
       "tasks": [
         "drill"
       ],
       "items_added": [
-        "vLLM Speculative Decoding Draft Model Vocab Mismatch — Corrupted Responses After Target Model Rollout"
+        "vLLM Speculative Decoding Draft Model Vocab Mismatch \u2014 Corrupted Responses After Target Model Rollout"
       ]
     },
     {
       "timestamp": "2026-05-13T08:00:00Z",
       "type": "drill",
-      "title": "Daily drill: Tokio Ack Handler Shutdown Race — Pub/Sub Redelivery Storm During GKE Rolling Update",
+      "title": "Daily drill: Tokio Ack Handler Shutdown Race \u2014 Pub/Sub Redelivery Storm During GKE Rolling Update",
       "summary": "Added a Hard-difficulty distributed-systems hotfix drill: a Rust/Tokio Pub/Sub consumer on GKE causes a 340K-message redelivery storm when fire-and-forget tokio::spawn ack tasks are dropped by Tokio's shutdown_timeout during a rolling update, leaving 847 messages unacknowledged per pod across 8 simultaneous pod terminations. Exercise covers structured concurrency fix via JoinSet, SIGTERM drain guard, terminationGracePeriodSeconds tuning, and CI enforcement via Pub/Sub emulator integration tests.",
       "tasks": [
         "drill"
       ],
       "items_added": [
-        "Tokio Ack Handler Shutdown Race — Pub/Sub Redelivery Storm During GKE Rolling Update"
+        "Tokio Ack Handler Shutdown Race \u2014 Pub/Sub Redelivery Storm During GKE Rolling Update"
       ]
     },
     {
       "timestamp": "2026-05-15T14:00:00Z",
       "type": "market-scan",
       "title": "Friday update: drill + market signal scan",
-      "summary": "Added a Hard ML Serving hotfix drill: vLLM 0.5.1 tensor-parallel serving silently deadlocks after AWS EFA driver 1.31.0 upgrades efa_use_device_rdma default, switching NCCL from Ring to Double Binary Tree algorithm on 8× A100 p4d instances — all 8 TP ranks block in an AllReduce barrier with 0% GPU utilization and 0% error rate. Market scan: Cerebras CBRS IPO priced at $185 (raised $5.55B, $56.4B val, Day 1 trading ~$100B implied); added 3 new business problems (Project Prometheus $10B physical-AI factory round, Sunday Robotics $165M household-robot Series B, managed inference consolidation via Nebius/Eigen AI + DigitalOcean); added Project Prometheus and Sunday Robotics to enterprise watchlist.",
+      "summary": "Added a Hard ML Serving hotfix drill: vLLM 0.5.1 tensor-parallel serving silently deadlocks after AWS EFA driver 1.31.0 upgrades efa_use_device_rdma default, switching NCCL from Ring to Double Binary Tree algorithm on 8\u00d7 A100 p4d instances \u2014 all 8 TP ranks block in an AllReduce barrier with 0% GPU utilization and 0% error rate. Market scan: Cerebras CBRS IPO priced at $185 (raised $5.55B, $56.4B val, Day 1 trading ~$100B implied); added 3 new business problems (Project Prometheus $10B physical-AI factory round, Sunday Robotics $165M household-robot Series B, managed inference consolidation via Nebius/Eigen AI + DigitalOcean); added Project Prometheus and Sunday Robotics to enterprise watchlist.",
       "tasks": [
         "drill",
         "market-scan"
       ],
       "items_added": [
-        "NCCL AllReduce Deadlock — Tensor Parallel vLLM Silent Hang After EFA Driver Upgrade",
+        "NCCL AllReduce Deadlock \u2014 Tensor Parallel vLLM Silent Hang After EFA Driver Upgrade",
         "Physical AI for industrial manufacturing simulation (factory automation)",
         "Household / personal service robots (consumer robotics)",
         "Managed AI inference consolidation & platform commoditization",
@@ -310,13 +310,13 @@
       "timestamp": "2026-05-18T12:00:00Z",
       "type": "knowledge-base",
       "title": "Monday update: drill + knowledge base refresh",
-      "summary": "Added a Hard database hotfix drill: Redis Sentinel split-brain during AWS AZ partial partition causes dual primary writes — 23 duplicate payment charges ($47,200) over 126 seconds. KB refresh: 2 new ML systems entries (Five Eras of KV Cache tiered offloading, Google Cloud AI Hypercomputer & TPU 8th gen inference architecture), 2 new tech talks from QCon AI Boston 2026 (DoorDash GenAI platform, context engineering for production AI), and 1 new org decision entry (staff+ engineers as the key to enterprise AI adoption).",
+      "summary": "Added a Hard database hotfix drill: Redis Sentinel split-brain during AWS AZ partial partition causes dual primary writes \u2014 23 duplicate payment charges ($47,200) over 126 seconds. KB refresh: 2 new ML systems entries (Five Eras of KV Cache tiered offloading, Google Cloud AI Hypercomputer & TPU 8th gen inference architecture), 2 new tech talks from QCon AI Boston 2026 (DoorDash GenAI platform, context engineering for production AI), and 1 new org decision entry (staff+ engineers as the key to enterprise AI adoption).",
       "tasks": [
         "drill",
         "knowledge-base"
       ],
       "items_added": [
-        "Redis Sentinel Split-Brain — Dual Primary Writes During AWS AZ Partial Partition",
+        "Redis Sentinel Split-Brain \u2014 Dual Primary Writes During AWS AZ Partial Partition",
         "Five Eras of KV Cache: Tiered Offloading & Distributed KV Sharing",
         "Google Cloud AI Hypercomputer & TPU 8th Gen Inference Architecture",
         "Building GenAI Platform at DoorDash (QCon AI Boston 2026)",
@@ -327,73 +327,73 @@
     {
       "timestamp": "2026-05-20T10:00:00Z",
       "type": "drill",
-      "title": "Daily drill: Elasticsearch Disk Flood Stage — force_merge Segment Merge Overhead Triggers Mass Index Read-Only Lockout",
+      "title": "Daily drill: Elasticsearch Disk Flood Stage \u2014 force_merge Segment Merge Overhead Triggers Mass Index Read-Only Lockout",
       "summary": "Added a Hard-difficulty distributed-systems hotfix drill: an automated force_merge on 280GB of aging Elasticsearch indices generates temporary merge-overhead disk usage that, combined with a G1GC Full GC pause deferring segment release, crosses the 95% flood-stage watermark and applies read_only_allow_delete=true to all indices cluster-wide. Standard cluster health shows GREEN throughout; 847 writes/sec return HTTP 403 for 6 minutes with 304,920 events dropped before the on-call discovers the cause. Exercise covers index-block triage via settings API (invisible to standard health checks), immediate block-clear, safe force_merge strategy, and automated flood-stage remediation Lambda.",
       "tasks": [
         "drill"
       ],
       "items_added": [
-        "Elasticsearch Disk Flood Stage — force_merge Segment Merge Overhead Triggers Mass Index Read-Only Lockout"
+        "Elasticsearch Disk Flood Stage \u2014 force_merge Segment Merge Overhead Triggers Mass Index Read-Only Lockout"
       ]
     },
     {
       "timestamp": "2026-05-19T12:00:00Z",
       "type": "drill",
-      "title": "Daily drill: SQS Visibility Timeout Race — Lambda Duration Spike Causes Duplicate Payment Charges During Flash Sale",
-      "summary": "Added a Hard-difficulty distributed-systems hotfix drill: AWS Lambda Node.js payment processor on SQS has its Duration P99 pushed from 17s to 31s when Stripe degrades to 1.2s and a SageMaker fraud endpoint saturates at 9.8s P99 during a flash sale — exceeding the 30s SQS VisibilityTimeout. Combined with an idempotency ordering bug (Stripe called before the DynamoDB conditional write), 847 customers are double-charged ($158,389 total). Exercise covers X-Ray dependency triage, VisibilityTimeout increase, Lambda concurrency throttle, idempotency-first reordering with DynamoDB PutItem as a distributed mutex, and Stripe native idempotency keys as defense-in-depth.",
+      "title": "Daily drill: SQS Visibility Timeout Race \u2014 Lambda Duration Spike Causes Duplicate Payment Charges During Flash Sale",
+      "summary": "Added a Hard-difficulty distributed-systems hotfix drill: AWS Lambda Node.js payment processor on SQS has its Duration P99 pushed from 17s to 31s when Stripe degrades to 1.2s and a SageMaker fraud endpoint saturates at 9.8s P99 during a flash sale \u2014 exceeding the 30s SQS VisibilityTimeout. Combined with an idempotency ordering bug (Stripe called before the DynamoDB conditional write), 847 customers are double-charged ($158,389 total). Exercise covers X-Ray dependency triage, VisibilityTimeout increase, Lambda concurrency throttle, idempotency-first reordering with DynamoDB PutItem as a distributed mutex, and Stripe native idempotency keys as defense-in-depth.",
       "tasks": [
         "drill"
       ],
       "items_added": [
-        "SQS Visibility Timeout Race — Lambda Duration Spike Causes Duplicate Payment Charges During Flash Sale"
+        "SQS Visibility Timeout Race \u2014 Lambda Duration Spike Causes Duplicate Payment Charges During Flash Sale"
       ]
     },
     {
       "timestamp": "2026-05-21T08:30:00Z",
       "type": "drill",
-      "title": "Daily drill: Vault Dynamic Secret max_ttl Reduction — Synchronized Lease Expiry Causes Mass PostgreSQL Auth Failure",
+      "title": "Daily drill: Vault Dynamic Secret max_ttl Reduction \u2014 Synchronized Lease Expiry Causes Mass PostgreSQL Auth Failure",
       "summary": "Added a Hard-difficulty infrastructure hotfix drill: a Vault operator shortens the PostgreSQL secrets engine max_ttl from 24h to 1h on production roles, causing all 96 Go service pods' vault-agent leases to expire simultaneously 1 hour later. The Go pgx v5 pool is static (initialized once at startup) and doesn't reinitialize when vault-agent writes new credentials, leaving all 12 services unable to connect to RDS PostgreSQL for 22 minutes. Exercise covers credential-vs-network triage, rolling restart mitigation, fsnotify-based hot credential rotation fix, and Vault lease staggering prevention.",
       "tasks": [
         "drill"
       ],
       "items_added": [
-        "Vault Dynamic Secret max_ttl Reduction — Synchronized Lease Expiry Causes Mass PostgreSQL Auth Failure"
+        "Vault Dynamic Secret max_ttl Reduction \u2014 Synchronized Lease Expiry Causes Mass PostgreSQL Auth Failure"
       ]
     },
     {
       "timestamp": "2026-05-14T08:30:00Z",
       "type": "drill",
-      "title": "Daily drill: Azure AKS CoreDNS ndots:5 Storm — DNS Search Domain Amplification Kills Kafka and Service Mesh Connectivity",
-      "summary": "Added a Hard-difficulty infrastructure hotfix drill: on Azure AKS, Kubernetes ndots:5 default causes 180 Java pods to generate 28,512 upstream DNS queries/sec (28× the Azure Private DNS Resolver quota of 1,000 QPS) after a KEDA scale-out for a product launch, killing Kafka connectivity and exhausting HikariCP database connection pools. Covers FQDN trailing-dot immediate fix, ndots:1 dnsConfig as durable solution, CoreDNS NXDOMAIN alerting, and NodeLocal DNSCache for long-term DNS throughput scaling.",
+      "title": "Daily drill: Azure AKS CoreDNS ndots:5 Storm \u2014 DNS Search Domain Amplification Kills Kafka and Service Mesh Connectivity",
+      "summary": "Added a Hard-difficulty infrastructure hotfix drill: on Azure AKS, Kubernetes ndots:5 default causes 180 Java pods to generate 28,512 upstream DNS queries/sec (28\u00d7 the Azure Private DNS Resolver quota of 1,000 QPS) after a KEDA scale-out for a product launch, killing Kafka connectivity and exhausting HikariCP database connection pools. Covers FQDN trailing-dot immediate fix, ndots:1 dnsConfig as durable solution, CoreDNS NXDOMAIN alerting, and NodeLocal DNSCache for long-term DNS throughput scaling.",
       "tasks": [
         "drill"
       ],
       "items_added": [
-        "Azure AKS CoreDNS ndots:5 Storm — DNS Search Domain Amplification Kills Kafka and Service Mesh Connectivity"
+        "Azure AKS CoreDNS ndots:5 Storm \u2014 DNS Search Domain Amplification Kills Kafka and Service Mesh Connectivity"
       ]
     },
     {
       "timestamp": "2026-05-27T08:00:00Z",
       "type": "drill",
-      "title": "Daily drill: RabbitMQ Quorum Queue Memory Alarm — Celery Prefetch Surge OOM Wave Blocks All Pika Producers on GKE",
-      "summary": "Added a Hard-difficulty distributed-systems hotfix drill: a Celery `worker_prefetch_multiplier` bump from 100→2000 causes 4 of 24 GKE worker pods to OOMKill, returning 8,000 unacked messages to RabbitMQ and triggering a memory alarm (41.8% of 64 GB) that blocks all 14 Pika producer connections. The coordinator's `wait_for_confirms_or_die(timeout=5.0)` treats the transient block as a fatal error, causing 100% error rate for 17 minutes; a misrouted liveness probe cascades into a coordinator pod restart storm. Exercise covers memory-alarm triage via `rabbitmqctl`, Celery scale-to-zero as immediate relief, `CELERYD_PREFETCH_MULTIPLIER=1` for long-running tasks, Pika `Connection.Blocked` callback handling, lazy queue mode to decouple depth from RAM, and prefetch guard at container startup.",
+      "title": "Daily drill: RabbitMQ Quorum Queue Memory Alarm \u2014 Celery Prefetch Surge OOM Wave Blocks All Pika Producers on GKE",
+      "summary": "Added a Hard-difficulty distributed-systems hotfix drill: a Celery `worker_prefetch_multiplier` bump from 100\u21922000 causes 4 of 24 GKE worker pods to OOMKill, returning 8,000 unacked messages to RabbitMQ and triggering a memory alarm (41.8% of 64 GB) that blocks all 14 Pika producer connections. The coordinator's `wait_for_confirms_or_die(timeout=5.0)` treats the transient block as a fatal error, causing 100% error rate for 17 minutes; a misrouted liveness probe cascades into a coordinator pod restart storm. Exercise covers memory-alarm triage via `rabbitmqctl`, Celery scale-to-zero as immediate relief, `CELERYD_PREFETCH_MULTIPLIER=1` for long-running tasks, Pika `Connection.Blocked` callback handling, lazy queue mode to decouple depth from RAM, and prefetch guard at container startup.",
       "tasks": [
         "drill"
       ],
       "items_added": [
-        "RabbitMQ Quorum Queue Memory Alarm — Celery worker_prefetch_multiplier Surge Triggers OOM Wave and Blocks All Pika Producers on GKE"
+        "RabbitMQ Quorum Queue Memory Alarm \u2014 Celery worker_prefetch_multiplier Surge Triggers OOM Wave and Blocks All Pika Producers on GKE"
       ]
     },
     {
       "timestamp": "2026-05-28T08:00:00Z",
       "type": "drill",
-      "title": "Daily drill: Temporal Workflow Sticky Queue Drain Stall — ML Training Pipeline Timeout Cascade During Worker Rolling Restart",
-      "summary": "Added a Hard-difficulty distributed-systems hotfix drill: a dormant Go SDK misconfiguration (StickyScheduleToStartTimeout=0 maps to infinite wait, not 'disabled') causes 92 Temporal TrainModelWorkflow instances to hang on terminated-pod sticky queues during a GKE 1.28→1.29 rolling restart. Workflows time out after 5 minutes, while their orphaned A100-80GB training activities continue burning $32.77/hr each — accumulating $17,499 in orphaned GPU compute before the on-call terminates them. Exercise covers sticky queue triage via tctl, orphaned GPU termination, StickyScheduleToStartTimeout fix (set to 10s or omit for server default), bulk workflow reset, and a pre-rolling-restart queue-depth gate in CI/CD.",
+      "title": "Daily drill: Temporal Workflow Sticky Queue Drain Stall \u2014 ML Training Pipeline Timeout Cascade During Worker Rolling Restart",
+      "summary": "Added a Hard-difficulty distributed-systems hotfix drill: a dormant Go SDK misconfiguration (StickyScheduleToStartTimeout=0 maps to infinite wait, not 'disabled') causes 92 Temporal TrainModelWorkflow instances to hang on terminated-pod sticky queues during a GKE 1.28\u21921.29 rolling restart. Workflows time out after 5 minutes, while their orphaned A100-80GB training activities continue burning $32.77/hr each \u2014 accumulating $17,499 in orphaned GPU compute before the on-call terminates them. Exercise covers sticky queue triage via tctl, orphaned GPU termination, StickyScheduleToStartTimeout fix (set to 10s or omit for server default), bulk workflow reset, and a pre-rolling-restart queue-depth gate in CI/CD.",
       "tasks": [
         "drill"
       ],
       "items_added": [
-        "Temporal Workflow Sticky Queue Drain Stall — ML Training Pipeline Timeout Cascade During Worker Rolling Restart"
+        "Temporal Workflow Sticky Queue Drain Stall \u2014 ML Training Pipeline Timeout Cascade During Worker Rolling Restart"
       ]
     },
     {
@@ -406,9 +406,9 @@
         "knowledge-base"
       ],
       "items_added": [
-        "Prometheus Histogram Bucket Saturation — Phantom SLO Compliance in LLM TTFT Monitoring",
-        "Meta Adaptive Ranking Model (ARM) — Request-Centric LLM-Scale Inference",
-        "Kubernetes Gateway API Inference Extension (GIE) — Model-Aware LLM Traffic Routing",
+        "Prometheus Histogram Bucket Saturation \u2014 Phantom SLO Compliance in LLM TTFT Monitoring",
+        "Meta Adaptive Ranking Model (ARM) \u2014 Request-Centric LLM-Scale Inference",
+        "Kubernetes Gateway API Inference Extension (GIE) \u2014 Model-Aware LLM Traffic Routing",
         "Identity Graph at Scale for Fraud, Inventory & Lineage (Airbnb)",
         "Platform engineering as governance and control plane for agentic AI systems",
         "EU Cyber Resilience Act (CRA) compliance for engineering teams building software products"
@@ -424,7 +424,7 @@
         "market-scan"
       ],
       "items_added": [
-        "SageMaker Multi-Model Endpoint LRU Cache Thrashing — EU/US Time-Zone Traffic Shift Causes P99 Latency 28s",
+        "SageMaker Multi-Model Endpoint LRU Cache Thrashing \u2014 EU/US Time-Zone Traffic Shift Causes P99 Latency 28s",
         "Persistent memory & self-improving AI agents",
         "Sovereign AI model platforms for regulated industries",
         "End-to-end AI-native warehouse automation (multi-form-factor robotics)",
@@ -436,13 +436,13 @@
     {
       "timestamp": "2026-06-02T08:00:00Z",
       "type": "drill",
-      "title": "Daily drill: TGI Streaming Zombie Sessions — iOS Background TCP Suspension Exhausts KV Cache Pool",
+      "title": "Daily drill: TGI Streaming Zombie Sessions \u2014 iOS Background TCP Suspension Exhausts KV Cache Pool",
       "summary": "Added a Hard-difficulty ML Serving hotfix drill: iOS 4.2.0 ships a background-fetch feature that suspends TCP sockets without sending FIN, causing TGI 2.1.0 Rust streaming tasks to block indefinitely on poll_write (EAGAIN). Over 4h 14min, 2,847 zombie SSE sessions accumulate and exhaust the entire 8.5 GB A10G KV cache pool on SageMaker, producing 89.3% error rate with near-zero GPU utilization. Exercise covers zombie-session triage via GPU memory vs utilization disparity, SageMaker endpoint cycling as immediate mitigation, TGI 2.2.0 --client-idle-timeout fix, iOS app TCP FIN remediation, and a compound CloudWatch alarm targeting the unique high-VRAM/low-compute fingerprint.",
       "tasks": [
         "drill"
       ],
       "items_added": [
-        "TGI Streaming Zombie Sessions — iOS Background TCP Suspension Exhausts KV Cache Pool"
+        "TGI Streaming Zombie Sessions \u2014 iOS Background TCP Suspension Exhausts KV Cache Pool"
       ]
     },
     {
@@ -455,12 +455,24 @@
         "knowledge-base"
       ],
       "items_added": [
-        "OpenTelemetry Collector Exporter Queue Saturation — Selective Long-Span Drop Masks LLM TTFT P99 Regression",
-        "NVIDIA Dynamo Agentic Inference — Full-Stack Optimizations for Multi-Turn Agent Workflows",
+        "OpenTelemetry Collector Exporter Queue Saturation \u2014 Selective Long-Span Drop Masks LLM TTFT P99 Regression",
+        "NVIDIA Dynamo Agentic Inference \u2014 Full-Stack Optimizations for Multi-Turn Agent Workflows",
         "Meta Unified AI Agents for Capacity Efficiency at Hyperscale",
-        "Netflix Unified Data Architecture (UDA) — Model Once, Represent Everywhere",
+        "Netflix Unified Data Architecture (UDA) \u2014 Model Once, Represent Everywhere",
         "Deploying autonomous AI agents on production infrastructure: ownership, safety, and operational model",
         "Capacity Efficiency at Meta: How Unified AI Agents Optimize Performance at Hyperscale (tech talk)"
+      ]
+    },
+    {
+      "timestamp": "2026-06-03T16:14:08Z",
+      "type": "drill",
+      "title": "Daily drill: Datadog High-Cardinality Tag Quota Breach \u2014 user_id on ML Inference Metrics Silences All SLO Monitors",
+      "summary": "Added a Hard-difficulty metrics observability drill: an engineer adds user_id as a DogStatsd tag to ml.inference.request.latency_ms, creating 8.2M unique timeseries (802% of Datadog quota). All 14 SLO monitors enter silent 'No Data' state; 35 minutes later a real vLLM 8.3% 503 error spike goes undetected until a customer Slack message. Exercise covers cardinality triage via Custom Metrics Summary API, hot-tag removal deploy, on_missing_data monitor fix, Metrics without Limits allow-listing, and a PR linter to block high-cardinality tags.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "Datadog High-Cardinality Tag Quota Breach \u2014 user_id on ML Inference Metrics Silences All SLO Monitors for 74 Minutes"
       ]
     }
   ]
