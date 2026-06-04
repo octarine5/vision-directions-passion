@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-06-03"
+    "last_updated": "2026-06-04"
   },
   "entries": [
     {
@@ -461,6 +461,18 @@
         "Netflix Unified Data Architecture (UDA) \u2014 Model Once, Represent Everywhere",
         "Deploying autonomous AI agents on production infrastructure: ownership, safety, and operational model",
         "Capacity Efficiency at Meta: How Unified AI Agents Optimize Performance at Hyperscale (tech talk)"
+      ]
+    },
+    {
+      "timestamp": "2026-06-04T08:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: Azure Event Hubs Partition Ownership Thundering Herd — HPA Oscillation Triggers Blob Storage Throttle",
+      "summary": "Added a Hard-difficulty distributed-systems hotfix drill: an HPA misconfiguration (stabilizationWindowSeconds: 0) on an Azure AKS feature ingestion service triggers 7 rapid scale oscillations (8→48→8 pods), causing 40 simultaneous pod terminations that release all Event Hubs partition ownership blobs at once. The 8 surviving pods race on ETag-based blob claims, generating 31,200 blob requests/min (78× baseline), saturating Azure Blob Storage throughput limits, and halting all consumer progress for 22 minutes while 4.2M events accumulate. Exercise covers ownership storm triage via Azure Monitor throttle metrics, HPA freeze as immediate mitigation, BlobCheckpointStore convergence monitoring, and prevention via HPA scale-in stabilization window and TableCheckpointStore migration.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "Azure Event Hubs Partition Ownership Thundering Herd — HPA Oscillation Triggers Blob Storage Throttle, Halts ML Feature Ingestion 22 Minutes"
       ]
     },
     {
