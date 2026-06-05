@@ -11,7 +11,7 @@
       "TAM",
       "Tags"
     ],
-    "last_updated": "2026-05-29"
+    "last_updated": "2026-06-05"
   },
   "sections": [
     {
@@ -655,6 +655,28 @@
             "biz"
           ],
           "added": "2026-05-29"
+        },
+        {
+          "problem": "Frontier AI lab public market debut & post-IPO enterprise pricing power",
+          "enterprise": "Anthropic (confidential S-1 filed June 1, 2026; $965B valuation post $65B Series H led by Altimeter/Sequoia/Dragoneer; $47B ARR run-rate May 2026 — up from $30B in April; first profitable quarter projected Q2 2026; Nasdaq listing targeting Oct 2026; 72 open enterprise sales roles vs 67 research roles as of filing date)",
+          "market_fit": "Anthropic's June 2026 IPO filing is the defining enterprise signal of the AI era: a frontier model lab converting research momentum into public-market permanence at near-$1T valuation. Key enterprise implications: (1) Public equity markets now validate AI model platforms as durable utility infrastructure — analogous to Oracle/SAP maturing from 'experimental tools' into enterprise budget line items. (2) Once public, Anthropic faces quarterly earnings pressure to expand enterprise pricing and reduce promotional API discounts — companies with >$5M annual Claude API spend face 3-5 year contractual lock-in hardening before pricing power materializes. (3) The S-1 reveals a commercial pivot: more enterprise sales roles than AI research roles for the first time, signaling model API revenue now drives strategy. (4) Anthropic is expected to beat OpenAI to IPO by 6-12 months — the 'first mover' narrative with institutional investors will entrench Claude as the default enterprise LLM across Fortune 500 procurement. (5) $47B ARR at <3 years of revenue makes Anthropic the fastest-growing enterprise software company in history, eclipsing even Salesforce and AWS at equivalent stages.",
+          "tam": "$200B+",
+          "tags": [
+            "ml",
+            "biz"
+          ],
+          "added": "2026-06-05"
+        },
+        {
+          "problem": "EU-sovereign AI compute infrastructure (non-US GPU hyperscalers)",
+          "enterprise": "Nscale ($2B Series C, $14.6B valuation, Mar 2026; NVIDIA + Dell + Nokia + Citadel + Jane Street invested; Nick Clegg + Sheryl Sandberg board; UK/Norway HQ), Gcore (Luxembourg, EU AI Act compliant GPU cloud), Hetzner Online (Germany)",
+          "market_fit": "Nscale's $2B Series C (March 9, 2026) — the largest Series C in European history, a 4× valuation jump from Series B — creates a distinct category: EU-domiciled GPU hyperscalers governed under EU law, separate from US hyperscalers' EU regions. GDPR Article 44's data transfer prohibition, the EU AI Act's data residency mandates for high-risk AI systems, and NIS2 critical infrastructure requirements create a structural barrier: European banks, hospitals, defense contractors, and government agencies cannot legally process regulated data on entities subject to US CLOUD Act jurisdiction. AWS eu-central-1 or Azure WestEurope don't solve this — the entity controlling the data must also be EU-governed. Nscale's investor composition (NVIDIA + Dell + Nokia for silicon + switching + enterprise distribution) signals this is a full-stack infrastructure play, not a GPU reseller. Nick Clegg (ex-Meta VP Global Affairs, ex-EU Deputy PM) and Sheryl Sandberg on the board signal EU regulatory fluency as a structural product feature, not an afterthought. A $14.6B valuation at Series C projects a $50B+ exit, suggesting the EU-sovereign AI cloud becomes a standalone hyperscaler category by 2028 — distinct from national compute reserves (government-funded, non-commercial) and US GPU-native cloud (Lambda, CoreWeave).",
+          "tam": "$25B",
+          "tags": [
+            "infra",
+            "biz"
+          ],
+          "added": "2026-06-05"
         }
       ]
     }

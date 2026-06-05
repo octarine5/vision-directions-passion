@@ -276,6 +276,20 @@
       "stage": "Series A ($450M, $1.7B valuation, Mar 2026)",
       "signal": "watch",
       "notes": "Exited stealth March 2026 with $450M Series A (Khosla, Mayfield, Temasek, John Doerr) to build FutureVision -- a Direct Video Action (DVA) model pre-trained on hundreds of millions of internet videos. Rather than teleoperated trajectory data, Rhoda trains on video to learn physics, motion, and physical interaction priors, then post-trains on small amounts of robot-specific data. The DVA model continuously observes environment, predicts future states as video, converts predictions to robot actions every few hundred milliseconds in a closed loop. Key differentiation: generalization across novel environments without re-training. Watch: DVA architecture could be the foundation model approach that finally bridges the robotics reality gap."
+    },
+    {
+      "name": "Nscale",
+      "domain": "EU-Sovereign AI Compute Infrastructure (GPU Hyperscaler)",
+      "stage": "Series C ($2B, $14.6B valuation, Mar 2026)",
+      "signal": "hot",
+      "notes": "Europe's largest-ever Series C (March 9, 2026), 4× valuation jump from Series B. UK/Norway-headquartered AI compute hyperscaler backed by NVIDIA, Dell, Nokia, Citadel, Jane Street, and Point72. Nick Clegg (ex-Meta VP Global Affairs, ex-EU Deputy PM) and Sheryl Sandberg join board — EU regulatory fluency as a core product differentiator. Targets regulated EU enterprises (banks, hospitals, defense) blocked from US-CLOUD-Act-governed hyperscalers by GDPR Art. 44, EU AI Act, and NIS2. Distinct from US GPU clouds (Lambda, CoreWeave) and national sovereign compute (government clusters). NVIDIA strategic investment signals Nscale is a key non-US distribution channel for Blackwell hardware."
+    },
+    {
+      "name": "Anthropic",
+      "domain": "Frontier AI Model Platform (Claude API / Enterprise AI)",
+      "stage": "Pre-IPO (Confidential S-1 filed June 1, 2026; $965B valuation post $65B Series H; Nasdaq Oct 2026 target)",
+      "signal": "hot",
+      "notes": "Confidentially filed S-1 with SEC on June 1, 2026 after closing $65B Series H led by Altimeter, Sequoia, Dragoneer. $965B post-money valuation — world's most valuable private AI company, eclipsing OpenAI's $852B for the first time. $47B ARR run-rate as of May 2026 (up from $30B in April 2026); first profitable quarter projected Q2 2026. Oct 2026 Nasdaq listing targeting $1T+ debut valuation. Enterprise signal: 72 open sales roles vs 67 research roles in the S-1 — Claude is now primarily a commercial enterprise utility. Expected to beat OpenAI to public markets by 6-12 months. Key risk for enterprise CTOs: once public, pricing power hardens — companies with >$5M annual Claude API spend face accelerating lock-in."
     }
   ],
   "careerMilestones": [

@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-06-04"
+    "last_updated": "2026-06-05"
   },
   "entries": [
     {
@@ -473,6 +473,23 @@
       ],
       "items_added": [
         "Azure Event Hubs Partition Ownership Thundering Herd — HPA Oscillation Triggers Blob Storage Throttle, Halts ML Feature Ingestion 22 Minutes"
+      ]
+    },
+    {
+      "timestamp": "2026-06-05T14:00:00Z",
+      "type": "market-scan",
+      "title": "Friday update: drill + market signal scan",
+      "summary": "Added a Hard ML Serving hotfix drill: vLLM 0.6.3 disaggregated prefill enters a circular NIXL KV transfer deadlock after KEDA scales the decode pool from 6\u21924 pods and an enterprise batch job floods with 28K-token requests \u2014 NIXL buffer pool exhausts in 9 minutes, both prefill and decode schedulers stall, error_rate stays 0% while generation_tokens_per_second drops to 0.0 for 17 minutes ($420K impact). Market scan: Anthropic confidential S-1 filed June 1, 2026 ($965B/$47B ARR/profitable Q2 projected); Nscale $2B Series C EU sovereign GPU hyperscaler ($14.6B, NVIDIA-backed); added 2 new business problem entries and 2 new watchlist entries (Nscale, Anthropic).",
+      "tasks": [
+        "drill",
+        "market-scan"
+      ],
+      "items_added": [
+        "vLLM Disaggregated Prefill \u2014 NIXL KV Transfer Deadlock After KEDA Decode Scale-Down Halts Generation for 17 Minutes",
+        "Frontier AI lab public market debut & post-IPO enterprise pricing power",
+        "EU-sovereign AI compute infrastructure (non-US GPU hyperscalers)",
+        "Nscale (watchlist)",
+        "Anthropic (watchlist)"
       ]
     },
     {
