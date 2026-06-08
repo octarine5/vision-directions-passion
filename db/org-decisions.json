@@ -3,133 +3,569 @@
     "category": "org-decisions",
     "display_name": "Org & Lifecycle",
     "layout": "table",
-    "columns": ["#", "Decision / Topic", "Key Considerations", "Phase"],
-    "last_updated": "2026-06-01"
+    "columns": [
+      "#",
+      "Decision / Topic",
+      "Key Considerations",
+      "Phase"
+    ],
+    "last_updated": "2026-06-08"
   },
   "sections": [
     {
       "title": "Project Ideation & Discovery (Phase 0)",
       "items": [
-        {"topic": "Problem framing & scoping", "considerations": "User pain severity, frequency, willingness to pay", "phase": "Discovery", "added": "2026-04-07"},
-        {"topic": "Build vs buy vs partner", "considerations": "Core competency, time-to-market, TCO, vendor risk", "phase": "Discovery", "added": "2026-04-07"},
-        {"topic": "Market sizing (TAM/SAM/SOM)", "considerations": "Top-down vs bottom-up, growth assumptions", "phase": "Discovery", "added": "2026-04-07"},
-        {"topic": "Competitive landscape mapping", "considerations": "Direct/indirect competitors, substitutes, moats", "phase": "Discovery", "added": "2026-04-07"},
-        {"topic": "Customer discovery interviews", "considerations": "Jobs-to-be-done, unmet needs, willingness to switch", "phase": "Discovery", "added": "2026-04-07"},
-        {"topic": "Technical feasibility spike", "considerations": "Prototype key risk, validate assumptions early", "phase": "Discovery", "added": "2026-04-07"},
-        {"topic": "Opportunity cost analysis", "considerations": "What won't you build? Resource allocation tradeoffs", "phase": "Discovery", "added": "2026-04-07"},
-        {"topic": "Stakeholder mapping", "considerations": "Who has budget, who blocks, who champions", "phase": "Discovery", "added": "2026-04-07"}
+        {
+          "topic": "Problem framing & scoping",
+          "considerations": "User pain severity, frequency, willingness to pay",
+          "phase": "Discovery",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Build vs buy vs partner",
+          "considerations": "Core competency, time-to-market, TCO, vendor risk",
+          "phase": "Discovery",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Market sizing (TAM/SAM/SOM)",
+          "considerations": "Top-down vs bottom-up, growth assumptions",
+          "phase": "Discovery",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Competitive landscape mapping",
+          "considerations": "Direct/indirect competitors, substitutes, moats",
+          "phase": "Discovery",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Customer discovery interviews",
+          "considerations": "Jobs-to-be-done, unmet needs, willingness to switch",
+          "phase": "Discovery",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Technical feasibility spike",
+          "considerations": "Prototype key risk, validate assumptions early",
+          "phase": "Discovery",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Opportunity cost analysis",
+          "considerations": "What won't you build? Resource allocation tradeoffs",
+          "phase": "Discovery",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Stakeholder mapping",
+          "considerations": "Who has budget, who blocks, who champions",
+          "phase": "Discovery",
+          "added": "2026-04-07"
+        }
       ]
     },
     {
       "title": "Planning & Design (Phase 1)",
       "items": [
-        {"topic": "RFC / design doc process", "considerations": "When to write, who reviews, approval gates", "phase": "Planning", "added": "2026-04-07"},
-        {"topic": "Architecture decision records (ADRs)", "considerations": "Document trade-offs, revisit conditions, alternatives rejected", "phase": "Planning", "added": "2026-04-07"},
-        {"topic": "Team staffing & composition", "considerations": "Skills needed, embedded vs matrix, contractor vs FTE", "phase": "Planning", "added": "2026-04-07"},
-        {"topic": "Roadmap prioritization framework", "considerations": "RICE, ICE, weighted scoring, stack ranking", "phase": "Planning", "added": "2026-04-07"},
-        {"topic": "OKR / goal setting", "considerations": "Outcome vs output, leading vs lagging metrics", "phase": "Planning", "added": "2026-04-07"},
-        {"topic": "Dependency management", "considerations": "Cross-team blockers, critical path, de-risking", "phase": "Planning", "added": "2026-04-07"},
-        {"topic": "Scope negotiation", "considerations": "MVP definition, must-have vs nice-to-have, time-boxing", "phase": "Planning", "added": "2026-04-07"},
-        {"topic": "Risk register", "considerations": "Technical, organizational, market, regulatory risks", "phase": "Planning", "added": "2026-04-07"},
-        {"topic": "Migration strategy selection", "considerations": "Big bang vs strangler fig vs parallel run", "phase": "Planning", "added": "2026-04-07"},
-        {"topic": "API contract design", "considerations": "Backward compatibility, versioning, schema evolution", "phase": "Planning", "added": "2026-04-07"}
+        {
+          "topic": "RFC / design doc process",
+          "considerations": "When to write, who reviews, approval gates",
+          "phase": "Planning",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Architecture decision records (ADRs)",
+          "considerations": "Document trade-offs, revisit conditions, alternatives rejected",
+          "phase": "Planning",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Team staffing & composition",
+          "considerations": "Skills needed, embedded vs matrix, contractor vs FTE",
+          "phase": "Planning",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Roadmap prioritization framework",
+          "considerations": "RICE, ICE, weighted scoring, stack ranking",
+          "phase": "Planning",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "OKR / goal setting",
+          "considerations": "Outcome vs output, leading vs lagging metrics",
+          "phase": "Planning",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Dependency management",
+          "considerations": "Cross-team blockers, critical path, de-risking",
+          "phase": "Planning",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Scope negotiation",
+          "considerations": "MVP definition, must-have vs nice-to-have, time-boxing",
+          "phase": "Planning",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Risk register",
+          "considerations": "Technical, organizational, market, regulatory risks",
+          "phase": "Planning",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Migration strategy selection",
+          "considerations": "Big bang vs strangler fig vs parallel run",
+          "phase": "Planning",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "API contract design",
+          "considerations": "Backward compatibility, versioning, schema evolution",
+          "phase": "Planning",
+          "added": "2026-04-07"
+        }
       ]
     },
     {
       "title": "Execution & Development (Phase 2)",
       "items": [
-        {"topic": "Sprint vs kanban vs shape-up", "considerations": "Team maturity, work type, predictability needs", "phase": "Execution", "added": "2026-04-07"},
-        {"topic": "Code review culture", "considerations": "Review speed, thoroughness, mentoring vs gatekeeping", "phase": "Execution", "added": "2026-04-07"},
-        {"topic": "Branch strategy (trunk-based vs gitflow)", "considerations": "Release cadence, team size, integration pain", "phase": "Execution", "added": "2026-04-07"},
-        {"topic": "Testing strategy", "considerations": "Test pyramid, integration vs unit, flaky test policy", "phase": "Execution", "added": "2026-04-07"},
-        {"topic": "Tech debt budgeting", "considerations": "20% rule, debt sprints, tracking velocity impact", "phase": "Execution", "added": "2026-04-07"},
-        {"topic": "Pair programming / mob programming", "considerations": "When it helps vs overhead, knowledge sharing", "phase": "Execution", "added": "2026-04-07"},
-        {"topic": "Microservice boundaries", "considerations": "Domain-driven design, service granularity, data ownership", "phase": "Execution", "added": "2026-04-07"},
-        {"topic": "Monorepo vs polyrepo", "considerations": "Build times, dependency management, team autonomy", "phase": "Execution", "added": "2026-04-07"},
-        {"topic": "Database schema evolution", "considerations": "Migrations, backward compat, expand-contract pattern", "phase": "Execution", "added": "2026-04-07"},
-        {"topic": "Feature flag lifecycle", "considerations": "Rollout strategy, cleanup, flag debt, kill switches", "phase": "Execution", "added": "2026-04-07"}
+        {
+          "topic": "Sprint vs kanban vs shape-up",
+          "considerations": "Team maturity, work type, predictability needs",
+          "phase": "Execution",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Code review culture",
+          "considerations": "Review speed, thoroughness, mentoring vs gatekeeping",
+          "phase": "Execution",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Branch strategy (trunk-based vs gitflow)",
+          "considerations": "Release cadence, team size, integration pain",
+          "phase": "Execution",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Testing strategy",
+          "considerations": "Test pyramid, integration vs unit, flaky test policy",
+          "phase": "Execution",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Tech debt budgeting",
+          "considerations": "20% rule, debt sprints, tracking velocity impact",
+          "phase": "Execution",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Pair programming / mob programming",
+          "considerations": "When it helps vs overhead, knowledge sharing",
+          "phase": "Execution",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Microservice boundaries",
+          "considerations": "Domain-driven design, service granularity, data ownership",
+          "phase": "Execution",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Monorepo vs polyrepo",
+          "considerations": "Build times, dependency management, team autonomy",
+          "phase": "Execution",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Database schema evolution",
+          "considerations": "Migrations, backward compat, expand-contract pattern",
+          "phase": "Execution",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Feature flag lifecycle",
+          "considerations": "Rollout strategy, cleanup, flag debt, kill switches",
+          "phase": "Execution",
+          "added": "2026-04-07"
+        }
       ]
     },
     {
       "title": "Launch & Rollout (Phase 3)",
       "items": [
-        {"topic": "Launch readiness review", "considerations": "SLO defined, runbook exists, rollback plan tested", "phase": "Launch", "added": "2026-04-07"},
-        {"topic": "Canary vs blue-green vs rolling deploy", "considerations": "Risk tolerance, rollback speed, stateful services", "phase": "Launch", "added": "2026-04-07"},
-        {"topic": "Gradual rollout strategy", "considerations": "1% -> 10% -> 50% -> 100%, metrics to watch", "phase": "Launch", "added": "2026-04-07"},
-        {"topic": "Launch communication plan", "considerations": "Internal stakeholders, customers, docs, changelog", "phase": "Launch", "added": "2026-04-07"},
-        {"topic": "Data migration execution", "considerations": "Backfill, dual-write, validation, cutover", "phase": "Launch", "added": "2026-04-07"},
-        {"topic": "Backward compatibility period", "considerations": "Deprecation timeline, customer migration support", "phase": "Launch", "added": "2026-04-07"},
-        {"topic": "Performance benchmarking", "considerations": "Load testing, soak testing, capacity planning", "phase": "Launch", "added": "2026-04-07"},
-        {"topic": "Security review & pen testing", "considerations": "Threat model, OWASP, auth flows, data classification", "phase": "Launch", "added": "2026-04-07"}
+        {
+          "topic": "Launch readiness review",
+          "considerations": "SLO defined, runbook exists, rollback plan tested",
+          "phase": "Launch",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Canary vs blue-green vs rolling deploy",
+          "considerations": "Risk tolerance, rollback speed, stateful services",
+          "phase": "Launch",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Gradual rollout strategy",
+          "considerations": "1% -> 10% -> 50% -> 100%, metrics to watch",
+          "phase": "Launch",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Launch communication plan",
+          "considerations": "Internal stakeholders, customers, docs, changelog",
+          "phase": "Launch",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Data migration execution",
+          "considerations": "Backfill, dual-write, validation, cutover",
+          "phase": "Launch",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Backward compatibility period",
+          "considerations": "Deprecation timeline, customer migration support",
+          "phase": "Launch",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Performance benchmarking",
+          "considerations": "Load testing, soak testing, capacity planning",
+          "phase": "Launch",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Security review & pen testing",
+          "considerations": "Threat model, OWASP, auth flows, data classification",
+          "phase": "Launch",
+          "added": "2026-04-07"
+        }
       ]
     },
     {
       "title": "Operate & Scale (Phase 4)",
       "items": [
-        {"topic": "SLO/SLA definition", "considerations": "Which metrics, error budgets, consequences", "phase": "Operate", "added": "2026-04-07"},
-        {"topic": "On-call structure", "considerations": "Rotation, escalation, compensation, burnout prevention", "phase": "Operate", "added": "2026-04-07"},
-        {"topic": "Incident management process", "considerations": "Severity levels, communication, post-mortems, action items", "phase": "Operate", "added": "2026-04-07"},
-        {"topic": "Runbook creation & maintenance", "considerations": "When to automate vs document, freshness", "phase": "Operate", "added": "2026-04-07"},
-        {"topic": "Capacity planning & autoscaling", "considerations": "Headroom, burst capacity, cost vs availability", "phase": "Operate", "added": "2026-04-07"},
-        {"topic": "Cost optimization cycles", "considerations": "Reserved instances, spot, right-sizing, FinOps", "phase": "Operate", "added": "2026-04-07"},
-        {"topic": "Observability maturity", "considerations": "Metrics -> logs -> traces -> profiling -> RCA automation", "phase": "Operate", "added": "2026-04-07"},
-        {"topic": "Disaster recovery testing", "considerations": "Game days, failover drills, RTO/RPO validation", "phase": "Operate", "added": "2026-04-07"},
-        {"topic": "Dependency upgrades & patching", "considerations": "Security patches, breaking changes, automated upgrades", "phase": "Operate", "added": "2026-04-07"},
-        {"topic": "AI agent production readiness checklist", "considerations": "Define SLOs for agents (task success rate, latency, cost/call); runbooks for agent failure modes (tool errors, context overflow, hallucination spikes); incident response for autonomous actions gone wrong; shadow mode before live deployment; gradual rollout with automated evals as gate", "phase": "Operate", "added": "2026-04-13"}
+        {
+          "topic": "SLO/SLA definition",
+          "considerations": "Which metrics, error budgets, consequences",
+          "phase": "Operate",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "On-call structure",
+          "considerations": "Rotation, escalation, compensation, burnout prevention",
+          "phase": "Operate",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Incident management process",
+          "considerations": "Severity levels, communication, post-mortems, action items",
+          "phase": "Operate",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Runbook creation & maintenance",
+          "considerations": "When to automate vs document, freshness",
+          "phase": "Operate",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Capacity planning & autoscaling",
+          "considerations": "Headroom, burst capacity, cost vs availability",
+          "phase": "Operate",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Cost optimization cycles",
+          "considerations": "Reserved instances, spot, right-sizing, FinOps",
+          "phase": "Operate",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Observability maturity",
+          "considerations": "Metrics -> logs -> traces -> profiling -> RCA automation",
+          "phase": "Operate",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Disaster recovery testing",
+          "considerations": "Game days, failover drills, RTO/RPO validation",
+          "phase": "Operate",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Dependency upgrades & patching",
+          "considerations": "Security patches, breaking changes, automated upgrades",
+          "phase": "Operate",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "AI agent production readiness checklist",
+          "considerations": "Define SLOs for agents (task success rate, latency, cost/call); runbooks for agent failure modes (tool errors, context overflow, hallucination spikes); incident response for autonomous actions gone wrong; shadow mode before live deployment; gradual rollout with automated evals as gate",
+          "phase": "Operate",
+          "added": "2026-04-13"
+        }
       ]
     },
     {
       "title": "Growth & Maturity (Phase 5)",
       "items": [
-        {"topic": "Platform team formation", "considerations": "When to centralize, internal product mindset, SLAs", "phase": "Growth", "added": "2026-04-07"},
-        {"topic": "Scaling team beyond 8-10", "considerations": "Two-pizza teams, communication overhead, sub-teams", "phase": "Growth", "added": "2026-04-07"},
-        {"topic": "Knowledge management", "considerations": "Wiki, design docs, tribal knowledge capture", "phase": "Growth", "added": "2026-04-07"},
-        {"topic": "Engineering metrics & health", "considerations": "DORA metrics, velocity, quality, developer satisfaction", "phase": "Growth", "added": "2026-04-07"},
-        {"topic": "Technical interview process", "considerations": "Bar calibration, interviewer training, structured evaluation", "phase": "Growth", "added": "2026-04-07"},
-        {"topic": "Architecture review board", "considerations": "When needed, composition, decision authority", "phase": "Growth", "added": "2026-04-07"},
-        {"topic": "Engineering brand & recruiting", "considerations": "Blog, talks, open-source, referral culture", "phase": "Growth", "added": "2026-04-07"},
-        {"topic": "Mentorship & sponsorship programs", "considerations": "1:1 pairing, skip-levels, career conversations", "phase": "Growth", "added": "2026-04-07"},
-        {"topic": "Reorg & team restructuring", "considerations": "Conway's law, minimize blast radius, communication", "phase": "Growth", "added": "2026-04-07"},
-        {"topic": "IC vs manager career track", "considerations": "Dual ladder, expectations, switching between tracks", "phase": "Growth", "added": "2026-04-07"}
+        {
+          "topic": "Platform team formation",
+          "considerations": "When to centralize, internal product mindset, SLAs",
+          "phase": "Growth",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Scaling team beyond 8-10",
+          "considerations": "Two-pizza teams, communication overhead, sub-teams",
+          "phase": "Growth",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Knowledge management",
+          "considerations": "Wiki, design docs, tribal knowledge capture",
+          "phase": "Growth",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Engineering metrics & health",
+          "considerations": "DORA metrics, velocity, quality, developer satisfaction",
+          "phase": "Growth",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Technical interview process",
+          "considerations": "Bar calibration, interviewer training, structured evaluation",
+          "phase": "Growth",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Architecture review board",
+          "considerations": "When needed, composition, decision authority",
+          "phase": "Growth",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Engineering brand & recruiting",
+          "considerations": "Blog, talks, open-source, referral culture",
+          "phase": "Growth",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Mentorship & sponsorship programs",
+          "considerations": "1:1 pairing, skip-levels, career conversations",
+          "phase": "Growth",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Reorg & team restructuring",
+          "considerations": "Conway's law, minimize blast radius, communication",
+          "phase": "Growth",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "IC vs manager career track",
+          "considerations": "Dual ladder, expectations, switching between tracks",
+          "phase": "Growth",
+          "added": "2026-04-07"
+        }
       ]
     },
     {
       "title": "Sunset & Transition (Phase 6)",
       "items": [
-        {"topic": "Deprecation strategy", "considerations": "Timeline, customer communication, migration support", "phase": "Sunset", "added": "2026-04-07"},
-        {"topic": "Data retention & archival", "considerations": "Compliance, cost, accessibility, legal holds", "phase": "Sunset", "added": "2026-04-07"},
-        {"topic": "Knowledge transfer", "considerations": "Tribal knowledge capture, documentation sprint", "phase": "Sunset", "added": "2026-04-07"},
-        {"topic": "Post-mortem & retrospective", "considerations": "What worked, what didn't, learnings for next project", "phase": "Sunset", "added": "2026-04-07"},
-        {"topic": "Team reallocation", "considerations": "Skills mapping to new projects, retention risk", "phase": "Sunset", "added": "2026-04-07"}
+        {
+          "topic": "Deprecation strategy",
+          "considerations": "Timeline, customer communication, migration support",
+          "phase": "Sunset",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Data retention & archival",
+          "considerations": "Compliance, cost, accessibility, legal holds",
+          "phase": "Sunset",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Knowledge transfer",
+          "considerations": "Tribal knowledge capture, documentation sprint",
+          "phase": "Sunset",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Post-mortem & retrospective",
+          "considerations": "What worked, what didn't, learnings for next project",
+          "phase": "Sunset",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Team reallocation",
+          "considerations": "Skills mapping to new projects, retention risk",
+          "phase": "Sunset",
+          "added": "2026-04-07"
+        }
       ]
     },
     {
       "title": "Cross-Cutting Organizational Decisions",
       "items": [
-        {"topic": "Remote vs hybrid vs in-person", "considerations": "Collaboration needs, talent pool, culture impact", "phase": "Cross-cutting", "added": "2026-04-07"},
-        {"topic": "Vendor / cloud provider selection", "considerations": "Lock-in risk, cost, feature set, support quality", "phase": "Cross-cutting", "added": "2026-04-07"},
-        {"topic": "Open-source vs proprietary", "considerations": "Community, licensing, support, competitive advantage", "phase": "Cross-cutting", "added": "2026-04-07"},
-        {"topic": "Compliance framework adoption", "considerations": "SOC2, HIPAA, GDPR, FedRAMP — which and when", "phase": "Cross-cutting", "added": "2026-04-07"},
-        {"topic": "Budget allocation across teams", "considerations": "Revenue-generating vs cost-center, strategic bets", "phase": "Cross-cutting", "added": "2026-04-07"},
-        {"topic": "Communication tooling & rituals", "considerations": "All-hands, standups, async-first, documentation culture", "phase": "Cross-cutting", "added": "2026-04-07"},
-        {"topic": "Cross-team project governance", "considerations": "RACI, program management, status reporting", "phase": "Cross-cutting", "added": "2026-04-07"},
-        {"topic": "Engineering principles codification", "considerations": "Values like ship fast vs ship right, ownership", "phase": "Cross-cutting", "added": "2026-04-07"},
-        {"topic": "Acquisition integration playbook", "considerations": "Tech stack merge, culture integration, retention", "phase": "Cross-cutting", "added": "2026-04-07"},
-        {"topic": "Internal tooling investment", "considerations": "When to build tools, ROI justification, maintenance cost", "phase": "Cross-cutting", "added": "2026-04-07"},
-        {"topic": "Multi-product architecture", "considerations": "Shared services, bounded contexts, data isolation", "phase": "Cross-cutting", "added": "2026-04-07"},
-        {"topic": "Internationalization strategy", "considerations": "i18n/l10n, data residency, local compliance", "phase": "Cross-cutting", "added": "2026-04-07"},
-        {"topic": "Developer experience (DX) investment", "considerations": "Build times, local dev, toolchain, IDE support", "phase": "Cross-cutting", "added": "2026-04-07"},
-        {"topic": "AI adoption strategy for the org", "considerations": "Training, tools, governance, risk management", "phase": "Cross-cutting", "added": "2026-04-07"},
-        {"topic": "Engineering culture & values", "considerations": "Blameless culture, learning org, psychological safety", "phase": "Cross-cutting", "added": "2026-04-07"},
-        {"topic": "Staff engineers and AI-assisted development", "considerations": "AI tools lower cost of direct implementation; staying hands-on builds technical credibility and faster decision loops; recalibrate when to code vs delegate; avoid over-indexing on pure influence at the expense of technical depth; use AI coding assistants to stay current in the codebase", "phase": "Cross-cutting", "added": "2026-04-13"},
-        {"topic": "AI agent governance and evaluation framework", "considerations": "Eval frameworks for non-deterministic agents; human-in-loop approval gates for high-stakes actions; agent observability (multi-step traces, tool call logs, decision replay); model version governance across agents; safety guardrails and output validators; rollback/kill-switch mechanisms; LLM-as-judge eval at scale", "phase": "Cross-cutting", "added": "2026-04-13"},
-        {"topic": "Agentic engineering as multi-agent SDLC delivery model", "considerations": "Distinct from AI coding assistants: a control plane that orchestrates cross-team workflows through the full SDLC (plan → code → test → review → deploy) using specialized agents with shared memory and a common observability layer; Cisco/LangChain pilot: 93% reduction in time-to-root-cause debugging, 65% reduction in execution time, biggest gains from compressing testing—not code generation; requires careful role definition (planner, coder, tester, reviewer agents) and traceability across agent handoffs; staff+ engineers become orchestration architects rather than individual contributors; non-determinism and hallucination risk amplify across agent chains", "phase": "Cross-cutting", "added": "2026-04-20"},
-        {"topic": "Measuring AI-assisted engineering ROI with productivity benchmarks", "considerations": "DX Q1 2026 report (400+ companies): 93% developer AI adoption, AI-authored code at 26.9% of production code (up from 22% Q4 2025); staff+ engineers heaviest agent users at 63.5% regular usage; Cursor users saw 46% PR throughput increase; key nuance: raw code velocity gains are partially offset by new bottlenecks at validation/QA/oversight — measure end-to-end cycle time, not just code generation speed; non-AI bottlenecks (CI/CD latency, code review, deploy gates) still eclipse AI productivity gains for many teams; onboarding time to first productive PR dropped from 39 to 33 days", "phase": "Cross-cutting", "added": "2026-04-20"},
-        {"topic": "Evaluating AI agents in production: lessons from Amazon agentic systems", "considerations": "Evaluation must cover the full agentic loop (multi-turn, multi-tool), not just single-turn LLM response quality; key failure modes at Amazon: agents hallucinating tool argument schemas, ignoring context window limits causing mid-task truncation, flawed retry logic triggering duplicate side-effectful actions, and poor error recovery leading to infinite loops; recommended metrics: task completion rate (binary pass/fail on the end-goal), step efficiency (actual steps vs optimal steps), tool-call accuracy (correct args + correct tool selected), and human escalation rate; establish quality baselines before adding capabilities — agents that 'feel smarter' can have lower task completion rates due to overconfidence; shadow mode deployment + A/B testing are mandatory gates before raising agent autonomy; human-in-loop checkpoints should gate on action reversibility (file delete vs file read) not on action type; regression suite must include adversarial inputs: ambiguous instructions, missing tools, partial context, conflicting tool outputs", "phase": "Cross-cutting", "added": "2026-04-27"},
-        {"topic": "Staff+ engineers as the key to enterprise AI adoption", "considerations": "Staff+ engineers are uniquely positioned as organizational glue between leadership AI strategy and team-level execution; key to success: seed 2-3 teams with strong testing discipline and willing early champions with small AI pilots that have measurable impact, then scale the pattern rather than mandating broad rollout; role shifts from individual coding to ensuring the right decisions are made across teams — AI tools lower the cost of direct implementation, so staying hands-on builds credibility while freeing capacity for cross-team leverage; verification and validation are the new bottlenecks — execution is no longer the constraint; decision rights must be explicit because agent systems create cost and risk quickly at scale; AI champions who can show measurable impact accelerate adoption more than top-down mandates; staff+ engineers run the pilot, document the repeatable playbook, then transfer ownership to teams while moving to the next leverage point", "phase": "Cross-cutting", "added": "2026-05-18"},
-        {"topic": "Platform engineering as governance and control plane for agentic AI systems", "considerations": "KubeCon EU 2026 (Amsterdam, March 2026) codified platform engineering's role shift from 'golden path provisioning' for human developers to governance infrastructure for AI agents — teams that build platforms capable of governing both humans and agents have a structural advantage entering the agentic era; platform teams now responsible for: agent isolation boundaries (prevent agents from accessing cross-tenant data), per-workflow cost caps (agents can spin up expensive GPU jobs autonomously without human approval), audit trails for all agentic actions (required for compliance in healthcare, finance, legal), deployment gates for model/prompt/tool-schema changes, and kill-switch mechanisms when agents misbehave; CNCF Sandbox admissions at KubeCon EU 2026 (llm-d, KAI Scheduler for GPU-aware scheduling) signal the inference and agentic layer is becoming core Kubernetes infrastructure; Google announced Kubernetes AI Conformance Program covering training, inference, and agentic workloads — creating a standard contract across cloud providers for AI workloads; internal developer platforms must evolve to enforce not just compute provisioning but behavioral policy for autonomous systems; platform teams without AI governance capabilities will become bottlenecks as agentic systems proliferate", "phase": "Cross-cutting", "added": "2026-05-25"},
-        {"topic": "EU Cyber Resilience Act (CRA) compliance for engineering teams building software products", "considerations": "EU CRA took effect November 2024 and becomes fully enforceable September 2026 for all software products with digital elements sold or distributed in the EU; key obligations: (1) CE marking on products with security claims; (2) machine-readable SBOM (Software Bill of Materials in SPDX or CycloneDX format) for all dependencies in the final product; (3) vulnerability disclosure within 24h of discovery to ENISA (EU cybersecurity agency); (4) 5-year security update and patch commitment after product launch; KubeCon EU 2026 made CRA compliance a central theme — OSS engineering teams contributing to products with 'economic activity' must now treat SBOM generation, vulnerability handling, and coordinated disclosure as non-optional engineering practices; immediate actions for engineering teams: integrate Syft or Trivy into CI pipelines for automatic SBOM generation on every build, set up VEX (Vulnerability Exploitability eXchange) pipelines to document why CVEs don't apply, establish a coordinated vulnerability disclosure email address and process, audit all direct dependencies for active maintenance status; staff+ engineers need to own the conversation with legal on which products trigger CRA obligations and ensure CRA compliance is baked into the engineering roadmap before the September 2026 enforcement deadline", "phase": "Cross-cutting", "added": "2026-05-25"},
-        {"topic": "Deploying autonomous AI agents on production infrastructure: ownership, safety, and operational model", "considerations": "Meta's Capacity Efficiency platform (April 2026) demonstrates a new operational mode: AI agents that autonomously generate and land pull requests on production infrastructure code — not just recommend changes but execute them; which action classes require human approval vs autonomous execution (code changes to config/infra vs data pipelines vs serving logic); safety boundaries: define an action graph with pre-approved verbs (profiling queries, flamegraph analysis, lint fixes) vs review-required verbs (production config changes, memory allocation tuning); auditability: every agent action must be logged with the specific skill invoked, tool call history, and human-readable rationale before the PR is created; skill versioning: encoded domain expertise in Skills must be version-controlled and tested like production code — a Skills regression can land hundreds of incorrect optimizations before detection; error budget for autonomous actions: track autonomous PR revert rate as a proxy for agent quality; governance: who owns the MCP tool schema when tools span multiple teams; staff+ engineers shift from doing optimization work to building the agent platform that does it — the leverage multiplier is 100x but the responsibility scope is 100x larger", "phase": "Cross-cutting", "added": "2026-06-01"}
+        {
+          "topic": "Remote vs hybrid vs in-person",
+          "considerations": "Collaboration needs, talent pool, culture impact",
+          "phase": "Cross-cutting",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Vendor / cloud provider selection",
+          "considerations": "Lock-in risk, cost, feature set, support quality",
+          "phase": "Cross-cutting",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Open-source vs proprietary",
+          "considerations": "Community, licensing, support, competitive advantage",
+          "phase": "Cross-cutting",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Compliance framework adoption",
+          "considerations": "SOC2, HIPAA, GDPR, FedRAMP — which and when",
+          "phase": "Cross-cutting",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Budget allocation across teams",
+          "considerations": "Revenue-generating vs cost-center, strategic bets",
+          "phase": "Cross-cutting",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Communication tooling & rituals",
+          "considerations": "All-hands, standups, async-first, documentation culture",
+          "phase": "Cross-cutting",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Cross-team project governance",
+          "considerations": "RACI, program management, status reporting",
+          "phase": "Cross-cutting",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Engineering principles codification",
+          "considerations": "Values like ship fast vs ship right, ownership",
+          "phase": "Cross-cutting",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Acquisition integration playbook",
+          "considerations": "Tech stack merge, culture integration, retention",
+          "phase": "Cross-cutting",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Internal tooling investment",
+          "considerations": "When to build tools, ROI justification, maintenance cost",
+          "phase": "Cross-cutting",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Multi-product architecture",
+          "considerations": "Shared services, bounded contexts, data isolation",
+          "phase": "Cross-cutting",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Internationalization strategy",
+          "considerations": "i18n/l10n, data residency, local compliance",
+          "phase": "Cross-cutting",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Developer experience (DX) investment",
+          "considerations": "Build times, local dev, toolchain, IDE support",
+          "phase": "Cross-cutting",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "AI adoption strategy for the org",
+          "considerations": "Training, tools, governance, risk management",
+          "phase": "Cross-cutting",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Engineering culture & values",
+          "considerations": "Blameless culture, learning org, psychological safety",
+          "phase": "Cross-cutting",
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Staff engineers and AI-assisted development",
+          "considerations": "AI tools lower cost of direct implementation; staying hands-on builds technical credibility and faster decision loops; recalibrate when to code vs delegate; avoid over-indexing on pure influence at the expense of technical depth; use AI coding assistants to stay current in the codebase",
+          "phase": "Cross-cutting",
+          "added": "2026-04-13"
+        },
+        {
+          "topic": "AI agent governance and evaluation framework",
+          "considerations": "Eval frameworks for non-deterministic agents; human-in-loop approval gates for high-stakes actions; agent observability (multi-step traces, tool call logs, decision replay); model version governance across agents; safety guardrails and output validators; rollback/kill-switch mechanisms; LLM-as-judge eval at scale",
+          "phase": "Cross-cutting",
+          "added": "2026-04-13"
+        },
+        {
+          "topic": "Agentic engineering as multi-agent SDLC delivery model",
+          "considerations": "Distinct from AI coding assistants: a control plane that orchestrates cross-team workflows through the full SDLC (plan → code → test → review → deploy) using specialized agents with shared memory and a common observability layer; Cisco/LangChain pilot: 93% reduction in time-to-root-cause debugging, 65% reduction in execution time, biggest gains from compressing testing—not code generation; requires careful role definition (planner, coder, tester, reviewer agents) and traceability across agent handoffs; staff+ engineers become orchestration architects rather than individual contributors; non-determinism and hallucination risk amplify across agent chains",
+          "phase": "Cross-cutting",
+          "added": "2026-04-20"
+        },
+        {
+          "topic": "Measuring AI-assisted engineering ROI with productivity benchmarks",
+          "considerations": "DX Q1 2026 report (400+ companies): 93% developer AI adoption, AI-authored code at 26.9% of production code (up from 22% Q4 2025); staff+ engineers heaviest agent users at 63.5% regular usage; Cursor users saw 46% PR throughput increase; key nuance: raw code velocity gains are partially offset by new bottlenecks at validation/QA/oversight — measure end-to-end cycle time, not just code generation speed; non-AI bottlenecks (CI/CD latency, code review, deploy gates) still eclipse AI productivity gains for many teams; onboarding time to first productive PR dropped from 39 to 33 days",
+          "phase": "Cross-cutting",
+          "added": "2026-04-20"
+        },
+        {
+          "topic": "Evaluating AI agents in production: lessons from Amazon agentic systems",
+          "considerations": "Evaluation must cover the full agentic loop (multi-turn, multi-tool), not just single-turn LLM response quality; key failure modes at Amazon: agents hallucinating tool argument schemas, ignoring context window limits causing mid-task truncation, flawed retry logic triggering duplicate side-effectful actions, and poor error recovery leading to infinite loops; recommended metrics: task completion rate (binary pass/fail on the end-goal), step efficiency (actual steps vs optimal steps), tool-call accuracy (correct args + correct tool selected), and human escalation rate; establish quality baselines before adding capabilities — agents that 'feel smarter' can have lower task completion rates due to overconfidence; shadow mode deployment + A/B testing are mandatory gates before raising agent autonomy; human-in-loop checkpoints should gate on action reversibility (file delete vs file read) not on action type; regression suite must include adversarial inputs: ambiguous instructions, missing tools, partial context, conflicting tool outputs",
+          "phase": "Cross-cutting",
+          "added": "2026-04-27"
+        },
+        {
+          "topic": "Staff+ engineers as the key to enterprise AI adoption",
+          "considerations": "Staff+ engineers are uniquely positioned as organizational glue between leadership AI strategy and team-level execution; key to success: seed 2-3 teams with strong testing discipline and willing early champions with small AI pilots that have measurable impact, then scale the pattern rather than mandating broad rollout; role shifts from individual coding to ensuring the right decisions are made across teams — AI tools lower the cost of direct implementation, so staying hands-on builds credibility while freeing capacity for cross-team leverage; verification and validation are the new bottlenecks — execution is no longer the constraint; decision rights must be explicit because agent systems create cost and risk quickly at scale; AI champions who can show measurable impact accelerate adoption more than top-down mandates; staff+ engineers run the pilot, document the repeatable playbook, then transfer ownership to teams while moving to the next leverage point",
+          "phase": "Cross-cutting",
+          "added": "2026-05-18"
+        },
+        {
+          "topic": "Platform engineering as governance and control plane for agentic AI systems",
+          "considerations": "KubeCon EU 2026 (Amsterdam, March 2026) codified platform engineering's role shift from 'golden path provisioning' for human developers to governance infrastructure for AI agents — teams that build platforms capable of governing both humans and agents have a structural advantage entering the agentic era; platform teams now responsible for: agent isolation boundaries (prevent agents from accessing cross-tenant data), per-workflow cost caps (agents can spin up expensive GPU jobs autonomously without human approval), audit trails for all agentic actions (required for compliance in healthcare, finance, legal), deployment gates for model/prompt/tool-schema changes, and kill-switch mechanisms when agents misbehave; CNCF Sandbox admissions at KubeCon EU 2026 (llm-d, KAI Scheduler for GPU-aware scheduling) signal the inference and agentic layer is becoming core Kubernetes infrastructure; Google announced Kubernetes AI Conformance Program covering training, inference, and agentic workloads — creating a standard contract across cloud providers for AI workloads; internal developer platforms must evolve to enforce not just compute provisioning but behavioral policy for autonomous systems; platform teams without AI governance capabilities will become bottlenecks as agentic systems proliferate",
+          "phase": "Cross-cutting",
+          "added": "2026-05-25"
+        },
+        {
+          "topic": "EU Cyber Resilience Act (CRA) compliance for engineering teams building software products",
+          "considerations": "EU CRA took effect November 2024 and becomes fully enforceable September 2026 for all software products with digital elements sold or distributed in the EU; key obligations: (1) CE marking on products with security claims; (2) machine-readable SBOM (Software Bill of Materials in SPDX or CycloneDX format) for all dependencies in the final product; (3) vulnerability disclosure within 24h of discovery to ENISA (EU cybersecurity agency); (4) 5-year security update and patch commitment after product launch; KubeCon EU 2026 made CRA compliance a central theme — OSS engineering teams contributing to products with 'economic activity' must now treat SBOM generation, vulnerability handling, and coordinated disclosure as non-optional engineering practices; immediate actions for engineering teams: integrate Syft or Trivy into CI pipelines for automatic SBOM generation on every build, set up VEX (Vulnerability Exploitability eXchange) pipelines to document why CVEs don't apply, establish a coordinated vulnerability disclosure email address and process, audit all direct dependencies for active maintenance status; staff+ engineers need to own the conversation with legal on which products trigger CRA obligations and ensure CRA compliance is baked into the engineering roadmap before the September 2026 enforcement deadline",
+          "phase": "Cross-cutting",
+          "added": "2026-05-25"
+        },
+        {
+          "topic": "Deploying autonomous AI agents on production infrastructure: ownership, safety, and operational model",
+          "considerations": "Meta's Capacity Efficiency platform (April 2026) demonstrates a new operational mode: AI agents that autonomously generate and land pull requests on production infrastructure code — not just recommend changes but execute them; which action classes require human approval vs autonomous execution (code changes to config/infra vs data pipelines vs serving logic); safety boundaries: define an action graph with pre-approved verbs (profiling queries, flamegraph analysis, lint fixes) vs review-required verbs (production config changes, memory allocation tuning); auditability: every agent action must be logged with the specific skill invoked, tool call history, and human-readable rationale before the PR is created; skill versioning: encoded domain expertise in Skills must be version-controlled and tested like production code — a Skills regression can land hundreds of incorrect optimizations before detection; error budget for autonomous actions: track autonomous PR revert rate as a proxy for agent quality; governance: who owns the MCP tool schema when tools span multiple teams; staff+ engineers shift from doing optimization work to building the agent platform that does it — the leverage multiplier is 100x but the responsibility scope is 100x larger",
+          "phase": "Cross-cutting",
+          "added": "2026-06-01"
+        },
+        {
+          "topic": "Staff Engineer promotion in the AI era: AI velocity tooling as a multiplier for influence scope",
+          "considerations": "A Pinterest case study (June 2026) shows how a Senior engineer accelerated to Staff by proactively adopting AI coding tools and systematically amplifying the impact beyond their immediate team. Three key dimensions: (1) Cross-team influence — identify a problem, offer to help fix it, then use AI tooling to deliver faster than expected ('Your page is slow, here's the data, and I'll help you fix it' vs. just filing a bug); (2) Emerging tech leverage — treat AI tools as an industry-wide shift with natural overlap to developer productivity; experiment broadly, measure velocity gains, document concrete numbers; (3) Community creation — share findings in a demo to engineering+product+design, get selected to lead company-wide AI coding standards. The pattern: early adopter → internal champion → recognized authority → formal influence scope. For staff-level promotion, the key question is not 'how fast do you ship?' but 'how wide is your blast radius?'",
+          "phase": "Cross-cutting",
+          "added": "2026-06-08"
+        }
       ]
     }
   ]

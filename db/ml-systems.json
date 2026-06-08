@@ -3,81 +3,839 @@
     "category": "ml-systems",
     "display_name": "ML Systems",
     "layout": "table",
-    "columns": ["#", "Topic", "Key Concepts", "Tags", "Resources"],
-    "last_updated": "2026-06-01"
+    "columns": [
+      "#",
+      "Topic",
+      "Key Concepts",
+      "Tags",
+      "Resources"
+    ],
+    "last_updated": "2026-06-08"
   },
   "sections": [
     {
       "title": "Core ML Infrastructure",
       "items": [
-        {"topic": "Feature Store Design", "concepts": "Online/offline serving, feature registry, point-in-time joins", "tags": ["ml", "data"], "resources": [{"title": "Feast", "url": "https://feast.dev/"}], "added": "2026-04-07"},
-        {"topic": "ML Training Pipeline", "concepts": "Data ingestion, preprocessing, distributed training, checkpointing", "tags": ["ml"], "resources": [{"title": "MLflow", "url": "https://mlflow.org/"}], "added": "2026-04-07"},
-        {"topic": "Model Serving at Scale", "concepts": "Batching, GPU sharing, model warm-up, A/B routing", "tags": ["ml", "infra"], "resources": [{"title": "TFX Serving", "url": "https://www.tensorflow.org/tfx/guide/serving"}], "added": "2026-04-07"},
-        {"topic": "Experiment Tracking & Model Registry", "concepts": "Versioning, lineage, reproducibility, metadata", "tags": ["ml"], "resources": [{"title": "Weights & Biases", "url": "https://wandb.ai/"}], "added": "2026-04-07"},
-        {"topic": "Data Labeling Pipeline", "concepts": "Active learning, label quality, human-in-loop, consensus", "tags": ["ml"], "resources": [{"title": "Scale AI", "url": "https://scale.com/"}], "added": "2026-04-07"},
-        {"topic": "ML Monitoring & Observability", "concepts": "Data drift, model degradation, feature importance shift", "tags": ["ml"], "resources": [{"title": "WhyLabs", "url": "https://docs.whylabs.ai/"}], "added": "2026-04-07"},
-        {"topic": "GPU Cluster Management", "concepts": "Job scheduling, preemption, multi-tenancy, NCCL", "tags": ["ml", "infra"], "resources": [{"title": "SLURM", "url": "https://slurm.schedmd.com/"}], "added": "2026-04-07"},
-        {"topic": "Distributed Training (Data/Model Parallel)", "concepts": "AllReduce, pipeline parallelism, ZeRO, FSDP", "tags": ["ml"], "resources": [{"title": "DeepSpeed", "url": "https://www.deepspeed.ai/"}], "added": "2026-04-07"},
-        {"topic": "Model Compression & Optimization", "concepts": "Quantization, pruning, distillation, ONNX", "tags": ["ml"], "resources": [{"title": "HF Optimum", "url": "https://huggingface.co/docs/optimum/"}], "added": "2026-04-07"},
-        {"topic": "Edge ML Inference", "concepts": "TFLite, CoreML, ONNX Runtime, on-device adaptation", "tags": ["ml", "infra"], "resources": [{"title": "LiteRT", "url": "https://ai.google.dev/edge/litert"}], "added": "2026-04-07"}
+        {
+          "topic": "Feature Store Design",
+          "concepts": "Online/offline serving, feature registry, point-in-time joins",
+          "tags": [
+            "ml",
+            "data"
+          ],
+          "resources": [
+            {
+              "title": "Feast",
+              "url": "https://feast.dev/"
+            }
+          ],
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "ML Training Pipeline",
+          "concepts": "Data ingestion, preprocessing, distributed training, checkpointing",
+          "tags": [
+            "ml"
+          ],
+          "resources": [
+            {
+              "title": "MLflow",
+              "url": "https://mlflow.org/"
+            }
+          ],
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Model Serving at Scale",
+          "concepts": "Batching, GPU sharing, model warm-up, A/B routing",
+          "tags": [
+            "ml",
+            "infra"
+          ],
+          "resources": [
+            {
+              "title": "TFX Serving",
+              "url": "https://www.tensorflow.org/tfx/guide/serving"
+            }
+          ],
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Experiment Tracking & Model Registry",
+          "concepts": "Versioning, lineage, reproducibility, metadata",
+          "tags": [
+            "ml"
+          ],
+          "resources": [
+            {
+              "title": "Weights & Biases",
+              "url": "https://wandb.ai/"
+            }
+          ],
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Data Labeling Pipeline",
+          "concepts": "Active learning, label quality, human-in-loop, consensus",
+          "tags": [
+            "ml"
+          ],
+          "resources": [
+            {
+              "title": "Scale AI",
+              "url": "https://scale.com/"
+            }
+          ],
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "ML Monitoring & Observability",
+          "concepts": "Data drift, model degradation, feature importance shift",
+          "tags": [
+            "ml"
+          ],
+          "resources": [
+            {
+              "title": "WhyLabs",
+              "url": "https://docs.whylabs.ai/"
+            }
+          ],
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "GPU Cluster Management",
+          "concepts": "Job scheduling, preemption, multi-tenancy, NCCL",
+          "tags": [
+            "ml",
+            "infra"
+          ],
+          "resources": [
+            {
+              "title": "SLURM",
+              "url": "https://slurm.schedmd.com/"
+            }
+          ],
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Distributed Training (Data/Model Parallel)",
+          "concepts": "AllReduce, pipeline parallelism, ZeRO, FSDP",
+          "tags": [
+            "ml"
+          ],
+          "resources": [
+            {
+              "title": "DeepSpeed",
+              "url": "https://www.deepspeed.ai/"
+            }
+          ],
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Model Compression & Optimization",
+          "concepts": "Quantization, pruning, distillation, ONNX",
+          "tags": [
+            "ml"
+          ],
+          "resources": [
+            {
+              "title": "HF Optimum",
+              "url": "https://huggingface.co/docs/optimum/"
+            }
+          ],
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Edge ML Inference",
+          "concepts": "TFLite, CoreML, ONNX Runtime, on-device adaptation",
+          "tags": [
+            "ml",
+            "infra"
+          ],
+          "resources": [
+            {
+              "title": "LiteRT",
+              "url": "https://ai.google.dev/edge/litert"
+            }
+          ],
+          "added": "2026-04-07"
+        }
       ]
     },
     {
       "title": "Applied ML Systems",
       "items": [
-        {"topic": "Recommendation System", "concepts": "Collaborative filtering, content-based, two-tower, ranking", "tags": ["ml", "biz"], "resources": [{"title": "YouTube Deep Rec", "url": "https://research.google/pubs/pub45530/"}], "added": "2026-04-07"},
-        {"topic": "Search Ranking System", "concepts": "Learning to rank, query understanding, relevance, semantic search", "tags": ["ml"], "resources": [{"title": "MS LTR", "url": "https://www.microsoft.com/en-us/research/project/mslr/"}], "added": "2026-04-07"},
-        {"topic": "Ads Click Prediction", "concepts": "CTR prediction, feature crosses, embedding tables, calibration", "tags": ["ml", "biz"], "resources": [{"title": "DLRM Paper", "url": "https://research.facebook.com/publications/deep-learning-recommendation-model-for-personalization-and-recommendation-systems/"}], "added": "2026-04-07"},
-        {"topic": "Fraud Detection System", "concepts": "Anomaly detection, graph features, real-time scoring, feedback loops", "tags": ["ml", "biz"], "resources": [{"title": "Stripe Radar", "url": "https://stripe.com/radar"}], "added": "2026-04-07"},
-        {"topic": "NLP Pipeline (NER, Classification, Summarization)", "concepts": "Tokenization, fine-tuning, prompt engineering, evaluation", "tags": ["ml"], "resources": [{"title": "HuggingFace", "url": "https://huggingface.co/docs/transformers/"}], "added": "2026-04-07"},
-        {"topic": "Computer Vision Pipeline", "concepts": "Object detection, segmentation, tracking, video understanding", "tags": ["ml"], "resources": [{"title": "Detectron2", "url": "https://github.com/facebookresearch/detectron2"}], "added": "2026-04-07"},
-        {"topic": "Speech Recognition System (ASR)", "concepts": "CTC, attention-based, streaming, language model fusion", "tags": ["ml"], "resources": [{"title": "Whisper", "url": "https://github.com/openai/whisper"}], "added": "2026-04-07"},
-        {"topic": "Conversational AI / Chatbot", "concepts": "Intent detection, dialog management, retrieval, generation", "tags": ["ml"], "resources": [{"title": "Rasa", "url": "https://rasa.com/docs/"}], "added": "2026-04-07"},
-        {"topic": "Content Moderation ML", "concepts": "Multi-label classification, toxicity, NSFW, appeal handling", "tags": ["ml"], "resources": [{"title": "Meta AI Safety", "url": "https://ai.meta.com/blog/community-standards-enforcement-report/"}], "added": "2026-04-07"},
-        {"topic": "Personalization Engine", "concepts": "User embeddings, contextual bandits, cold-start, real-time features", "tags": ["ml", "biz"], "resources": [{"title": "Netflix Tech Blog", "url": "https://netflixtechblog.com/"}], "added": "2026-04-07"}
+        {
+          "topic": "Recommendation System",
+          "concepts": "Collaborative filtering, content-based, two-tower, ranking",
+          "tags": [
+            "ml",
+            "biz"
+          ],
+          "resources": [
+            {
+              "title": "YouTube Deep Rec",
+              "url": "https://research.google/pubs/pub45530/"
+            }
+          ],
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Search Ranking System",
+          "concepts": "Learning to rank, query understanding, relevance, semantic search",
+          "tags": [
+            "ml"
+          ],
+          "resources": [
+            {
+              "title": "MS LTR",
+              "url": "https://www.microsoft.com/en-us/research/project/mslr/"
+            }
+          ],
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Ads Click Prediction",
+          "concepts": "CTR prediction, feature crosses, embedding tables, calibration",
+          "tags": [
+            "ml",
+            "biz"
+          ],
+          "resources": [
+            {
+              "title": "DLRM Paper",
+              "url": "https://research.facebook.com/publications/deep-learning-recommendation-model-for-personalization-and-recommendation-systems/"
+            }
+          ],
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Fraud Detection System",
+          "concepts": "Anomaly detection, graph features, real-time scoring, feedback loops",
+          "tags": [
+            "ml",
+            "biz"
+          ],
+          "resources": [
+            {
+              "title": "Stripe Radar",
+              "url": "https://stripe.com/radar"
+            }
+          ],
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "NLP Pipeline (NER, Classification, Summarization)",
+          "concepts": "Tokenization, fine-tuning, prompt engineering, evaluation",
+          "tags": [
+            "ml"
+          ],
+          "resources": [
+            {
+              "title": "HuggingFace",
+              "url": "https://huggingface.co/docs/transformers/"
+            }
+          ],
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Computer Vision Pipeline",
+          "concepts": "Object detection, segmentation, tracking, video understanding",
+          "tags": [
+            "ml"
+          ],
+          "resources": [
+            {
+              "title": "Detectron2",
+              "url": "https://github.com/facebookresearch/detectron2"
+            }
+          ],
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Speech Recognition System (ASR)",
+          "concepts": "CTC, attention-based, streaming, language model fusion",
+          "tags": [
+            "ml"
+          ],
+          "resources": [
+            {
+              "title": "Whisper",
+              "url": "https://github.com/openai/whisper"
+            }
+          ],
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Conversational AI / Chatbot",
+          "concepts": "Intent detection, dialog management, retrieval, generation",
+          "tags": [
+            "ml"
+          ],
+          "resources": [
+            {
+              "title": "Rasa",
+              "url": "https://rasa.com/docs/"
+            }
+          ],
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Content Moderation ML",
+          "concepts": "Multi-label classification, toxicity, NSFW, appeal handling",
+          "tags": [
+            "ml"
+          ],
+          "resources": [
+            {
+              "title": "Meta AI Safety",
+              "url": "https://ai.meta.com/blog/community-standards-enforcement-report/"
+            }
+          ],
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Personalization Engine",
+          "concepts": "User embeddings, contextual bandits, cold-start, real-time features",
+          "tags": [
+            "ml",
+            "biz"
+          ],
+          "resources": [
+            {
+              "title": "Netflix Tech Blog",
+              "url": "https://netflixtechblog.com/"
+            }
+          ],
+          "added": "2026-04-07"
+        }
       ]
     },
     {
       "title": "LLM & Generative AI Systems",
       "items": [
-        {"topic": "LLM Pre-Training Infrastructure", "concepts": "Data pipeline, tokenizer, distributed training, checkpointing", "tags": ["ml"], "resources": [{"title": "Chinchilla Paper", "url": "https://arxiv.org/abs/2203.15556"}], "added": "2026-04-07"},
-        {"topic": "RLHF / Alignment Pipeline", "concepts": "Reward modeling, PPO, DPO, human preferences", "tags": ["ml"], "resources": [{"title": "InstructGPT", "url": "https://arxiv.org/abs/2203.02155"}], "added": "2026-04-07"},
-        {"topic": "RAG System Design", "concepts": "Chunking strategies, retrieval, re-ranking, citation", "tags": ["ml"], "resources": [{"title": "RAG Survey", "url": "https://arxiv.org/abs/2312.10997"}], "added": "2026-04-07"},
-        {"topic": "LLM Agent Framework", "concepts": "Tool use, planning, memory, multi-agent orchestration", "tags": ["ml"], "resources": [{"title": "Agent Survey", "url": "https://arxiv.org/abs/2308.11432"}], "added": "2026-04-07"},
-        {"topic": "Fine-Tuning Pipeline (LoRA/QLoRA)", "concepts": "Parameter-efficient, adapter layers, data curation", "tags": ["ml"], "resources": [{"title": "LoRA Paper", "url": "https://arxiv.org/abs/2106.09685"}], "added": "2026-04-07"},
-        {"topic": "LLM Evaluation Framework", "concepts": "Benchmarks, human eval, automated eval, safety testing", "tags": ["ml"], "resources": [{"title": "LM Eval Harness", "url": "https://github.com/EleutherAI/lm-evaluation-harness"}], "added": "2026-04-07"},
-        {"topic": "Image Generation System (Diffusion)", "concepts": "Latent diffusion, conditioning, guidance, safety filters", "tags": ["ml"], "resources": [{"title": "Stable Diffusion", "url": "https://arxiv.org/abs/2112.10752"}], "added": "2026-04-07"},
-        {"topic": "Embedding Service", "concepts": "Batch/online embedding, caching, versioning, similarity search", "tags": ["ml", "infra"], "resources": [{"title": "OpenAI Embeddings", "url": "https://openai.com/index/new-embedding-models-and-api-updates/"}], "added": "2026-04-07"},
-        {"topic": "Prompt Management Platform", "concepts": "Versioning, A/B testing, guardrails, cost optimization", "tags": ["ml"], "resources": [{"title": "LangChain", "url": "https://www.langchain.com/"}], "added": "2026-04-07"},
-        {"topic": "Multi-Modal AI System", "concepts": "Vision-language models, cross-modal alignment, fusion", "tags": ["ml"], "resources": [{"title": "LLaVA", "url": "https://arxiv.org/abs/2304.08485"}], "added": "2026-04-07"},
-        {"topic": "Prefill-Decode Disaggregation for LLM Serving", "concepts": "Separate prefill (compute-bound, parallel) and decode (memory-bound, sequential) phases onto distinct GPU pools; eliminate phase interference; goodput optimization; KV cache transfer via NIXL/NVMe-oF/CXL; 2-7x throughput over collocated serving; deployed by Meta, LinkedIn, Mistral; vLLM disagg_prefill feature; cache-aware CPD for 40% higher sustained throughput on long-context", "tags": ["ml", "infra"], "resources": [{"title": "DistServe (OSDI 2024)", "url": "https://arxiv.org/abs/2401.09670"}], "added": "2026-04-13"},
-        {"topic": "Parallel Speculative Decoding (P-EAGLE)", "concepts": "Generate all K draft tokens in a single drafter forward pass (vs sequential EAGLE autoregression); removes autoregressive ceiling; 1.69x over vanilla EAGLE-3 on NVIDIA B200; 4-5x over standard decoding on coding tasks; parallel drafter head trained via teacher forcing; vLLM v0.16+ integration via parallel_drafting=true; pre-trained heads for Llama, Qwen3", "tags": ["ml", "infra"], "resources": [{"title": "P-EAGLE vLLM Blog", "url": "https://vllm.ai/blog/p-eagle"}], "added": "2026-04-13"},
-        {"topic": "Context Engineering for LLM Agents", "concepts": "Design dynamic context windows: right info, right format, right time; memory types (episodic, semantic, working); retrieval-augmented context; tool results and MCP integration; context compression for long multi-turn; KV cache prefix reuse; smallest high-signal token set maximizes task success; discipline beyond prompt engineering", "tags": ["ml"], "resources": [{"title": "Anthropic Engineering Blog", "url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents"}], "added": "2026-04-13"},
-        {"topic": "llm-d: Kubernetes-Native Distributed LLM Inference", "concepts": "CNCF Sandbox project donated March 2026 by IBM, Red Hat, Google; disaggregated prefill/decode on separate K8s pods (compute vs memory-bandwidth optimization); hierarchical KV cache offloading across GPU HBM → CPU DRAM → NVMe → distributed storage; cache-aware LoRA routing; scale-to-zero autoscaling; active-active HA; UCCL-based transport resilience; ~3.1k tok/s per B200 decode GPU, 50k output tok/s on 16×16 B200 prefill/decode topology; compatible with any accelerator (NVIDIA/AMD/Google TPU)", "tags": ["ml", "infra"], "resources": [{"title": "llm-d CNCF Blog", "url": "https://www.cncf.io/blog/2026/03/24/welcome-llm-d-to-the-cncf-evolving-kubernetes-into-sota-ai-infrastructure/"}], "added": "2026-04-20"},
-        {"topic": "NVIDIA Dynamo: Datacenter-Scale Disaggregated Inference", "concepts": "Production-ready (v1.0) open-source distributed inference framework; disaggregated prefill/decode across GPU pools via NVIDIA NIXL (Inference Xfer Library) for KV cache transfer; LLM-aware request routing with disaggregated scheduling; 7× throughput on GB200 NVL72 vs collocated serving; dynamic GPU reallocation based on load; multi-tier KV cache (HBM → DRAM → NVMe); compatible with vLLM, SGLang, TensorRT-LLM, PyTorch; deployed by AWS, Azure, GCP, OCI", "tags": ["ml", "infra"], "resources": [{"title": "NVIDIA Dynamo 1.0 Blog", "url": "https://developer.nvidia.com/blog/nvidia-dynamo-1-production-ready/"}], "added": "2026-04-20"},
-        {"topic": "Agentic GPU Kernel Optimization (KernelEvolve)", "concepts": "Meta's production system that treats kernel optimization as a search problem, not one-shot code generation; explores hundreds of alternative kernel implementations per target operation; works across heterogeneous hardware from a single framework: NVIDIA GPUs, AMD GPUs, Meta's custom MTIA silicon, CPUs; uses retrieval augmentation to pull relevant kernel patterns rather than manual prompt engineering; >60% inference throughput improvement over already-optimized baselines (including torch.compile + vendor libraries) on NVIDIA GPUs for the Andromeda Ads model; >25% training throughput improvement on MTIA; up to 17× over raw PyTorch baselines across diverse ops; reduces expert kernel development time from weeks to hours; deployed in production across Meta's training and inference fleet; published at ISCA 2026", "tags": ["ml", "infra"], "resources": [{"title": "KernelEvolve Paper (ISCA 2026)", "url": "https://arxiv.org/abs/2512.23236"}], "added": "2026-04-27"},
-        {"topic": "Ray on Kubernetes for Production ML at Scale (Uber)", "concepts": "Uber migrated all ML projects from YARN-based Peloton to Ray on Kubernetes in 2024; 1.5–4× improvement in distributed training speed; unified stack: Kubernetes + Ray + PyTorch + vLLM; job management platform with SKU-based filtering for heterogeneous GPU hardware (A100, H100, custom SKUs); supports elastic resource sharing and preemption without manual scheduler tuning; users specify job type and resource requirements — system automatically allocates optimal resources based on current cluster load; Ray clusters scoped per job, each node with multiple GPUs; vLLM used for distributed inference scoring in LLM fine-tuning evaluation loops; ElasticDL-style training allows mid-job scaling without checkpoint restarts; two-part migration: (1) open-source tech stack adoption, (2) enhanced Kubernetes resource management with preemption+priority", "tags": ["ml", "infra"], "resources": [{"title": "Uber Engineering Blog", "url": "https://www.uber.com/us/en/blog/ubers-journey-to-ray-on-kubernetes-ray-setup/"}], "added": "2026-04-27"},
-        {"topic": "Five Eras of KV Cache: Tiered Offloading & Distributed KV Sharing", "concepts": "KV cache evolution across 5 generations: (1) per-request GPU buffers with PagedAttention (vLLM 2023) — eliminates memory fragmentation; (2) prefix caching — reuse KV of shared system prompts across requests; (3) radix-tree cross-request structural reuse (SGLang) — cache common prefixes across different users; (4) tiered offloading — spill inactive KV blocks GPU HBM→CPU DRAM→NVMe SSD, serving 10x more concurrent users per GPU (vLLM 0.9.0 async offload connector, sub-100ms restoration); (5) distributed multi-node KV sharing for disaggregated serving — LMCache and llm-d filesystem backend let multiple vLLM servers share a common KV prefix cache over shared storage; NVIDIA ICMSP (BlueField-4 DPU off-GPU KV management, CES 2026); CacheFlow 3D-parallel KV scheduling over tokens, layers, and GPUs; 14x TTFT improvement for long-context inputs via prefix restoration; KV quantization (INT8/INT4) reduces offloading bandwidth by 2-4x", "tags": ["ml", "infra"], "resources": [{"title": "Modular: The Five Eras of KVCache", "url": "https://www.modular.com/blog/the-five-eras-of-kvcache"}], "added": "2026-05-18"},
-        {"topic": "Google Cloud AI Hypercomputer & TPU 8th Gen Inference Architecture", "concepts": "TPU 8i (inference): 384 MB on-chip SRAM (3x prior gen), 288 GB HBM for massive KV caches, 19.2 Tb/s ICI bandwidth (doubled), dedicated Collectives Acceleration Engine (5x lower AllReduce latency), 80% better perf/$; TPU 8t (training): 121 exaflops per 9,600-chip superpod, 2 PB unified memory, 1M+ chip clusters via Pathways+JAX; Virgo interconnect: 4x bandwidth, 134K TPUs per datacenter, 80K GPUs with A5X (NVIDIA Vera Rubin NVL72); GKE Inference Gateway: ML-driven capacity-aware request routing (70%+ TTFT reduction), integrates with llm-d CNCF; 4x faster node startup + 80% faster pod startup + 5x faster model loading via Model Streamer + Rapid Cache; Google Cloud Managed Lustre at 10 TB/s / 80 PB for checkpoint I/O; designed for agentic-era RL training (high-throughput SRAM) and disaggregated inference (HBM for KV caches)", "tags": ["ml", "infra"], "resources": [{"title": "Google Cloud Next 2026: AI Infrastructure", "url": "https://cloud.google.com/blog/products/compute/ai-infrastructure-at-next26"}], "added": "2026-05-18"},
-        {"topic": "Meta Adaptive Ranking Model (ARM) — Request-Centric LLM-Scale Inference", "concepts": "Solves the inference trilemma: accuracy vs latency vs cost; replaces one-size-fits-all inference with request-centric routing that dynamically selects model complexity based on predicted request value and user intent; lightweight routing model predicts which model tier (small/fast vs large/accurate) maximizes ROI per request; serves LLM-scale recommendation model at sub-500ms P99 on Instagram at global scale; reduces GPU compute cost ~40% vs always-running full-capacity model by routing simpler requests to smaller models; deployed to Instagram Ads Q4 2025 delivering +3% conversions +5% CTR; key insight: not every request needs the biggest model — the intelligence is in the routing, not just the model; enables teams to run LLM-scale models in production without proportionally increasing infrastructure cost", "tags": ["ml", "infra", "biz"], "resources": [{"title": "Meta Engineering Blog (Mar 2026)", "url": "https://engineering.fb.com/2026/03/31/ml-applications/meta-adaptive-ranking-model-bending-the-inference-scaling-curve-to-serve-llm-scale-models-for-ads/"}], "added": "2026-05-25"},
-        {"topic": "Kubernetes Gateway API Inference Extension (GIE) — Model-Aware LLM Traffic Routing", "concepts": "Standard Kubernetes load balancing (round-robin) creates GPU hotspots for LLM serving: one pod with a long-running 40-token/s generation blocks many short requests that could have been served in 50ms on an idle pod; GIE routes at the model level not the URL level — InferencePool CRD groups backend pods serving the same model, EndpointPicker (EPP) plugin selects the least-loaded pod using real-time inference metrics (queue depth, TTFT, tokens-in-flight, GPU utilization); supports LoRA-adapter-aware routing (route requests for fine-tuned variants to pods that have the adapter warm in GPU memory); per-request priority classes allow latency-critical (sync API) and batch (async pipeline) traffic to coexist on the same fleet; v1.4.0 reached GA in 2026 with conformance suite; agentgateway (Rust) is first conformant implementation; adopted by Istio, NGINX Gateway Fabric, Envoy Gateway; KubeCon EU 2026 identified GIE as the emerging standard contract between the K8s gateway layer and inference-aware schedulers (llm-d, KAI Scheduler); reduces P99 TTFT hotspots by 60-70% vs naive round-robin for mixed short/long request traffic", "tags": ["ml", "infra"], "resources": [{"title": "Gateway API Inference Extension Docs", "url": "https://gateway-api-inference-extension.sigs.k8s.io/"}], "added": "2026-05-25"},
-        {"topic": "NVIDIA Dynamo Agentic Inference — Full-Stack Optimizations for Multi-Turn Agent Workflows", "concepts": "Agent hints extension: structured metadata (priority level, estimated output length, speculative prefill flags) attached per-request, giving Dynamo's router and runtime agent-aware scheduling and KV cache decisions; v1/responses and v1/messages APIs expose typed content blocks (thinking tokens, tool calls, text) as distinct objects — inference engine applies different cache and scheduling policy per block type; 97.2% KV cache hit rate for multi-agent workflows (vs ~40% for stateless LLM serving) by routing agent turns with shared system prompt to nodes with that prefix already warm; multi-turn streaming: reasoning segments, tool-call events, and response metadata stream back as the turn unfolds (not after final text), reducing perceived latency for orchestrators that parse intermediate output; Rust-based parser crates extracted as standalone reusable libraries for harness authors; agent scheduling: long-context reasoning turns routed to high-SRAM nodes, short tool-call dispatch turns routed to low-latency nodes; coding agents (Stripe generating 1,300+ PRs/week, Ramp attributing 30% of merged PRs to agents) as the primary production agentic workload driving these optimizations; Dynamo 1.0 achieves 7× throughput improvement on Blackwell GPUs over baseline collocated serving; published May 2026", "tags": ["ml", "infra"], "resources": [{"title": "NVIDIA Technical Blog: Full-Stack Optimizations for Agentic Inference", "url": "https://developer.nvidia.com/blog/full-stack-optimizations-for-agentic-inference-with-nvidia-dynamo/"}], "added": "2026-06-01"},
-        {"topic": "Meta Unified AI Agents for Capacity Efficiency at Hyperscale", "concepts": "Autonomous AI agent platform built on two composable layers: MCP Tools (standardized LLM interfaces for querying profiling data, flamegraphs, code configs, and build systems) and Skills (encoded domain expertise of senior efficiency engineers, reusable across agent workflows); offense + defense strategy — offense agents proactively scan Meta's fleet for compute savings opportunities; defense agents (AI Regression Solver) integrate with Meta's FBDetect CI to auto-detect performance regressions and generate ready-to-review PRs, compressing ~10 hours of manual investigation into ~30 minutes; platform has recovered hundreds of megawatts of power across Meta's AI training fleet (enough to power hundreds of thousands of homes/year); within 1 year the same agent foundation was extended to: conversational efficiency assistants, capacity planning agents, personalized optimization recommendations, guided investigation workflows, and automated validation pipelines; agents operate fully autonomously on production infrastructure changes — the platform IS the Capacity Efficiency Program; the key architectural insight: standardized MCP tool interfaces enable any LLM agent to query the same data that human engineers consult, unlocking automation at scale across all efficiency disciplines; published April 2026", "tags": ["ml", "infra", "biz"], "resources": [{"title": "Meta Engineering Blog (Apr 2026)", "url": "https://engineering.fb.com/2026/04/16/developer-tools/capacity-efficiency-at-meta-how-unified-ai-agents-optimize-performance-at-hyperscale/"}], "added": "2026-06-01"}
+        {
+          "topic": "LLM Pre-Training Infrastructure",
+          "concepts": "Data pipeline, tokenizer, distributed training, checkpointing",
+          "tags": [
+            "ml"
+          ],
+          "resources": [
+            {
+              "title": "Chinchilla Paper",
+              "url": "https://arxiv.org/abs/2203.15556"
+            }
+          ],
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "RLHF / Alignment Pipeline",
+          "concepts": "Reward modeling, PPO, DPO, human preferences",
+          "tags": [
+            "ml"
+          ],
+          "resources": [
+            {
+              "title": "InstructGPT",
+              "url": "https://arxiv.org/abs/2203.02155"
+            }
+          ],
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "RAG System Design",
+          "concepts": "Chunking strategies, retrieval, re-ranking, citation",
+          "tags": [
+            "ml"
+          ],
+          "resources": [
+            {
+              "title": "RAG Survey",
+              "url": "https://arxiv.org/abs/2312.10997"
+            }
+          ],
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "LLM Agent Framework",
+          "concepts": "Tool use, planning, memory, multi-agent orchestration",
+          "tags": [
+            "ml"
+          ],
+          "resources": [
+            {
+              "title": "Agent Survey",
+              "url": "https://arxiv.org/abs/2308.11432"
+            }
+          ],
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Fine-Tuning Pipeline (LoRA/QLoRA)",
+          "concepts": "Parameter-efficient, adapter layers, data curation",
+          "tags": [
+            "ml"
+          ],
+          "resources": [
+            {
+              "title": "LoRA Paper",
+              "url": "https://arxiv.org/abs/2106.09685"
+            }
+          ],
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "LLM Evaluation Framework",
+          "concepts": "Benchmarks, human eval, automated eval, safety testing",
+          "tags": [
+            "ml"
+          ],
+          "resources": [
+            {
+              "title": "LM Eval Harness",
+              "url": "https://github.com/EleutherAI/lm-evaluation-harness"
+            }
+          ],
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Image Generation System (Diffusion)",
+          "concepts": "Latent diffusion, conditioning, guidance, safety filters",
+          "tags": [
+            "ml"
+          ],
+          "resources": [
+            {
+              "title": "Stable Diffusion",
+              "url": "https://arxiv.org/abs/2112.10752"
+            }
+          ],
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Embedding Service",
+          "concepts": "Batch/online embedding, caching, versioning, similarity search",
+          "tags": [
+            "ml",
+            "infra"
+          ],
+          "resources": [
+            {
+              "title": "OpenAI Embeddings",
+              "url": "https://openai.com/index/new-embedding-models-and-api-updates/"
+            }
+          ],
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Prompt Management Platform",
+          "concepts": "Versioning, A/B testing, guardrails, cost optimization",
+          "tags": [
+            "ml"
+          ],
+          "resources": [
+            {
+              "title": "LangChain",
+              "url": "https://www.langchain.com/"
+            }
+          ],
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Multi-Modal AI System",
+          "concepts": "Vision-language models, cross-modal alignment, fusion",
+          "tags": [
+            "ml"
+          ],
+          "resources": [
+            {
+              "title": "LLaVA",
+              "url": "https://arxiv.org/abs/2304.08485"
+            }
+          ],
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Prefill-Decode Disaggregation for LLM Serving",
+          "concepts": "Separate prefill (compute-bound, parallel) and decode (memory-bound, sequential) phases onto distinct GPU pools; eliminate phase interference; goodput optimization; KV cache transfer via NIXL/NVMe-oF/CXL; 2-7x throughput over collocated serving; deployed by Meta, LinkedIn, Mistral; vLLM disagg_prefill feature; cache-aware CPD for 40% higher sustained throughput on long-context",
+          "tags": [
+            "ml",
+            "infra"
+          ],
+          "resources": [
+            {
+              "title": "DistServe (OSDI 2024)",
+              "url": "https://arxiv.org/abs/2401.09670"
+            }
+          ],
+          "added": "2026-04-13"
+        },
+        {
+          "topic": "Parallel Speculative Decoding (P-EAGLE)",
+          "concepts": "Generate all K draft tokens in a single drafter forward pass (vs sequential EAGLE autoregression); removes autoregressive ceiling; 1.69x over vanilla EAGLE-3 on NVIDIA B200; 4-5x over standard decoding on coding tasks; parallel drafter head trained via teacher forcing; vLLM v0.16+ integration via parallel_drafting=true; pre-trained heads for Llama, Qwen3",
+          "tags": [
+            "ml",
+            "infra"
+          ],
+          "resources": [
+            {
+              "title": "P-EAGLE vLLM Blog",
+              "url": "https://vllm.ai/blog/p-eagle"
+            }
+          ],
+          "added": "2026-04-13"
+        },
+        {
+          "topic": "Context Engineering for LLM Agents",
+          "concepts": "Design dynamic context windows: right info, right format, right time; memory types (episodic, semantic, working); retrieval-augmented context; tool results and MCP integration; context compression for long multi-turn; KV cache prefix reuse; smallest high-signal token set maximizes task success; discipline beyond prompt engineering",
+          "tags": [
+            "ml"
+          ],
+          "resources": [
+            {
+              "title": "Anthropic Engineering Blog",
+              "url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents"
+            }
+          ],
+          "added": "2026-04-13"
+        },
+        {
+          "topic": "llm-d: Kubernetes-Native Distributed LLM Inference",
+          "concepts": "CNCF Sandbox project donated March 2026 by IBM, Red Hat, Google; disaggregated prefill/decode on separate K8s pods (compute vs memory-bandwidth optimization); hierarchical KV cache offloading across GPU HBM → CPU DRAM → NVMe → distributed storage; cache-aware LoRA routing; scale-to-zero autoscaling; active-active HA; UCCL-based transport resilience; ~3.1k tok/s per B200 decode GPU, 50k output tok/s on 16×16 B200 prefill/decode topology; compatible with any accelerator (NVIDIA/AMD/Google TPU)",
+          "tags": [
+            "ml",
+            "infra"
+          ],
+          "resources": [
+            {
+              "title": "llm-d CNCF Blog",
+              "url": "https://www.cncf.io/blog/2026/03/24/welcome-llm-d-to-the-cncf-evolving-kubernetes-into-sota-ai-infrastructure/"
+            }
+          ],
+          "added": "2026-04-20"
+        },
+        {
+          "topic": "NVIDIA Dynamo: Datacenter-Scale Disaggregated Inference",
+          "concepts": "Production-ready (v1.0) open-source distributed inference framework; disaggregated prefill/decode across GPU pools via NVIDIA NIXL (Inference Xfer Library) for KV cache transfer; LLM-aware request routing with disaggregated scheduling; 7× throughput on GB200 NVL72 vs collocated serving; dynamic GPU reallocation based on load; multi-tier KV cache (HBM → DRAM → NVMe); compatible with vLLM, SGLang, TensorRT-LLM, PyTorch; deployed by AWS, Azure, GCP, OCI",
+          "tags": [
+            "ml",
+            "infra"
+          ],
+          "resources": [
+            {
+              "title": "NVIDIA Dynamo 1.0 Blog",
+              "url": "https://developer.nvidia.com/blog/nvidia-dynamo-1-production-ready/"
+            }
+          ],
+          "added": "2026-04-20"
+        },
+        {
+          "topic": "Agentic GPU Kernel Optimization (KernelEvolve)",
+          "concepts": "Meta's production system that treats kernel optimization as a search problem, not one-shot code generation; explores hundreds of alternative kernel implementations per target operation; works across heterogeneous hardware from a single framework: NVIDIA GPUs, AMD GPUs, Meta's custom MTIA silicon, CPUs; uses retrieval augmentation to pull relevant kernel patterns rather than manual prompt engineering; >60% inference throughput improvement over already-optimized baselines (including torch.compile + vendor libraries) on NVIDIA GPUs for the Andromeda Ads model; >25% training throughput improvement on MTIA; up to 17× over raw PyTorch baselines across diverse ops; reduces expert kernel development time from weeks to hours; deployed in production across Meta's training and inference fleet; published at ISCA 2026",
+          "tags": [
+            "ml",
+            "infra"
+          ],
+          "resources": [
+            {
+              "title": "KernelEvolve Paper (ISCA 2026)",
+              "url": "https://arxiv.org/abs/2512.23236"
+            }
+          ],
+          "added": "2026-04-27"
+        },
+        {
+          "topic": "Ray on Kubernetes for Production ML at Scale (Uber)",
+          "concepts": "Uber migrated all ML projects from YARN-based Peloton to Ray on Kubernetes in 2024; 1.5–4× improvement in distributed training speed; unified stack: Kubernetes + Ray + PyTorch + vLLM; job management platform with SKU-based filtering for heterogeneous GPU hardware (A100, H100, custom SKUs); supports elastic resource sharing and preemption without manual scheduler tuning; users specify job type and resource requirements — system automatically allocates optimal resources based on current cluster load; Ray clusters scoped per job, each node with multiple GPUs; vLLM used for distributed inference scoring in LLM fine-tuning evaluation loops; ElasticDL-style training allows mid-job scaling without checkpoint restarts; two-part migration: (1) open-source tech stack adoption, (2) enhanced Kubernetes resource management with preemption+priority",
+          "tags": [
+            "ml",
+            "infra"
+          ],
+          "resources": [
+            {
+              "title": "Uber Engineering Blog",
+              "url": "https://www.uber.com/us/en/blog/ubers-journey-to-ray-on-kubernetes-ray-setup/"
+            }
+          ],
+          "added": "2026-04-27"
+        },
+        {
+          "topic": "Five Eras of KV Cache: Tiered Offloading & Distributed KV Sharing",
+          "concepts": "KV cache evolution across 5 generations: (1) per-request GPU buffers with PagedAttention (vLLM 2023) — eliminates memory fragmentation; (2) prefix caching — reuse KV of shared system prompts across requests; (3) radix-tree cross-request structural reuse (SGLang) — cache common prefixes across different users; (4) tiered offloading — spill inactive KV blocks GPU HBM→CPU DRAM→NVMe SSD, serving 10x more concurrent users per GPU (vLLM 0.9.0 async offload connector, sub-100ms restoration); (5) distributed multi-node KV sharing for disaggregated serving — LMCache and llm-d filesystem backend let multiple vLLM servers share a common KV prefix cache over shared storage; NVIDIA ICMSP (BlueField-4 DPU off-GPU KV management, CES 2026); CacheFlow 3D-parallel KV scheduling over tokens, layers, and GPUs; 14x TTFT improvement for long-context inputs via prefix restoration; KV quantization (INT8/INT4) reduces offloading bandwidth by 2-4x",
+          "tags": [
+            "ml",
+            "infra"
+          ],
+          "resources": [
+            {
+              "title": "Modular: The Five Eras of KVCache",
+              "url": "https://www.modular.com/blog/the-five-eras-of-kvcache"
+            }
+          ],
+          "added": "2026-05-18"
+        },
+        {
+          "topic": "Google Cloud AI Hypercomputer & TPU 8th Gen Inference Architecture",
+          "concepts": "TPU 8i (inference): 384 MB on-chip SRAM (3x prior gen), 288 GB HBM for massive KV caches, 19.2 Tb/s ICI bandwidth (doubled), dedicated Collectives Acceleration Engine (5x lower AllReduce latency), 80% better perf/$; TPU 8t (training): 121 exaflops per 9,600-chip superpod, 2 PB unified memory, 1M+ chip clusters via Pathways+JAX; Virgo interconnect: 4x bandwidth, 134K TPUs per datacenter, 80K GPUs with A5X (NVIDIA Vera Rubin NVL72); GKE Inference Gateway: ML-driven capacity-aware request routing (70%+ TTFT reduction), integrates with llm-d CNCF; 4x faster node startup + 80% faster pod startup + 5x faster model loading via Model Streamer + Rapid Cache; Google Cloud Managed Lustre at 10 TB/s / 80 PB for checkpoint I/O; designed for agentic-era RL training (high-throughput SRAM) and disaggregated inference (HBM for KV caches)",
+          "tags": [
+            "ml",
+            "infra"
+          ],
+          "resources": [
+            {
+              "title": "Google Cloud Next 2026: AI Infrastructure",
+              "url": "https://cloud.google.com/blog/products/compute/ai-infrastructure-at-next26"
+            }
+          ],
+          "added": "2026-05-18"
+        },
+        {
+          "topic": "Meta Adaptive Ranking Model (ARM) — Request-Centric LLM-Scale Inference",
+          "concepts": "Solves the inference trilemma: accuracy vs latency vs cost; replaces one-size-fits-all inference with request-centric routing that dynamically selects model complexity based on predicted request value and user intent; lightweight routing model predicts which model tier (small/fast vs large/accurate) maximizes ROI per request; serves LLM-scale recommendation model at sub-500ms P99 on Instagram at global scale; reduces GPU compute cost ~40% vs always-running full-capacity model by routing simpler requests to smaller models; deployed to Instagram Ads Q4 2025 delivering +3% conversions +5% CTR; key insight: not every request needs the biggest model — the intelligence is in the routing, not just the model; enables teams to run LLM-scale models in production without proportionally increasing infrastructure cost",
+          "tags": [
+            "ml",
+            "infra",
+            "biz"
+          ],
+          "resources": [
+            {
+              "title": "Meta Engineering Blog (Mar 2026)",
+              "url": "https://engineering.fb.com/2026/03/31/ml-applications/meta-adaptive-ranking-model-bending-the-inference-scaling-curve-to-serve-llm-scale-models-for-ads/"
+            }
+          ],
+          "added": "2026-05-25"
+        },
+        {
+          "topic": "Kubernetes Gateway API Inference Extension (GIE) — Model-Aware LLM Traffic Routing",
+          "concepts": "Standard Kubernetes load balancing (round-robin) creates GPU hotspots for LLM serving: one pod with a long-running 40-token/s generation blocks many short requests that could have been served in 50ms on an idle pod; GIE routes at the model level not the URL level — InferencePool CRD groups backend pods serving the same model, EndpointPicker (EPP) plugin selects the least-loaded pod using real-time inference metrics (queue depth, TTFT, tokens-in-flight, GPU utilization); supports LoRA-adapter-aware routing (route requests for fine-tuned variants to pods that have the adapter warm in GPU memory); per-request priority classes allow latency-critical (sync API) and batch (async pipeline) traffic to coexist on the same fleet; v1.4.0 reached GA in 2026 with conformance suite; agentgateway (Rust) is first conformant implementation; adopted by Istio, NGINX Gateway Fabric, Envoy Gateway; KubeCon EU 2026 identified GIE as the emerging standard contract between the K8s gateway layer and inference-aware schedulers (llm-d, KAI Scheduler); reduces P99 TTFT hotspots by 60-70% vs naive round-robin for mixed short/long request traffic",
+          "tags": [
+            "ml",
+            "infra"
+          ],
+          "resources": [
+            {
+              "title": "Gateway API Inference Extension Docs",
+              "url": "https://gateway-api-inference-extension.sigs.k8s.io/"
+            }
+          ],
+          "added": "2026-05-25"
+        },
+        {
+          "topic": "NVIDIA Dynamo Agentic Inference — Full-Stack Optimizations for Multi-Turn Agent Workflows",
+          "concepts": "Agent hints extension: structured metadata (priority level, estimated output length, speculative prefill flags) attached per-request, giving Dynamo's router and runtime agent-aware scheduling and KV cache decisions; v1/responses and v1/messages APIs expose typed content blocks (thinking tokens, tool calls, text) as distinct objects — inference engine applies different cache and scheduling policy per block type; 97.2% KV cache hit rate for multi-agent workflows (vs ~40% for stateless LLM serving) by routing agent turns with shared system prompt to nodes with that prefix already warm; multi-turn streaming: reasoning segments, tool-call events, and response metadata stream back as the turn unfolds (not after final text), reducing perceived latency for orchestrators that parse intermediate output; Rust-based parser crates extracted as standalone reusable libraries for harness authors; agent scheduling: long-context reasoning turns routed to high-SRAM nodes, short tool-call dispatch turns routed to low-latency nodes; coding agents (Stripe generating 1,300+ PRs/week, Ramp attributing 30% of merged PRs to agents) as the primary production agentic workload driving these optimizations; Dynamo 1.0 achieves 7× throughput improvement on Blackwell GPUs over baseline collocated serving; published May 2026",
+          "tags": [
+            "ml",
+            "infra"
+          ],
+          "resources": [
+            {
+              "title": "NVIDIA Technical Blog: Full-Stack Optimizations for Agentic Inference",
+              "url": "https://developer.nvidia.com/blog/full-stack-optimizations-for-agentic-inference-with-nvidia-dynamo/"
+            }
+          ],
+          "added": "2026-06-01"
+        },
+        {
+          "topic": "Meta Unified AI Agents for Capacity Efficiency at Hyperscale",
+          "concepts": "Autonomous AI agent platform built on two composable layers: MCP Tools (standardized LLM interfaces for querying profiling data, flamegraphs, code configs, and build systems) and Skills (encoded domain expertise of senior efficiency engineers, reusable across agent workflows); offense + defense strategy — offense agents proactively scan Meta's fleet for compute savings opportunities; defense agents (AI Regression Solver) integrate with Meta's FBDetect CI to auto-detect performance regressions and generate ready-to-review PRs, compressing ~10 hours of manual investigation into ~30 minutes; platform has recovered hundreds of megawatts of power across Meta's AI training fleet (enough to power hundreds of thousands of homes/year); within 1 year the same agent foundation was extended to: conversational efficiency assistants, capacity planning agents, personalized optimization recommendations, guided investigation workflows, and automated validation pipelines; agents operate fully autonomously on production infrastructure changes — the platform IS the Capacity Efficiency Program; the key architectural insight: standardized MCP tool interfaces enable any LLM agent to query the same data that human engineers consult, unlocking automation at scale across all efficiency disciplines; published April 2026",
+          "tags": [
+            "ml",
+            "infra",
+            "biz"
+          ],
+          "resources": [
+            {
+              "title": "Meta Engineering Blog (Apr 2026)",
+              "url": "https://engineering.fb.com/2026/04/16/developer-tools/capacity-efficiency-at-meta-how-unified-ai-agents-optimize-performance-at-hyperscale/"
+            }
+          ],
+          "added": "2026-06-01"
+        },
+        {
+          "topic": "Ray Serve 2.55 Online Inference Upgrade — HAProxy Ingress + gRPC Replica Communication",
+          "concepts": "Ray Serve 2.55 introduces two architectural bypasses that eliminate Python-layer bottlenecks: (1) HAProxy integration at ingress — replacing the Python-based HTTP proxy with HAProxy for connection multiplexing, removes the Python GIL from the hot path; (2) Direct gRPC between deployment replicas — bypassing the previous REST-over-Python relay for inter-replica calls. Together these deliver 88% lower P99 latency and 11.1x throughput improvement in unary workloads (490 → 1,573 QPS in recommendation model pipelines), 8.9x in streaming. Both enabled via environment variables in Ray 2.55+; no code changes required for existing Ray Serve deployments.",
+          "tags": [
+            "ml",
+            "infra",
+            "scale"
+          ],
+          "resources": [
+            {
+              "title": "Major upgrades to Ray Serve: Online Inference with 88% lower latency and 11.1x higher throughput",
+              "url": "https://www.anyscale.com/blog/ray-serve-inference-lower-latency-higher-throughput-haproxy"
+            }
+          ],
+          "added": "2026-06-08"
+        },
+        {
+          "topic": "Netflix Model Lifecycle Graph — Centralized ML Metadata Service for Discovery and Dependency Tracking",
+          "concepts": "Netflix's Metadata Service (MDS) builds a Model Lifecycle Graph that indexes ML entities (models, features, pipelines, experiments, datasets) and their cross-domain relationships across all of Netflix's ML teams. Architecture: real-time event ingestion → Datomic persistence → background enrichment jobs materialize relationships asynchronously → AIP Portal (unified search + navigation UI). Enables cross-team questions like 'Which experiments use this feature?' or 'Which models share these features?' without manual discovery. Mirrors LinkedIn DataHub's graph-centric approach but tailored for Netflix's multi-team ML ecosystem. Part 1 of a multi-part series on Netflix's 1M req/sec ML serving infrastructure (traffic routing via Switchboard + Envoy in Part 2).",
+          "tags": [
+            "ml",
+            "data",
+            "infra"
+          ],
+          "resources": [
+            {
+              "title": "Democratizing ML at Netflix: Building the Model Lifecycle Graph",
+              "url": "https://netflixtechblog.com/democratizing-machine-learning-at-netflix-building-the-model-lifecycle-graph-5cc6d5828bb1"
+            },
+            {
+              "title": "State of Routing in Model Serving (Part 2)",
+              "url": "https://netflixtechblog.com/state-of-routing-in-model-serving-16e22fe18741"
+            }
+          ],
+          "added": "2026-06-08"
+        }
       ]
     },
     {
       "title": "ML Platform & Operations",
       "items": [
-        {"topic": "ML Platform (Michelangelo/Cortex)", "concepts": "End-to-end MLOps, self-service, governance", "tags": ["ml", "infra"], "resources": [{"title": "Uber Michelangelo", "url": "https://www.uber.com/blog/michelangelo-machine-learning-platform/"}], "added": "2026-04-07"},
-        {"topic": "Data Quality & Validation", "concepts": "Schema enforcement, statistical tests, anomaly detection", "tags": ["data", "ml"], "resources": [{"title": "TFDV", "url": "https://www.tensorflow.org/tfx/data_validation/get_started"}], "added": "2026-04-07"},
-        {"topic": "Online Learning System", "concepts": "Real-time model updates, concept drift, warm-starting", "tags": ["ml"], "resources": [{"title": "Vowpal Wabbit", "url": "https://vowpalwabbit.org/"}], "added": "2026-04-07"},
-        {"topic": "Causal Inference Platform", "concepts": "Uplift modeling, treatment effects, counterfactuals", "tags": ["ml", "biz"], "resources": [{"title": "CausalML", "url": "https://causalml.readthedocs.io/"}], "added": "2026-04-07"},
-        {"topic": "Time-Series Forecasting System", "concepts": "Seasonality, trend, exogenous variables, ensemble", "tags": ["ml"], "resources": [{"title": "Prophet", "url": "https://facebook.github.io/prophet/"}], "added": "2026-04-07"},
-        {"topic": "Knowledge Graph Construction", "concepts": "Entity resolution, relation extraction, graph embeddings", "tags": ["ml", "data"], "resources": [{"title": "KG Survey", "url": "https://arxiv.org/abs/2003.02320"}], "added": "2026-04-07"},
-        {"topic": "Autonomous Driving ML Stack", "concepts": "Perception, prediction, planning, simulation", "tags": ["ml"], "resources": [{"title": "Planning Survey", "url": "https://arxiv.org/abs/2206.02474"}], "added": "2026-04-07"},
-        {"topic": "Reinforcement Learning Infrastructure", "concepts": "Environment simulation, replay buffers, distributed rollouts", "tags": ["ml"], "resources": [{"title": "RLlib", "url": "https://docs.ray.io/en/latest/rllib/index.html"}], "added": "2026-04-07"},
-        {"topic": "Federated Learning System", "concepts": "Privacy, aggregation, communication efficiency, heterogeneity", "tags": ["ml"], "resources": [{"title": "Flower", "url": "https://flower.ai/"}], "added": "2026-04-07"},
-        {"topic": "Robotics ML Pipeline", "concepts": "Sim-to-real, imitation learning, grasping, manipulation", "tags": ["ml"], "resources": [{"title": "RT-X", "url": "https://robotics-transformer-x.github.io/"}], "added": "2026-04-07"}
+        {
+          "topic": "ML Platform (Michelangelo/Cortex)",
+          "concepts": "End-to-end MLOps, self-service, governance",
+          "tags": [
+            "ml",
+            "infra"
+          ],
+          "resources": [
+            {
+              "title": "Uber Michelangelo",
+              "url": "https://www.uber.com/blog/michelangelo-machine-learning-platform/"
+            }
+          ],
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Data Quality & Validation",
+          "concepts": "Schema enforcement, statistical tests, anomaly detection",
+          "tags": [
+            "data",
+            "ml"
+          ],
+          "resources": [
+            {
+              "title": "TFDV",
+              "url": "https://www.tensorflow.org/tfx/data_validation/get_started"
+            }
+          ],
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Online Learning System",
+          "concepts": "Real-time model updates, concept drift, warm-starting",
+          "tags": [
+            "ml"
+          ],
+          "resources": [
+            {
+              "title": "Vowpal Wabbit",
+              "url": "https://vowpalwabbit.org/"
+            }
+          ],
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Causal Inference Platform",
+          "concepts": "Uplift modeling, treatment effects, counterfactuals",
+          "tags": [
+            "ml",
+            "biz"
+          ],
+          "resources": [
+            {
+              "title": "CausalML",
+              "url": "https://causalml.readthedocs.io/"
+            }
+          ],
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Time-Series Forecasting System",
+          "concepts": "Seasonality, trend, exogenous variables, ensemble",
+          "tags": [
+            "ml"
+          ],
+          "resources": [
+            {
+              "title": "Prophet",
+              "url": "https://facebook.github.io/prophet/"
+            }
+          ],
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Knowledge Graph Construction",
+          "concepts": "Entity resolution, relation extraction, graph embeddings",
+          "tags": [
+            "ml",
+            "data"
+          ],
+          "resources": [
+            {
+              "title": "KG Survey",
+              "url": "https://arxiv.org/abs/2003.02320"
+            }
+          ],
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Autonomous Driving ML Stack",
+          "concepts": "Perception, prediction, planning, simulation",
+          "tags": [
+            "ml"
+          ],
+          "resources": [
+            {
+              "title": "Planning Survey",
+              "url": "https://arxiv.org/abs/2206.02474"
+            }
+          ],
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Reinforcement Learning Infrastructure",
+          "concepts": "Environment simulation, replay buffers, distributed rollouts",
+          "tags": [
+            "ml"
+          ],
+          "resources": [
+            {
+              "title": "RLlib",
+              "url": "https://docs.ray.io/en/latest/rllib/index.html"
+            }
+          ],
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Federated Learning System",
+          "concepts": "Privacy, aggregation, communication efficiency, heterogeneity",
+          "tags": [
+            "ml"
+          ],
+          "resources": [
+            {
+              "title": "Flower",
+              "url": "https://flower.ai/"
+            }
+          ],
+          "added": "2026-04-07"
+        },
+        {
+          "topic": "Robotics ML Pipeline",
+          "concepts": "Sim-to-real, imitation learning, grasping, manipulation",
+          "tags": [
+            "ml"
+          ],
+          "resources": [
+            {
+              "title": "RT-X",
+              "url": "https://robotics-transformer-x.github.io/"
+            }
+          ],
+          "added": "2026-04-07"
+        }
       ]
     }
   ]
