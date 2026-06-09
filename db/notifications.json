@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-06-08"
+    "last_updated": "2026-06-09"
   },
   "entries": [
     {
@@ -502,6 +502,18 @@
       ],
       "items_added": [
         "Datadog High-Cardinality Tag Quota Breach — user_id on ML Inference Metrics Silences All SLO Monitors for 74 Minutes"
+      ]
+    },
+    {
+      "timestamp": "2026-06-09T08:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: Grafana Loki Ingester OOM — High-Cardinality tenant_id Label Silences All Alertmanager Rules for 52 Minutes",
+      "summary": "Added a Hard-difficulty infrastructure hotfix drill: a Java Spring Boot recommendation service on GKE moves tenant_id from a JSON log body field to a Loki structured label, exploding from 48 to 393,600 active Loki streams and OOMKilling all 6 ingesters at 09:31 UTC. All 14 Alertmanager log-based rules silently enter 'pending' (no data) state; an ML inference regression goes undetected for 52 minutes until a customer reports it via Slack. Exercise covers cardinality triage via logcli and Prometheus, rollback-and-redeploy mitigation, Loki ingester recovery, correct per-tenant instrumentation via LogQL structured parsing plus a Prometheus metrics stage, and prevention via stream-creation-rate alerting, max_streams_per_user limits, CI cardinality linting, and an Alertmanager DeadMansSwitch heartbeat.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "Grafana Loki Ingester OOM — High-Cardinality tenant_id Label Silences All Alertmanager Rules for 52 Minutes"
       ]
     },
     {
