@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-06-09"
+    "last_updated": "2026-06-10"
   },
   "entries": [
     {
@@ -502,6 +502,18 @@
       ],
       "items_added": [
         "Datadog High-Cardinality Tag Quota Breach — user_id on ML Inference Metrics Silences All SLO Monitors for 74 Minutes"
+      ]
+    },
+    {
+      "timestamp": "2026-06-10T07:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: Kubernetes etcd WAL Fsync Stall — EBS Volume I/O Impairment Triggers Leader Election Storm, 19 GPU Nodes NotReady",
+      "summary": "Added a Hard-difficulty infrastructure hotfix drill: a self-managed Kubernetes 1.28 cluster's etcd FSyncs balloon from 2ms to 3,847ms when an AWS EBS gp2 volume (secretly downgraded from io1 in a cost-optimization Terraform commit) suffers a 4-minute I/O impairment. 12 Raft leader-election cycles destabilize the API server (31.4% error rate), 19 of 24 A100 GPU worker nodes go NotReady, and 14 PyTorch DDP training jobs deadlock in NCCL AllReduce — burning $12,800 in wasted GPU compute. Exercise covers fsync-latency triage via etcd metrics, live io2 volume migration, etcd election-timeout hardening, and Terraform Sentinel policy to block future gp2 regressions.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "Kubernetes etcd WAL Fsync Stall — EBS Volume I/O Impairment Triggers Leader Election Storm, 19 GPU Nodes NotReady"
       ]
     },
     {
