@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-06-10"
+    "last_updated": "2026-06-11"
   },
   "entries": [
     {
@@ -514,6 +514,18 @@
       ],
       "items_added": [
         "Kubernetes etcd WAL Fsync Stall — EBS Volume I/O Impairment Triggers Leader Election Storm, 19 GPU Nodes NotReady"
+      ]
+    },
+    {
+      "timestamp": "2026-06-11T08:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: AWS RDS Proxy Connection Pinning Storm — SET search_path in Multi-Tenant Lambda Functions Exhausts Proxy Pool",
+      "summary": "Added a Hard-difficulty database hotfix drill: a multi-tenant SaaS checkout service's Node.js Lambda functions use SET search_path TO tenant_${tenantId} in pg pool.on('connect'), causing RDS Proxy to pin every connection. Under normal load (50 Lambdas) this is invisible for 7 months; when end-of-month billing fires 612 concurrent Lambdas, all 400 proxy connections are pinned simultaneously, producing 71.4% checkout error rate for 19 minutes and $3.2M in unprocessed billing. Fix replaces the SET command with PostgreSQL connection string options=-csearch_path=... startup parameter, which RDS Proxy does not pin.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "AWS RDS Proxy Connection Pinning Storm — SET search_path in Multi-Tenant Lambda Functions Exhausts Proxy Pool During End-of-Month Billing Run"
       ]
     },
     {
