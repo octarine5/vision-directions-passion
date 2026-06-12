@@ -290,6 +290,20 @@
       "stage": "Pre-IPO (Confidential S-1 filed June 1, 2026; $965B valuation post $65B Series H; Nasdaq Oct 2026 target)",
       "signal": "hot",
       "notes": "Confidentially filed S-1 with SEC on June 1, 2026 after closing $65B Series H led by Altimeter, Sequoia, Dragoneer. $965B post-money valuation — world's most valuable private AI company, eclipsing OpenAI's $852B for the first time. $47B ARR run-rate as of May 2026 (up from $30B in April 2026); first profitable quarter projected Q2 2026. Oct 2026 Nasdaq listing targeting $1T+ debut valuation. Enterprise signal: 72 open sales roles vs 67 research roles in the S-1 — Claude is now primarily a commercial enterprise utility. Expected to beat OpenAI to public markets by 6-12 months. Key risk for enterprise CTOs: once public, pricing power hardens — companies with >$5M annual Claude API spend face accelerating lock-in."
+    },
+    {
+      "name": "NEURA Robotics",
+      "domain": "Full-Stack Physical AI Platform (Humanoid + Mobile Robots + Cobot Arms)",
+      "stage": "Series C ($1.4B, June 10, 2026; investors: NVIDIA, Amazon, Qualcomm, Tether, Bosch, Schaeffler, European Investment Bank)",
+      "signal": "hot",
+      "notes": "Largest full-stack robotics funding round in history (June 10, 2026). Germany-based physical AI platform building humanoid robots, mobile robots, light robot arms, and sensor kits for manufacturing + supply chain. Key moat: 'NEURA Gyms' — real-world proprietary training environments for cognitive robots, making experiential training data the structural advantage analogous to Waymo's miles-driven dataset. Investor coalition (NVIDIA silicon + Amazon cloud/distribution + Qualcomm edge inference + Bosch/Schaeffler OEM customers) creates a vertically integrated route to European industrial market. EU domicile is a product feature for GDPR/NIS2-regulated European enterprise customers blocked from US-cloud-governed robots. Target: serial production to multi-million robots by 2030."
+    },
+    {
+      "name": "Armada",
+      "domain": "Edge AI Infrastructure (Disconnected / Remote / Military AI Compute)",
+      "stage": "Series B ($230M, $2.2B valuation; led by 8090 Industries, BlackRock, Overmatch Ventures)",
+      "signal": "watch",
+      "notes": "Builds purpose-built AI infrastructure nodes for edge environments where centralized GPU cloud is unavailable: military forward operating bases, remote industrial sites, maritime/airborne platforms. $230M Series B led by BlackRock + 8090 Industries (defense tech-focused) + Overmatch Ventures. Distinct from Lambda Labs / CoreWeave (centralized AI factories) — Armada targets constrained-compute environments where latency, air-gap, and sovereignty requirements make cloud inference impossible. Signal: defense AI and remote industrial AI inference is large enough to attract $2.2B valuations — suggests the 'last-mile AI compute' problem is now funded at infrastructure scale, not just as military R&D."
     }
   ],
   "careerMilestones": [

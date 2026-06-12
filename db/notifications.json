@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-06-11"
+    "last_updated": "2026-06-12"
   },
   "entries": [
     {
@@ -557,6 +557,24 @@
         "Staff Engineer promotion in the AI era: AI velocity tooling as a multiplier for influence scope",
         "Serving LLMs at Scale: the Hidden KV Cache Advantage (QCon AI Boston 2026)",
         "Beyond the Prototype: Scaling Framework Agnostic AI Agent Infrastructure with Ray (QCon AI Boston 2026)"
+      ]
+    },
+    {
+      "timestamp": "2026-06-12T08:00:00Z",
+      "type": "market-scan",
+      "title": "Friday update: drill + market signal scan",
+      "summary": "Added a Hard distributed-systems hotfix drill: GCP Pub/Sub DLQ infinite retry storm caused by a Protobuf breaking schema change (field removal without 'reserved') — the DLQ subscriber uses the same broken binary, creating a closed NAK loop at 8,300 msg/sec that saturates the 100K outstanding-message quota and halts the primary pipeline for 31 minutes via flow-control backpressure. Market scan added 3 new business problems (NEURA Robotics $1.4B Series C European physical AI platform, Meta x Scale AI frontier talent acqui-hire at $14.3B, CoreWeave/NVIDIA Vera Rubin agentic AI compute hardware generation) and added NEURA Robotics and Armada to the enterprise watchlist.",
+      "tasks": [
+        "drill",
+        "market-scan"
+      ],
+      "items_added": [
+        "GCP Pub/Sub Dead Letter Topic Infinite Retry Storm — Protobuf Breaking Schema Change Stalls ML Event Pipeline for 31 Minutes",
+        "European full-stack physical AI platform consolidation (NEURA Robotics $1.4B Series C)",
+        "Frontier AI talent concentration — acqui-hire at platform scale (Meta x Scale AI)",
+        "Agentic AI compute hardware generation (NVIDIA Vera Rubin / CoreWeave)",
+        "NEURA Robotics (watchlist)",
+        "Armada (watchlist)"
       ]
     }
   ]

@@ -11,7 +11,7 @@
       "TAM",
       "Tags"
     ],
-    "last_updated": "2026-06-05"
+    "last_updated": "2026-06-12"
   },
   "sections": [
     {
@@ -677,6 +677,39 @@
             "biz"
           ],
           "added": "2026-06-05"
+        },
+        {
+          "problem": "European full-stack physical AI platform consolidation (humanoid + mobile + cobot)",
+          "enterprise": "NEURA Robotics ($1.4B Series C, June 10, 2026; investors: NVIDIA, Amazon, Qualcomm, Tether, Bosch, Schaeffler, European Investment Bank; largest full-stack robotics round in history)",
+          "market_fit": "NEURA Robotics' $1.4B Series C (June 10, 2026) — the largest ever for a full-stack robotics company — signals that physical AI is developing distinct geographic investor clusters: US (Figure AI, Apptronik, Tesla Optimus) and EU (NEURA, Franka/Agile Robots). NEURA's differentiation is the 'NEURA Gyms' concept: real-world training environments where cognitive robots accumulate proprietary experience data at scale, making training data the structural moat (analogous to how autonomous vehicle miles-driven created Waymo's data advantage). Co-investment from NVIDIA (silicon) + Amazon (AWS cloud + distribution) + Qualcomm (edge inference chips) + Bosch/Schaeffler (manufacturing OEM customers) represents a vertically integrated go-to-market that bypasses the startup-to-OEM sale cycle. For enterprises in GDPR/NIS2-governed EU markets blocked from US cloud by data residency rules, an EU-domiciled physical AI platform eliminates the multi-cloud compliance risk of deploying US-built robots in regulated European factories.",
+          "tam": "$50B",
+          "tags": [
+            "ml",
+            "biz"
+          ],
+          "added": "2026-06-12"
+        },
+        {
+          "problem": "Frontier AI talent concentration — acqui-hire at platform scale",
+          "enterprise": "Meta x Scale AI (~$14.3B for 50% stake, June 2026; Alexandr Wang (28) leads new Meta Superintelligence Labs; 11+ senior engineers from OpenAI, Anthropic, Google hired within weeks of deal close)",
+          "market_fit": "Meta's acquisition of a 50% stake in Scale AI — primarily to install founder Alexandr Wang as head of Meta Superintelligence Labs — represents a new phase of the AI talent war: the 'platform-scale acqui-hire.' Rather than recruiting individual researchers at $10–50M compensation packages, Meta acquired an entire talent gravity field by co-owning Scale AI's organizational relationships and network effects with frontier lab researchers. Within weeks, 11+ senior engineers from OpenAI, Anthropic, and Google defected to Meta Superintelligence Labs — citing Wang as the draw, not Meta's existing AI org. Implied cost per recruited senior researcher: ~$1.5B when normalized across the cohort. Enterprise implication: (1) Companies that cannot write $14B checks cannot compete for frontier model talent — the capability gap between frontier labs and enterprise AI teams becomes structural and permanent. (2) Scale AI's data-labeling pipeline is now strategically aligned with Meta's training roadmap — enterprises using Scale AI for RLHF data labeling face a potential conflict-of-interest risk in their training data supply chain. (3) The 'Meta Superintelligence Labs' branding signals Meta views superintelligence as a credible 3–5 year target, accelerating the timeline pressure on every enterprise AI strategy.",
+          "tam": "$200B+",
+          "tags": [
+            "ml",
+            "biz"
+          ],
+          "added": "2026-06-12"
+        },
+        {
+          "problem": "Agentic AI compute hardware generation (post-inference-only accelerators)",
+          "enterprise": "CoreWeave (first deployment of NVIDIA Vera Rubin NVL72, June 1, 2026; launched unified agentic AI capabilities: training + inference + observability + RL in one platform; CRWV stock +13.96% on day), NVIDIA (Vera Rubin platform targeting agentic era workloads)",
+          "market_fit": "CoreWeave's June 1, 2026 first-to-deploy of NVIDIA Vera Rubin NVL72 signals a hardware generation transition: the first AI accelerator architecture explicitly designed for 'agentic' workloads — autonomous systems that reason, plan, and self-improve in production. This is architecturally distinct from prior generations: (1) H100/A100 were optimized for batch training; (2) inference-only chips (Inferentia, TPU v5e) targeted low-cost single-pass generation. Agentic workloads combine simultaneous high-memory-bandwidth inference (generating actions), RL training from environment feedback, and continuous learning loops — a fundamentally different memory-compute access pattern. CoreWeave simultaneously launched a unified agentic AI capability layer (training + inference + observability + RL) on top of Vera Rubin NVL72, positioning it as the first 'agentic AI cloud' rather than a GPU rental service. For engineering teams building multi-step AI agents with RLHF or online learning components, this creates a new infrastructure procurement decision: purpose-built agentic accelerators vs assembling mixed H100 (training) + A10G (inference) clusters. The 13.96% stock surge on announcement reflects Wall Street pricing in CoreWeave's three-month head start on Vera Rubin as a durable competitive moat against AWS/GCP/Azure who must wait for NVIDIA allocation.",
+          "tam": "$40B",
+          "tags": [
+            "infra",
+            "ml"
+          ],
+          "added": "2026-06-12"
         }
       ]
     }
