@@ -9,7 +9,7 @@
       "Key Considerations",
       "Phase"
     ],
-    "last_updated": "2026-06-08"
+    "last_updated": "2026-06-15"
   },
   "sections": [
     {
@@ -565,6 +565,12 @@
           "considerations": "A Pinterest case study (June 2026) shows how a Senior engineer accelerated to Staff by proactively adopting AI coding tools and systematically amplifying the impact beyond their immediate team. Three key dimensions: (1) Cross-team influence — identify a problem, offer to help fix it, then use AI tooling to deliver faster than expected ('Your page is slow, here's the data, and I'll help you fix it' vs. just filing a bug); (2) Emerging tech leverage — treat AI tools as an industry-wide shift with natural overlap to developer productivity; experiment broadly, measure velocity gains, document concrete numbers; (3) Community creation — share findings in a demo to engineering+product+design, get selected to lead company-wide AI coding standards. The pattern: early adopter → internal champion → recognized authority → formal influence scope. For staff-level promotion, the key question is not 'how fast do you ship?' but 'how wide is your blast radius?'",
           "phase": "Cross-cutting",
           "added": "2026-06-08"
+        },
+        {
+          "topic": "AI-authored code governance at scale: review posture, architectural drift, and codebase knowledge erosion above the 25% threshold",
+          "considerations": "DX Q1 2026 data (26.9% of production code AI-authored, projecting 40%+ by Q4 2026) crosses the threshold where traditional code review and knowledge transfer models break down structurally. Three compounding risks staff+ engineers must own: (1) Codebase knowledge erosion — when 30%+ of code has no human author, nobody 'knows' those sections; incidents in that code surface with no instinctive owner and no on-call tribal knowledge; mitigate by requiring human-written regression tests for every AI-generated function above N lines, creating a forcing function for a human to understand the code; (2) Architectural drift — AI tools optimize for local correctness (pass the tests, match the style guide) but are blind to emergent architectural invariants, deprecated internal abstractions, and private patterns; over time this produces 'zombie patterns' where technically correct but architecturally inconsistent code accumulates; mitigate by investing in ArchUnit-style architectural fitness function tests that codify the constraints AI cannot infer; (3) Differential security review posture — AI-generated code has a distinct bug profile vs human-written: lower syntax/structure error rate but higher subtle semantic error rate in auth checks, boundary conditions, and state machine transitions; SAST tools trained on human code patterns undercount AI-authored vulnerabilities; require security review depth proportional to surface area (all auth/crypto/data-access paths authored by AI get manual review regardless of test coverage); governance toolkit: adopt 'ai-authored' git trailer in commit policy for provenance tracking, gate AI code on the same reviewer SLAs as human code (don't use AI to bypass review queues), and instrument tech-debt dashboards to track AI-vs-human-authored defect rates separately to calibrate trust over time",
+          "phase": "Cross-cutting",
+          "added": "2026-06-15"
         }
       ]
     }

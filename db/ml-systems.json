@@ -10,7 +10,7 @@
       "Tags",
       "Resources"
     ],
-    "last_updated": "2026-06-08"
+    "last_updated": "2026-06-15"
   },
   "sections": [
     {
@@ -686,6 +686,38 @@
             }
           ],
           "added": "2026-06-08"
+        },
+        {
+          "topic": "vLLM v0.23.0 Multi-Tier KV Cache Offloading + Model Runner V2 + Rust Frontend",
+          "concepts": "Object-store secondary tier for KV cache enables GPU HBM → CPU DRAM → S3/GCS/ABS cascade offloading; per-request offloading policy configurable via on_new_request lifecycle hook for fine-grained GPU memory management under bursty traffic. CUTLASS FP8 padding bypass delivers +20% throughput on FP8 GEMM ops for H100/B200 workloads; MoE-permute buffer pre-allocation yields +9–14% on Mixtral/DeepSeek MoE models. Model Runner V2 now default for Llama and Mistral dense models with FlashInfer samplers and breakable CUDA graphs. Experimental Rust frontend with streaming endpoints bypasses Python GIL on the critical request-handling path. DFlash Causal support with proper lookahead-slot allocation for speculative decoding; DeepSeek-V4 maturity; Transformers v5 compatibility.",
+          "tags": [
+            "ml",
+            "infra",
+            "scale"
+          ],
+          "resources": [
+            {
+              "title": "vLLM v0.23.0 Release Notes",
+              "url": "https://github.com/vllm-project/vllm/releases/tag/v0.23.0"
+            }
+          ],
+          "added": "2026-06-15"
+        },
+        {
+          "topic": "SGLang v0.5.13 HiCache Hierarchical KV Offload + Speculative Decoding V2 Default",
+          "concepts": "HiCache with UnifiedRadixTree enables automatic hierarchical KV cache offloading for hybrid models (Mamba, SWA) — GPU HBM → CPU DRAM → NVMe SSD; token-count bucket warm-up eliminates cold-start stalls on first serving request after model load. Speculative Decoding V2 (tree drafting with topk > 1) is now the production default across all backends (triton, FA3, MLA, aiter), supporting page_size > 1 and hybrid-linear models; Spec V1 deprecated with EAGLE/MTP unified onto the V2 worker path. DeepSeek V4 context parallelism combined with MTP speculation, flash_mla_sparse_fwd sparse-attention kernel, FP4 indexer support, and waterfill load balancing for DeepEP expert parallelism. SM120 GPU (Blackwell) compatibility added; collectively reduces per-step overhead under high concurrency.",
+          "tags": [
+            "ml",
+            "infra",
+            "scale"
+          ],
+          "resources": [
+            {
+              "title": "SGLang v0.5.13 Release Notes",
+              "url": "https://github.com/sgl-project/sglang/releases/tag/v0.5.13"
+            }
+          ],
+          "added": "2026-06-15"
         }
       ]
     },

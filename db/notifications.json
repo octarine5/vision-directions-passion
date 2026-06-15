@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-06-12"
+    "last_updated": "2026-06-15"
   },
   "entries": [
     {
@@ -575,6 +575,22 @@
         "Agentic AI compute hardware generation (NVIDIA Vera Rubin / CoreWeave)",
         "NEURA Robotics (watchlist)",
         "Armada (watchlist)"
+      ]
+    },
+    {
+      "timestamp": "2026-06-15T08:00:00Z",
+      "type": "knowledge-base",
+      "title": "Monday update: drill + knowledge base refresh",
+      "summary": "Added a Hard ML Serving hotfix drill: TensorRT-LLM 0.10.0 FP8 cuBLAS GEMM silent NaN cascade triggered by GKE node pool CUDA 12.4→12.6 upgrade — cuBLAS tiling algorithm change causes FP8 descaling factor buffer misalignment (64-byte reads from 128-byte allocated buffer), scaling factors read as 0.0, NaN propagates through transformer attention layers producing garbled repeating-token outputs at 0% HTTP error rate; 49,200 garbled responses over 52 minutes, $340K SLA exposure, detected only by LLM judge quality monitor. KB refresh: 2 new ML systems entries (vLLM v0.23.0 multi-tier KV cache offloading + CUTLASS FP8 +20% + Rust frontend; SGLang v0.5.13 HiCache hierarchical KV offload + Spec V2 as production default), 1 new org decision entry (AI-authored code governance at scale: review posture, architectural drift, and codebase knowledge erosion above the 25% threshold).",
+      "tasks": [
+        "drill",
+        "knowledge-base"
+      ],
+      "items_added": [
+        "TensorRT-LLM FP8 cuBLAS GEMM Silent NaN Cascade — GKE Node Pool CUDA 12.6 Upgrade Produces Garbled Outputs at 0% Error Rate",
+        "vLLM v0.23.0 Multi-Tier KV Cache Offloading + Model Runner V2 + Rust Frontend",
+        "SGLang v0.5.13 HiCache Hierarchical KV Offload + Speculative Decoding V2 Default",
+        "AI-authored code governance at scale: review posture, architectural drift, and codebase knowledge erosion above the 25% threshold"
       ]
     }
   ]
