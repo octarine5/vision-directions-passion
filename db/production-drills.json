@@ -3,7 +3,7 @@
     "category": "production-drills",
     "display_name": "Production Drills",
     "layout": "drills",
-    "last_updated": "2026-06-15"
+    "last_updated": "2026-06-16"
   },
   "sections": [
     {
@@ -235,6 +235,21 @@
             "connection-pooling"
           ],
           "added": "2026-06-11"
+        },
+        {
+          "drill": "ClickHouse MergeTree \"Too Many Parts\" Insert Storm — Kafka Engine Misconfiguration Stalls Real-Time Analytics",
+          "layer": "Database & Storage (ClickHouse)",
+          "difficulty": "Medium-Hard",
+          "scenario": "At 03:14 UTC, an on-call engineer at a clickstream analytics company is paged for `analytics.events_local` INSERT failures. A recent change set the Kafka Engine table's `kafka_max_block_size` to 1 and disabled batching at the consumer, so ClickHouse flushes a new part per message instead of per batch. Within 40 minutes, part counts on the busiest partition balloon past the threshold and inserts start failing with: `Code: 252. DB::Exception: Too many parts (309 with average size of 0.01 MiB) in table 'analytics.events_local' (Merger Mutator). Parts have not been merged in 305 seconds. Look at the 'parts_to_throw_insert' merge tree setting.` Background merge threads can't keep up — `system.merges` shows 5,380 queued tasks in `ReplicatedMergeTreeQueue`, replication lag to the two replicas climbs from 2s to 11 minutes, and EBS volume IOPS on the ClickHouse nodes spike from a baseline of 1,200 to 18,400, triggering disk throttling. Grafana's `events_ingested_total` rate drops from 42k/s to 0, and the downstream Superset dashboards used by the trust & safety team go stale.",
+          "exercise": "1. Reproduce: Stand up a local ClickHouse + Kafka (redpanda) test cluster, set `kafka_max_block_size=1` on a Kafka Engine table and `kafka_flush_interval_ms` to a low value, then push 50k single-record messages and watch `system.parts` part count climb\n2. Diagnose: Query `SELECT partition, count() FROM system.parts WHERE active GROUP BY partition ORDER BY count() DESC` and `SELECT * FROM system.replication_queue` to confirm merge backlog vs. genuine disk/CPU exhaustion\n3. Fix: Restore consumer-side batching (raise `kafka_max_block_size` to 1M rows / set `kafka_flush_interval_ms` to 7500ms), set `max_insert_block_size` appropriately on the Materialized View's target table, and enable `async_insert=1` with `wait_for_async_insert=1` as a safety net for any direct small inserts\n4. Validate: Confirm `system.parts` count per partition returns under `parts_to_throw_insert` (300 default) within one merge cycle, replication lag drops back under 5s, and `events_ingested_total` rate recovers to baseline\n5. Prevent: Add a Prometheus alert on `ClickHouseAsyncMetrics_MaxPartCountForPartition` exceeding 150, document the Kafka Engine batching contract in the team runbook, and add a CI check that rejects PRs setting `kafka_max_block_size` below a sane floor",
+          "tags": [
+            "clickhouse",
+            "kafka",
+            "mergetree",
+            "insert-storm",
+            "replication-lag"
+          ],
+          "added": "2026-06-16"
         }
       ]
     },

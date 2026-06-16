@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-06-15"
+    "last_updated": "2026-06-16"
   },
   "entries": [
     {
@@ -591,6 +591,18 @@
         "vLLM v0.23.0 Multi-Tier KV Cache Offloading + Model Runner V2 + Rust Frontend",
         "SGLang v0.5.13 HiCache Hierarchical KV Offload + Speculative Decoding V2 Default",
         "AI-authored code governance at scale: review posture, architectural drift, and codebase knowledge erosion above the 25% threshold"
+      ]
+    },
+    {
+      "timestamp": "2026-06-16T16:10:00Z",
+      "type": "drill",
+      "title": "Daily drill: ClickHouse MergeTree \"Too Many Parts\" Insert Storm",
+      "summary": "Added a Medium-Hard Database & Storage hotfix drill: a Kafka Engine misconfiguration (kafka_max_block_size=1) causes per-message parts in a ClickHouse MergeTree table, triggering \"Too many parts\" insert failures, an 11-minute replication lag spike, and an EBS IOPS surge from 1.2k to 18.4k that stalls real-time analytics ingestion.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "ClickHouse MergeTree \"Too Many Parts\" Insert Storm — Kafka Engine Misconfiguration Stalls Real-Time Analytics"
       ]
     }
   ]
