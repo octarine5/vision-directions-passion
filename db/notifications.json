@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-06-16"
+    "last_updated": "2026-06-17"
   },
   "entries": [
     {
@@ -591,6 +591,18 @@
         "vLLM v0.23.0 Multi-Tier KV Cache Offloading + Model Runner V2 + Rust Frontend",
         "SGLang v0.5.13 HiCache Hierarchical KV Offload + Speculative Decoding V2 Default",
         "AI-authored code governance at scale: review posture, architectural drift, and codebase knowledge erosion above the 25% threshold"
+      ]
+    },
+    {
+      "timestamp": "2026-06-17T08:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: DynamoDB Hot Partition — Sequential User ID Batch Scan Exhausts Adaptive Capacity, Stales ML Feature Reads for 2.3M Users",
+      "summary": "Added a Hard-difficulty distributed-systems hotfix drill: a daily batch inference pipeline reads DynamoDB user features in sequential user_id order (usr_00000001…usr_02300000), causing a hash-collision hotspot where 63% of IDs land on 3 internal partitions. At 71,204 RCU/min (12× provisioned), Adaptive Capacity burst credits exhaust in 15 minutes — throttling the real-time recommendation Lambda and serving 6-hour-stale features to 2.3M DAUs, dropping feed CTR 28% and costing $184K/hr. Exercise covers Contributor Insights triage, Lambda concurrency freeze as immediate mitigation, batch read shuffle + adaptive boto3 retry as the fix, and SQS-spread BatchGetItem for durable rate control.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "DynamoDB Hot Partition — Sequential User ID Batch Scan Exhausts Adaptive Capacity, Stales ML Feature Reads for 2.3M Users"
       ]
     },
     {
