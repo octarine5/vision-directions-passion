@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-06-17"
+    "last_updated": "2026-06-18"
   },
   "entries": [
     {
@@ -603,6 +603,18 @@
       ],
       "items_added": [
         "DynamoDB Hot Partition — Sequential User ID Batch Scan Exhausts Adaptive Capacity, Stales ML Feature Reads for 2.3M Users"
+      ]
+    },
+    {
+      "timestamp": "2026-06-18T08:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: NVIDIA MPS Daemon SIGFPE — flash-attn Empty-Sequence Division-by-Zero Kills All Co-Tenant GPU Processes",
+      "summary": "Added a Hard-difficulty ML Serving hotfix drill: on a multi-tenant p3.8xlarge GPU sharing platform, tenant-0003's flash-attn 2.6.1 upgrade introduced a seqlen=0 division-by-zero CUDA device-side assert that triggers NVIDIA MPS daemon to SIGKILL all 3 co-tenant processes on GPU 0 simultaneously — taking tenant-0001 and tenant-0002 offline as collateral damage for 7 minutes while 4.2 GB model weights reload from S3. Covers MPS blast-radius triage, per-tenant MPS server isolation, flash-attn upgrade fix, and CUDA exception CI validation gate.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "NVIDIA MPS Daemon SIGFPE — flash-attn Empty-Sequence Division-by-Zero Kills All Co-Tenant GPU Processes, 3 Inference Services Dark 7 Minutes"
       ]
     },
     {
