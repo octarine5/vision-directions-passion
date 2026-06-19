@@ -304,6 +304,13 @@
       "stage": "Series B ($230M, $2.2B valuation; led by 8090 Industries, BlackRock, Overmatch Ventures)",
       "signal": "watch",
       "notes": "Builds purpose-built AI infrastructure nodes for edge environments where centralized GPU cloud is unavailable: military forward operating bases, remote industrial sites, maritime/airborne platforms. $230M Series B led by BlackRock + 8090 Industries (defense tech-focused) + Overmatch Ventures. Distinct from Lambda Labs / CoreWeave (centralized AI factories) — Armada targets constrained-compute environments where latency, air-gap, and sovereignty requirements make cloud inference impossible. Signal: defense AI and remote industrial AI inference is large enough to attract $2.2B valuations — suggests the 'last-mile AI compute' problem is now funded at infrastructure scale, not just as military R&D."
+    },
+    {
+      "name": "DeepInfra",
+      "domain": "Open-Source Inference API Gateway & Model Aggregation",
+      "stage": "Series B ($107M, May 4, 2026; co-led by 500 Global + Georges Harik; investors: NVIDIA, Samsung Next, Supermicro, Felicis, A.Capital, Peak6, Upper90)",
+      "signal": "hot",
+      "notes": "Processes 5 trillion tokens/week via 190+ open-source models (Llama, Mixtral, Qwen, Phi, Gemma, DeepSeek) behind a single OpenAI-compatible API endpoint. 25× token volume growth since Series A; revenue 3× in 2026. NVIDIA's strategic co-investment signals DeepInfra is a key open-source compute distribution channel — buying GPU time at scale without hyperscaler markup. Category thesis: the OpenAI-compatible API spec is becoming the de facto standard for LLM routing; DeepInfra is building the provider-agnostic inference aggregation layer that lets enterprises switch models without code changes. At current growth trajectory, the inference gateway category is inflecting from startup niche to infrastructure-tier."
     }
   ],
   "careerMilestones": [

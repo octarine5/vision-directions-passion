@@ -11,7 +11,7 @@
       "TAM",
       "Tags"
     ],
-    "last_updated": "2026-06-12"
+    "last_updated": "2026-06-19"
   },
   "sections": [
     {
@@ -710,6 +710,39 @@
             "ml"
           ],
           "added": "2026-06-12"
+        },
+        {
+          "problem": "AI lab developer toolchain vertical integration — ecosystem lock-in via open-source acquisition",
+          "enterprise": "OpenAI (acquired Astral: uv + ruff + ty, Mar 19, 2026; acquired Promptfoo: AI security testing, Mar 2026; 7 total acquisitions in 2026 — io, Statsig, Astral, Promptfoo, Hiro Finance + 2 others — nearly matching all of 2025)",
+          "market_fit": "OpenAI's acquisition of Astral (uv: Python package manager used by millions of engineers, ruff: dominant Python linter, ty: type checker) on March 19, 2026 signals a strategic shift beyond API monetization: controlling the developer's daily workflow before they open a model API. Pattern mirrors Microsoft's GitHub + VS Code + npm ecosystem playbook — once a developer's package manager and linter are tied to an AI lab, switching cost compounds with every tool integration. Promptfoo (AI security testing, same month) fills the enterprise security gate in the Codex pipeline. OpenAI's 7 acquisitions in 2026 — compared to 5 in all of 2025 — signals an accelerating land-grab for developer infrastructure that doesn't depend on model quality alone. Enterprise implication: companies choosing Codex for AI coding now inherit a vertically integrated Python toolchain with alignment to OpenAI's training data and security posture. Competing labs (Anthropic/Claude, Google/Gemini) have no equivalent developer toolchain ownership — their enterprise AI coding offerings remain model-only, with ecosystem risk exposed.",
+          "tam": "$30B",
+          "tags": [
+            "ml",
+            "biz"
+          ],
+          "added": "2026-06-19"
+        },
+        {
+          "problem": "Open-source inference API standardization & model aggregation layer",
+          "enterprise": "DeepInfra ($107M Series B, May 4, 2026; NVIDIA, Samsung Next, Supermicro, Felicis co-investors; 190+ open-source models; 5 trillion tokens/week; 25× token growth since Series A; revenue 3× in 2026), LiteLLM, OpenRouter",
+          "market_fit": "DeepInfra's $107M Series B — co-led by 500 Global with NVIDIA, Samsung Next, and Supermicro as strategic investors — signals that the 'OpenAI-compatible API' specification has become the de facto TCP/IP of LLM serving. DeepInfra processes 5 trillion tokens/week (comparable to or exceeding most hyperscaler-hosted model volumes) via a unified gateway that routes to 190+ open-source models (Llama, Mixtral, Qwen, Phi, Gemma, DeepSeek) behind a single OpenAI-compatible endpoint. NVIDIA's investment is strategically motivated: DeepInfra is a high-velocity distribution channel for NVIDIA GPU compute without the hyperscaler markup or sales cycle. Enterprise engineering implication: the inference gateway layer (DeepInfra, LiteLLM, OpenRouter) is becoming the provider-agnostic abstraction that lets teams switch from Claude → Llama → Qwen → custom fine-tuned models without application code changes — the same way Kubernetes abstracted cloud infrastructure. At 25× token volume growth since Series A, the category is inflecting: inference aggregation is no longer a niche developer tool but is approaching infrastructure-tier adoption, with NVIDIA and Samsung Next validating it as a strategic compute distribution channel rather than a startup experiment.",
+          "tam": "$15B",
+          "tags": [
+            "ml",
+            "infra"
+          ],
+          "added": "2026-06-19"
+        },
+        {
+          "problem": "Physical AI open-world foundation models — synthetic training data generation for robotics & AV",
+          "enterprise": "NVIDIA Cosmos 3 (launched June 1, 2026, open-source; Cosmos Coalition: Skild AI, Runway, Agile Robots, Black Forest Labs, Generalist, LTX; first open omnimodel for physical AI), Google DeepMind Gemini Robotics",
+          "market_fit": "NVIDIA's launch of Cosmos 3 on June 1, 2026 (at GTC Taipei) establishes the 'world model' as a distinct infrastructure layer beneath the robot operating stack. Cosmos 3 is the first fully open omnimodel that natively generates text, images, video, ambient sound, and robot actions with physics-accurate simulation — reducing physical AI training cycles from months to days by providing unlimited synthetic training data. The Cosmos Coalition (Skild AI for warehouse robotics, Runway for video synthesis, Agile Robots for manipulation, Black Forest Labs for image generation) creates an open ecosystem analogous to how Hugging Face Hub standardized NLP model sharing — but for physical world simulation. Distinct from the robot hardware companies (Figure AI, NEURA Robotics): Cosmos 3 is the data generation infrastructure layer that all of them will depend on for training. Strategic implication: NVIDIA controls both the GPU training hardware (H100/B200) AND the world model generating the training data, creating a complete vertical from silicon to synthetic experience. For engineering teams at robotics companies, Cosmos 3 changes the build-vs-buy decision for simulation: a team of 5 engineers can now generate Waymo-scale synthetic driving or manipulation data without a physics simulation team. OpenMDW-ready packaging means trained policies are immediately deployable to robot hardware without format conversion.",
+          "tam": "$20B",
+          "tags": [
+            "ml",
+            "infra"
+          ],
+          "added": "2026-06-19"
         }
       ]
     }

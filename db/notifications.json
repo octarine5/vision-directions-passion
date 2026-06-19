@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-06-18"
+    "last_updated": "2026-06-19"
   },
   "entries": [
     {
@@ -627,6 +627,23 @@
       ],
       "items_added": [
         "ClickHouse MergeTree \"Too Many Parts\" Insert Storm — Kafka Engine Misconfiguration Stalls Real-Time Analytics"
+      ]
+    },
+    {
+      "timestamp": "2026-06-19T08:00:00Z",
+      "type": "market-scan",
+      "title": "Friday update: drill + market signal scan",
+      "summary": "Added a Hard ML Serving hotfix drill: AWS Bedrock streaming truncation where ALB 60s idle timeout silently cuts Claude SSE streams mid-response for 847 long-document contract analyses — HTTP 200 returned with partial buffer, 0% error rate, detected only by a data quality word-count Lambda 2 hours later. Market scan added 3 new business problems (OpenAI developer toolchain vertical integration via Astral/Promptfoo acquisitions, DeepInfra $107M NVIDIA-backed open-source inference API standardization at 5T tokens/week, NVIDIA Cosmos 3 open physical-AI world model) and added DeepInfra to the enterprise watchlist.",
+      "tasks": [
+        "drill",
+        "market-scan"
+      ],
+      "items_added": [
+        "AWS Bedrock Streaming Truncation — ALB Idle Timeout Silently Corrupts Claude SSE Responses for Long-Document Analysis",
+        "AI lab developer toolchain vertical integration — ecosystem lock-in via open-source acquisition",
+        "Open-source inference API standardization & model aggregation layer",
+        "Physical AI open-world foundation models — synthetic training data generation for robotics & AV",
+        "DeepInfra (watchlist)"
       ]
     }
   ]
