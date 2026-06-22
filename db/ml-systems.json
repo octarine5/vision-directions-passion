@@ -10,7 +10,7 @@
       "Tags",
       "Resources"
     ],
-    "last_updated": "2026-06-15"
+    "last_updated": "2026-06-22"
   },
   "sections": [
     {
@@ -718,6 +718,22 @@
             }
           ],
           "added": "2026-06-15"
+        },
+        {
+          "topic": "Meta SilverTorch: Unified Model-Based Recommendation — Index as Model",
+          "concepts": "SilverTorch reimagines Meta's retrieval ecosystem by making every retrieval component (item index, eligibility filter, scoring layer, user tower) a tensor or operator inside a single PyTorch model. Traditional recommendation pipelines treat index lookup, candidate filtering, and scoring as separate systems with separate deployments, build/deploy cycles, and optimization domains; SilverTorch unifies all of these as nn.Modules in a single PyTorch training and inference graph. Key architectural insight: the boundary between ML engineering and infrastructure engineering dissolves — the whole system reduces to a single PyTorch model, so it automatically benefits from every advance in the PyTorch ecosystem (torch.compile, quantization, hardware-specific kernels, CUDA graph capture) without separate per-component optimization work. Enables direct integration of LLM capabilities inside the retrieval model rather than orchestrating LLMs as an external service — tighter coupling raises the system ceiling for LLM-powered recommendation at production scale. GPU-optimized end-to-end retrieval: the unified model runs entirely on GPU for both training and serving, eliminating the CPU-GPU transfer overhead that constrained index lookup in prior architectures. Democratizes large-scale GPU recommendation infrastructure: any team can train and deploy on standard GPU hardware without maintaining a custom index serving system. Accepted at SIGIR 2026 full paper track; deployed in production at Meta for major recommendation surfaces. Published May 26, 2026.",
+          "tags": [
+            "ml",
+            "infra",
+            "scale"
+          ],
+          "resources": [
+            {
+              "title": "SilverTorch: Meta Engineering Blog (May 2026)",
+              "url": "https://engineering.fb.com/2026/05/26/ml-applications/silvertorch-index-as-model-new-retrieval-paradigm-recommendation-systems/"
+            }
+          ],
+          "added": "2026-06-22"
         }
       ]
     },

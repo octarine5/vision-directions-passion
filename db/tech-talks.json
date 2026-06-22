@@ -3,7 +3,7 @@
     "category": "tech-talks",
     "display_name": "Tech Talks",
     "layout": "cards",
-    "last_updated": "2026-06-08"
+    "last_updated": "2026-06-22"
   },
   "sections": [
     {
@@ -666,6 +666,22 @@
           "venue": "KubeCon 2023",
           "description": "Internal developer platforms, golden paths, self-service",
           "added": "2026-04-07"
+        },
+        {
+          "title": "Team Topologies as the 'Infrastructure for Agency' with AI",
+          "url": "https://qconlondon.com/presentation/mar2026/team-topologies-infrastructure-agency-ai",
+          "speaker": "Matthew Skelton (co-author, Team Topologies)",
+          "venue": "QCon London 2026",
+          "description": "Argues that AI success depends on organisational maturity, not just model capability. Maps cognitive load directly to AI context windows: just as humans fail when mental capacity is exceeded, AI agents hallucinate or lose coherence when they operate outside defined boundaries. Introduces stewardship (vs. mere ownership) as the production operating model for AI systems — looking after agentic infrastructure for those who follow. JP Morgan Athena platform case study: reduced 60% of dependencies using opt-in adoption ('friendly FOMO') rather than top-down mandates — social dynamics outperformed enforcement. Innovation and Practices Enabling Teams as the mechanism for knowledge diffusion and measurable AI ROI. Core thesis: the primary obstacles to AI value are organisational, not technical — team structure is the hidden constraint.",
+          "added": "2026-06-22"
+        },
+        {
+          "title": "Blurring the Lines: Engineering & Data Teams in the Age of AI",
+          "url": "https://www.infoq.com/news/2026/03/engineering-data-teams/",
+          "speaker": "Lada Indra (Head of Data Platform, Pleo)",
+          "venue": "QCon London 2026",
+          "description": "AI systems have erased the boundary between software engineering and data engineering: engineers now deploy models, handle streaming predictions, and manage real-time feature pipelines; data engineers now own production-grade systems with engineer-level SLAs and on-call rotation. Practical convergence strategies: (1) data contracts — treat data streams like APIs by defining ownership, schema, and SLAs in code enforced through CI/CD schema registries, preventing silent breaks from corrupting downstream ML features; (2) full-stack observability — extend monitoring beyond uptime/latency to include data health (semantic validity, freshness, distribution consistency); (3) joint incident management — analytics engineers and data scientists join architecture reviews and share on-call responsibilities. Conclusion: the AI era requires one system, one team, shared responsibility — dissolving silos is the only way to deliver AI features reliably at scale.",
+          "added": "2026-06-22"
         }
       ]
     },

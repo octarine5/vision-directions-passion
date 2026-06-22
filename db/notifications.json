@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-06-19"
+    "last_updated": "2026-06-22"
   },
   "entries": [
     {
@@ -644,6 +644,24 @@
         "Open-source inference API standardization & model aggregation layer",
         "Physical AI open-world foundation models — synthetic training data generation for robotics & AV",
         "DeepInfra (watchlist)"
+      ]
+    },
+    {
+      "timestamp": "2026-06-22T08:00:00Z",
+      "type": "knowledge-base",
+      "title": "Monday update: drill + knowledge base refresh",
+      "summary": "Added a Hard distributed-systems drill: Kafka Streams changelog topic retention (24h) shorter than a 73-hour ECS scale-to-zero maintenance window wipes all 7 RocksDB state stores, zeroing ML fraud features and collapsing the block rate from 15.4% to 0.8% for 4 hours ($829K in fraudulent charges). KB refresh: 1 new ML systems entry (Meta SilverTorch unified PyTorch recommendation model — index as model, SIGIR 2026), 1 new system design entry (Airbnb multi-product data architecture with cross-pillar data contracts, June 2026), 2 new tech talks (QCon London 2026: Team Topologies as AI agency infrastructure by Matthew Skelton; Blurring the Lines engineering-data convergence by Lada Indra/Pleo), and 1 new org decision entry (engineering and data team convergence for AI production systems).",
+      "tasks": [
+        "drill",
+        "knowledge-base"
+      ],
+      "items_added": [
+        "Kafka Streams Changelog Retention Expiry — State Store Wipeout After 73-Hour Maintenance Pause Zeroes ML Feature Vectors, Fraud Model Block Rate Collapses",
+        "Meta SilverTorch: Unified Model-Based Recommendation — Index as Model",
+        "Multi-Product Data Architecture — Scaling the Offline Warehouse Across Product Boundaries (Airbnb)",
+        "Team Topologies as the 'Infrastructure for Agency' with AI (QCon London 2026)",
+        "Blurring the Lines: Engineering & Data Teams in the Age of AI (QCon London 2026)",
+        "Engineering and data team convergence: shared ownership of AI systems in production"
       ]
     }
   ]

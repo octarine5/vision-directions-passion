@@ -10,7 +10,7 @@
       "Tags",
       "Resources"
     ],
-    "last_updated": "2026-06-08"
+    "last_updated": "2026-06-22"
   },
   "sections": [
     {
@@ -1196,6 +1196,22 @@
             }
           ],
           "added": "2026-06-08"
+        },
+        {
+          "topic": "Multi-Product Data Architecture — Scaling the Offline Warehouse Across Product Boundaries (Airbnb)",
+          "concepts": "After launching new product pillars (Experiences, Rooms) in May 2025, Airbnb faced a data architecture challenge: each product pillar had its own production data models, schemas, and team ownership — but the offline data warehouse needed to provide a consistent, unified view across all pillars for analytics, ML features, and business reporting. Solution: treat the offline data warehouse as a translation layer that transforms raw production data into a standardized, reliable source of truth, rather than letting each pillar own a parallel analytics silo. Three architectural decisions: (1) Data contracts across product boundaries — each pillar codifies formal contracts (schema, owner, SLA, quality guarantees) for the data it publishes, enforced via CI/CD schema registries; cross-team data dependencies are treated like internal APIs with versioning and deprecation timelines, preventing silent schema breaks from corrupting downstream ML features; (2) Canonical domain models — a shared domain modeling layer above raw production tables provides pillar-agnostic views (e.g., a unified 'Booking' model valid across Homes, Experiences, and Rooms despite different underlying schemas), eliminating inconsistencies that arise when three teams each independently define 'what a booking is'; (3) Consistent quality gates, flexible contribution — the warehouse infrastructure enforces freshness checks, null-rate monitors, and distribution tests as non-optional quality gates, but is flexible about what data each pillar contributes — enabling new product pillars to onboard without requiring central infrastructure team involvement in every new dataset. Key lesson: in a multi-product company, the data model IS the shared contract between products; getting it wrong creates compounding integration debt. Published June 2026.",
+          "tags": [
+            "data",
+            "infra",
+            "scale"
+          ],
+          "resources": [
+            {
+              "title": "Scaling Beyond One: Airbnb Engineering Blog (Jun 2026)",
+              "url": "https://medium.com/airbnb-engineering/scaling-beyond-one-how-airbnb-evolved-its-data-architecture-for-a-multi-product-world-6125645d470c"
+            }
+          ],
+          "added": "2026-06-22"
         }
       ]
     }
