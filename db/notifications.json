@@ -2,9 +2,21 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-06-22"
+    "last_updated": "2026-06-23"
   },
   "entries": [
+    {
+      "timestamp": "2026-06-23T07:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: Azure Service Bus Session Lock Zombie — Pod OOMKill Triggers acceptNextSession 429 Storm",
+      "summary": "Added a Hard-difficulty distributed-systems hotfix drill: an AKS node drain OOMKills a Java pod mid-session, leaving an Azure Service Bus session lock held by the dead pod for 5 minutes while 15 survivor pods simultaneously hammer acceptNextSession — generating 900 throttled 429 requests/min that escalate to a 60-second backoff tier, halting all ordered order processing for 14 minutes (19,830 queued orders, $87K SLA exposure). Exercise covers zombie session lock triage, rolling-restart to reset backoff state, startup jitter fix, Session Lock Duration reduction from 5min to 60s, and Azure Monitor alerts for the throughput/active-session divergence pattern.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "Azure Service Bus Session Lock Zombie — Pod OOMKill Triggers acceptNextSession 429 Storm, Halts Ordered Order Processing for 14 Minutes"
+      ]
+    },
     {
       "timestamp": "2026-05-26T08:00:00Z",
       "type": "drill",
