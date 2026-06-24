@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-06-23"
+    "last_updated": "2026-06-24"
   },
   "entries": [
     {
@@ -656,6 +656,18 @@
         "Open-source inference API standardization & model aggregation layer",
         "Physical AI open-world foundation models — synthetic training data generation for robotics & AV",
         "DeepInfra (watchlist)"
+      ]
+    },
+    {
+      "timestamp": "2026-06-24T09:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: Kafka KRaft Controller Voter Set Mismatch — PVC Deletion Blocks Topic Mutations for 27 Minutes",
+      "summary": "Added a Hard-difficulty distributed-systems hotfix drill: on a GKE Confluent Platform 7.6 cluster running KRaft mode, the on-call SRE applies the (safe-in-ZooKeeper) PVC-delete-and-recreate procedure to a corrupted controller disk — but in KRaft mode this wipes meta.properties, leaving the replacement pod in CrashLoopBackOff and the 2-node quorum unable to commit any controller-plane log entry. All AdminClient mutations (CreateTopics, AlterConfigs) timeout for 27 minutes, stalling 14 microservice canary deploys and Confluent Schema Registry. Fix: kafka-storage.sh format with the surviving cluster UUID, then pod delete to restart cleanly.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "Kafka KRaft Controller Voter Set Mismatch — PVC Deletion Prevents Replacement Controller from Joining Quorum, Blocks All Topic Mutations for 27 Minutes"
       ]
     },
     {
