@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-06-24"
+    "last_updated": "2026-06-25"
   },
   "entries": [
     {
@@ -686,6 +686,18 @@
         "Team Topologies as the 'Infrastructure for Agency' with AI (QCon London 2026)",
         "Blurring the Lines: Engineering & Data Teams in the Age of AI (QCon London 2026)",
         "Engineering and data team convergence: shared ownership of AI systems in production"
+      ]
+    },
+    {
+      "timestamp": "2026-06-25T07:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: Nomad Job Priority Inversion — ML Training Batch priority=100 Preempts All 24 Payment Service Allocations, $1.54M Revenue Halt in 22 Minutes",
+      "summary": "Added a Hard-difficulty distributed-systems hotfix drill: a data scientist deploys an ml-training-sweep batch job with priority=100 (copy-pasted from dev cluster without review) to a prod HashiCorp Nomad 1.7.6 cluster running at 87% capacity. The payment-api service runs at priority=80. Nomad's batch preemption evicts all 24 payment-api allocations in 2 seconds; a priority-inversion death cycle re-preempts any rescheduled payment-api alloc every 3 seconds, Consul deregisters the service, Envoy upstreams go empty, and 312K sessions receive 503s for 22 minutes ($1.54M revenue halted). Exercise covers identification via nomad job status, stopping the batch job, fixing priority tiers (batch=30, payment=95), enforcing a Nomad Sentinel job-policy, isolating ML training in a separate namespace with preemption disabled, and prevention via CI linter, PagerDuty preemption alert, and a dev-to-prod migration checklist.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "Nomad Job Priority Inversion — ML Training Batch priority=100 Preempts All 24 Payment Service Allocations, $1.54M Revenue Halt in 22 Minutes"
       ]
     }
   ]
