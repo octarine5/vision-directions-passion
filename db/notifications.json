@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-06-25"
+    "last_updated": "2026-06-26"
   },
   "entries": [
     {
@@ -686,6 +686,24 @@
         "Team Topologies as the 'Infrastructure for Agency' with AI (QCon London 2026)",
         "Blurring the Lines: Engineering & Data Teams in the Age of AI (QCon London 2026)",
         "Engineering and data team convergence: shared ownership of AI systems in production"
+      ]
+    },
+    {
+      "timestamp": "2026-06-26T07:00:00Z",
+      "type": "market-scan",
+      "title": "Friday update: drill + market signal scan",
+      "summary": "Added a Hard ML Serving hotfix drill: Istio/Envoy per-instance retry budget amplifies a 3.2% vLLM KV cache 503 error rate into 100% outage in 4 minutes — retries hold KV blocks for 30s perTryTimeout, preventing recovery; fix is disable retries on 5xx, switch to cluster-wide retry budget via EnvoyFilter, and use vLLM 429 load shedding to structurally break the feedback loop. Market scan: SpaceX/xAI acquires Cursor for $60B (largest AI developer tools M&A ever); Google DeepMind mass researcher exodus (Noam Shazeer → OpenAI, John Jumper → Anthropic); Alphabet $80B equity raise for $180-190B 2026 AI capex; OpenAI confidential S-1 filed June 8. Updated Cursor watchlist entry to reflect acquisition; added OpenAI to watchlist.",
+      "tasks": [
+        "drill",
+        "market-scan"
+      ],
+      "items_added": [
+        "Istio/Envoy Retry Storm — vLLM KV Cache Transient 503 Amplified by Per-Instance Retry Budget to 100% Error Rate in 4 Minutes",
+        "Non-lab AI developer platform consolidation — SpaceX/xAI acquires Cursor for $60B",
+        "Google DeepMind researcher exodus — frontier AI talent concentration at AGI labs",
+        "Hyperscaler AI capex super-cycle — Alphabet $80B equity raise + $180B+ 2026 capex",
+        "Cursor (watchlist update: acquired by SpaceX/xAI for $60B)",
+        "OpenAI (watchlist)"
       ]
     },
     {

@@ -224,9 +224,9 @@
     {
       "name": "Cursor",
       "domain": "AI Developer Tools (IDE / Coding Agent)",
-      "stage": "Series C (in talks, $2B raise at $50B+ valuation, Apr 2026)",
+      "stage": "Acquired by SpaceX/xAI for $60B all-stock (announced June 16, 2026; expected Q3 2026 close)",
       "signal": "hot",
-      "notes": "AI-native code editor with 400K+ paying developers; in talks to raise $2B led by a16z + NVIDIA at $50B+ valuation (Apr 19, 2026); signals developer tools reaching infrastructure-tier valuations; direct competitor to GitHub Copilot and new agent coding frameworks"
+      "notes": "SpaceX exercised its option to acquire Anysphere (Cursor) for $60B in all-stock — the largest AI developer tools M&A in history — 10 days after SpaceX's own Nasdaq IPO. Deal rationale: Cursor's 150M lines/day of enterprise code trains Grok's coding capabilities; Cursor gains access to Colossus (200K H100 supercluster) for model training. 50K+ enterprise clients (~2/3 of Fortune 500). SpaceX (merged with xAI) now has Grok model + Cursor IDE + Colossus compute = vertically integrated AI developer platform competing with Anthropic/OpenAI. Enterprise risk: clients may face pressure to use Grok over Claude/GPT within the IDE. GOOGL fell 5% on news; SpaceX shares rose 8% (market cap ~$2.7T, surpassing Amazon). Enterprise engineering teams should audit Cursor vendor dependency before Q3 close."
     },
     {
       "name": "MatX",
@@ -311,6 +311,13 @@
       "stage": "Series B ($107M, May 4, 2026; co-led by 500 Global + Georges Harik; investors: NVIDIA, Samsung Next, Supermicro, Felicis, A.Capital, Peak6, Upper90)",
       "signal": "hot",
       "notes": "Processes 5 trillion tokens/week via 190+ open-source models (Llama, Mixtral, Qwen, Phi, Gemma, DeepSeek) behind a single OpenAI-compatible API endpoint. 25× token volume growth since Series A; revenue 3× in 2026. NVIDIA's strategic co-investment signals DeepInfra is a key open-source compute distribution channel — buying GPU time at scale without hyperscaler markup. Category thesis: the OpenAI-compatible API spec is becoming the de facto standard for LLM routing; DeepInfra is building the provider-agnostic inference aggregation layer that lets enterprises switch models without code changes. At current growth trajectory, the inference gateway category is inflecting from startup niche to infrastructure-tier."
+    },
+    {
+      "name": "OpenAI",
+      "domain": "Frontier AI Lab (Model APIs, ChatGPT, Codex, Operator)",
+      "stage": "Pre-IPO (Confidential S-1 filed June 8, 2026; Goldman Sachs + Morgan Stanley leading; $850B+ valuation; Q4 2026 Nasdaq target)",
+      "signal": "hot",
+      "notes": "OpenAI filed a confidential S-1 with the SEC on June 8, 2026 — one week after Anthropic's filing — officially entering the IPO pipeline. At $850B+ valuation with $25B ARR (as of the filing), an OpenAI public debut would rank among the largest US IPOs in history. Goldman Sachs and Morgan Stanley are lead underwriters; Q4 2026 Nasdaq listing is targeted. Combined Anthropic + OpenAI IPO pipeline in H2 2026 represents $1.8T+ in combined implied market cap — the largest dual-frontier-AI-lab public offering window in history. Enterprise engineering implications: (1) post-IPO, API pricing power hardens — teams with >$5M annual OpenAI API spend should negotiate 3-year enterprise agreements before Q4; (2) the dual-IPO signals frontier AI model APIs have crossed from 'experimental' to 'infrastructure utility' in public market perception; (3) both companies' S-1 filings will disclose actual ARR, gross margins, and token economics for the first time — invaluable benchmarks for enterprise AI ROI modeling."
     }
   ],
   "careerMilestones": [
