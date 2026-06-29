@@ -10,7 +10,7 @@
       "Tags",
       "Resources"
     ],
-    "last_updated": "2026-06-22"
+    "last_updated": "2026-06-29"
   },
   "sections": [
     {
@@ -883,6 +883,57 @@
             }
           ],
           "added": "2026-04-07"
+        },
+        {
+          "topic": "Disaggregated Prefill-Decode Serving (NVIDIA Dynamo / vLLM / SGLang)",
+          "concepts": "Separates the two LLM generation phases — prefill (compute-bound: processes entire prompt in parallel) and decode (memory-bandwidth-bound: generates one token per step) — onto dedicated GPU pools that scale independently. Prefill workers use compute-heavy GPUs (e.g., H100 SXM with high FLOPs); decode workers use memory-bandwidth-optimized GPUs (e.g., H100 PCIe). NVIDIA Dynamo 1.0 (GA March 2026, GTC) sits above vLLM/SGLang/TRT-LLM as an orchestration layer: it routes each request to a prefill worker, then transfers the completed KV-cache tensors to a decode worker via NIXL over NVLink/InfiniBand. Benchmarks on DeepSeek-R1 on Blackwell: up to 7× higher throughput vs monolithic serving. The architecture enables per-phase autoscaling — a KEDA rule on TTFT percentile scales prefill workers while decode workers scale on TBT (time-between-tokens). Production adopters: Meta, LinkedIn, Mistral, Hugging Face running vLLM with disaggregated serving; AWS, GCP, Azure, OCI all announced Dynamo integrations for managed inference (June 2026). Key operational risk: KV-cache transfer adds 5–15ms of cross-node latency; prefill/decode pool size ratio must be tuned per traffic mix (long prompts → more prefill; high output length → more decode); KEDA scale-down of decode workers can deadlock in-flight KV transfers (covered in vLLM Disaggregated Prefill drill).",
+          "tags": [
+            "ml",
+            "infra",
+            "scale"
+          ],
+          "resources": [
+            {
+              "title": "NVIDIA Dynamo Technical Blog",
+              "url": "https://developer.nvidia.com/blog/introducing-nvidia-dynamo-a-low-latency-distributed-inference-framework-for-scaling-reasoning-ai-models/"
+            },
+            {
+              "title": "PyTorch Disaggregated Inference at Scale with vLLM",
+              "url": "https://pytorch.org/blog/disaggregated-inference-at-scale-with-pytorch-vllm/"
+            }
+          ],
+          "added": "2026-06-29"
+        },
+        {
+          "topic": "Scaling LLM Inference with N-D Parallelism at Meta (Tensor + Context + Expert Parallelism)",
+          "concepts": "Meta's engineering blog (Oct 2025) documents how they scaled LLM inference beyond single-node limits by combining three parallelism dimensions simultaneously: (1) Tensor Parallelism (TP) — splits individual weight matrices across GPUs (2–8 devices), reducing per-device memory at the cost of AllReduce synchronization on every attention/FFN layer; optimal TP degree trades off memory vs NVLink bandwidth saturation; (2) Context Parallelism (CP) — distributes the input sequence across GPUs so each device processes a shard of the KV sequence; enables serving 128K+ token contexts without per-device KV memory explosion; ring-attention pattern required to avoid quadratic memory growth; (3) Expert Parallelism (EP) — for MoE (Mixture of Experts) models like Llama-4, distributes expert layers across separate GPU groups so each token's selected experts may live on different devices; AlltoAll collective required for expert routing, latency-sensitive at scale. Meta moved to a prefill/decode disaggregated architecture alongside N-D parallelism, enabling heterogeneous hardware allocation — prefill uses compute-optimal TP configs while decode uses bandwidth-optimal TP configs; both tiers now served by vLLM with Meta-internal disagg integration. Key operational complexity: N-D parallelism requires careful tuning of TP × CP × EP product against GPU count and NVLink topology; incorrect configs produce silent performance cliffs (not errors); a TP-8 config on H100s connected via PCIe (not NVLink) is 3× slower than TP-8 on NVLink SXM due to bandwidth difference.",
+          "tags": [
+            "ml",
+            "infra",
+            "scale"
+          ],
+          "resources": [
+            {
+              "title": "Meta Engineering: Scaling LLM Inference — Tensor, Context, Expert Parallelism",
+              "url": "https://engineering.fb.com/2025/10/17/ai-research/scaling-llm-inference-innovations-tensor-parallelism-context-parallelism-expert-parallelism/"
+            }
+          ],
+          "added": "2026-06-29"
+        },
+        {
+          "topic": "LLM Router / Proxy Architecture (LiteLLM, Portkey, OpenRouter)",
+          "concepts": "Production LLM deployments increasingly use a proxy routing layer between application services and the model backends. Architecture: unified API endpoint (OpenAI-compatible /v1/chat/completions) → router → backend pool (self-hosted vLLM/SGLang + commercial API fallbacks). Key capabilities: (1) Model failover with configurable health checks, cooldown timers, and success retry thresholds — misconfigured cooldown_time (too high) causes runaway spend on commercial fallbacks when primary is transiently unhealthy; (2) Cost tracking per model/team/department with real-time budget enforcement and hard spending caps per time window; (3) Semantic caching — deduplicate semantically similar prompts (e.g., LiteLLM Redis cache, GPTCache) to cut token spend by 20–60% on repetitive workloads; (4) Load balancing strategies: round-robin, latency-based-routing (route to lowest P50 backend), least-busy (route to lowest queue depth); (5) A/B model testing: split traffic by % across model versions for quality comparison with automatic fallback on increased error rates. Operational pitfalls: router itself becomes a critical dependency — must be HA with ≥2 replicas and a circuit breaker for its own health endpoints; per-request health check adds 2–10ms latency overhead (prefer background health polling for latency-sensitive paths); careless failover configuration causes $10K+/hr surprise costs when commercial fallbacks activate under load.",
+          "tags": [
+            "ml",
+            "infra"
+          ],
+          "resources": [
+            {
+              "title": "LiteLLM Proxy Documentation",
+              "url": "https://docs.litellm.ai/docs/proxy/quick_start"
+            }
+          ],
+          "added": "2026-06-29"
         }
       ]
     }

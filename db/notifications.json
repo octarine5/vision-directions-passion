@@ -2,9 +2,27 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-06-26"
+    "last_updated": "2026-06-29"
   },
   "entries": [
+    {
+      "timestamp": "2026-06-29T07:00:00Z",
+      "type": "knowledge-base",
+      "title": "Monday update: drill + knowledge base refresh",
+      "summary": "Added Hard ML Serving drill on LiteLLM proxy failover storm (NVIDIA fabricmanager boot delay after driver upgrade routes $22K to OpenAI GPT-4 in 4 hours). Knowledge base: 3 new ML systems entries (disaggregated P/D serving with NVIDIA Dynamo, Meta N-D parallelism, LLM router patterns), 3 new tech talks (GTC 2026 inference engines, KubeCon EU 2026 keynote, KubeCon shift recap), 1 system design entry (LLM serving gateway design), and 1 org decisions entry (staff+ re-hands-on imperative for AI era).",
+      "tasks": ["drill", "knowledge-base"],
+      "items_added": [
+        "LiteLLM Proxy Router Failover Storm — NVIDIA Fabricmanager Boot Delay After Driver Upgrade Triggers $22K OpenAI GPT-4 Runaway Cost in 4 Hours",
+        "Disaggregated Prefill-Decode Serving (NVIDIA Dynamo / vLLM / SGLang)",
+        "Scaling LLM Inference with N-D Parallelism at Meta (Tensor + Context + Expert Parallelism)",
+        "LLM Router / Proxy Architecture (LiteLLM, Portkey, OpenRouter)",
+        "GTC 2026 Recap: Inference Engines Deep Dive — Disaggregated Serving, PagedAttention, RadixAttention",
+        "Beyond Operations: Scaling Platform Engineering in the CNCF Community (Abby Bangser, KubeCon EU 2026)",
+        "The Big Kubernetes Shift — Inside KubeCon 2026",
+        "LLM Serving Gateway / Proxy Design",
+        "Staff engineers getting hands-on with AI tooling in 2026: the re-hands-on imperative"
+      ]
+    },
     {
       "timestamp": "2026-06-23T07:00:00Z",
       "type": "drill",

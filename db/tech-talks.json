@@ -3,7 +3,7 @@
     "category": "tech-talks",
     "display_name": "Tech Talks",
     "layout": "cards",
-    "last_updated": "2026-06-22"
+    "last_updated": "2026-06-29"
   },
   "sections": [
     {
@@ -927,6 +927,30 @@
           "venue": "YouTube 2024",
           "description": "Model capabilities, safety evaluation, constitutional AI training",
           "added": "2026-04-07"
+        },
+        {
+          "title": "GTC 2026 Recap: Inference Engines Deep Dive — Disaggregated Serving, PagedAttention, RadixAttention",
+          "url": "https://www.youtube.com/watch?v=qDOxTI-4pnU",
+          "speaker": "Various (vLLM, SGLang, NVIDIA)",
+          "venue": "GTC San Jose 2026 / YouTube",
+          "description": "Comprehensive walkthrough of LLM inference engine internals from GTC 2026: prefill-decode disaggregation with NVIDIA Dynamo, PagedAttention memory management, and SGLang's RadixAttention for prefix cache reuse. Essential context for anyone evaluating or operating LLM serving infrastructure.",
+          "added": "2026-06-29"
+        },
+        {
+          "title": "Beyond Operations: Scaling Platform Engineering in the CNCF Community",
+          "url": "https://www.youtube.com/watch?v=gmAfYEPBYr0",
+          "speaker": "Abby Bangser",
+          "venue": "KubeCon + CloudNativeCon Europe 2026 Keynote",
+          "description": "KubeCon EU 2026 keynote examining how platform engineering must evolve from golden-path provisioning for human developers to governance infrastructure for autonomous AI agents — covering isolation boundaries, per-workflow cost caps, audit trails, and kill-switch mechanisms for agentic workloads.",
+          "added": "2026-06-29"
+        },
+        {
+          "title": "The Big Kubernetes Shift — Inside KubeCon 2026",
+          "url": "https://www.youtube.com/watch?v=bN-RtJNOVQU",
+          "speaker": "Various",
+          "venue": "KubeCon EU 2026 Conference Recap / YouTube",
+          "description": "Comprehensive KubeCon EU 2026 recap covering the major themes: Kubernetes AI Conformance Program, CNCF Sandbox projects for inference (llm-d, KAI GPU scheduler), OpenTelemetry consolidation, and the shift toward AI-native platform engineering. Good 30-minute orientation for the 2026 cloud-native landscape.",
+          "added": "2026-06-29"
         }
       ]
     }

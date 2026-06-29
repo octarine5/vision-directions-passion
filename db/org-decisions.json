@@ -9,7 +9,7 @@
       "Key Considerations",
       "Phase"
     ],
-    "last_updated": "2026-06-22"
+    "last_updated": "2026-06-29"
   },
   "sections": [
     {
@@ -577,6 +577,12 @@
           "considerations": "QCon London 2026 established a new operational norm: AI production systems erase the classical boundary between software engineering and data engineering. Engineers now deploy models, manage real-time feature pipelines, handle streaming predictions, and participate in data quality incidents; data engineers now own production-grade systems with engineer-level SLAs, runbooks, and on-call rotations. Three convergence mechanisms staff+ engineers should institutionalize: (1) Data contracts as the inter-team API — codify ownership, schema, SLAs, and quality guarantees for all data streams published across team boundaries; enforce via CI/CD schema registries (e.g., Confluent Schema Registry, buf schema checks, dbt contract tests); treat schema changes like API breaking changes — versioned, deprecated with a timeline, and communicated ahead of time; prevents the 'silent upstream data change causes downstream ML model degradation' anti-pattern that is the most common category of AI production incident; (2) Full-stack observability including data health — extend the standard latency/error/saturation dashboard to include freshness SLIs (how stale is the feature data?), semantic validity checks (are values in expected ranges?), and cross-service consistency checks (does upstream agree with downstream on the count?); these data health metrics must appear alongside latency in the same Grafana dashboards and fire the same PagerDuty alerts; (3) Joint incident management across the engineering-data boundary — analytics engineers and data scientists participate in architecture reviews and on-call rotations for AI systems their data feeds; prevents the anti-pattern where a data issue is detected by the ML team but 'owned' by the data team with no shared escalation path or SLA; staff+ engineers should proactively design cross-functional on-call rotations, shared postmortems, and joint architecture review processes — this is the operational model required to sustain AI systems reliably in production",
           "phase": "Cross-cutting",
           "added": "2026-06-22"
+        },
+        {
+          "topic": "Staff engineers getting hands-on with AI tooling in 2026: credibility, leverage, and the 're-hands-on' imperative",
+          "considerations": "Paula Muldoon (March 2026) and QCon London 2026 consensus: the 2022-24 trend of staff+ engineers moving purely to strategy/coordination is reversing. AI tools lower the cost of direct implementation so dramatically that staying hands-on now has positive leverage (you ship 5x faster AND build credibility). Three-part model: (1) Build — use AI coding tools to remain a net producer of high-quality code rather than exclusively a reviewer and advisor; being a technical leader who can't ship code loses credibility with teams when AI means any senior engineer can; (2) Understand — directly operate the AI/LLM tools your organization is adopting (run a local model, build a RAG prototype, instrument a vLLM deployment) rather than delegating all hands-on work to junior engineers; this technical depth is required to make correct architecture and build-vs-buy decisions; (3) Guide — the staff+ engineer's unique value is synthesizing hands-on experience with cross-team and industry-wide perspective to set the right direction; without the hands-on component the guidance is abstract and increasingly mistrusted by teams doing the actual work. Specific 2026 action: identify one AI system your team is building or operating, go deep on it technically, then use that knowledge to set standards for the rest of the org.",
+          "phase": "Cross-cutting",
+          "added": "2026-06-29"
         }
       ]
     }

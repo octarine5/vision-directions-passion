@@ -10,7 +10,7 @@
       "Tags",
       "Resources"
     ],
-    "last_updated": "2026-06-22"
+    "last_updated": "2026-06-29"
   },
   "sections": [
     {
@@ -1212,6 +1212,22 @@
             }
           ],
           "added": "2026-06-22"
+        },
+        {
+          "topic": "LLM Serving Gateway / Proxy Design",
+          "concepts": "Unified OpenAI-compatible API gateway routing to heterogeneous backends (self-hosted vLLM/SGLang + commercial APIs). Key design decisions: health-check strategy (per-request vs background polling — background avoids per-call latency), failover thresholds (allowed_fails + cooldown_time determine blast radius of primary outage), cost-cap enforcement at the router layer (hard budget limits per model/team/window), semantic caching for repeat prompts (GPTCache/Redis with cosine-similarity threshold), load balancing strategies (round-robin, latency-based, least-busy). Critical operational concern: misconfigured cooldown_time on primary failover can route all traffic to expensive commercial APIs for hours, causing $10K+/hr surprise spend; mitigate with background health polling, short cooldown (30s), and an always-on cost alarm at 10% of monthly budget.",
+          "tags": [
+            "ml",
+            "infra",
+            "scale"
+          ],
+          "resources": [
+            {
+              "title": "LiteLLM Proxy Docs",
+              "url": "https://docs.litellm.ai/docs/proxy/quick_start"
+            }
+          ],
+          "added": "2026-06-29"
         }
       ]
     }
