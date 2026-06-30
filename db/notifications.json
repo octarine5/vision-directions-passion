@@ -2,9 +2,19 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-06-29"
+    "last_updated": "2026-06-30"
   },
   "entries": [
+    {
+      "timestamp": "2026-06-30T11:30:00Z",
+      "type": "drill",
+      "title": "Daily drill: AWS Inferentia2 Neuron Compiled Artifact Cache Collision",
+      "summary": "Added a Hard-difficulty ML Serving hotfix drill: AWS Inferentia2 serving container loads a stale June 9 .neff artifact (512K-vocab) instead of the June 16 retrained binary (524K-vocab) because the S3 cache key used only model_name+version_tag — silently clamping 12,288 new product SKU embedding indices to the padding token for 14 days with 0% HTTP error rate and $412K GMV opportunity cost. Exercise covers neuron-ls artifact timestamp triage, rolling instance replacement to force recompilation, content-hash-based cache keys, vocab-range probe deployment gate, and neuron_model_vocab_size Prometheus guard.",
+      "tasks": ["drill"],
+      "items_added": [
+        "AWS Inferentia2 Neuron Compiled Artifact Cache Collision — Stale .neff Serves 14-Day-Old Model Weights, Silent Wrong Outputs for 12K New Products"
+      ]
+    },
     {
       "timestamp": "2026-06-29T07:00:00Z",
       "type": "knowledge-base",
