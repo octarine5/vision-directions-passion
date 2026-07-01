@@ -2,9 +2,19 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-06-30"
+    "last_updated": "2026-07-01"
   },
   "entries": [
+    {
+      "timestamp": "2026-07-01T10:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: cert-manager CertificateRequest Backlog — Vault PKI Saturation Blocks All GKE Pod Scheduling for 23 Minutes",
+      "summary": "Added a Hard-difficulty infrastructure hotfix drill: a data scientist deploys MLflow experiment pods with 1-minute cert TTLs on GKE (Istio 1.22.1 / cert-manager 1.14.7 / Vault 1.17.0), generating 32.4 Vault PKI sign requests/second that saturate the shared PKI connection pool. After 37 minutes of starvation, the Istio sidecar injector webhook's TLS cert expires — its failurePolicy: Fail causes 100% cluster-wide pod scheduling failure across all namespaces for 23 minutes, stalling 38 ML training jobs and a payment service security rollout ($190K impact). Exercise covers MPS blast-radius triage via simultaneous multi-namespace FailedCreate events, failurePolicy: Ignore as immediate unblock, MLflow scale-to-zero to clear Vault backlog, istiod cert restoration, and OPA policy to enforce minimum 5-minute cert TTL.",
+      "tasks": ["drill"],
+      "items_added": [
+        "cert-manager CertificateRequest Backlog — 1-Minute MLflow Cert TTL Saturates Vault PKI, Istiod Webhook TLS Expires, Blocks All GKE Pod Scheduling Cluster-Wide for 23 Minutes"
+      ]
+    },
     {
       "timestamp": "2026-06-30T11:30:00Z",
       "type": "drill",
