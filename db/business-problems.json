@@ -11,7 +11,7 @@
       "TAM",
       "Tags"
     ],
-    "last_updated": "2026-06-26"
+    "last_updated": "2026-07-03"
   },
   "sections": [
     {
@@ -778,6 +778,39 @@
             "biz"
           ],
           "added": "2026-06-26"
+        },
+        {
+          "problem": "Open-source LLM enterprise cloud at commercial scale — independent of closed-model lab APIs",
+          "enterprise": "Together AI ($800M Series C at $8.3B valuation, July 1, 2026; Aramco Ventures led + NVIDIA + Vista Equity + General Catalyst; $1.15B+ annual bookings; 500 MW compute committed independently by investors)",
+          "market_fit": "Together AI's $800M Series C (July 1, 2026) — led by Aramco Ventures with NVIDIA, Vista Equity, and General Catalyst at an $8.3B valuation (2.5× Series B in 16 months) — signals open-source LLM serving has reached commercial infrastructure scale independent of frontier model lab APIs. $1.15B in annual bookings with open-source model usage tripling YoY confirms enterprises are actively choosing Llama/DeepSeek/Qwen deployments over OpenAI/Anthropic for cost, data-sovereignty, and customization reasons. NVIDIA's strategic co-investment mirrors its plays in DeepInfra and Nscale: open-source model clouds are becoming GPU distribution channels at hyperscaler margins without hyperscaler capex, and NVIDIA needs to own that distribution channel. 500 MW of committed compute (capitalized independently by investors, not Together AI's balance sheet) indicates a CoreWeave-style infrastructure buildout behind the API layer. Enterprise implication: the Anthropic/OpenAI duopoly faces structural erosion from an open-model platform that can serve Llama-3.1-405B, DeepSeek-V3, and Qwen-2.5-72B at $0.60/M tokens vs $15/M for Claude Sonnet — a 25× cost gap that pays for engineering team migration costs in weeks.",
+          "tam": "$50B",
+          "tags": [
+            "ml",
+            "infra"
+          ],
+          "added": "2026-07-03"
+        },
+        {
+          "problem": "Humanoid robot commercial deployment & public market validation — first category IPO benchmark",
+          "enterprise": "Agility Robotics (SPAC merger with Churchill Capital XI announced June 24, 2026; $2.5B pre-money valuation; $620M raised; $200M PIPE led by Foxconn; backed by Amazon + NVIDIA; Digit v5; 65K+ commercial operating hours; $300M+ committed multi-year orders; ticker AGLT on Nasdaq, Q3 2026 close)",
+          "market_fit": "Agility Robotics' SPAC deal (June 24, 2026) — the first pure-play US-listed humanoid robot company at $2.5B valuation — marks the transition from research-lab demonstration to commercial infrastructure deployment. Foxconn leading the $200M PIPE is the category-defining signal: the world's largest contract manufacturer (responsible for the entire iPhone supply chain) is betting that humanoid robots will enter its own production lines, validating the supply-chain path that no prior humanoid company had demonstrated. 65,000+ hours of logged commercial operation across 9 enterprise facilities (GXO Logistics, Schaeffler, Toyota Manufacturing Canada) separates Digit v5 from render-ware demos. $300M+ in committed multi-year orders confirms enterprises are signing contracts, not just pilots. Foxconn's involvement sets a scale-manufacturing trajectory for Digit v5 that could bring unit economics below $50K — the threshold at which robots compete with human labor at prevailing wages in logistics. The public market debut creates the first humanoid robotics benchmark valuation: AGLT's post-SPAC stock performance will be the proxy institutional investors use to price the entire category, making it a leading indicator for Figure AI, NEURA Robotics, Apptronik, and Tesla Optimus fundraising and valuation multiples.",
+          "tam": "$60B",
+          "tags": [
+            "ml",
+            "biz"
+          ],
+          "added": "2026-07-03"
+        },
+        {
+          "problem": "AI world simulation models — synthetic training data infrastructure for physical AI systems",
+          "enterprise": "Odyssey ($310M Series B at $1.45B valuation, June 17, 2026; Natural Capital led; Amazon, GV, AMD Ventures, IQT, EQT co-investors; AWS preferred cloud partner + Trainium chips; founders: Oliver Cameron + Jeff Hawke, AV industry veterans)",
+          "market_fit": "Odyssey's $310M Series B (June 17, 2026) — backed by Amazon with AWS as preferred cloud and Trainium chips for model training — validates a distinct AI infrastructure category: world simulation models that generate physics-accurate synthetic training data for autonomous physical AI systems at a cost and scale that real-world data collection cannot match. Odyssey's model portfolio (Odyssey-2 Max for physics simulation, Starchild-1 for real-time multimodal world modeling, Agora-1 for multi-agent interaction, PROWL for active exploration) represents the data generation layer beneath all physical AI applications — the same structural role that NVIDIA Cosmos 3 occupies but from an independent lab with Amazon ecosystem alignment. Amazon's strategic co-investment positions Odyssey as the Trainium-native world model layer competing with NVIDIA's Cosmos Coalition for the synthetic training data supply chain. This creates a three-way competition: NVIDIA Cosmos 3 (open-source, H100/B200 compute), Google DeepMind Gemini Robotics (TPU compute), and Odyssey (AWS Trainium). Enterprise implication for robotics engineering teams: world simulation infrastructure is transitioning from custom-built physics engines (Gazebo, Isaac Sim, Unreal Engine) to foundation-model-generated synthetic data APIs — a build-vs-buy decision that arrives in 12-18 months as all three platforms reach production readiness. Engineering teams that invest in custom simulation pipelines now face stranded asset risk when API-driven world models commoditize the capability.",
+          "tam": "$25B",
+          "tags": [
+            "ml",
+            "infra"
+          ],
+          "added": "2026-07-03"
         }
       ]
     }

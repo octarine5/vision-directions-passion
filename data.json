@@ -202,10 +202,10 @@
     },
     {
       "name": "Together AI",
-      "domain": "Model Serving",
-      "stage": "Series A",
-      "signal": "watch",
-      "notes": "Open-source model training and serving"
+      "domain": "Open-Source LLM Cloud (Model Serving + Training)",
+      "stage": "Series C ($8.3B valuation, $800M raised July 1, 2026; Aramco Ventures + NVIDIA + Vista Equity + General Catalyst led)",
+      "signal": "hot",
+      "notes": "$800M Series C at $8.3B valuation (July 1, 2026) — 2.5× Series B in 16 months. $1.15B+ annual bookings; open-source model usage tripled YoY. 500 MW compute committed independently by investors (CoreWeave-style infrastructure behind the API). Aramco Ventures leading + NVIDIA strategic co-investment signals open-source cloud is becoming a key GPU distribution channel at hyperscaler margins. Serves Llama, DeepSeek, Qwen, Mixtral at $0.60–1.20/M tokens (vs $15/M for Claude Sonnet) — 10–25× cost gap pays for enterprise migration in weeks. Primary competitors: DeepInfra, Fireworks AI, Replicate. Together.ai growing toward hyperscaler-scale training + inference at commercial speed."
     },
     {
       "name": "Cerebras",
@@ -318,6 +318,20 @@
       "stage": "Pre-IPO (Confidential S-1 filed June 8, 2026; Goldman Sachs + Morgan Stanley leading; $850B+ valuation; Q4 2026 Nasdaq target)",
       "signal": "hot",
       "notes": "OpenAI filed a confidential S-1 with the SEC on June 8, 2026 — one week after Anthropic's filing — officially entering the IPO pipeline. At $850B+ valuation with $25B ARR (as of the filing), an OpenAI public debut would rank among the largest US IPOs in history. Goldman Sachs and Morgan Stanley are lead underwriters; Q4 2026 Nasdaq listing is targeted. Combined Anthropic + OpenAI IPO pipeline in H2 2026 represents $1.8T+ in combined implied market cap — the largest dual-frontier-AI-lab public offering window in history. Enterprise engineering implications: (1) post-IPO, API pricing power hardens — teams with >$5M annual OpenAI API spend should negotiate 3-year enterprise agreements before Q4; (2) the dual-IPO signals frontier AI model APIs have crossed from 'experimental' to 'infrastructure utility' in public market perception; (3) both companies' S-1 filings will disclose actual ARR, gross margins, and token economics for the first time — invaluable benchmarks for enterprise AI ROI modeling."
+    },
+    {
+      "name": "Agility Robotics",
+      "domain": "Humanoid Robotics (Commercial Warehouse & Manufacturing Automation)",
+      "stage": "Pre-IPO SPAC (Churchill Capital XI merger announced June 24, 2026; $2.5B pre-money valuation; $620M raised; $200M PIPE led by Foxconn; ticker AGLT on Nasdaq, Q3 2026 close expected)",
+      "signal": "hot",
+      "notes": "First pure-play US-listed humanoid robot company. Backed by Amazon + NVIDIA. Digit v5 has 65,000+ logged commercial operating hours across 9 enterprise facilities (GXO Logistics, Schaeffler, Toyota Manufacturing Canada) — separates Agility from render-ware demos. $300M+ in committed multi-year orders. Foxconn leading the $200M PIPE is the category-defining signal: world's largest contract manufacturer is betting humanoid robots enter its own production lines, validating a scale-manufacturing path at potentially <$50K unit cost. Cooperative-safety-first design (robots work beside people without isolation cages) sets a new enterprise deployment criterion. AGLT post-SPAC stock performance will be the benchmark institutional investors use to price all humanoid robotics companies (Figure AI, NEURA, Tesla Optimus, Apptronik). Watch Q3 2026 for SPAC close + first public earnings call as the category's first public data point on robotics unit economics."
+    },
+    {
+      "name": "Odyssey",
+      "domain": "AI World Simulation Models (Physical AI Training Data Infrastructure)",
+      "stage": "Series B ($310M, $1.45B valuation, June 17, 2026; Natural Capital led; Amazon, GV, AMD Ventures, IQT, EQT co-investors)",
+      "signal": "hot",
+      "notes": "World simulation model company founded by AV pioneers Oliver Cameron + Jeff Hawke. AWS preferred cloud + Amazon Trainium chips for training — positions Odyssey as Amazon's world-model answer to NVIDIA Cosmos 3. Model portfolio: Odyssey-2 Max (physics-accurate world simulation), Starchild-1 (real-time multimodal world model), Agora-1 (multi-agent interaction), PROWL (active exploration via self-supervised data generation). Amazon's strategic co-investment + Jeff Dean (Google chief scientist) as individual backer signals this is foundational infrastructure for physical AI training, not a niche robotics tool. Enterprise signal: world simulation models are commoditizing the 'synthetic training data' infrastructure layer — custom physics simulation pipelines (Gazebo, Isaac Sim) face stranded asset risk in 12-18 months. Watch for AWS SageMaker integration that lets robotics teams access Odyssey world models as managed training data APIs."
     }
   ],
   "careerMilestones": [

@@ -2,9 +2,28 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-07-02"
+    "last_updated": "2026-07-03"
   },
   "entries": [
+    {
+      "timestamp": "2026-07-03T07:00:00Z",
+      "type": "market-scan",
+      "title": "Friday update: drill + market signal scan",
+      "summary": "Added a Hard distributed-systems hotfix drill: Debezium 2.3 CDC server_id mismatch after Aurora MySQL 8.0 upgrade silently resets binlog offset to earliest, replaying 847K historical events that overwrite the ML feature store with 6-hour-old purchase history — 22 ML models serve stale recommendations for 93 minutes ($89K excess discount cost, 31% CTR drop). Market scan: Together AI $800M Series C at $8.3B valuation (Aramco + NVIDIA, $1.15B bookings, open-source tripling); Agility Robotics SPAC/IPO at $2.5B ($620M raised, Foxconn PIPE, AGLT on Nasdaq, first humanoid robot public company); Odyssey $310M Series B at $1.45B (Amazon AWS partnership, world simulation models for physical AI training data). Updated Together AI watchlist entry from Series A to Series C hot; added Agility Robotics and Odyssey to watchlist.",
+      "tasks": [
+        "drill",
+        "market-scan"
+      ],
+      "items_added": [
+        "Debezium 2.3 CDC server_id Mismatch After Aurora MySQL 8.0 Upgrade — 847K Feature Overwrite Storm Corrupts ML Recommendation Store for 93 Minutes",
+        "Open-source LLM enterprise cloud at commercial scale (Together AI $800M Series C)",
+        "Humanoid robot commercial deployment & public market validation (Agility Robotics SPAC, AGLT)",
+        "AI world simulation models — synthetic training data infrastructure for physical AI (Odyssey $310M)",
+        "Together AI (watchlist update: Series C $8.3B, $800M raised, hot)",
+        "Agility Robotics (watchlist)",
+        "Odyssey (watchlist)"
+      ]
+    },
     {
       "timestamp": "2026-07-02T07:00:00Z",
       "type": "drill",
