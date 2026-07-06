@@ -3,7 +3,7 @@
     "category": "tech-talks",
     "display_name": "Tech Talks",
     "layout": "cards",
-    "last_updated": "2026-06-29"
+    "last_updated": "2026-07-06"
   },
   "sections": [
     {
@@ -461,6 +461,22 @@
           "venue": "QCon AI Boston 2026",
           "description": "Moving from a local notebook to a production-grade Agent Engine at Apple scale. Demonstrates a unified deployment layer that is agnostic to agent framework (LangGraph, AutoGen, custom), using Ray Serve as the reference implementation to handle unpredictable execution times, long-running agentic loops, and framework lock-in. Architecture patterns for multi-agent orchestration serving billions of users.",
           "added": "2026-06-08"
+        },
+        {
+          "title": "Beyond vLLM: Distributed LLM Inferencing With llm-d on Kubernetes",
+          "url": "https://www.youtube.com/watch?v=GgQtgwdoOWs",
+          "speaker": "Ravindra Patil (Red Hat)",
+          "venue": "KubeCon + CloudNativeCon India 2026, Mumbai (June 18–19, 2026)",
+          "description": "Introduction to llm-d, the CNCF Sandbox project jointly donated by IBM Research, Red Hat, and Google Cloud (with NVIDIA, CoreWeave, AMD, Cisco as founding partners). Demonstrates Kubernetes-native disaggregated LLM serving beyond single-node vLLM: hierarchical KV cache offloading (VRAM → DRAM → NVMe → network), prefix-cache-aware routing using the same Branch-Sharded KV Indexer approach as NVIDIA Dynamo, and the llm-d CRD API for declarative inference deployments. Positions llm-d as a middleware layer in the Kubernetes AI Conformance Program's inference tier.",
+          "added": "2026-07-06"
+        },
+        {
+          "title": "Your AI Agent Has No SLO — Defining Reliability for Autonomous Systems",
+          "url": "https://www.youtube.com/watch?v=aYPiXBFdZYQ",
+          "speaker": "Andrew Espira (Kustode), AI SRE Summit panel",
+          "venue": "AI SRE Summit 2026 (Virtual, May 12, 2026)",
+          "description": "Addresses the operational gap between traditional SRE (distributed tracing, SLIs, SLOs, error budgets on deterministic services) and AI agents that auto-remediate incidents. Explores how to define agent-observed SLIs (task completion rate, step efficiency, tool-call accuracy, human escalation rate), calibrate autonomy with safety gates and human-in-the-loop checkpoints, and set error budgets for non-deterministic agentic workflows. Features a panel including Charity Majors (Honeycomb), Stefana Muller (Salesforce VP Infrastructure), and Itiel Shwartz (Komodor CTO).",
+          "added": "2026-07-06"
         }
       ]
     },

@@ -2,9 +2,30 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-07-03"
+    "last_updated": "2026-07-06"
   },
   "entries": [
+    {
+      "timestamp": "2026-07-06T07:00:00Z",
+      "type": "knowledge-base",
+      "title": "Monday update: drill + knowledge base refresh",
+      "summary": "Added a Hard metrics drill: Grafana Mimir Ruler Ring Cache Poisoning — simultaneous HPA scale-down from 12→6 replicas triggers a ring ownership cache bug (Mimir 2.11.0–2.11.3 #8392) that orphans 50% of alert rule groups for 5h 40min, leaving vLLM P99 latency SLO breach undetected for 4h 13min. KB refresh: 3 new ML systems entries (NVIDIA Dynamo v1.2.0 with Branch-Sharded KV Indexer, Agent-Assisted SGLang Development SKILL.md workflow, Netflix GenPage autoregressive homepage transformer), 1 new system design entry (Meta's AI Storage Blueprint at scale), 2 new tech talks (KubeCon India 2026 llm-d distributed inference, AI SRE Summit 2026 AI Agent SLOs panel), 2 new org decision entries (AI code production confidence crisis ownership gap, AI-native engineering team model with verification as new bottleneck).",
+      "tasks": [
+        "drill",
+        "knowledge-base"
+      ],
+      "items_added": [
+        "Grafana Mimir Ruler Ring Cache Poisoning — HPA Scale-Down Orphans 50% of Alert Rule Evaluations for 5h 40min",
+        "NVIDIA Dynamo v1.2.0 — Branch-Sharded KV Indexer and Production-Ready GPU Memory Service",
+        "Agent-Assisted SGLang Development — SKILL.md Agents for GPU Kernel Optimization and CI Workflows",
+        "Netflix GenPage — End-to-End Generative Homepage Construction via Autoregressive Transformer",
+        "Meta's AI Storage Blueprint — Solving the GPU-Storage Bandwidth Gap at 1GW+ Data Center Scale",
+        "Beyond vLLM: Distributed LLM Inferencing With llm-d on Kubernetes (KubeCon India 2026)",
+        "Your AI Agent Has No SLO — Defining Reliability for Autonomous Systems (AI SRE Summit 2026)",
+        "AI-generated code production confidence crisis: the ownership gap between creation speed and shipping safety",
+        "AI-native engineering orgs at production scale: verification as the new bottleneck and engineers as agent orchestrators"
+      ]
+    },
     {
       "timestamp": "2026-07-03T07:00:00Z",
       "type": "market-scan",

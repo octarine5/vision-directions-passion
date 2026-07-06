@@ -10,7 +10,7 @@
       "Tags",
       "Resources"
     ],
-    "last_updated": "2026-06-29"
+    "last_updated": "2026-07-06"
   },
   "sections": [
     {
@@ -934,6 +934,59 @@
             }
           ],
           "added": "2026-06-29"
+        },
+        {
+          "topic": "NVIDIA Dynamo v1.2.0 — Branch-Sharded KV Indexer and Production-Ready GPU Memory Service",
+          "concepts": "NVIDIA Dynamo 1.2.0 (released June 2, 2026, 603 PRs from 82 contributors across Intel, Microsoft, Baseten, Roblox) introduces three major capabilities: (1) Branch-Sharded KV Indexer — anchor-aware routing that inspects the first N tokens of each request's KV cache entry, selects the decode worker with the longest matching prefix stored on device, and routes to it; early benchmarks on multi-turn enterprise chat workloads show 38–52% cache hit rate improvement over round-robin routing across the same pool size; (2) GPU Memory Service graduation — the in-pod sidecar that manages cross-layer KV tensor sharing (DRAM offload, NVLink cross-worker transfer, SSD spill) is now v1beta1 production-stable with documented upgrade paths; it ships as a per-node DaemonSet on Kubernetes and as a sidecar container in ECS/Nomad task definitions; (3) Text-to-image serving on TensorRT-LLM — Dynamo's disaggregated scheduler now supports image generation pipelines (SDXL, Flux) as a new backend alongside LLM endpoints, using the same NIXL transfer protocol for latent activations. Community ecosystem signals: 28 companies have opened 'Dynamo Integration' issues on GitHub as of July 2026, indicating broad adoption intent across cloud providers (AWS, GCP, Azure, OCI all in integration stage per their public roadmaps). Key staff+ operational context: the Branch-Sharded KV Indexer's anchor-based cache key design means long-document prefill workloads (RAG, legal, code review) see dramatically higher cache reuse while short-prompt stateless requests see no benefit; model the traffic mix before enabling to avoid miscalibrated routing decisions.",
+          "tags": [
+            "ml",
+            "infra",
+            "scale"
+          ],
+          "resources": [
+            {
+              "title": "NVIDIA Dynamo v1.2.0 Release Notes",
+              "url": "https://github.com/ai-dynamo/dynamo/releases/tag/v1.2.0"
+            }
+          ],
+          "added": "2026-07-06"
+        },
+        {
+          "topic": "Agent-Assisted SGLang Development — SKILL.md Agents for GPU Kernel Optimization and CI Workflows",
+          "concepts": "LMSYS blog post (July 2, 2026) documents the SGLang team's internal experiment encoding CUDA kernel optimization, CI triage, profiling, and benchmark workflows into reusable SKILL.md agent scripts executed by a small agentic system. Workflow: a benchmark-regression CI job flags a P95 TTFT increase → a skill agent reads the flamegraph + microbenchmark diff, proposes a kernel patch, runs the SGLang test suite, and generates a PR with benchmark comparison tables — all autonomously. As of late June 2026, three KDA-Pilot-derived GPU kernel optimizations (attention layer vectorization, KV cache copy vectorization, LoRA adapter weight fusing) landed in SGLang main via this approach, compressing what was previously a 2–3 week human optimization loop into 8–12 hour agent cycles. Key operational reality: 'agent-assisted' is not 'agent-autonomous' — a human reviews and merges each PR; the agent reduces the time spent on exploratory search (85% of optimization time), not on judgment of whether to land the change. Implications for staff+ engineers: (1) inference framework development is shifting from 'skilled CUDA programmer writes kernel' to 'skilled engineer designs the evaluation harness and review criteria, agent finds the optimization'; (2) organizations with strong benchmark suites will extract more value from this pattern than those with weak quality gates; (3) the SKILL.md abstraction (encoding domain expertise as agent capabilities) will likely generalize to ML platform workflows beyond kernel optimization — feature engineering automation, schema migration, cost optimization.",
+          "tags": [
+            "ml",
+            "infra",
+            "scale"
+          ],
+          "resources": [
+            {
+              "title": "LMSYS Blog: Agent-Assisted SGLang Development",
+              "url": "https://www.lmsys.org/blog/2026-07-02-agent-assisted-sglang-development/"
+            }
+          ],
+          "added": "2026-07-06"
+        },
+        {
+          "topic": "Netflix GenPage — End-to-End Generative Homepage Construction via Autoregressive Transformer",
+          "concepts": "Netflix TechBlog (June 30, 2026) presents GenPage: a single autoregressive transformer that replaces the traditional multi-stage recommender pipeline (retrieval → ranking → layout) to generate the entire structured, multi-row Netflix homepage in one pass. Training recipe mirrors LLM methodology: pretraining on historical production pages (content + layout) followed by post-training via Weighted Binary Classification (WBC) or Reinforcement Learning (RL). Online A/B test vs. the mature production recommender: +0.24% lift in the core user engagement metric (p < 0.001) and 20% reduction in end-to-end serving latency. Key technical findings relevant to ML serving engineers: (1) enriching the input prompt (adding more user context signals, catalog metadata, editorial tags) yields larger quality gains than scaling model parameters — diminishing returns on model size appear earlier than expected in the recommendation domain; (2) RL post-training increases homepage diversity even when diversity is not part of the objective, likely because RL explores a broader behavior space than WBC classification which stays near the historical distribution; (3) for entity cold-start (new titles not in training data), context injection (embedding the new title's metadata into the prefix) is more effective than fine-tuning; (4) GenPage autoregressive sampling is compatible with continuous batching (PagedAttention semantics), enabling shared GPU infrastructure with LLM serving. The shift from a pipeline of multiple specialized models to a single generalist model is consistent with the LLM paradigm shift seen in NLP — Netflix is among the first to demonstrate this transition at production scale for recommendation.",
+          "tags": [
+            "ml",
+            "infra",
+            "scale",
+            "data"
+          ],
+          "resources": [
+            {
+              "title": "Netflix TechBlog: GenPage — End-to-End Generative Homepage Construction",
+              "url": "https://netflixtechblog.com/genpage-towards-end-to-end-generative-homepage-construction-at-netflix-77146fba8a08"
+            },
+            {
+              "title": "arXiv 2606.31031",
+              "url": "https://arxiv.org/abs/2606.31031"
+            }
+          ],
+          "added": "2026-07-06"
         }
       ]
     }

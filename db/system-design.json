@@ -10,7 +10,7 @@
       "Tags",
       "Resources"
     ],
-    "last_updated": "2026-06-29"
+    "last_updated": "2026-07-06"
   },
   "sections": [
     {
@@ -1228,6 +1228,23 @@
             }
           ],
           "added": "2026-06-29"
+        },
+        {
+          "topic": "Meta's AI Storage Blueprint — Solving the GPU-Storage Bandwidth Gap at 1GW+ Data Center Scale",
+          "concepts": "Meta Engineering blog (July 1, 2026) diagnoses storage as the primary bottleneck for GPU utilization in large-scale AI workloads, superseding compute bottlenecks at datacenter scale. Key insight: GPU compute performance has roughly tripled every two years (following training FLOPs scaling laws) while storage bandwidth has grown at ~30–40% per year — creating a widening gap where GPUs frequently stall waiting for checkpoint reads, training data loads, and model weight loads. Meta's blueprint addresses three sub-problems: (1) Checkpoint I/O — saving/loading 100B+ parameter model checkpoints; Meta uses a staged checkpoint system (GPU VRAM → node NVMe RAID → distributed object store) to overlap compute and I/O, cutting checkpoint overhead from 8% of training time to <1% using async flush pipelines; (2) Training data pipeline — high-throughput streaming of multimodal training batches (text, image, video) to GPU memory; uses a pull-based prefetch architecture where a CPU 'data engine' preloads the next N batches to DRAM/NVMe using Linux io_uring for zero-copy; (3) Interconnect architecture — at 1GW+ data center scale, NFS/NAS becomes a bottleneck; Meta's blueprint uses a tiered disaggregated storage fabric: NVMe-over-Fabrics (NVMe-oF) for the hot layer (checkpoint write bursts) + a software-defined distributed file system (custom POSIX-compatible FS similar to DAOS) for the warm layer + cloud object storage for cold/archival. For staff+ engineers designing ML infrastructure: the 'storage bandwidth gap' problem is hitting companies at ~100B parameter model scale; below that, standard NFS/EFS/GCS is adequate; above that, the storage architecture requires the same attention as GPU topology and interconnect design.",
+          "tags": [
+            "infra",
+            "ml",
+            "scale",
+            "data"
+          ],
+          "resources": [
+            {
+              "title": "Engineering at Meta: Meta's AI Storage Blueprint at Scale",
+              "url": "https://engineering.fb.com/2026/07/01/data-infrastructure/metas-ai-storage-blueprint-at-scale/"
+            }
+          ],
+          "added": "2026-07-06"
         }
       ]
     }
