@@ -2,9 +2,21 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-07-06"
+    "last_updated": "2026-07-07"
   },
   "entries": [
+    {
+      "timestamp": "2026-07-07T07:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: Apache Airflow XCom PostgreSQL Bloat — ML Training Scheduler Stall Delays 847 Batch Jobs 22 Minutes",
+      "summary": "Added a Hard-difficulty distributed-systems hotfix drill: a data scientist's ml_training_dag pushes 174MB pandas DataFrames as JSON into the Airflow XCom PostgreSQL table, accumulating 47.4M dead tuples (96.4% bloat) over 4.5 weeks. Autovacuum's 22-minute VACUUM FREEZE on the xcom table holds an AccessExclusiveLock that stalls all 3 Airflow scheduler pods, causing 847 ML batch jobs to expire their SQS timeout, blocking the downstream inference_pipeline_dag, and serving 4.2M users 6-hour-stale recommendations with $314K revenue impact.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "Apache Airflow XCom PostgreSQL Bloat — ML Training DAG Serializes 174MB DataFrames to Metadata DB, Scheduler Stall Delays 847 Batch Jobs 22 Minutes, Stale Recommendations to 4.2M Users"
+      ]
+    },
     {
       "timestamp": "2026-07-06T07:00:00Z",
       "type": "knowledge-base",
