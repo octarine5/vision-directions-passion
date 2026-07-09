@@ -2,9 +2,21 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-07-08"
+    "last_updated": "2026-07-09"
   },
   "entries": [
+    {
+      "timestamp": "2026-07-09T07:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: NATS JetStream MaxAckPending Saturation — Sequential AI Inference Latency Spike Silently Stalls Go ML Pipeline for 23 Minutes",
+      "summary": "Added a Hard-difficulty distributed-systems hotfix drill: a Go ML event pipeline's NATS JetStream PullSubscribe consumer uses sequential inference calls (50 msgs × 28.3s P99 each = 23.6 min per batch), causing all MaxAckPending=1,000 slots to fill with redelivery-looping messages when a vLLM rolling restart spikes inference P99 past the AckWait=30s threshold. NATS stops delivering new messages; the consumer logs 'no messages' and masks 847,293 queued events, causing 23 minutes of feed staleness and $94K revenue impact. Fix: bounded goroutine pool with InProgress() heartbeats to extend AckWait during slow inference.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "NATS JetStream MaxAckPending Saturation — Sequential AI Inference Latency Spike Pins Consumer Ack Window, Silently Stalls Go ML Pipeline for 23 Minutes"
+      ]
+    },
     {
       "timestamp": "2026-07-08T07:00:00Z",
       "type": "drill",
