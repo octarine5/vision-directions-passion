@@ -280,9 +280,9 @@
     {
       "name": "Nscale",
       "domain": "EU-Sovereign AI Compute Infrastructure (GPU Hyperscaler)",
-      "stage": "Series C ($2B, $14.6B valuation, Mar 2026)",
+      "stage": "Series C ($2B, $14.6B valuation, Mar 2026) + $900M revolving credit facility (July 7, 2026; 12-bank syndicate: JPMorgan, Goldman Sachs, Morgan Stanley, MUFG, Bank of America, Deutsche Bank, Mizuho + 5 others)",
       "signal": "hot",
-      "notes": "Europe's largest-ever Series C (March 9, 2026), 4× valuation jump from Series B. UK/Norway-headquartered AI compute hyperscaler backed by NVIDIA, Dell, Nokia, Citadel, Jane Street, and Point72. Nick Clegg (ex-Meta VP Global Affairs, ex-EU Deputy PM) and Sheryl Sandberg join board — EU regulatory fluency as a core product differentiator. Targets regulated EU enterprises (banks, hospitals, defense) blocked from US-CLOUD-Act-governed hyperscalers by GDPR Art. 44, EU AI Act, and NIS2. Distinct from US GPU clouds (Lambda, CoreWeave) and national sovereign compute (government clusters). NVIDIA strategic investment signals Nscale is a key non-US distribution channel for Blackwell hardware."
+      "notes": "Europe's largest-ever Series C (March 9, 2026), 4× valuation jump from Series B. UK/Norway-headquartered AI compute hyperscaler backed by NVIDIA, Dell, Nokia, Citadel, Jane Street, and Point72. Nick Clegg (ex-Meta VP Global Affairs, ex-EU Deputy PM) and Sheryl Sandberg join board — EU regulatory fluency as a core product differentiator. Targets regulated EU enterprises (banks, hospitals, defense) blocked from US-CLOUD-Act-governed hyperscalers by GDPR Art. 44, EU AI Act, and NIS2. July 7, 2026 update: closed $900M revolving credit facility syndicated across 12 major banks (JPMorgan, Goldman, Morgan Stanley, MUFG, BofA, Deutsche, Mizuho + 5 others) — total capital now exceeds $2.9B. The 12-bank syndicate means lenders are now pricing Nscale as infrastructure company risk, not startup risk. Credit facility earmarked for US + Europe + APAC data center expansion. Full-stack sovereign ownership (energy + data centers + GPU compute + software) now at the scale where it can credibly compete with CoreWeave and Lambda for mid-market GPU cloud deals outside EU."
     },
     {
       "name": "Anthropic",
@@ -314,10 +314,10 @@
     },
     {
       "name": "OpenAI",
-      "domain": "Frontier AI Lab (Model APIs, ChatGPT, Codex, Operator)",
+      "domain": "Frontier AI Lab (Model APIs, ChatGPT, Codex, ChatGPT Work super app)",
       "stage": "Pre-IPO (Confidential S-1 filed June 8, 2026; Goldman Sachs + Morgan Stanley leading; $850B+ valuation; Q4 2026 Nasdaq target)",
       "signal": "hot",
-      "notes": "OpenAI filed a confidential S-1 with the SEC on June 8, 2026 — one week after Anthropic's filing — officially entering the IPO pipeline. At $850B+ valuation with $25B ARR (as of the filing), an OpenAI public debut would rank among the largest US IPOs in history. Goldman Sachs and Morgan Stanley are lead underwriters; Q4 2026 Nasdaq listing is targeted. Combined Anthropic + OpenAI IPO pipeline in H2 2026 represents $1.8T+ in combined implied market cap — the largest dual-frontier-AI-lab public offering window in history. Enterprise engineering implications: (1) post-IPO, API pricing power hardens — teams with >$5M annual OpenAI API spend should negotiate 3-year enterprise agreements before Q4; (2) the dual-IPO signals frontier AI model APIs have crossed from 'experimental' to 'infrastructure utility' in public market perception; (3) both companies' S-1 filings will disclose actual ARR, gross margins, and token economics for the first time — invaluable benchmarks for enterprise AI ROI modeling."
+      "notes": "OpenAI filed a confidential S-1 with the SEC on June 8, 2026 — one week after Anthropic's filing — officially entering the IPO pipeline. At $850B+ valuation with $25B ARR (as of the filing), an OpenAI public debut would rank among the largest US IPOs in history. Goldman Sachs and Morgan Stanley are lead underwriters; Q4 2026 Nasdaq listing is targeted. July 10, 2026 update: launched ChatGPT Work — a 'super app' powered by GPT-5.6 that unifies ChatGPT + document creation + presentation generation + one-click hosted website publishing into a single product. Rolled out July 10 to Pro/Enterprise/Edu users first. Strategic significance: OpenAI is no longer an API provider — it now owns the full knowledge-work workflow layer, competing directly with Microsoft Office, Google Workspace, Notion, and Canva simultaneously. For engineering teams using OpenAI APIs: the super app creates a consumer-grade daily-workflow lock-in that API access alone never could — the moat is no longer model quality but accumulated work history and artifact ownership. Post-IPO API pricing will accelerate this trend."
     },
     {
       "name": "Agility Robotics",
@@ -325,6 +325,13 @@
       "stage": "Pre-IPO SPAC (Churchill Capital XI merger announced June 24, 2026; $2.5B pre-money valuation; $620M raised; $200M PIPE led by Foxconn; ticker AGLT on Nasdaq, Q3 2026 close expected)",
       "signal": "hot",
       "notes": "First pure-play US-listed humanoid robot company. Backed by Amazon + NVIDIA. Digit v5 has 65,000+ logged commercial operating hours across 9 enterprise facilities (GXO Logistics, Schaeffler, Toyota Manufacturing Canada) — separates Agility from render-ware demos. $300M+ in committed multi-year orders. Foxconn leading the $200M PIPE is the category-defining signal: world's largest contract manufacturer is betting humanoid robots enter its own production lines, validating a scale-manufacturing path at potentially <$50K unit cost. Cooperative-safety-first design (robots work beside people without isolation cages) sets a new enterprise deployment criterion. AGLT post-SPAC stock performance will be the benchmark institutional investors use to price all humanoid robotics companies (Figure AI, NEURA, Tesla Optimus, Apptronik). Watch Q3 2026 for SPAC close + first public earnings call as the category's first public data point on robotics unit economics."
+    },
+    {
+      "name": "Ollama",
+      "domain": "Local LLM Inference Runtime (Open-Source, Developer-First)",
+      "stage": "Series B ($65M, Theory Ventures led, July 9, 2026)",
+      "signal": "hot",
+      "notes": "Ollama raised a $65M Series B led by Theory Ventures on July 9, 2026 — the first institutional venture round for the most widely-used open-source local LLM inference runtime (160K+ GitHub stars, 1M+ monthly downloads). Ollama provides a Docker-like CLI interface (`ollama pull llama3`, `ollama run`) for running LLMs locally on Mac, Windows, and Linux with hardware-optimized backends. The Series B signals two things: (1) the 'run open-weight models on your laptop or private server' category is commercially viable — enterprises pay for Ollama Pro features (model management, fleet deployment, SLA support) even when the core runtime is free; (2) Theory Ventures (known for infrastructure bets: PlanetScale, Temporal, Retool) views local inference as infrastructure-tier, not consumer tool. For ML engineers: Ollama is the reference implementation for 'what does great local inference DX look like' — its model library, REST API (/api/generate), and pull/run CLI design patterns are being copied by enterprise tools. Signal for personalized AI: on-device inference for privacy-sensitive personalization (health, finance, legal) is now infrastructure-grade, not experimental."
     },
     {
       "name": "Odyssey",

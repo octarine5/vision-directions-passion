@@ -2,9 +2,28 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-07-09"
+    "last_updated": "2026-07-10"
   },
   "entries": [
+    {
+      "timestamp": "2026-07-10T16:13:00Z",
+      "type": "market-scan",
+      "title": "Friday update: drill + market signal scan",
+      "summary": "Added a Hard distributed-systems hotfix drill: GCP Bigtable multi-cluster replication lag causes 8.4M users to receive 7-minute-stale ML features during a regional failover when the Python feature client uses the default multi_cluster_routing_use_any app profile against a lag-heavy follower cluster — 37 minutes undetected, $94K/hr revenue loss, no HTTP errors. Market scan: OpenAI launches ChatGPT Work super app (GPT-5.6, documents + presentations + hosted websites in one product); Nscale adds $900M revolving credit facility (12-bank syndicate, $2.9B total capital); Bespoke Labs $40M Series A for agent pre-deployment simulation infrastructure; Prime Intellect $130M Series A at $1B valuation for decentralized AI training. Updated Nscale and OpenAI watchlist entries; added Ollama ($65M Series B, Theory Ventures, July 9).",
+      "tasks": [
+        "drill",
+        "market-scan"
+      ],
+      "items_added": [
+        "GCP Cloud Bigtable Multi-Cluster Replication Lag — Regional Traffic Failover Routes ML Feature Reads to Stale Follower, 8.4M Users Served 7-Minute-Old Features for 37 Minutes",
+        "AI knowledge-work super app — frontier lab vertical integration from model to document to published artifact (OpenAI ChatGPT Work, Anthropic Cowork/Reflect)",
+        "AI agent pre-deployment simulation & evaluation infrastructure (Bespoke Labs $40M Series A)",
+        "Decentralized & collaborative AI training infrastructure (Prime Intellect $130M Series A, $1B valuation)",
+        "Nscale (watchlist update: $900M credit facility, 12-bank syndicate, $2.9B total capital)",
+        "OpenAI (watchlist update: ChatGPT Work super app launch, GPT-5.6)",
+        "Ollama (watchlist: $65M Series B, Theory Ventures, July 9, 2026)"
+      ]
+    },
     {
       "timestamp": "2026-07-09T07:00:00Z",
       "type": "drill",

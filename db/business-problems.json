@@ -11,7 +11,7 @@
       "TAM",
       "Tags"
     ],
-    "last_updated": "2026-07-03"
+    "last_updated": "2026-07-10"
   },
   "sections": [
     {
@@ -811,6 +811,39 @@
             "infra"
           ],
           "added": "2026-07-03"
+        },
+        {
+          "problem": "AI knowledge-work super app — frontier lab vertical integration from model to document to published artifact",
+          "enterprise": "OpenAI (ChatGPT Work, launched July 10, 2026; powered by GPT-5.6; Pro/Enterprise/Edu first; creates documents, presentations, hosted websites, and code from a single unified interface); Google (Gemini in Workspace); Anthropic (Claude Cowork + Reflect, early July 2026)",
+          "market_fit": "OpenAI's July 10, 2026 launch of ChatGPT Work — a unified 'super app' that combines the ChatGPT chatbot, document creation, presentation generation, code execution, and one-click hosted website publishing into a single interface powered by GPT-5.6 — marks the moment a frontier AI lab stopped being an API provider and became a direct competitor to Microsoft Office, Google Workspace, Notion, and Canva simultaneously. The strategic shift: enterprise value is captured at the workflow layer, not the model layer. Anthropic's simultaneous Claude Cowork + Reflect launches (early July 2026) — persistent cross-session context, shared artifacts, and behavioral observation ('what topics have you worked on this week?') — confirm both frontier labs are converging on the same insight: the moat is not model quality but daily workflow lock-in. For ML engineers building personalized AI products: the super app pattern defines the end state of the category — users who give a single AI system permission to observe their full work history and create artifacts on their behalf generate personalization signal orders of magnitude richer than any API-level interaction. The super app is the data flywheel, not just the product.",
+          "tam": "$150B",
+          "tags": [
+            "ml",
+            "biz"
+          ],
+          "added": "2026-07-10"
+        },
+        {
+          "problem": "AI agent pre-deployment simulation & evaluation infrastructure",
+          "enterprise": "Bespoke Labs ($40M Series A, Wing VC led, Mayfield + The House Fund, ~July 6, 2026); Braintrust AI; AgentBench (open-source); METR (Model Evaluation & Threat Research)",
+          "market_fit": "Bespoke Labs' $40M Series A (Wing VC, ~July 6, 2026) validates a distinct infrastructure layer beneath the AI agent stack: large-scale simulated environments where agents can safely learn, explore, and fail before touching production systems. This is architecturally distinct from prompt-based testing (evaluating individual LLM outputs) or unit tests on tool calls — Bespoke builds game-engine-level simulation environments where a web browsing agent can 'try to book a flight 10,000 times' in a sandboxed replica before being deployed for real users. The market driver: as AI agents take consequential real-world actions (booking, purchasing, editing, sending), the inability to safely test agent behaviors at scale is the primary enterprise blocker to shipping. A Wing VC-led Series A in this space signals that institutional AI investors view 'pre-deployment agent simulation' as a necessary infrastructure category, not a feature inside an existing eval platform. Enterprise implication: within 18 months, requiring a simulation pass before production agent rollout will be a compliance norm — analogous to requiring unit tests before code merge. Teams without simulation infrastructure will face the same liability risk as shipping code without tests.",
+          "tam": "$8B",
+          "tags": [
+            "ml",
+            "infra"
+          ],
+          "added": "2026-07-10"
+        },
+        {
+          "problem": "Decentralized & collaborative AI training infrastructure — compute democratization across distributed GPU networks",
+          "enterprise": "Prime Intellect ($130M Series A, $1B valuation, Radical Ventures led, July 2026); Petals (EleutherAI, open-source distributed inference); Together AI (distributed training platform)",
+          "market_fit": "Prime Intellect's $130M Series A at a $1B valuation (Radical Ventures led, July 2026) validates a new architectural approach to AI training: distributed training across geographically dispersed GPUs owned by multiple independent parties, coordinated via a decentralized protocol. Rather than requiring a single actor to own a 10K-GPU cluster, Prime Intellect's protocol enables coordinated training across contributed GPUs from universities, smaller cloud providers, and enterprise excess capacity — achieving training compute at hyperscaler scale without hyperscaler capex or ownership. The enterprise implication is bifurcated: (1) For compute-poor organizations (universities, startups, government labs) that cannot afford H100 clusters, Prime Intellect's infrastructure offers access to frontier-scale training. (2) For Staff+ engineers evaluating training infrastructure, this introduces a new axis of trust: decentralized training requires verifiable gradient updates (cryptographic attestation of honest participation) — a solved-enough problem for $1B VC validation but still a systems engineering challenge for production adoption. The $1B valuation at Series A signals this is the early-stage version of what may become a $30B+ compute democratization category by 2030 — particularly if export controls on H100/B200 accelerate demand for geographically distributed alternatives.",
+          "tam": "$20B",
+          "tags": [
+            "ml",
+            "infra"
+          ],
+          "added": "2026-07-10"
         }
       ]
     }
