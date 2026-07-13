@@ -3,7 +3,7 @@
     "category": "tech-talks",
     "display_name": "Tech Talks",
     "layout": "cards",
-    "last_updated": "2026-07-06"
+    "last_updated": "2026-07-13"
   },
   "sections": [
     {
@@ -477,6 +477,22 @@
           "venue": "AI SRE Summit 2026 (Virtual, May 12, 2026)",
           "description": "Addresses the operational gap between traditional SRE (distributed tracing, SLIs, SLOs, error budgets on deterministic services) and AI agents that auto-remediate incidents. Explores how to define agent-observed SLIs (task completion rate, step efficiency, tool-call accuracy, human escalation rate), calibrate autonomy with safety gates and human-in-the-loop checkpoints, and set error budgets for non-deterministic agentic workflows. Features a panel including Charity Majors (Honeycomb), Stefana Muller (Salesforce VP Infrastructure), and Itiel Shwartz (Komodor CTO).",
           "added": "2026-07-06"
+        },
+        {
+          "title": "KServe in Production: Scaling Generative Inference the Cloud Native Way",
+          "url": "https://kccncind2026.sched.com/event/kserve-in-production",
+          "speaker": "Johnu George (Nutanix)",
+          "venue": "KubeCon + CloudNativeCon India 2026, Mumbai (June 18–19, 2026)",
+          "description": "Production deployment patterns for KServe serving generative AI workloads at scale on Kubernetes. Covers KServe's unified model inference platform integrating with llm-d and vLLM backends, autoscaling for LLM serving, multi-model serving with InferenceGraph CRDs, and operational lessons from Nutanix's production KServe deployments handling GPU resource management and model versioning at cloud native scale.",
+          "added": "2026-07-13"
+        },
+        {
+          "title": "When Kubeflow Fights Cilium: Debugging 60% Idle GPUs in Kubernetes",
+          "url": "https://kccncind2026.sched.com/event/kubeflow-cilium-gpu-debugging",
+          "speaker": "Ramkumar Nagaraj & Bingi Narasimha Karthik (Adobe)",
+          "venue": "KubeCon + CloudNativeCon India 2026, Mumbai (June 18–19, 2026)",
+          "description": "War story from Adobe's ML platform team: a silent network policy conflict between Kubeflow training operators and Cilium eBPF-based CNI left 60% of GPU training nodes idle — GPUs allocated but not running work. Covers the debugging journey through GPU utilization metrics, network policy tracing with Hubble, the Cilium-Kubeflow port conflict root cause, and the fix. Essential viewing for teams running ML training workloads on Kubernetes with advanced CNI plugins.",
+          "added": "2026-07-13"
         }
       ]
     },

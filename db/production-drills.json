@@ -3,7 +3,7 @@
     "category": "production-drills",
     "display_name": "Production Drills",
     "layout": "drills",
-    "last_updated": "2026-07-10"
+    "last_updated": "2026-07-13"
   },
   "sections": [
     {
@@ -1194,6 +1194,15 @@
             "distributed-systems"
           ],
           "added": "2026-07-10"
+        },
+        {
+          "drill": "AWS SQS FIFO Queue Static MessageGroupId Hotspot — ML Inference Pipeline Caps at 3 msg/sec, 847K-Message Backlog Accrues in 6 Hours",
+          "layer": "Queue / Message Processing (AWS SQS FIFO / AWS Lambda / Python)",
+          "difficulty": "Hard",
+          "scenario": "At 09:15 UTC, the on-call notices ApproximateAgeOfOldestMessage on ml-inference-fifo.fifo has climbed from 8 seconds to 4 hours 12 minutes — a silent queue depth explosion with zero error alarms. Python Lambda consumers show 99.97% 200-OK. Root cause: new personalization pipeline deployed 6 hours prior sends all inference requests using static MessageGroupId 'ml-inference-v2'. SQS FIFO processes only one message per MessageGroupId at a time, capping effective throughput at 3 msg/sec (Lambda batch size 1, max concurrency per group: 1) versus intended 3,000 msg/sec across 1,000 concurrent Lambdas. Queue grows at 890 messages/minute. 847,312 messages backlogged. Real-time model inference 6.2 hours behind — 4.3M users served completely stale recommendations. CTR drops 31%, $84K/hr revenue impact. DLQ depth=0, Lambda errors=0, SQS send rate normal — all alarms healthy.",
+          "exercise": "1. Triage: Correlate ApproximateAgeOfOldestMessage spike with the 09:09 UTC pipeline deploy; fetch oldest 5 messages from queue to inspect MessageGroupId values (all return 'ml-inference-v2')\n2. Hotfix: Stop producer Lambda to pause inflow; deploy temporary standard SQS queue as bypass route for new inference requests; redirect traffic in 5 minutes\n3. Root fix: Change MessageGroupId to userId (e.g., 'user-{user_id}') to spread load across up to 1M groups; FIFO queues can now process up to 3,000 groups in parallel\n4. Drain: Deploy backlog-drain Lambda reading frozen FIFO queue (batch size 10, max concurrency 1,000 groups) using per-user IDs; drain 847K-message backlog in ~14 minutes\n5. Validate: Confirm ApproximateAgeOfOldestMessage returns to < 30s; verify recommendation freshness via A/B bucket split and CTR recovery\n6. Prevent: Add SQS FIFO MessageGroupId cardinality check to CI — alert if any producer uses a static or near-static (< 1,000 unique) group ID pattern; add CloudWatch alarm on ApproximateAgeOfOldestMessage > 60s",
+          "tags": ["queue", "sqs", "lambda", "throughput", "aws", "python", "ml-serving"],
+          "added": "2026-07-13"
         }
       ]
     },

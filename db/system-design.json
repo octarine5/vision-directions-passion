@@ -10,7 +10,7 @@
       "Tags",
       "Resources"
     ],
-    "last_updated": "2026-07-06"
+    "last_updated": "2026-07-13"
   },
   "sections": [
     {
@@ -1245,6 +1245,18 @@
             }
           ],
           "added": "2026-07-06"
+        },
+        {
+          "topic": "Zone-Failure-Resilient Search Infrastructure (Uber OpenSearch)",
+          "concepts": "Uber engineering blog (June 25, 2026) by Smit Patel documents how Uber achieved Zone Failure Resilience (ZFR) for OpenSearch — the ability to withstand complete loss of an AWS AZ without impacting querying or data ingestion. Two-layer approach: (1) Physical placement isolation — Uber's in-house 'isolation group' infrastructure built on Odin (Uber's container orchestration platform) ensures OpenSearch nodes are spread across separate failure domains (racks, AZs) with hard placement constraints that prevent multiple primary/replica pairs from co-locating; (2) Logical shard-awareness — OpenSearch's native shard-allocation awareness settings ensure primary and replica shards for the same index are always placed in different isolation groups, decoupling the logical replication topology from physical topology details. Key design insight: by combining physical isolation-group placement constraints with OpenSearch's logical shard-allocation awareness, the system remains stable even during a 'zone + 1 failure' (loss of an entire AZ plus one additional node). This approach is generalizable: isolation groups abstract away physical datacenter topology details so OpenSearch only needs to express logical constraints (primary ≠ replica AZ) and the placement system enforces the physical constraints. Uber's implementation decouples OpenSearch resilience from team knowledge of physical data center topology — any new cluster inherits ZFR by default through the Odin integration.",
+          "tags": ["infra", "scale"],
+          "resources": [
+            {
+              "title": "Uber Engineering: Zone-Failure-Resilient OpenSearch (June 2026)",
+              "url": "https://www.uber.com/us/en/blog/zone-failure-resilient/"
+            }
+          ],
+          "added": "2026-07-13"
         }
       ]
     }

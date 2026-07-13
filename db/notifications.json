@@ -2,9 +2,24 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-07-10"
+    "last_updated": "2026-07-13"
   },
   "entries": [
+    {
+      "timestamp": "2026-07-13T07:00:00Z",
+      "type": "knowledge-base",
+      "title": "Monday update: drill + knowledge base refresh",
+      "summary": "Added a Hard distributed-systems hotfix drill: AWS SQS FIFO static MessageGroupId hotspot — ML inference pipeline uses 'ml-inference-v2' as a static MessageGroupId, capping throughput at 3 msg/sec (SQS FIFO processes one message per group at a time), accumulating 847K-message backlog in 6 hours, serving 4.3M users stale recommendations with 31% CTR drop and $84K/hr impact — zero alarms fire. KB refresh: 1 new ML systems entry (vLLM MORI-IO RDMA KV Connector for disaggregated prefill, 2.5× goodput), 2 new tech talks (KubeCon India 2026: KServe in production generative inference; Kubeflow vs Cilium 60% idle GPU debugging), 1 new system design entry (Uber zone-failure-resilient OpenSearch, June 2026), 1 new org decisions entry (Nicole Forsgren LDX3 2026: AI amplifies pre-existing engineering friction as the new rate-limiter).",
+      "tasks": ["drill", "knowledge-base"],
+      "items_added": [
+        "AWS SQS FIFO Queue Static MessageGroupId Hotspot — ML Inference Pipeline Caps at 3 msg/sec, 847K-Message Backlog Accrues in 6 Hours",
+        "vLLM Production Stack with MORI-IO RDMA KV Connector — 2.5× Throughput for Disaggregated Prefill",
+        "KServe in Production: Scaling Generative Inference the Cloud Native Way (KubeCon India 2026)",
+        "When Kubeflow Fights Cilium: Debugging 60% Idle GPUs in Kubernetes (KubeCon India 2026)",
+        "Zone-Failure-Resilient Search Infrastructure (Uber OpenSearch, June 2026)",
+        "AI as engineering friction amplifier: how accelerated code production makes pre-existing bottlenecks the rate-limiter (Nicole Forsgren, LDX3 2026)"
+      ]
+    },
     {
       "timestamp": "2026-07-10T16:13:00Z",
       "type": "market-scan",

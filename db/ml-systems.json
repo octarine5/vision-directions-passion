@@ -10,7 +10,7 @@
       "Tags",
       "Resources"
     ],
-    "last_updated": "2026-07-06"
+    "last_updated": "2026-07-13"
   },
   "sections": [
     {
@@ -987,6 +987,22 @@
             }
           ],
           "added": "2026-07-06"
+        },
+        {
+          "topic": "vLLM Production Stack with MORI-IO RDMA KV Connector — 2.5× Throughput for Disaggregated Prefill",
+          "concepts": "MORI-IO (Memory-Over-RDMA I/O) is a production KV cache transfer connector for vLLM disaggregated prefill that uses RDMA over the network fabric instead of NVLink-only transfer, enabling prefill and decode instances to span multiple physical nodes without code changes. Key characteristics: uses RDMA transport for cross-node KV cache transfer, achieving 2.5× higher goodput and eliminating inter-token latency (ITL) violations vs. TCP-based transfer at the same hardware configuration. Production-ready connector alongside NixlConnector and MooncakeConnector in vLLM's disaggregated prefill tier. Architecture benefit: RDMA-based KV transfer decouples physical placement from logical prefill/decode assignment — operators can co-locate prefill-heavy H100 SXM nodes with decode-heavy H100 PCIe nodes on different rack switches and route KV cache via RDMA without NVLink requirement. Operational context: MORI-IO requires RoCE v2 or InfiniBand network fabric; requires provisioning RDMA-capable NICs on all nodes in the prefill/decode pool; adds 2–4ms transfer latency for typical KV sizes (16KB–512KB) vs 0.5–1ms on NVLink — evaluate tradeoff vs hardware topology constraints. Integration with vLLM production-stack Helm chart enables fully Kubernetes-native disaggregated serving with RDMA transport.",
+          "tags": ["ml", "infra", "scale"],
+          "resources": [
+            {
+              "title": "vLLM Blog: MORI-IO KV Connector for Disaggregated Prefill",
+              "url": "https://vllm.ai/blog/2026-04-07-moriio-kv-connector"
+            },
+            {
+              "title": "vLLM Disaggregated Prefill Docs",
+              "url": "https://docs.vllm.ai/en/latest/features/disagg_prefill/"
+            }
+          ],
+          "added": "2026-07-13"
         }
       ]
     }
