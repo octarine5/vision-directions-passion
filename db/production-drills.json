@@ -3,7 +3,7 @@
     "category": "production-drills",
     "display_name": "Production Drills",
     "layout": "drills",
-    "last_updated": "2026-07-13"
+    "last_updated": "2026-07-14"
   },
   "sections": [
     {
@@ -60,6 +60,24 @@
             "rate-limiting"
           ],
           "added": "2026-04-07"
+        },
+        {
+          "drill": "gRPC HTTP/2 GOAWAY Frame Storm During Rolling Deployment",
+          "layer": "API (gRPC) / Sidecar Proxy (Envoy/Istio)",
+          "difficulty": "Hard",
+          "scenario": "At 09:47 UTC, PagerDuty fires: 'rpc_error_rate{service=\"recommendation-svc\",code=\"UNAVAILABLE\"} = 8.3% (threshold: 1%)'. A rolling deployment of recommendation-svc v3.1.4 → v3.1.5 is 40% complete; v3.1.5 adds gRPC keepalive settings (GRPC_ARG_KEEPALIVE_TIME_MS=10000, GRPC_ARG_KEEPALIVE_PERMIT_WITHOUT_CALLS=true). Grafana shows grpc_server_handled_total{grpc_code=\"Unavailable\"} spiking from 14/min baseline to 1,847/min at 09:47 UTC. Client logs flood with: 'rpc error: code = Unavailable desc = connection closed before server preface received'. Envoy sidecar access logs on Terminating pods show: '[2026-07-14T09:47:23.841Z] \"POST /recommendation.v1.RecommendationService/GetRecs HTTP/2\" 0 RESET_BEFORE_HEADERS_SENT upstream_reset_before_response_started{GOAWAY} 0 0 - -'. kubectl rollout status stalls: '4 of 8 updated replicas, 1 unavailable'. Error rate spikes precisely for ~30s each time a pod enters Terminating state, then drops to near-zero until the next pod termination. No errors on v3.1.4 pods. P99 latency for successful RPCs is flat at 42ms, ruling out a v3.1.5 code regression.",
+          "exercise": "1. Diagnose: Correlate error timestamps with pod lifecycle events via 'kubectl get events -n prod --field-selector reason=Killing | grep recommendation-svc' — confirms each error burst aligns with a pod termination. Check Envoy access logs for GOAWAY on Terminating pods. Reproduce locally: run two gRPC server instances, send SIGTERM to one while holding keepalive connections open; observe clients receiving UNAVAILABLE before preStop completes.\n2. Immediate mitigation: Pause rollout ('kubectl rollout pause deployment/recommendation-svc -n prod'). Scale from 8 → 12 replicas ('kubectl scale deployment recommendation-svc -n prod --replicas=12') to reduce per-pod load and stabilize. Error rate falls to 0.2% within 90s as Terminating pod count drops to zero.\n3. Root cause: With GRPC_ARG_KEEPALIVE_PERMIT_WITHOUT_CALLS=true, Go gRPC clients maintain long-lived idle H2 connections to every pod. When a pod receives SIGTERM, Envoy sends HTTP/2 GOAWAY on all open connections after its 5s drain_duration — but the preStop hook only sleeps 5s, so the pod exits before clients can drain in-flight RPCs off the connection. Previously (v3.1.4, no keepalive), connections were short-lived (per-RPC or bounded by max_connection_age) and had already rotated away from pods before SIGTERM; with keepalive, idle connections persist indefinitely, massively increasing GOAWAY exposure window from ~0 to ~94 in-flight RPCs per termination.\n4. Fix: Add 'lifecycle: preStop: exec: command: [\"/bin/sh\",\"-c\",\"sleep 35\"]' to recommendation-svc container spec to outlast Envoy drain window. Set 'minReadySeconds: 30' and 'terminationGracePeriodSeconds: 65' in Deployment spec. On the Go gRPC client: wrap all RPCs with retry middleware using 'codes.Unavailable' as a retryable code with exponential backoff (max 3 retries, cap 500ms). Apply Istio EnvoyFilter to set drain_duration: 45s and parent_shutdown_duration: 60s cluster-wide. Resume rollout ('kubectl rollout resume deployment/recommendation-svc -n prod').\n5. Validate: Monitor grpc_server_handled_total{grpc_code=\"Unavailable\"} stays under 0.1% across all 8 subsequent pod rollovers. Confirm preStop timing with 'kubectl describe pod <terminating-pod> -n prod' — verify 35s between deletion timestamp and container exit. Run 'istioctl proxy-config listener recommendation-svc-<pod> --port 15001' to confirm new drain_duration is in effect.\n6. Prevent: Enforce preStop.sleep >= Envoy drain_duration via OPA admission webhook that rejects Deployments where terminationGracePeriodSeconds < 60 in the prod namespace. Add rollout integration test that injects traffic during pod termination and asserts UNAVAILABLE rate < 0.1%. Add GOAWAY handling to internal gRPC client wrapper library and document keepalive gotchas in service mesh runbook.",
+          "tags": [
+            "grpc",
+            "http2",
+            "envoy",
+            "istio",
+            "kubernetes",
+            "rolling-deployment",
+            "service-mesh",
+            "goaway"
+          ],
+          "added": "2026-07-14"
         }
       ]
     },

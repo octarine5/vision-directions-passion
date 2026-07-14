@@ -2,9 +2,19 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-07-13"
+    "last_updated": "2026-07-14"
   },
   "entries": [
+    {
+      "timestamp": "2026-07-14T07:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: gRPC HTTP/2 GOAWAY Frame Storm During Rolling Deployment",
+      "summary": "Added a Hard-difficulty API/service-mesh hotfix drill: recommendation-svc rolling deployment (v3.1.4 → v3.1.5) adds gRPC keepalive with GRPC_ARG_KEEPALIVE_PERMIT_WITHOUT_CALLS=true, causing long-lived idle H2 connections to persist to Terminating pods; Envoy's 5s preStop is shorter than its drain window, so GOAWAY frames arrive while clients hold active RPCs — spiking UNAVAILABLE errors to 8.3% (1,847/min peak) for ~30s per pod termination. Fix: preStop sleep 35s, minReadySeconds 30, gRPC client retry on UNAVAILABLE, and Envoy drain_duration 45s via Istio EnvoyFilter.",
+      "tasks": ["drill"],
+      "items_added": [
+        "gRPC HTTP/2 GOAWAY Frame Storm During Rolling Deployment — Keepalive-Pinned Idle Connections Absorb Envoy GOAWAY on Pod Termination, 8.3% Unavailable Error Spike"
+      ]
+    },
     {
       "timestamp": "2026-07-13T07:00:00Z",
       "type": "knowledge-base",
