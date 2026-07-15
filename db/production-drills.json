@@ -3,7 +3,7 @@
     "category": "production-drills",
     "display_name": "Production Drills",
     "layout": "drills",
-    "last_updated": "2026-07-14"
+    "last_updated": "2026-07-15"
   },
   "sections": [
     {
@@ -268,6 +268,25 @@
             "replication-lag"
           ],
           "added": "2026-06-16"
+        },
+        {
+          "drill": "PostgreSQL Logical Replication Slot WAL Bloat — Debezium CDC Consumer OOM Loop Pins 18 GB of WAL, Fills RDS Disk, Crashes Primary for 8 Minutes",
+          "layer": "Database (PostgreSQL 15.3 / AWS RDS / Debezium 2.5 / ECS / MSK Kafka)",
+          "difficulty": "Hard",
+          "scenario": "At 11:23 UTC, PagerDuty fires: 'RDSStorageSpaceAlert: ml-feature-db-primary FreeStorageSpace = 3.8 GB (threshold: 5 GB)'. The RDS instance is a db.r6g.2xlarge (64 GB gp3 SSD) in us-west-2. A data engineering team started a COPY at 08:47 UTC, inserting 18,342,891 rows into ml_features.user_embeddings. Debezium 2.5.4 (ECS, 2 tasks, 4 GB heap each) streams CDC events from a logical replication slot (debezium_ml_features_slot) to MSK Kafka topic ml-features.user-embeddings. At 09:15 UTC, Debezium OOM-crashes attempting to hold the bulk-insert WAL batch in heap during snapshot recovery. ECS restartPolicy: ALWAYS relaunches it immediately — it OOM-crashes again within 3 minutes each time, cycling 5 times:\n\n  2026-07-15T09:15:44.831Z ERROR [io.debezium.connector.postgresql.PostgresConnectorTask]\n    Failed to create and start the snapshot phase\n    Caused by: java.lang.OutOfMemoryError: Java heap space\n\nBecause the slot's consumer never reconnects successfully, confirmed_flush_lsn is frozen at the 08:47 UTC pre-backfill LSN. PostgreSQL cannot recycle WAL past that point:\n\n  SELECT slot_name, active, pg_wal_lsn_diff(pg_current_wal_lsn(), restart_lsn) AS lag_bytes\n  FROM pg_replication_slots;\n  -- debezium_ml_features_slot | false | 18,253,824,000   (≈18.2 GB)\n\nAt 11:41 UTC, free storage hits 0. PostgreSQL rejects all writes:\n\n  FATAL: could not write to file \"pg_wal/00000001000001B100000046\": No space left on device\n\nThe primary crashes into recovery mode, unavailable for 8 minutes while the OS recycles WAL segments. All 42 downstream services fail with 'FATAL: connection to server was lost'. ML inference falls back to Redis cache (5-min TTL), then to global-mean features after TTL expiry — degrading 23% of CTR-model recommendation predictions. Total business impact: 55 minutes (8 min DB down + 47 min stale features), $78K estimated revenue loss.",
+          "exercise": "1. Diagnose the slot, not Debezium: The alert says storage, so query the storage root cause before anything else. In psql: 'SELECT slot_name, active, restart_lsn, pg_wal_lsn_diff(pg_current_wal_lsn(), restart_lsn) AS lag_bytes, catalog_xmin FROM pg_replication_slots WHERE active = false' — returns debezium_ml_features_slot with 18.2 GB lag. Confirm Debezium OOM from ECS: 'aws ecs describe-tasks --cluster ml-workers --tasks <task-arn> --query tasks[0].stoppedReason' → 'Essential container in task exited (exit code 137)'. Correlate FreeStorageSpace CloudWatch metric — linear decline from 64 GB at 08:47 UTC matches the COPY start time exactly.\n2. Immediate mitigation — drop the stuck slot: 'SELECT pg_drop_replication_slot(''debezium_ml_features_slot'');' — this instantly releases the WAL retention pin. PostgreSQL recycling runs within the next checkpoint (default checkpoint_timeout: 5 min); FreeStorageSpace climbs from 0 → ~45 GB within 10 minutes. Verify: 'SELECT count(*) FROM pg_replication_slots WHERE slot_name = ''debezium_ml_features_slot''' returns 0.\n3. Restart Debezium with safe heap bounds: Reduce ECS task JAVA_OPTS from -Xmx4G to -Xmx2G and set connector properties 'snapshot.fetch.size=512', 'max.batch.size=1024', 'max.queue.size=8192' to cap per-restart WAL batch size. Debezium recreates the slot and starts a fresh snapshot (~8–15 min for 18M rows). Deploy: 'aws ecs update-service --cluster ml-workers --service debezium-ml-features --force-new-deployment'.\n4. Add WAL lag CloudWatch alarm: Deploy a Lambda (Python, EventBridge trigger every 5 min) that queries pg_replication_slots and publishes lag_bytes as a custom metric (namespace PostgreSQL/ReplicationSlots, dimension SlotName). Set CloudWatch Alarm: WALLagBytes > 5,368,709,120 (5 GB) → PagerDuty P2 'Replication slot WAL lag exceeds 5 GB — primary disk at risk'. This fires 3.6 hours before disk exhaustion, giving time to act before the emergency.\n5. Add bulk-operation pre-flight check to data-engineering runbook: Before any COPY or bulk INSERT > 1M rows, require engineers to run: 'SELECT slot_name, active, pg_wal_lsn_diff(pg_current_wal_lsn(), restart_lsn)/1073741824.0 AS lag_gb FROM pg_replication_slots' and page the on-call DBA if any slot has lag_gb > 1.0 or active = false. Add a PL/pgSQL check function called from a pre-COPY migration gate.\n6. Prevent: (a) Enable RDS storage autoscaling (max_allocated_storage: 200 GB) as a backstop — each 5 GB increment as free space falls buys hours of additional runway without requiring any manual action. (b) Set PostgreSQL 16 parameter inactive_replication_slots_max_disconnection_delay = '30min' (PG15: use a scheduled Lambda to drop slots inactive > 30 min) — auto-drops zombie slots before WAL accumulates. (c) Add Debezium connector-health alert: after 3 consecutive ECS task failures within 10 min, fire PagerDuty P2 'Debezium OOM-cycling' — would have caught the issue at 09:25 UTC, 2 hours before the storage alert. (d) Add an E2E CDC pipeline smoke test to the on-call pre-shift dashboard: verify Debezium consumer_lag (Kafka lag on ml-features.user-embeddings) is < 60s; any value > 300s triggers a P2 alert on the freshness SLO.",
+          "tags": [
+            "postgresql",
+            "replication",
+            "wal",
+            "debezium",
+            "cdc",
+            "aws-rds",
+            "kafka",
+            "ml-features",
+            "disk-full"
+          ],
+          "added": "2026-07-15"
         }
       ]
     },

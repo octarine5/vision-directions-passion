@@ -2,9 +2,19 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-07-14"
+    "last_updated": "2026-07-15"
   },
   "entries": [
+    {
+      "timestamp": "2026-07-15T07:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: PostgreSQL Logical Replication Slot WAL Bloat — Debezium CDC OOM Loop Fills RDS Disk",
+      "summary": "Added a Hard-difficulty database hotfix drill: Debezium 2.5 CDC consumer on ECS OOM-crashes 5 times during a bulk 18M-row COPY, leaving the PostgreSQL logical replication slot frozen and retaining 18.2 GB of WAL — exhausting RDS disk and crashing the primary for 8 minutes. Covers replication slot diagnosis, emergency slot drop, safe Debezium heap tuning, WAL lag CloudWatch alerting via Lambda, and pre-flight bulk-operation guardrails.",
+      "tasks": ["drill"],
+      "items_added": [
+        "PostgreSQL Logical Replication Slot WAL Bloat — Debezium CDC Consumer OOM Loop Pins 18 GB of WAL, Fills RDS Disk, Crashes Primary for 8 Minutes"
+      ]
+    },
     {
       "timestamp": "2026-07-14T07:00:00Z",
       "type": "drill",
