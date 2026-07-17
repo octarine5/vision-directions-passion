@@ -11,7 +11,7 @@
       "TAM",
       "Tags"
     ],
-    "last_updated": "2026-07-10"
+    "last_updated": "2026-07-17"
   },
   "sections": [
     {
@@ -110,6 +110,27 @@
             "infra"
           ],
           "added": "2026-04-07"
+        },
+        {
+          "problem": "Specialized LLM inference API consolidation at hyperscale",
+          "enterprise": "Fireworks AI ($1.5B Series D, $17.5B val, $1B+ ARR, July 16, 2026), Together AI, Groq",
+          "market_fit": "Enterprises need dedicated low-latency open-model inference at hyperscaler throughput without cloud markup; Fireworks serving 40T tokens/day (up from 15T) for Uber, Shopify, GitLab, MongoDB",
+          "tam": "$30B",
+          "tags": [
+            "ml",
+            "infra"
+          ],
+          "added": "2026-07-17"
+        },
+        {
+          "problem": "RLOps — continuous production feedback loop for AI agent post-training",
+          "enterprise": "Adaptive ML (acquired by Datadog June 30, 2026 for RLOps platform), Reinforcement Labs, Imbue",
+          "market_fit": "Enterprise AI agents deployed to production have no automated loop to improve from live feedback; RL-based post-training from production signals replaces one-shot fine-tuning; Datadog paid acquisition premium to own this layer inside observability",
+          "tam": "$8B",
+          "tags": [
+            "ml"
+          ],
+          "added": "2026-07-17"
         }
       ]
     },
@@ -198,6 +219,16 @@
             "ml"
           ],
           "added": "2026-04-07"
+        },
+        {
+          "problem": "De novo antibody and protein generative design (pre-clinical AI)",
+          "enterprise": "Chai Discovery ($400M Series C, $3.8B val, July 14, 2026; Eli Lilly + Pfizer customers), Isomorphic Labs, AbSci",
+          "market_fit": "Chai-3 achieves double-digit experimental success rates for zero-shot de novo antibody design; tripled valuation in 7 months; generative molecular AI is replacing $1B+ wet-lab pre-clinical spend per drug program",
+          "tam": "$25B",
+          "tags": [
+            "ml"
+          ],
+          "added": "2026-07-17"
         }
       ]
     },

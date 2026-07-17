@@ -195,10 +195,10 @@
     },
     {
       "name": "Modular/Mojo",
-      "domain": "AI Infrastructure",
-      "stage": "Series B",
-      "signal": "watch",
-      "notes": "Next-gen AI programming language and runtime"
+      "domain": "AI Infrastructure (CUDA alternative, MAX AI platform / Mojo language) — Acquired by Qualcomm",
+      "stage": "Acquired by Qualcomm for ~$4B all-stock (announced June 24, 2026; pending regulatory approval, expected H2 2026 close)",
+      "signal": "acquired",
+      "notes": "Qualcomm agreed to acquire Modular (founded by Chris Lattner + Tim Davis, ex-Google/Apple/LLVM) for ~$4B all-stock on June 24, 2026. Strategic rationale: Qualcomm gains Modular's MAX AI platform and Mojo language — the most credible hardware-agnostic ML execution layer built to run across NVIDIA, AMD, Intel, and Qualcomm chips. Direct CUDA alternative: MAX AI already runs PyTorch and TensorFlow graphs on non-NVIDIA hardware without code changes. Post-acquisition, Qualcomm's Oryon/Hexagon NPU ecosystem gains a first-class ML runtime, enabling on-device inference at competitive parity with CoreML and TensorRT. The $4B price for a compiler-runtime company signals that the ML execution layer is now viewed as a strategic moat, not a commodity. For engineers: if MAX AI ships as a free Qualcomm SDK, the CUDA migration TAM shrinks significantly — hardware-agnostic ML deployment becomes the new standard."
     },
     {
       "name": "Together AI",
@@ -339,6 +339,13 @@
       "stage": "Series B ($310M, $1.45B valuation, June 17, 2026; Natural Capital led; Amazon, GV, AMD Ventures, IQT, EQT co-investors)",
       "signal": "hot",
       "notes": "World simulation model company founded by AV pioneers Oliver Cameron + Jeff Hawke. AWS preferred cloud + Amazon Trainium chips for training — positions Odyssey as Amazon's world-model answer to NVIDIA Cosmos 3. Model portfolio: Odyssey-2 Max (physics-accurate world simulation), Starchild-1 (real-time multimodal world model), Agora-1 (multi-agent interaction), PROWL (active exploration via self-supervised data generation). Amazon's strategic co-investment + Jeff Dean (Google chief scientist) as individual backer signals this is foundational infrastructure for physical AI training, not a niche robotics tool. Enterprise signal: world simulation models are commoditizing the 'synthetic training data' infrastructure layer — custom physics simulation pipelines (Gazebo, Isaac Sim) face stranded asset risk in 12-18 months. Watch for AWS SageMaker integration that lets robotics teams access Odyssey world models as managed training data APIs."
+    },
+    {
+      "name": "Fireworks AI",
+      "domain": "Specialized LLM Inference API Platform (Open-Source Model Serving at Hyperscale)",
+      "stage": "Series D ($1.505B, $17.5B valuation, July 16, 2026; led by Atreides Management, Index Ventures, TCV; NVIDIA co-investor)",
+      "signal": "hot",
+      "notes": "Fireworks AI closed a $1.505B Series D at $17.5B valuation on July 16, 2026 — the largest single round in dedicated open-source LLM inference infrastructure. $1B+ ARR reached; daily token volume grew from 15T to 40T tokens/day in the past 6 months. Enterprise customers include Uber, Shopify, Doximity, Elastic, GitLab, MongoDB. Core thesis: enterprises need a third option between build-your-own GPU cluster and paying hyperscaler (OpenAI/Anthropic) rates — a specialized inference layer that serves any open-weight model (Llama, Mistral, Qwen, DeepSeek) at hyperscaler throughput with SLAs, at 10–25x lower cost per token than closed APIs. The $1.5B raise will expand GPU capacity and fund a 'Specialized Intelligence' positioning (fine-tuned models + compound AI systems, not just generic inference). NVIDIA's co-investment signals open-source inference platforms are now a primary GPU distribution channel alongside hyperscalers. For ML engineers: Fireworks' function-calling, JSON mode, and structured outputs are the reference implementation for production-grade open-model inference APIs — their latency and throughput benchmarks set the comparison baseline for enterprise open-model deployments."
     }
   ],
   "careerMilestones": [
