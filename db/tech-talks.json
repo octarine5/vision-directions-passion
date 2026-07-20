@@ -3,7 +3,7 @@
     "category": "tech-talks",
     "display_name": "Tech Talks",
     "layout": "cards",
-    "last_updated": "2026-07-13"
+    "last_updated": "2026-07-20"
   },
   "sections": [
     {
@@ -493,6 +493,30 @@
           "venue": "KubeCon + CloudNativeCon India 2026, Mumbai (June 18–19, 2026)",
           "description": "War story from Adobe's ML platform team: a silent network policy conflict between Kubeflow training operators and Cilium eBPF-based CNI left 60% of GPU training nodes idle — GPUs allocated but not running work. Covers the debugging journey through GPU utilization metrics, network policy tracing with Hubble, the Cilium-Kubeflow port conflict root cause, and the fix. Essential viewing for teams running ML training workloads on Kubernetes with advanced CNI plugins.",
           "added": "2026-07-13"
+        },
+        {
+          "title": "Towards AI Agents In the Real World",
+          "url": "https://icml.cc/virtual/2026/invited-talk/67258",
+          "speaker": "Pascale Fung (HKUST)",
+          "venue": "ICML 2026, Seoul, South Korea (July 7, 2026)",
+          "description": "Opening invited talk of ICML 2026 main conference. Fung argues that recent LLM-agent advances driven by imitation learning + RL in digital environments are hitting a ceiling; next leap requires agents grounded in world modeling — integrating multimodal perception, planning-through-reasoning, and memory. Proposes a shift from instruction-following to principled autonomous agents that understand physical environments and user intentions. Frames the key open problems: grounding, causal reasoning, long-horizon planning, and human-centered alignment for real-world deployment.",
+          "added": "2026-07-20"
+        },
+        {
+          "title": "WF2026: Autoresearch & Keynotes ft. Anthropic, Google DeepMind, Amazon AGI",
+          "url": "https://www.youtube.com/watch?v=4sX_He5c4sI",
+          "speaker": "Multiple speakers (Anthropic, Google DeepMind, Amazon AGI, Sonar, Arena, Recursive)",
+          "venue": "AI Engineer World's Fair 2026, Moscone West, San Francisco (June 30 – July 1, 2026)",
+          "description": "Main-stage Day 2 keynote compilation from AI Engineer World's Fair 2026 (6,000+ engineers, 300 speakers, 29 tracks). Covers autoresearch — AI systems that improve AI systems — entering production at Anthropic and DeepMind; Amazon AGI's approach to agentic tool use at scale; and the emerging 'software factory' paradigm where agents write, test, and deploy code autonomously. Specific segments cover eval-driven agent development, reliability of multi-step agentic pipelines, and observability patterns for autonomous systems.",
+          "added": "2026-07-20"
+        },
+        {
+          "title": "WF2026: Software Factories & Keynotes ft. Microsoft, OpenAI, Z.ai, MiniMax, Hugging Face",
+          "url": "https://www.youtube.com/watch?v=htM02KMNZnk",
+          "speaker": "Multiple speakers (Microsoft, OpenAI, Z.ai/GLM, MiniMax, Hugging Face)",
+          "venue": "AI Engineer World's Fair 2026, Moscone West, San Francisco (June 29, 2026)",
+          "description": "Main-stage Day 1 keynote compilation from AI Engineer World's Fair 2026. Microsoft's vision for AI-native software factories — agents as first-class engineering team members with defined roles, contracts, and handoffs. OpenAI's production engineering patterns for o-series reasoning models in agentic loops. Z.ai (GLM-4 team) and MiniMax present open-source LLM infrastructure patterns for serving at >1T tokens/day. Hugging Face on open-weight model deployment pipelines and the role of community models in enterprise AI stacks.",
+          "added": "2026-07-20"
         }
       ]
     },

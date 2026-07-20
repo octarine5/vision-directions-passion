@@ -9,7 +9,7 @@
       "Key Considerations",
       "Phase"
     ],
-    "last_updated": "2026-07-13"
+    "last_updated": "2026-07-20"
   },
   "sections": [
     {
@@ -601,6 +601,12 @@
           "considerations": "Nicole Forsgren (Sr. Engineering Director at Google, lead author of Accelerate & Frictionless) at LDX3 London June 2026: before AI coding tools, engineering systems had friction everywhere — slow builds, unclear ownership, knowledge in one person's head — but natural speed limits meant friction was not the bottleneck. Now that AI has dramatically accelerated how fast engineers produce code, the friction that was always there has become the thing slowing everything down. Key implication for staff+ engineers: the highest-leverage investment is no longer 'write more code faster' but 'identify and remove the friction that AI just surfaced' — CI/CD latency, code review queues, unclear ownership models, and knowledge silos are now the primary rate limiters. Actionable framework: (1) Map your engineering system's friction points using the Frictionless methodology — any step that adds latency between code generation and production is now a candidate for elimination; (2) Treat engineering system health (build times, deployment frequency, review turnaround) as first-class SLOs — AI tools make these the actual bottleneck, so they deserve the same alerting and optimization attention as production services; (3) The orgs that win with AI are those that had low-friction systems before AI — this validates the 'boring infrastructure' investment thesis. Staff+ engineers who built low-friction developer platforms are disproportionately positioned to extract AI productivity gains.",
           "phase": "Cross-cutting",
           "added": "2026-07-13"
+        },
+        {
+          "topic": "State of Agent Engineering 2026: 57% of orgs in production; quality is the top barrier",
+          "considerations": "LangChain survey of 1,200+ engineering teams: 57% have AI agents in production (vs 22% in 2025). Quality is the top barrier (32% of respondents) — reliability over many turns, hallucinations, unpredictable tool-call sequences. Observability-vs-evals gap: 89% of teams have observability tooling but only 52% have systematic evaluations; teams that invest in evals report 2.3× higher agent task-completion rates. Agent engineering is emerging as a distinct discipline from both ML and traditional SWE — new roles, new tooling (eval frameworks, trace stores, agent sandboxes). Staff+ implication: agent reliability, evaluation strategy, and multi-agent orchestration are now first-class system design concerns alongside latency and throughput.",
+          "phase": "Cross-cutting",
+          "added": "2026-07-20"
         }
       ]
     }

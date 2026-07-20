@@ -10,7 +10,7 @@
       "Tags",
       "Resources"
     ],
-    "last_updated": "2026-07-13"
+    "last_updated": "2026-07-20"
   },
   "sections": [
     {
@@ -1003,6 +1003,18 @@
             }
           ],
           "added": "2026-07-13"
+        },
+        {
+          "topic": "vLLM v0.25.0 — Model Runner V2, Streaming Parser Engine, Universal Speculative Decoding",
+          "concepts": "Model Runner V2 (unified eager + compiled path) is now the default; legacy PagedAttention V1 engine removed. Streaming Parser Engine handles tool-call and reasoning-chain parsing in a single unified pass, eliminating the previous dual-parser split. Universal speculative decoding adds support for heterogeneous-vocabulary drafters: DSpark for small same-vocab drafters and DFlash for cross-model cross-vocab speculation. Transformers backend now matches native vLLM throughput after kernel-level optimization. V1 architecture reduces scheduling overhead ~40% at 1K+ concurrent requests.",
+          "tags": ["ml", "infra", "scale"],
+          "resources": [
+            {
+              "title": "vLLM v0.25.0 Release Notes",
+              "url": "https://github.com/vllm-project/vllm/releases/tag/v0.25.0"
+            }
+          ],
+          "added": "2026-07-20"
         }
       ]
     }

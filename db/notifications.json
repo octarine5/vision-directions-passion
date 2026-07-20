@@ -2,9 +2,28 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-07-17"
+    "last_updated": "2026-07-20"
   },
   "entries": [
+    {
+      "timestamp": "2026-07-20T07:00:00Z",
+      "type": "knowledge-base",
+      "title": "Monday update: drill + knowledge base refresh",
+      "summary": "Added a Hard distributed-systems hotfix drill: Apache Pulsar BookKeeper bookie disk-full causes ledger write stall — unbounded ML feature replay job fills single bookie (4TB EBS) in 2h47m, breaking write quorum (ensemble=3, writeQuorum=2) and blocking 847 concurrent producers across 14 ML feature pipelines ($1.2M/hr impact); fix involves emergency bookie scale-out, ledger GC to free disk, and rate-limiting the replay job. Knowledge base refresh: added vLLM v0.25.0 (Model Runner V2 default, Streaming Parser Engine for unified tool-call parsing, DSpark/DFlash universal speculative decoding) to ml-systems; Uber Cart Assistant 8-stage state-graph architecture (LLMs for ambiguity, deterministic systems for retrieval/pricing/validation — 34% cart abandonment reduction) to system-design; LangChain State of Agent Engineering 2026 (57% orgs in production, quality top barrier, observability-vs-evals gap) to org-decisions; and three new tech talks: ICML 2026 Pascale Fung on world-model-grounded agents, AI Engineer World's Fair 2026 Day 1 (Software Factories, Microsoft/OpenAI/HF) and Day 2 (Autoresearch, Anthropic/DeepMind/Amazon AGI).",
+      "tasks": [
+        "drill",
+        "knowledge-base"
+      ],
+      "items_added": [
+        "Apache Pulsar BookKeeper Bookie Disk-Full — Ledger Write Stall Triggers Cascading Producer Timeout",
+        "vLLM v0.25.0 — Model Runner V2, Streaming Parser Engine, Universal Speculative Decoding",
+        "Agentic Grocery Shopping — Uber Cart Assistant State-Graph Architecture",
+        "State of Agent Engineering 2026: 57% of orgs have agents in production; quality is the top barrier",
+        "Towards AI Agents In the Real World — Pascale Fung, ICML 2026",
+        "WF2026: Autoresearch & Keynotes ft. Anthropic, Google DeepMind, Amazon AGI (AI Engineer World's Fair 2026)",
+        "WF2026: Software Factories & Keynotes ft. Microsoft, OpenAI, Z.ai, MiniMax, HF (AI Engineer World's Fair 2026)"
+      ]
+    },
     {
       "timestamp": "2026-07-17T07:00:00Z",
       "type": "market-scan",

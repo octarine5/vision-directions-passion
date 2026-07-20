@@ -10,7 +10,7 @@
       "Tags",
       "Resources"
     ],
-    "last_updated": "2026-07-13"
+    "last_updated": "2026-07-20"
   },
   "sections": [
     {
@@ -1257,6 +1257,18 @@
             }
           ],
           "added": "2026-07-13"
+        },
+        {
+          "topic": "Agentic Grocery Shopping — Uber Cart Assistant State-Graph Architecture",
+          "concepts": "8-stage LLM state graph for ambiguous shopping intent: (1) query understanding LLM, (2) candidate retrieval via deterministic API, (3) semantic relevance judge LLM, (4) dietary/preference filter, (5) quantity disambiguation LLM, (6) price/promo guardrails deterministic, (7) cart validation schema check deterministic, (8) confirmation generation LLM. Key design principle: LLMs own ambiguity resolution and user intent; deterministic systems own retrieval, pricing, schema validation. Timeout guardrails enforce per-stage latency budget. Result: 34% reduction in cart abandonment vs rule-based predecessor. Generalizable pattern for any multi-step agentic workflow where reliability and cost matter.",
+          "tags": ["biz", "ml", "scale"],
+          "resources": [
+            {
+              "title": "Uber Cart Assistant: Building an Agentic Grocery Shopping Experience",
+              "url": "https://www.uber.com/us/en/blog/uber-cart-assistant/"
+            }
+          ],
+          "added": "2026-07-20"
         }
       ]
     }

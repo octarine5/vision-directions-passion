@@ -3,7 +3,7 @@
     "category": "production-drills",
     "display_name": "Production Drills",
     "layout": "drills",
-    "last_updated": "2026-07-17"
+    "last_updated": "2026-07-20"
   },
   "sections": [
     {
@@ -1281,6 +1281,22 @@
             "ml-features"
           ],
           "added": "2026-07-17"
+        },
+        {
+          "drill": "Apache Pulsar BookKeeper Bookie Disk-Full — Ledger Write Stall Triggers Cascading Producer Timeout",
+          "layer": "Distributed Systems (Apache Pulsar 3.3 / BookKeeper 4.17 / AWS EKS)",
+          "difficulty": "Hard",
+          "scenario": "At 09:18 UTC, PagerDuty fires: 'pulsar-prod-us-east1 producer-send-error-rate 38.4% (threshold: 1%)'. Your Apache Pulsar 3.3.2 cluster (6 broker pods on AWS EKS, 9 BookKeeper bookie nodes — 3× r6i.4xlarge per AZ, us-east-1a/b/c) handles 420K messages/sec for a real-time event pipeline. Pulsar broker logs:\n\n  2026-07-20T09:14:22.831Z ERROR ManagedLedgerImpl - Topic persistent://prod/events/user-actions addEntry failed: BKException{code=6, message='BKNotEnoughBookiesException: Not enough non-faulty bookies available'}\n  2026-07-20T09:15:04.001Z WARN  PersistentTopic - Topic persistent://prod/events/user-actions pending-add-entries=48,200 exceeds max 50,000 — blocking producers\n  2026-07-20T09:18:47.332Z ERROR ProducerImpl - [persistent://prod/events/user-actions] Send timeout in waiting for receipt of message\n\nProducer client logs: ProducerQueueIsFullError: The producer queue is full and cannot accept new messages. Concurrent producers blocked: 847 across 12 application pods.\n\nBookKeeper admin shows bookie node 10.0.1.45 (us-east-1a) in READ_ONLY mode. CloudWatch: its 4TB gp3 EBS volume at 100% utilization, 0 bytes available. Pulsar ensemble=3, writeQuorum=2, ackQuorum=2 — losing even one bookie from the ensemble means BKNotEnoughBookiesException for any NEW ledger segment. Brokers can still serve reads from existing ledgers but cannot open ledger segments for writes. Root cause: at 06:27 UTC an ML feature replay job began replaying 72 hours of historical event data at unlimited throughput. At 420K msg/sec × 1KB average message size, the replay job wrote ~5.1TB to the cluster over 2h47m, filling the AZ-1a bookie (capacity 4TB after BookKeeper journal + index directories). The replay job had no rate limit and no disk-space pre-check. Business impact: 847 blocked producers across 14 ML model feature pipelines, estimated $1.2M/hr downstream model degradation.",
+          "exercise": "1. Triage: Confirm READ_ONLY bookie: pulsar-admin brokers list; then pulsar-admin topics internal-stats persistent://prod/events/user-actions | jq '.ledgers[-1].ensemble' — shows ['10.0.1.45:3181', '10.0.1.46:3181', '10.0.1.47:3181']. SSH to 10.0.1.45 and run df -h /mnt/bookkeeper-data — 0 bytes free. Confirm in BookKeeper logs: grep 'No space left on device' /var/log/bookkeeper/bookie.log confirms the I/O exception origin. Check bookie health via JMX: bookie_STATE = READ_ONLY vs RUNNING. Rule out broker-side issue by checking pulsar broker logs — all errors are BKNotEnoughBookiesException (BookKeeper upstream), not broker OOM or GC.\n2. Immediate mitigation — restore write quorum: Scale the BookKeeper StatefulSet by 1: kubectl scale statefulset bookkeeper -n pulsar --replicas=10. The new bookie (10.0.1.50) self-registers with ZooKeeper within 30s; Pulsar brokers discover it via ZK watcher and immediately include it in new ensemble assignments. BKNotEnoughBookiesException clears within 60s; producers unblock as pending-add-entries drain. Simultaneously stop the culprit: kubectl get jobs -n ml-platform | grep replay — kubectl delete job ml-feature-replay-historical -n ml-platform. This halts the write amplification.\n3. Free disk on the full bookie: Identify expired ledgers on 10.0.1.45: bookkeeper-shell ledger -ledgerIdFormatter hex listledgers | grep 10.0.1.45 | sort -k3 -rn | head -20. Cross-reference with subscription backlog: pulsar-admin topics stats persistent://prod/events/user-actions — any subscription with backlogSize=0 means those ledgers are fully consumed. Trigger ledger GC: pulsar-admin topics trim persistent://prod/events/user-actions. BookKeeper deletes acknowledged ledgers, freeing disk. Monitor df -h /mnt/bookkeeper-data until <80% utilization, then bookie transitions READ_ONLY → RUNNING automatically.\n4. Validate recovery: Monitor Pulsar broker metric pulsar_producer_send_error_count — should drop to 0 within 2 min of the new bookie registering. Confirm pulsar_ml_add_entry_errors_total = 0. Check new ledger segments: pulsar-admin topics internal-stats persistent://prod/events/user-actions | jq '.ledgers[-1]' — new ledger ID with ensemble including the new bookie. Producer timeout rate returns to 0%. Downstream ML feature pipeline lag drains to <5 seconds within 10 min.\n5. Root fix: (a) Add rate limiting to the replay job: configure a Pulsar producer with maxPendingMessages=500, sendTimeoutMs=5000, and add a token-bucket rate limiter (target: 5K msg/sec for replay jobs, vs 420K for live traffic). Enforce via Pulsar namespace-level publish rate: pulsar-admin namespaces set-publish-rate prod/events-replay --msg-publish-rate 5000. (b) Change ensemble/write quorum: ensemble=4, writeQuorum=3, ackQuorum=2 — cluster can now tolerate 1 full bookie loss without stalling any writes. (c) Add pre-flight check to replay job: assert sum(bookie disk available) > estimated_replay_bytes before starting; fail fast if capacity insufficient.\n6. Prevent: (a) EBS disk alert at 75% utilization on all bookie nodes (CloudWatch VolumeIdleTime, or custom CWAgent metric). At 420K msg/s × 1KB, that is >1 hour of lead time from 75% → 100%. (b) BookKeeper automatic disk management: enable DbLedgerStorage with minMajorCompactionThreshold=0.5, gcWaitTime=60000 for proactive ledger compaction before disk fills. (c) Add bookie disk capacity check to the ML feature replay job's pre-flight runbook and CI integration test. (d) PagerDuty alert: any bookie in READ_ONLY state for >60s → P1 'Pulsar write quorum degraded'.",
+          "tags": [
+            "pulsar",
+            "bookkeeper",
+            "distributed",
+            "disk-full",
+            "aws",
+            "messaging"
+          ],
+          "added": "2026-07-20"
         }
       ]
     },
