@@ -2,9 +2,21 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-07-20"
+    "last_updated": "2026-07-21"
   },
   "entries": [
+    {
+      "timestamp": "2026-07-21T07:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: AWS EMR Serverless S3 Checkpoint Prefix Throttle",
+      "summary": "Added a Hard distributed-systems hotfix drill: S3 ListObjectsV2 rate throttling on an 8,847-object checkpoint prefix causes PySpark Structured Streaming to crash and restart from a stale checkpoint, rolling back the watermark 11 minutes and replaying historical events that overwrite a live Delta Lake feature store — 14 ML models serve stale features to 6.2M users for 31 minutes (CTR −25%, ~$168K impact). Fix covers checkpoint retention limits, UUID prefix sharding for S3 rate partitioning, batch-ID-guarded Delta merges to prevent stale overwrites, and feature-freshness alerting.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "AWS EMR Serverless S3 Checkpoint Prefix Throttle — PySpark Structured Streaming Watermark Rollback Overwrites Live Feature Store for 31 Minutes"
+      ]
+    },
     {
       "timestamp": "2026-07-20T07:00:00Z",
       "type": "knowledge-base",
