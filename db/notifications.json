@@ -2,9 +2,21 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-07-21"
+    "last_updated": "2026-07-22"
   },
   "entries": [
+    {
+      "timestamp": "2026-07-22T07:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: Lettuce 6.3 Topology Refresh Race — ElastiCache Redis Cluster MOVED Loop Blocks ML Feature Reads",
+      "summary": "Added a Hard-difficulty distributed-systems hotfix drill: Lettuce 6.3.0 contains a topology refresh race (GitHub #2617) where a concurrent CLUSTER NODES response during a MOVED redirect commits a partial slot→node map, sending 5 shards into a permanent MOVED oscillation loop at 340 redirects/sec during an ElastiCache Redis Cluster planned failover — 31.4% error rate, 847K sessions lose ML personalization for 28 minutes ($147K). Fix: rolling restart for immediate recovery, upgrade to Lettuce 6.3.2 for the atomic topology-snapshot fix.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "Lettuce 6.3 Topology Refresh Race — ElastiCache Redis Cluster MOVED Loop Blocks ML Feature Reads for 28 Minutes During Planned Failover"
+      ]
+    },
     {
       "timestamp": "2026-07-21T07:00:00Z",
       "type": "drill",
