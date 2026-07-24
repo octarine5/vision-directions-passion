@@ -2,9 +2,27 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-07-23"
+    "last_updated": "2026-07-24"
   },
   "entries": [
+    {
+      "timestamp": "2026-07-24T07:00:00Z",
+      "type": "market-scan",
+      "title": "Friday update: drill + market signal scan",
+      "summary": "Added a Hard distributed-systems hotfix drill: MLflow 2.8.0 global pg_advisory_lock starvation — a GitHub Actions merge queue flush fires 14 concurrent model registration jobs against a shared RDS PostgreSQL metadata store; the model-name-agnostic advisory lock serializes all callers, exhausting a 15-connection SQLAlchemy pool in 90 seconds and blocking the production model promotion Argo Workflow for 47 minutes while 3.7M users receive a stale recommendation model (8.4% CTR depression, $132K impact). Market scan: Thinking Machines Lab (Mira Murati) releases Inkling — 975B MoE open-weights model, Apache-2.0, fine-tunable via Tinker platform; Acrab unveils GΞLIX 1 SoC + Agent Box edge agentic AI compute platform ($350M backed, Singapore); Glow emerges from stealth with $180M Series A at $1.2B valuation for AI-native endpoint security for agent attack surfaces. Added Acrab and Thinking Machines Lab to enterprise watchlist.",
+      "tasks": [
+        "drill",
+        "market-scan"
+      ],
+      "items_added": [
+        "MLflow 2.8.0 Global pg_advisory_lock Starvation — CI Merge Queue Flush Blocks Production Model Promotion for 47 Minutes",
+        "Open-weights frontier MoE model platform with enterprise fine-tuning PaaS (Thinking Machines Lab / Inkling 975B, Apache-2.0)",
+        "Edge agentic AI compute — full-stack silicon-to-software platform for on-device autonomous agents (Acrab GΞLIX 1 SoC, $350M)",
+        "AI-native endpoint security for agentic AI attack surfaces (Glow $180M Series A, $1.2B valuation)",
+        "Acrab (watchlist: edge AI silicon + software, $350M, GΞLIX 1 SoC unveiled July 23)",
+        "Thinking Machines Lab (watchlist: Inkling 975B MoE open-weights, Apache-2.0, July 15)"
+      ]
+    },
     {
       "timestamp": "2026-07-23T07:00:00Z",
       "type": "drill",

@@ -346,6 +346,20 @@
       "stage": "Series D ($1.505B, $17.5B valuation, July 16, 2026; led by Atreides Management, Index Ventures, TCV; NVIDIA co-investor)",
       "signal": "hot",
       "notes": "Fireworks AI closed a $1.505B Series D at $17.5B valuation on July 16, 2026 — the largest single round in dedicated open-source LLM inference infrastructure. $1B+ ARR reached; daily token volume grew from 15T to 40T tokens/day in the past 6 months. Enterprise customers include Uber, Shopify, Doximity, Elastic, GitLab, MongoDB. Core thesis: enterprises need a third option between build-your-own GPU cluster and paying hyperscaler (OpenAI/Anthropic) rates — a specialized inference layer that serves any open-weight model (Llama, Mistral, Qwen, DeepSeek) at hyperscaler throughput with SLAs, at 10–25x lower cost per token than closed APIs. The $1.5B raise will expand GPU capacity and fund a 'Specialized Intelligence' positioning (fine-tuned models + compound AI systems, not just generic inference). NVIDIA's co-investment signals open-source inference platforms are now a primary GPU distribution channel alongside hyperscalers. For ML engineers: Fireworks' function-calling, JSON mode, and structured outputs are the reference implementation for production-grade open-model inference APIs — their latency and throughput benchmarks set the comparison baseline for enterprise open-model deployments."
+    },
+    {
+      "name": "Acrab",
+      "domain": "Edge Agentic AI Compute (Full-Stack Silicon + Inference + OS + Agent Orchestration)",
+      "stage": "Growth ($350M cumulative financing; GΞLIX 1 SoC + Agent Box unveiled July 23, 2026)",
+      "signal": "watch",
+      "notes": "Singapore-based Acrab (founded 2024) unveiled GΞLIX 1 custom AI SoC and Agent Box personal edge compute platform on July 23, 2026, backed by $350M led by Vertex Ventures SEA & India. Full-stack architecture: custom silicon + local LLM inference + purpose-built OS + multi-modal HMI + agent orchestration — the only company attempting a fully vertically integrated edge AI stack from transistor to agent abstraction layer (analogous to Apple Silicon + CoreML + iOS, but for autonomous agents). GΞLIX 1 is designed for agentic inference workloads (multi-turn reasoning, tool-use loops) not batch image classification. Key differentiation from Qualcomm AI Hub/Apple Neural Engine: purpose-built for the memory access patterns of multi-step agentic inference, not single-pass classification. Target markets: privacy-sensitive personalized AI (health, finance), air-gapped industrial deployments, and sub-100ms action latency requirements for physical world agents."
+    },
+    {
+      "name": "Thinking Machines Lab",
+      "domain": "Frontier AI Lab (Open-Weights MoE Model + Enterprise Fine-Tuning PaaS)",
+      "stage": "Growth ($2B seed; Inkling 975B MoE open-weights model released July 15, 2026)",
+      "signal": "watch",
+      "notes": "Founded by ex-OpenAI CTO Mira Murati and former OpenAI research leads. Inkling (July 15, 2026): 975B-parameter MoE model, 41B active parameters, 45T multimodal training tokens, Apache-2.0 license — no commercial restrictions. Fine-tuning available same-day on Tinker (managed fine-tuning PaaS). Inkling-Small (276B total / 12B active) forthcoming. MoE architecture: GPT-4-class reasoning at 41B-dense inference cost. Significance: adds a third credible open-weights frontier lab alongside Meta LLaMA and DeepSeek, with direct OpenAI research pedigree. Apache-2.0 at frontier quality removes the IP risk that blocked enterprises from fine-tuning LLaMA on proprietary data — materially changes build-vs-buy for personalized AI. Watch Inkling-Small release for the deployable, fine-tunable candidate for on-device/edge serving."
     }
   ],
   "careerMilestones": [

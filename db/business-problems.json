@@ -11,7 +11,7 @@
       "TAM",
       "Tags"
     ],
-    "last_updated": "2026-07-17"
+    "last_updated": "2026-07-24"
   },
   "sections": [
     {
@@ -131,6 +131,17 @@
             "ml"
           ],
           "added": "2026-07-17"
+        },
+        {
+          "problem": "Open-weights frontier MoE model platform with enterprise fine-tuning PaaS",
+          "enterprise": "Thinking Machines Lab / Inkling (975B MoE, 41B active params, Apache-2.0, July 15, 2026; founded by ex-OpenAI CTO Mira Murati, $2B seed; paired with Tinker fine-tuning platform), Meta LLaMA, Mistral, DeepSeek",
+          "market_fit": "Thinking Machines Lab released Inkling on July 15, 2026 — a 975B-parameter mixture-of-experts model (41B active) trained on 45T multimodal tokens (text, images, audio, video), Apache-2.0 licensed, available same-day for fine-tuning on Tinker (the company's managed fine-tuning platform). This is the first credible open-weights frontier model shipped by a team with direct pedigree from the OpenAI model research org (Murati was CTO; co-founders include former OpenAI research leads). Key enterprise signals: (1) Apache-2.0 with no commercial restrictions positions Inkling as a Llama-3 alternative with a frontier-lab-quality training run (45T tokens vs Llama-3's 15T); (2) The Tinker fine-tuning PaaS creates recurring revenue on top of the open-weights base — the Meta LLaMA/Replicate/Together AI monetization pattern, but controlled by the model authors; (3) The MoE architecture (975B total / 41B active) delivers GPT-4 class reasoning at inference costs comparable to a 41B dense model — enabling fine-tuning on enterprise datasets without prohibitive GPU costs. For ML engineers: Inkling-Small (276B / 12B active) is forthcoming — if quality benchmarks hold, this is the most deployable open-weights frontier model to date for personalized AI tasks.",
+          "tam": "$20B",
+          "tags": [
+            "ml",
+            "infra"
+          ],
+          "added": "2026-07-24"
         }
       ]
     },
@@ -351,6 +362,17 @@
             "biz"
           ],
           "added": "2026-04-07"
+        },
+        {
+          "problem": "AI-native endpoint security for agentic AI attack surfaces",
+          "enterprise": "Glow ($180M Series A, $1.2B valuation, July 22, 2026; Sequoia + Cyberstarts + Greenoaks + Redpoint led; ex-Meta VP Eng CEO Roi Tiger), Wiz, Orca Security, Lacework",
+          "market_fit": "AI agents running on employee endpoints — spawning subprocesses, writing files, making outbound network calls, accessing credentials — create attack surfaces that traditional EDR (Detect + Respond) tools cannot address. Glow's 'adaptive prevention' model maps each endpoint's normal behavior at the OS-process level, then enforces policy dynamically without signatures or rules: an AI agent that calls Stripe is permitted, one that exfiltrates to an unknown IP is blocked before execution. $180M Series A at $1.2B (unicorn at debut) in July 2026 validates that the transition from AI-assisted detection to AI-native prevention is a distinct $5B+ market. Enterprise signal: as AI coding agents (Cursor, GitHub Copilot) run with write access to code and secrets on developer laptops, the endpoint is the primary AI attack surface, not the network perimeter.",
+          "tam": "$8B",
+          "tags": [
+            "infra",
+            "ml"
+          ],
+          "added": "2026-07-24"
         }
       ]
     },
@@ -875,6 +897,17 @@
             "infra"
           ],
           "added": "2026-07-10"
+        },
+        {
+          "problem": "Edge agentic AI compute — full-stack silicon-to-software platform for on-device autonomous agents",
+          "enterprise": "Acrab ($350M cumulative financing, $350M led by Vertex Ventures SEA & India; GΞLIX 1 SoC + Agent Box unveiled July 23, 2026; Singapore-HQ, founded 2024), Qualcomm AI Hub, Apple Silicon Neural Engine, NVIDIA Jetson",
+          "market_fit": "Acrab unveiled GΞLIX 1 — its first-generation AI SoC — and Agent Box (a personal edge AI compute platform) on July 23, 2026, backed by $350M in cumulative financing led by Vertex Ventures SEA & India. Acrab's full-stack architecture spans: (1) custom AI silicon (GΞLIX 1 SoC) optimized for agentic inference workloads (multi-step reasoning, tool-use loops, multi-modal perception), (2) local LLM inference runtime, (3) a purpose-built operating system, (4) multi-modal human-machine interface stack, and (5) an agent orchestration layer. This is structurally distinct from single-chip providers (Qualcomm, Apple, NVIDIA Jetson): Acrab owns the entire vertical from transistors to the agent abstraction layer, the same way Apple controls Silicon + CoreML + iOS. The 'on-device autonomous agent' architecture addresses three enterprise constraints that cloud inference cannot solve: (a) sub-100ms action latency required for real-time physical world interactions, (b) data sovereignty for sensitive personal/industrial data, (c) continuous operation in air-gapped or bandwidth-constrained environments. For engineers building personalized AI: the GΞLIX 1 platform is the first purpose-built silicon designed for the attention-head memory access patterns of multi-turn agentic inference (not batch image classification or keyword spotting) — the compute profile that Qualcomm's Hexagon and Apple's Neural Engine were not originally designed for.",
+          "tam": "$25B",
+          "tags": [
+            "ml",
+            "infra"
+          ],
+          "added": "2026-07-24"
         }
       ]
     }

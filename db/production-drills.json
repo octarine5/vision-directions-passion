@@ -3,7 +3,7 @@
     "category": "production-drills",
     "display_name": "Production Drills",
     "layout": "drills",
-    "last_updated": "2026-07-23"
+    "last_updated": "2026-07-24"
   },
   "sections": [
     {
@@ -1355,6 +1355,24 @@
             "msk"
           ],
           "added": "2026-07-23"
+        },
+        {
+          "drill": "MLflow 2.8.0 Global pg_advisory_lock Starvation \u2014 CI Merge Queue Flush Serializes 14 Concurrent Model Registrations, Blocks Production Model Promotion for 47 Minutes",
+          "layer": "Hotfix Drills \u2014 Distributed Systems (MLflow 2.8.0 / PostgreSQL 15.2 / AWS RDS db.t4g.xlarge / GitHub Actions / Argo Workflows / GKE / us-west-2)",
+          "difficulty": "Hard",
+          "scenario": "At 16:41 UTC on a Thursday, a GitHub Actions merge queue flushes 14 buffered PRs simultaneously after a code freeze lift. Each CI job calls mlflow.tracking.MlflowClient().register_model('runs:/abc-def-123/model', 'recommendation-v2'). In MLflow 2.8.0, this method acquires SELECT pg_advisory_xact_lock(hashtext('register_new_model_version_v1')) \u2014 a global, transaction-scoped advisory lock on the shared PostgreSQL 15.2 RDS metadata store (db.t4g.xlarge, Multi-AZ, us-west-2) \u2014 to prevent duplicate version numbering. The lock hash is model-name-agnostic; registering any model serializes all callers globally.\n\nSQLAlchemy pool: pool_size=5, max_overflow=10 (15 connections total). All 14 CI jobs race for the 1 available lock slot. By 16:42:34 UTC, 11 of 13 waiting sessions exhaust the 30s pool timeout:\n  sqlalchemy.exc.TimeoutError: QueuePool limit of size 5 overflow 10 reached, connection timed out, timeout 30\n  mlflow.exceptions.MlflowException: Error: Failed to register model due to backend store error. See logs for full traceback.\n\nThe production promotion Argo Workflow ('promote-models'), triggered at 16:42:07 UTC, calls MlflowClient().transition_model_version_stage('recommendation-v2', '48', 'Production') \u2014 which also acquires the same global advisory lock in MLflow 2.8.0. It blocks for 47 minutes. All 14 recommendation models continue serving version 42 instead of 48. Version 48 patches a personalization regression identified 6 days earlier causing 8.4% CTR depression across 3.7M active users: estimated $132K lost engagement revenue.\n\nMLflow Prometheus metrics during incident:\n  mlflow_requests_total{method=\"POST\",endpoint=\"/api/2.0/mlflow/registered-models/create\",status=\"500\"} = 142/min at peak\n  mlflow_server_db_pool_size{state=\"overflow\"} = 10 (sustained for 44 minutes)\n  mlflow_server_db_pool_size{state=\"idle\"} = 0\n\nDiscovery: At 17:29 UTC, an ML engineer notices the 'promote-models' Argo Workflow stuck in Running state for 47 minutes (normal runtime: 3 minutes) and correlates with the MLflow server error log flood.",
+          "exercise": "1. Diagnose: Query the RDS metadata store directly \u2014 SELECT pid, query, wait_event_type, wait_event, now() - query_start AS duration FROM pg_stat_activity WHERE wait_event = 'Advisory' AND state = 'active' ORDER BY duration DESC; \u2014 reveals 13 sessions waiting on pg_advisory_xact_lock with identical hashtext values, 1 holding it. Confirm global lock scope by inspecting MLflow 2.8.0 source: mlflow/store/db/db_types.py _get_resource_advisory_lock() returns hashtext('register_new_model_version_v1') with no model-name component. Cross-reference with MLflow server logs showing QueuePool TimeoutError bursts.\n2. Immediate mitigation: Scale MLflow server from 2 \u2192 8 replicas (kubectl scale deployment mlflow-server --replicas=8 -n mlflow) to expand total SQLAlchemy pool from 15 \u2192 60 connections. Apply pool overrides: kubectl set env deployment/mlflow-server MLFLOW_SQLALCHEMYSTORE_POOL_SIZE=20 MLFLOW_SQLALCHEMYSTORE_MAX_OVERFLOW=40 -n mlflow && kubectl rollout restart deployment/mlflow-server -n mlflow. Pool starvation resolves within 90s; 11 blocked CI jobs retry and succeed. Manually re-trigger the 3 that hit cancel-in-progress.\n3. Unblock production promotion: kubectl delete argo workflow promote-models-k9x72 -n mlflow; re-trigger via Argo UI. With expanded pool, promotion completes in 2m 11s. Verify: mlflow_model_version_stage{model=\"recommendation-v2\",stage=\"Production\"} = 48. CTR recovery observable in next 15-minute A/B segment reporting window.\n4. Root fix: Upgrade MLflow to 2.12.0 which replaces the global advisory lock with per-model-name fine-grained locking: pg_advisory_xact_lock(hashtext('register_new_model_version_v1:' || model_name)). Registering 'recommendation-v2' and 'ranking-v3' simultaneously no longer contend. Validate by running 20 concurrent mlflow.register_model calls across 10 distinct model names in a staging environment \u2014 expect \u22642 concurrent advisory locks at any instant.\n5. Prevent burst congestion: Add GitHub Actions concurrency groups to all MLflow registration jobs: concurrency: { group: 'mlflow-register-${{ github.repository }}', cancel-in-progress: false }. This serializes registrations per repo at CI layer, not DB layer. Set merge queue max-parallel to 5 in .github/merge_queue.yml to cap simultaneous lock contention even before the MLflow upgrade ships.\n6. Add SLO alerts: (a) mlflow_server_db_pool_size{state=\"idle\"} == 0 for 5 minutes \u2192 PagerDuty. (b) Argo Workflow duration for promote-models > 600s \u2192 PagerDuty (would have fired 37 minutes before manual discovery). (c) mlflow_requests_total{status=\"500\",endpoint=~\".*/registered-models/.*\"} rate > 50/min for 2 minutes \u2192 Slack #ml-oncall.",
+          "tags": [
+            "mlflow",
+            "postgresql",
+            "advisory-lock",
+            "model-registry",
+            "distributed-systems",
+            "argo-workflows",
+            "ci-cd",
+            "ml-serving"
+          ],
+          "added": "2026-07-24"
         }
       ]
     },
