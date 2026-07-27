@@ -3,7 +3,7 @@
     "category": "tech-talks",
     "display_name": "Tech Talks",
     "layout": "cards",
-    "last_updated": "2026-07-20"
+    "last_updated": "2026-07-27"
   },
   "sections": [
     {
@@ -517,6 +517,14 @@
           "venue": "AI Engineer World's Fair 2026, Moscone West, San Francisco (June 29, 2026)",
           "description": "Main-stage Day 1 keynote compilation from AI Engineer World's Fair 2026. Microsoft's vision for AI-native software factories — agents as first-class engineering team members with defined roles, contracts, and handoffs. OpenAI's production engineering patterns for o-series reasoning models in agentic loops. Z.ai (GLM-4 team) and MiniMax present open-source LLM infrastructure patterns for serving at >1T tokens/day. Hugging Face on open-weight model deployment pipelines and the role of community models in enterprise AI stacks.",
           "added": "2026-07-20"
+        },
+        {
+          "title": "In-House LLM Serving at Netflix",
+          "url": "https://netflixtechblog.com/in-house-llm-serving-at-netflix-b1f7e4bc1e15",
+          "speaker": "Netflix ML Platform Team",
+          "venue": "Netflix TechBlog / InfoQ (July 17, 2026)",
+          "description": "Deep-dive into Netflix’s production LLM serving architecture: vLLM as the primary inference engine + NVIDIA Triton for batching/orchestration, unified behind the Model Scoring Service (MSS) API. Covers the engine selection matrix (vLLM for autoregressive generation, Triton for embeddings and classical ML), model packaging standards, gRPC and OpenAI-compatible HTTP API surface design, and output constraint enforcement (structured JSON schema validation) at the MSS routing layer. Provides a rare look at how a non-AI-first company scales LLM serving for internal product teams without requiring each team to manage inference infrastructure. The MSS facade pattern decouples API consumers from engine implementation details, enabling vLLM version upgrades without breaking callers.",
+          "added": "2026-07-27"
         }
       ]
     },

@@ -10,7 +10,7 @@
       "Tags",
       "Resources"
     ],
-    "last_updated": "2026-07-20"
+    "last_updated": "2026-07-27"
   },
   "sections": [
     {
@@ -1015,6 +1015,34 @@
             }
           ],
           "added": "2026-07-20"
+        },
+        {
+          "topic": "vLLM v0.26.0 — Tiered KV Offloading, Per-Group Attention Backend, NVFP4/MXFP4 Quantization",
+          "concepts": "Object-store secondary KV cache tier enables GPU HBM → CPU DRAM → S3/GCS/ABS cascade offloading with per-request eviction policy hooks. Attention backend is now selectable per KV-cache group (FlashAttention, FlashInfer, or xFormers per layer group), enabling hybrid attention strategies within a single model. Sliding window attention exposed as an explicit backend capability rather than a silent preprocessing transformation. NVFP4 and MXFP4 quantization support added for Blackwell-class GPUs (GB200/B200). Inkling model family (Thinking Machines Lab’s 975B MoE open-weights) added as a supported model class. DeepSeek-V4 serving optimizations including expert-parallel routing improvements. Rust frontend multimodal: video and audio token streams now handled natively without Python fallback. Transformers 5.13.0 compatibility; FlashInfer 0.6.14; NIXL 1.3.1 for cross-node KV transfer. 411 commits, 212 contributors.",
+          "tags": ["ml", "infra", "scale"],
+          "resources": [
+            {
+              "title": "vLLM v0.26.0 Release Notes",
+              "url": "https://github.com/vllm-project/vllm/releases/tag/v0.26.0"
+            }
+          ],
+          "added": "2026-07-27"
+        },
+        {
+          "topic": "Netflix In-House LLM Serving — vLLM + NVIDIA Triton Unified Under Model Scoring Service",
+          "concepts": "Netflix’s Model Scoring Service (MSS) is the centralized inference platform serving all production ML models. The LLM serving architecture layers vLLM (autoregressive inference engine) and NVIDIA Triton Inference Server (batching and orchestration for classical ML and embedding models) behind MSS’s unified API surface, exposing both gRPC and OpenAI-compatible HTTP endpoints to internal teams. Key design decisions: single engine selection matrix (vLLM for autoregressive generation, Triton for everything else); model packaging standardized on a Netflix-internal container spec with reproducible dependency locking; output constraints (structured JSON, schema enforcement) applied at the MSS routing layer before reaching the engine. The platform enables Netflix engineering teams to self-serve LLM deployment without managing inference infrastructure. The architecture decouples engine upgrades (e.g. vLLM version bumps) from the API contract — MSS acts as a stable facade. Published July 17, 2026.",
+          "tags": ["ml", "infra", "scale"],
+          "resources": [
+            {
+              "title": "Netflix TechBlog: In-House LLM Serving at Netflix",
+              "url": "https://netflixtechblog.com/in-house-llm-serving-at-netflix-b1f7e4bc1e15"
+            },
+            {
+              "title": "InfoQ: Netflix Shares How It Deploys Its In-House LLM Platform",
+              "url": "https://www.infoq.com/news/2026/07/netflix-llm-platform/"
+            }
+          ],
+          "added": "2026-07-27"
         }
       ]
     }

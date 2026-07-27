@@ -2,9 +2,25 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-07-24"
+    "last_updated": "2026-07-27"
   },
   "entries": [
+    {
+      "timestamp": "2026-07-27T07:00:00Z",
+      "type": "knowledge-base",
+      "title": "Monday update: drill + knowledge base refresh",
+      "summary": "Added Hard distributed-systems hotfix drill: Kafka Streams DSL RocksDB standby replica changelog warmup stall — a 17-minute-prior AZ packet-loss event left standby replicas 847K records behind; JVM Full GC pauses during restoration extend restore from ~24s to 41 minutes, serving zero-vector features to 3.8M users with 0% error rate and zero consumer lag alerts. Knowledge base refresh: vLLM v0.26.0 (tiered KV offloading, per-group attention backend, NVFP4/MXFP4 quantization), Netflix In-House LLM Serving (vLLM + Triton unified under Model Scoring Service), and Anthropic 2026 Agentic Coding Trends (engineer as orchestrator, 60% AI usage but 0–20% fully delegatable, multi-agent teams).",
+      "tasks": [
+        "drill",
+        "knowledge-base"
+      ],
+      "items_added": [
+        "Kafka Streams DSL RocksDB Standby Replica Changelog Warmup Stall — Session Feature Aggregator Serves Zero-Vector Features to 3.8M Users for 41 Minutes (production-drills)",
+        "vLLM v0.26.0 — Tiered KV Offloading, Per-Group Attention Backend, NVFP4/MXFP4 Quantization (ml-systems)",
+        "Netflix In-House LLM Serving — vLLM + NVIDIA Triton Unified Under Model Scoring Service (ml-systems + tech-talks)",
+        "Anthropic 2026 Agentic Coding Trends: engineer role shifts from implementer to orchestrator (org-decisions)"
+      ]
+    },
     {
       "timestamp": "2026-07-24T07:00:00Z",
       "type": "market-scan",

@@ -9,7 +9,7 @@
       "Key Considerations",
       "Phase"
     ],
-    "last_updated": "2026-07-20"
+    "last_updated": "2026-07-27"
   },
   "sections": [
     {
@@ -607,6 +607,12 @@
           "considerations": "LangChain survey of 1,200+ engineering teams: 57% have AI agents in production (vs 22% in 2025). Quality is the top barrier (32% of respondents) — reliability over many turns, hallucinations, unpredictable tool-call sequences. Observability-vs-evals gap: 89% of teams have observability tooling but only 52% have systematic evaluations; teams that invest in evals report 2.3× higher agent task-completion rates. Agent engineering is emerging as a distinct discipline from both ML and traditional SWE — new roles, new tooling (eval frameworks, trace stores, agent sandboxes). Staff+ implication: agent reliability, evaluation strategy, and multi-agent orchestration are now first-class system design concerns alongside latency and throughput.",
           "phase": "Cross-cutting",
           "added": "2026-07-20"
+        },
+        {
+          "topic": "Anthropic 2026 Agentic Coding Trends: engineer role shifts from implementer to orchestrator",
+          "considerations": "Anthropic’s 2026 Agentic Coding Trends Report (500+ engineering teams surveyed) identifies 8 structural shifts: (1) Engineer role shifts from implementer to orchestrator — writing specs, reviewing AI output, and directing multi-agent teams rather than writing most code directly. (2) Multi-agent teams are a production reality — a single engineer now orchestrates 3–7 parallel coding agents simultaneously. (3) 60% of coding tasks use AI, but only 0–20% are fully delegatable without human review — the trust gap is the primary challenge. (4) SDLC cycle times compressed from weeks to hours for well-specified features. (5) Long-running agents (days to weeks per task) are emerging; session management and context persistence become infrastructure concerns. (6) Intelligent escalation patterns — agents that know when to pause and ask vs. continue autonomously — are the primary reliability lever. (7) The bottleneck is now clarity of specification, not coding speed. (8) Security review and code quality gates become more critical as AI-generated code volume increases. Staff+ implication: the highest-leverage skill is writing precise, testable specifications that agents can execute reliably. The engineer who can articulate acceptance criteria and edge cases clearly outperforms the engineer who can code fastest.",
+          "phase": "Cross-cutting",
+          "added": "2026-07-27"
         }
       ]
     }
