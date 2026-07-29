@@ -2,9 +2,21 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-07-28"
+    "last_updated": "2026-07-29"
   },
   "entries": [
+    {
+      "timestamp": "2026-07-29T07:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: CockroachDB Leaseholder Concentration — New Tenant Batch Scoring Saturates Single Node, ML Feature Store P99 12× SLO",
+      "summary": "Added a Hard database hotfix drill: a Fortune 500 customer's continuous batch scoring job (64 Python workers, 28K req/sec) concentrates all reads on a single CockroachDB leaseholder node (node-04, 97% CPU) because the 94MB tenant key range never triggers CockroachDB's 512MB auto-split threshold — degrading P99 latency to 2,412ms across ALL tenants for 31 minutes. Fix: manual SPLIT AT + SCATTER, per-tenant rate limiting at 5K req/sec, and automated pre-split at onboarding.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "CockroachDB Leaseholder Concentration — Hot Range from New Tenant Batch Scoring Saturates Single Node, Multi-Tenant ML Feature Store P99 12× SLO for 31 Minutes"
+      ]
+    },
     {
       "timestamp": "2026-07-28T07:00:00Z",
       "type": "drill",

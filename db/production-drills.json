@@ -3,7 +3,7 @@
     "category": "production-drills",
     "display_name": "Production Drills",
     "layout": "drills",
-    "last_updated": "2026-07-28"
+    "last_updated": "2026-07-29"
   },
   "sections": [
     {
@@ -287,6 +287,26 @@
             "disk-full"
           ],
           "added": "2026-07-15"
+        },
+        {
+          "drill": "CockroachDB Leaseholder Concentration — Hot Range from New Tenant Batch Scoring Saturates Single Node, Multi-Tenant ML Feature Store P99 12× SLO for 31 Minutes",
+          "layer": "Database (CockroachDB 23.2) / Multi-Tenant SaaS / GCP",
+          "difficulty": "Hard",
+          "scenario": "At 14:07 UTC, PagerDuty fires: 'ml_feature_store.p99_latency_ms = 2,412ms (SLO: 200ms, budget: 0%)'. The service is a Go feature store backed by CockroachDB 23.2.4, a 9-node cluster (n1-standard-16, 3 nodes per GCP zone: us-central1-a/b/c). The schema is:\n\n  CREATE TABLE ml_features (\n    tenant_id     INT NOT NULL,\n    feature_group VARCHAR(64) NOT NULL,\n    entity_id     BIGINT NOT NULL,\n    features      JSONB,\n    updated_at    TIMESTAMPTZ DEFAULT now(),\n    PRIMARY KEY (tenant_id, feature_group, entity_id)\n  );\n\nThe table has 84 billion rows. P99 latency is elevated to 2,400ms across ALL tenants — including tenants with very low traffic. CockroachDB Admin UI (port 8080) shows:\n\n  Hot Ranges (reads/sec, top 10):\n  /Table/106/1/47823  → node-04 (leaseholder)  | reads: 28,447/sec | writes: 3,841/sec\n  /Table/106/1/47824  → node-04 (leaseholder)  | reads: 0/sec     | writes: 0/sec\n\n  node-04 CPU: 97.3%  (user + system, all 16 vCPU)\n  Nodes 01–03, 05–09: CPU 22–31%\n\nTenant 47823 is a Fortune 500 customer ('Apex Logistics') onboarded 3 days ago. Their data science team runs a continuous batch scoring loop (Python, multiprocessing.Pool with 64 workers, no inter-request sleep) executing 28,000 point lookups per second against ml_features for their 84M entities. All keys are under the (47823, *, *) range, which is only 94 MB — well below CockroachDB's default range_max_bytes=512MB split threshold — so it has never been split. 100% of those reads are served by the single leaseholder on node-04.\n\nThe on-call engineer initially suspects a network partition or GCP zone incident: error rate is 0%, consumer lag is flat, disk I/O across all nodes is normal. No application logs show errors. The only symptom is the global P99 latency spike starting at 14:04 UTC — precisely when Apex Logistics's nightly scoring job started.",
+          "exercise": "1. Diagnose via Admin UI and SQL: Navigate to Admin UI → Metrics → Hot Ranges. Confirm (47823,*,*) is at 28K reads/sec entirely on node-04 with 97% CPU. Validate in psql: 'SELECT range_id, start_key, end_key, lease_holder, replicas FROM [SHOW RANGES FROM TABLE ml_features] WHERE start_key LIKE ''%47823%'' OR end_key LIKE ''%47823%'';' — confirms all tenant 47823 keys are in one range with node-04 as leaseholder. Check node-level latency breakdown: 'SELECT node_id, avg(p99) FROM crdb_internal.node_metrics WHERE metric_name = ''sql.service.latency-p99'' GROUP BY node_id;' — node-04 shows 2,380ms vs ~80ms on other nodes, confirming the problem is node-local, not network.\n2. Immediate mitigation — manual range split and scatter: Manually force CockroachDB to subdivide the hot range and redistribute the new sub-ranges across nodes:\n\n  ALTER TABLE ml_features SPLIT AT\n    VALUES (47823, chr(0), 0),\n    (47823, 'purchase_history', 21000000),\n    (47823, 'purchase_history', 42000000),\n    (47823, 'purchase_history', 63000000);\n\n  ALTER TABLE ml_features SCATTER\n    FROM (47823, chr(0), 0)\n    TO   (47824, chr(0), 0);\n\n  Wait 90–120 seconds for lease-transfer gossip to propagate. Re-check Admin UI: the (47823,*,*) range now shows 4 sub-ranges on nodes 02, 04, 07, and 09. node-04 CPU drops from 97% to 28% within 2 minutes. Global P99 falls from 2,412ms to 81ms.\n3. Throttle the tenant at the application layer: In the Go feature store service, introduce a per-tenant rate.Limiter (golang.org/x/time/rate). Set tenant 47823's limit to 5,000 req/sec (rate.NewLimiter(5000, 500)) and return HTTP 429 with Retry-After: 1 when exceeded. Page the Apex Logistics account team to reduce the batch scoring pool from 64 workers to 8, and add a 50ms inter-request sleep to spread load evenly across the scoring window.\n4. Long-term fix — automated pre-split at tenant onboarding: Extend the tenant provisioning Terraform module to execute a CockroachDB pre-split step via a null_resource provisioner. For each new tenant_id, emit 8 SPLIT AT statements across feature_group and entity_id boundary quantiles derived from an existing-tenant p90 distribution. Also tighten zone configuration: 'ALTER TABLE ml_features CONFIGURE ZONE USING range_max_bytes = 67108864, range_min_bytes = 16777216;' — 64MB max forces splits at 4× finer granularity than the 512MB default, limiting future hotspot blast radius.\n5. Validate: Monitor Admin UI Hot Ranges for 30 minutes — no single range should exceed 5,000 reads/sec sustained for > 2 minutes. Query 'SELECT count(*) FROM [SHOW RANGES FROM TABLE ml_features] WHERE lease_holder = 4;' to confirm node-04 holds a proportional share (~11%) of leases, not a concentration. Verify in Grafana: ml_feature_store_p99_latency_ms stays below 100ms for all tenant cohorts.\n6. Prevent: (a) Deploy a hot-range probe: a Go cron job that polls CockroachDB's /_status/hotranges JSON endpoint every 60s and publishes a custom metric ranges_reads_per_sec{range_id, leaseholder_node} to Prometheus. Alert if any range exceeds 10,000 reads/sec on a single node for > 2 minutes. (b) Add a tenant onboarding integration test: after provisioning, run a 30-second QPS ramp to the expected peak rate for that customer tier in staging and assert no single node exceeds 60% CPU. (c) Enforce QPS tiers at contract time: platinum tenants (>5K req/sec) get dedicated CockroachDB zone constraints pinning their tenant_id range to a dedicated node group.",
+          "tags": [
+            "cockroachdb",
+            "hot-range",
+            "leaseholder",
+            "database",
+            "gcp",
+            "multi-tenant",
+            "ml-features",
+            "range-split",
+            "distributed-database",
+            "go"
+          ],
+          "added": "2026-07-29"
         }
       ]
     },
