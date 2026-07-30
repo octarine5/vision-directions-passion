@@ -2,9 +2,21 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-07-29"
+    "last_updated": "2026-07-30"
   },
   "entries": [
+    {
+      "timestamp": "2026-07-30T07:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: SageMaker Async Inference Concurrency Slot Starvation — 3-Hour Conference WAV Silently Backlog 8,437 SQS Messages",
+      "summary": "Added a Hard ML Serving hotfix drill: a 1.47 GB 3-hour conference WAV uploaded to the async inference SQS path occupies 1 of 4 SageMaker Async Inference concurrency slots for 110 minutes (Whisper large-v3 at 1.8× realtime), causing a morning batch submission of 4,800 MP3s to accumulate 8,437 SQS messages silently — InvocationsInProgress=4 appears healthy and no SageMaker error metric fires. Fix: delete the stuck S3 input to free the slot, scale out to 4 instances for drain, route oversized files to Batch Transform, and add compound CloudWatch alarm (all slots frozen + queue growing) plus auto-scaling on SageMakerVariantAsyncInferencingInvocationsInProgress.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "SageMaker Async Inference Concurrency Slot Starvation — 3-Hour Conference WAV Occupies Slot for 110 Minutes, 8,437-Message SQS Backlog Accumulates Silently"
+      ]
+    },
     {
       "timestamp": "2026-07-29T07:00:00Z",
       "type": "drill",
