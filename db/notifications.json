@@ -2,9 +2,27 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-07-30"
+    "last_updated": "2026-07-31"
   },
   "entries": [
+    {
+      "timestamp": "2026-07-31T07:00:00Z",
+      "type": "market-scan",
+      "title": "Friday update: drill + market signal scan",
+      "summary": "Added a Hard ML Training hotfix drill: Azure AKS spot VM eviction triggers TorchElastic re-rendezvous that races with NCCL's stale rank-to-IP peer table — 10 surviving workers retain communicators pointing to the evicted node's dead IP while 2 new workers wait on the fresh IP, deadlocking all 12 DDP ranks indefinitely at 0% GPU utilization with no exception raised; $17,280 in A100 spot cost wasted over 4 hours on a frozen LLaMA-3.1-70B fine-tune job before a cost anomaly alert fires. Market scan: Unitree Robotics launches $620M STAR Market IPO on July 31 at $5.8B implied valuation (first humanoid robot public company in China, fastest STAR approval at 104 days); Hush Security raises $30M Series A for AI agent non-human identity governance with just-in-time credential scoping (Akamai strategic, July 28); Strix open-source AI pentester reaches 43K+ GitHub stars growing 7-10K/week (#1 GitHub Trending, proof-of-exploit on every finding). Added Unitree Robotics and Hush Security to enterprise watchlist.",
+      "tasks": [
+        "drill",
+        "market-scan"
+      ],
+      "items_added": [
+        "Azure AKS Spot VM Eviction — TorchElastic Re-Rendezvous NCCL Rank Remap Race Deadlocks LLaMA-3.1 Fine-Tune for 4 Hours, $17,280 Wasted at Zero Throughput (production-drills)",
+        "AI agent non-human identity (NHI) governance — just-in-time credential scoping for autonomous agents (Hush Security $30M Series A + Act Security $60M, July 28)",
+        "China-domiciled humanoid robot public equity market debut (Unitree Robotics $620M STAR Market IPO, July 31, $5.8B valuation)",
+        "AI-native autonomous penetration testing (Strix 43K+ GitHub stars, #1 trending, proof-of-exploit model)",
+        "Unitree Robotics (watchlist: STAR Market IPO, $620M, $5.8B implied valuation)",
+        "Hush Security (watchlist: NHI governance, $30M Series A, Akamai strategic)"
+      ]
+    },
     {
       "timestamp": "2026-07-30T07:00:00Z",
       "type": "drill",

@@ -11,7 +11,7 @@
       "TAM",
       "Tags"
     ],
-    "last_updated": "2026-07-24"
+    "last_updated": "2026-07-31"
   },
   "sections": [
     {
@@ -373,6 +373,17 @@
             "ml"
           ],
           "added": "2026-07-24"
+        },
+        {
+          "problem": "AI agent non-human identity (NHI) governance — just-in-time credential scoping for autonomous agents",
+          "enterprise": "Hush Security ($30M Series A, $41M total, July 28, 2026; Battery Ventures + YL Ventures + Akamai strategic; founded by ex-Meta Networks founders Micha Rave et al.), Act Security ($60M seed + Series A, Team8 + Bessemer + Notable Capital, July 28, 2026)",
+          "market_fit": "Enterprise AI agents running autonomously — spawning sub-agents, calling external APIs, writing to databases, reading credentials — use long-lived standing credentials that were designed for human users. Hush Security's 'machine access platform' solves this with just-in-time scoped permissions: each agent action is issued a short-lived credential with the minimum permissions required for that specific call, revoked immediately after. Act Security addresses the same attack surface from the access-control angle — governing what non-human identities (AI agents, OAuth tokens, service accounts, CI bots) are permitted to do and detecting anomalous credential behavior. Both companies raised on July 28, 2026 — the same week — signaling the NHI security category is now formally recognized as a distinct enterprise budget line item. Enterprise signal: Akamai as a strategic investor in Hush validates that non-human identity is the new perimeter for network security. Crunchbase reports $855M raised across 150+ seed rounds in AI security in 2026 — NHI governance is the fastest-growing sub-category.",
+          "tam": "$6B",
+          "tags": [
+            "ml",
+            "infra"
+          ],
+          "added": "2026-07-31"
         }
       ]
     },
@@ -908,6 +919,28 @@
             "infra"
           ],
           "added": "2026-07-24"
+        },
+        {
+          "problem": "China-domiciled humanoid robot public equity market debut — first category IPO benchmark outside the US",
+          "enterprise": "Unitree Robotics ($620M STAR Market IPO, 42B yuan implied valuation ~$5.8B, July 31, 2026; fastest-ever STAR Market approval at 104 days; 1.699B yuan 2025 revenue; 60.13% gross margin; proceeds earmarked for AI model R&D + new product lines + smart manufacturing base)",
+          "market_fit": "Unitree Robotics formally launched its $620M IPO on Shanghai's STAR Market on July 31, 2026 — the first humanoid robotics company to go public in China and one of the first globally (alongside Agility Robotics SPAC in the US). Key signal: Unitree achieved 104-day STAR Market approval — the fastest in exchange history — reflecting regulatory urgency to establish China's domestic humanoid robot sector as a publicly capitalized industry before US and European competitors. 2025 revenue: 1.699B yuan (+35-45% YoY H1 2026 expected) at 60% gross margins — better unit economics than most enterprise SaaS companies. The 42B yuan implied valuation at IPO ($5.8B) establishes the first Chinese reference price for humanoid robot equities, setting the benchmark that Hong Kong's 46+ robotics pipeline applicants will price against. Enterprise implication: Unitree's H1 hardware volumes (combat-sport demos going viral) are distinct from Agility's 65K commercial hours — two different product positioning theses are now both publicly valued, giving investors a cross-market comparator. With China mandating domestic robotics supply chains under its 2025 humanoid robot industry plan, the STAR IPO also creates a government-backed demand signal independent of global export markets. US export ban on Unitree hardware (pending regulatory action) is a tail risk that creates a bifurcated global supply chain — one Western-compatible, one China-domestic.",
+          "tam": "$60B",
+          "tags": [
+            "ml",
+            "biz"
+          ],
+          "added": "2026-07-31"
+        },
+        {
+          "problem": "AI-native autonomous penetration testing — continuous vulnerability discovery with proof-of-concept exploits",
+          "enterprise": "Strix (open-source; 43K+ GitHub stars growing ~7-10K/week July 2026; #1 GitHub Trending July 3, 2026; v1.3.1 with GitHub Actions support), Horizon3.ai, Pentera, NodeZero",
+          "market_fit": "Strix crossed 43,400 GitHub stars this week at a sustained 7-10K stars/week growth rate — the fastest-growing security repository on GitHub in July 2026. Its core differentiator: every Strix finding ships with a working exploit (an actual HTTP request or payload proving the vulnerability is real); if it cannot prove a bug, it does not report it. This eliminates the primary cost of traditional pentesting — triaging false positives. Strix is open-source and deploys as a terminal agent that autonomously explores an application, maps attack surfaces, tests for known and novel vulnerability patterns, and self-improves from feedback between runs. The GitHub Actions integration (v1.3.1) makes Strix a native DevSecOps CI gate — analogous to what Dependabot did for dependency CVEs, but for application-layer vulnerabilities. Market signal: the shift from manual pentesting ($15-50K per engagement, 6-month cadence) to AI-driven continuous pentesting (always-on, proof-of-exploit) is structurally the same disruption that observability made against manual dashboarding. Strix's open-source adoption velocity (faster than Ollama or OpenClaw at equivalent age) suggests this is the reference implementation around which the commercial market will coalesce. Enterprise engineering implication: staff+ security reviews that previously required external red team engagements can now be supplemented or replaced by Strix runs on every PR — shifting security-finding from a quarterly cost center to a daily CI check.",
+          "tam": "$8B",
+          "tags": [
+            "infra",
+            "ml"
+          ],
+          "added": "2026-07-31"
         }
       ]
     }

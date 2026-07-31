@@ -360,6 +360,20 @@
       "stage": "Growth ($2B seed; Inkling 975B MoE open-weights model released July 15, 2026)",
       "signal": "watch",
       "notes": "Founded by ex-OpenAI CTO Mira Murati and former OpenAI research leads. Inkling (July 15, 2026): 975B-parameter MoE model, 41B active parameters, 45T multimodal training tokens, Apache-2.0 license — no commercial restrictions. Fine-tuning available same-day on Tinker (managed fine-tuning PaaS). Inkling-Small (276B total / 12B active) forthcoming. MoE architecture: GPT-4-class reasoning at 41B-dense inference cost. Significance: adds a third credible open-weights frontier lab alongside Meta LLaMA and DeepSeek, with direct OpenAI research pedigree. Apache-2.0 at frontier quality removes the IP risk that blocked enterprises from fine-tuning LLaMA on proprietary data — materially changes build-vs-buy for personalized AI. Watch Inkling-Small release for the deployable, fine-tunable candidate for on-device/edge serving."
+    },
+    {
+      "name": "Unitree Robotics",
+      "domain": "Humanoid & Quadruped Robotics (China-domiciled; STAR Market IPO)",
+      "stage": "Public (STAR Market IPO July 31, 2026; 4.2B yuan raised ~$620M; 42B yuan implied valuation ~$5.8B)",
+      "signal": "hot",
+      "notes": "Launched $620M IPO on Shanghai's STAR Market on July 31, 2026 — the first humanoid robotics company to list publicly in China and one of the first globally. Fastest STAR Market approval in exchange history (104 days). 2025 revenue: 1.699B yuan at 60.13% gross margin — better unit economics than most SaaS. H1 2026 revenue expected +35-45% YoY. Products: Go2 quadruped, H1 humanoid. Proceeds earmarked for AI model R&D, new product lines, and smart manufacturing scale-up. US export ban risk is the primary tail risk — creates a bifurcated global supply chain between Western-compatible humanoid platforms (Agility, Figure AI, NEURA) and China-domestic (Unitree). Watch AGLT (Agility Robotics SPAC) vs Unitree STAR Market post-IPO price as the first global humanoid robot cross-market valuation benchmark."
+    },
+    {
+      "name": "Hush Security",
+      "domain": "AI Agent Non-Human Identity (NHI) Governance & Just-in-Time Credential Scoping",
+      "stage": "Series A ($30M, $41M total, July 28, 2026; Battery Ventures + YL Ventures + Akamai strategic)",
+      "signal": "watch",
+      "notes": "Founded by ex-Meta Networks founders. Builds a machine access platform that issues AI agents just-in-time scoped credentials — short-lived, minimum-permission tokens for each individual action, revoked immediately after. Solves the standing credential problem: AI agents with persistent API keys, OAuth tokens, or service accounts expose far broader attack surfaces than the action they're taking requires. Akamai's strategic investment signals NHI security is now a network-perimeter-level concern (not just IAM). Context: both Hush ($30M) and Act Security ($60M) raised on the same day (July 28, 2026), and Crunchbase reports $855M raised across 150+ AI security seed rounds in 2026. NHI governance is the fastest-growing sub-category inside enterprise security as AI coding agents (Cursor, GitHub Copilot) run with write access to code and secrets on developer machines. Watch: does Hush integrate with Glow (endpoint AI security) to create a full NHI + endpoint protection stack?"
     }
   ],
   "careerMilestones": [
