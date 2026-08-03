@@ -10,7 +10,7 @@
       "Tags",
       "Resources"
     ],
-    "last_updated": "2026-07-27"
+    "last_updated": "2026-08-03"
   },
   "sections": [
     {
@@ -501,7 +501,7 @@
         },
         {
           "topic": "llm-d: Kubernetes-Native Distributed LLM Inference",
-          "concepts": "CNCF Sandbox project donated March 2026 by IBM, Red Hat, Google; disaggregated prefill/decode on separate K8s pods (compute vs memory-bandwidth optimization); hierarchical KV cache offloading across GPU HBM → CPU DRAM → NVMe → distributed storage; cache-aware LoRA routing; scale-to-zero autoscaling; active-active HA; UCCL-based transport resilience; ~3.1k tok/s per B200 decode GPU, 50k output tok/s on 16×16 B200 prefill/decode topology; compatible with any accelerator (NVIDIA/AMD/Google TPU)",
+          "concepts": "CNCF Sandbox project donated March 2026 by IBM, Red Hat, Google; disaggregated prefill/decode on separate K8s pods (compute vs memory-bandwidth optimization); hierarchical KV cache offloading across GPU HBM \u2192 CPU DRAM \u2192 NVMe \u2192 distributed storage; cache-aware LoRA routing; scale-to-zero autoscaling; active-active HA; UCCL-based transport resilience; ~3.1k tok/s per B200 decode GPU, 50k output tok/s on 16\u00d716 B200 prefill/decode topology; compatible with any accelerator (NVIDIA/AMD/Google TPU)",
           "tags": [
             "ml",
             "infra"
@@ -516,7 +516,7 @@
         },
         {
           "topic": "NVIDIA Dynamo: Datacenter-Scale Disaggregated Inference",
-          "concepts": "Production-ready (v1.0) open-source distributed inference framework; disaggregated prefill/decode across GPU pools via NVIDIA NIXL (Inference Xfer Library) for KV cache transfer; LLM-aware request routing with disaggregated scheduling; 7× throughput on GB200 NVL72 vs collocated serving; dynamic GPU reallocation based on load; multi-tier KV cache (HBM → DRAM → NVMe); compatible with vLLM, SGLang, TensorRT-LLM, PyTorch; deployed by AWS, Azure, GCP, OCI",
+          "concepts": "Production-ready (v1.0) open-source distributed inference framework; disaggregated prefill/decode across GPU pools via NVIDIA NIXL (Inference Xfer Library) for KV cache transfer; LLM-aware request routing with disaggregated scheduling; 7\u00d7 throughput on GB200 NVL72 vs collocated serving; dynamic GPU reallocation based on load; multi-tier KV cache (HBM \u2192 DRAM \u2192 NVMe); compatible with vLLM, SGLang, TensorRT-LLM, PyTorch; deployed by AWS, Azure, GCP, OCI",
           "tags": [
             "ml",
             "infra"
@@ -531,7 +531,7 @@
         },
         {
           "topic": "Agentic GPU Kernel Optimization (KernelEvolve)",
-          "concepts": "Meta's production system that treats kernel optimization as a search problem, not one-shot code generation; explores hundreds of alternative kernel implementations per target operation; works across heterogeneous hardware from a single framework: NVIDIA GPUs, AMD GPUs, Meta's custom MTIA silicon, CPUs; uses retrieval augmentation to pull relevant kernel patterns rather than manual prompt engineering; >60% inference throughput improvement over already-optimized baselines (including torch.compile + vendor libraries) on NVIDIA GPUs for the Andromeda Ads model; >25% training throughput improvement on MTIA; up to 17× over raw PyTorch baselines across diverse ops; reduces expert kernel development time from weeks to hours; deployed in production across Meta's training and inference fleet; published at ISCA 2026",
+          "concepts": "Meta's production system that treats kernel optimization as a search problem, not one-shot code generation; explores hundreds of alternative kernel implementations per target operation; works across heterogeneous hardware from a single framework: NVIDIA GPUs, AMD GPUs, Meta's custom MTIA silicon, CPUs; uses retrieval augmentation to pull relevant kernel patterns rather than manual prompt engineering; >60% inference throughput improvement over already-optimized baselines (including torch.compile + vendor libraries) on NVIDIA GPUs for the Andromeda Ads model; >25% training throughput improvement on MTIA; up to 17\u00d7 over raw PyTorch baselines across diverse ops; reduces expert kernel development time from weeks to hours; deployed in production across Meta's training and inference fleet; published at ISCA 2026",
           "tags": [
             "ml",
             "infra"
@@ -546,7 +546,7 @@
         },
         {
           "topic": "Ray on Kubernetes for Production ML at Scale (Uber)",
-          "concepts": "Uber migrated all ML projects from YARN-based Peloton to Ray on Kubernetes in 2024; 1.5–4× improvement in distributed training speed; unified stack: Kubernetes + Ray + PyTorch + vLLM; job management platform with SKU-based filtering for heterogeneous GPU hardware (A100, H100, custom SKUs); supports elastic resource sharing and preemption without manual scheduler tuning; users specify job type and resource requirements — system automatically allocates optimal resources based on current cluster load; Ray clusters scoped per job, each node with multiple GPUs; vLLM used for distributed inference scoring in LLM fine-tuning evaluation loops; ElasticDL-style training allows mid-job scaling without checkpoint restarts; two-part migration: (1) open-source tech stack adoption, (2) enhanced Kubernetes resource management with preemption+priority",
+          "concepts": "Uber migrated all ML projects from YARN-based Peloton to Ray on Kubernetes in 2024; 1.5\u20134\u00d7 improvement in distributed training speed; unified stack: Kubernetes + Ray + PyTorch + vLLM; job management platform with SKU-based filtering for heterogeneous GPU hardware (A100, H100, custom SKUs); supports elastic resource sharing and preemption without manual scheduler tuning; users specify job type and resource requirements \u2014 system automatically allocates optimal resources based on current cluster load; Ray clusters scoped per job, each node with multiple GPUs; vLLM used for distributed inference scoring in LLM fine-tuning evaluation loops; ElasticDL-style training allows mid-job scaling without checkpoint restarts; two-part migration: (1) open-source tech stack adoption, (2) enhanced Kubernetes resource management with preemption+priority",
           "tags": [
             "ml",
             "infra"
@@ -561,7 +561,7 @@
         },
         {
           "topic": "Five Eras of KV Cache: Tiered Offloading & Distributed KV Sharing",
-          "concepts": "KV cache evolution across 5 generations: (1) per-request GPU buffers with PagedAttention (vLLM 2023) — eliminates memory fragmentation; (2) prefix caching — reuse KV of shared system prompts across requests; (3) radix-tree cross-request structural reuse (SGLang) — cache common prefixes across different users; (4) tiered offloading — spill inactive KV blocks GPU HBM→CPU DRAM→NVMe SSD, serving 10x more concurrent users per GPU (vLLM 0.9.0 async offload connector, sub-100ms restoration); (5) distributed multi-node KV sharing for disaggregated serving — LMCache and llm-d filesystem backend let multiple vLLM servers share a common KV prefix cache over shared storage; NVIDIA ICMSP (BlueField-4 DPU off-GPU KV management, CES 2026); CacheFlow 3D-parallel KV scheduling over tokens, layers, and GPUs; 14x TTFT improvement for long-context inputs via prefix restoration; KV quantization (INT8/INT4) reduces offloading bandwidth by 2-4x",
+          "concepts": "KV cache evolution across 5 generations: (1) per-request GPU buffers with PagedAttention (vLLM 2023) \u2014 eliminates memory fragmentation; (2) prefix caching \u2014 reuse KV of shared system prompts across requests; (3) radix-tree cross-request structural reuse (SGLang) \u2014 cache common prefixes across different users; (4) tiered offloading \u2014 spill inactive KV blocks GPU HBM\u2192CPU DRAM\u2192NVMe SSD, serving 10x more concurrent users per GPU (vLLM 0.9.0 async offload connector, sub-100ms restoration); (5) distributed multi-node KV sharing for disaggregated serving \u2014 LMCache and llm-d filesystem backend let multiple vLLM servers share a common KV prefix cache over shared storage; NVIDIA ICMSP (BlueField-4 DPU off-GPU KV management, CES 2026); CacheFlow 3D-parallel KV scheduling over tokens, layers, and GPUs; 14x TTFT improvement for long-context inputs via prefix restoration; KV quantization (INT8/INT4) reduces offloading bandwidth by 2-4x",
           "tags": [
             "ml",
             "infra"
@@ -590,8 +590,8 @@
           "added": "2026-05-18"
         },
         {
-          "topic": "Meta Adaptive Ranking Model (ARM) — Request-Centric LLM-Scale Inference",
-          "concepts": "Solves the inference trilemma: accuracy vs latency vs cost; replaces one-size-fits-all inference with request-centric routing that dynamically selects model complexity based on predicted request value and user intent; lightweight routing model predicts which model tier (small/fast vs large/accurate) maximizes ROI per request; serves LLM-scale recommendation model at sub-500ms P99 on Instagram at global scale; reduces GPU compute cost ~40% vs always-running full-capacity model by routing simpler requests to smaller models; deployed to Instagram Ads Q4 2025 delivering +3% conversions +5% CTR; key insight: not every request needs the biggest model — the intelligence is in the routing, not just the model; enables teams to run LLM-scale models in production without proportionally increasing infrastructure cost",
+          "topic": "Meta Adaptive Ranking Model (ARM) \u2014 Request-Centric LLM-Scale Inference",
+          "concepts": "Solves the inference trilemma: accuracy vs latency vs cost; replaces one-size-fits-all inference with request-centric routing that dynamically selects model complexity based on predicted request value and user intent; lightweight routing model predicts which model tier (small/fast vs large/accurate) maximizes ROI per request; serves LLM-scale recommendation model at sub-500ms P99 on Instagram at global scale; reduces GPU compute cost ~40% vs always-running full-capacity model by routing simpler requests to smaller models; deployed to Instagram Ads Q4 2025 delivering +3% conversions +5% CTR; key insight: not every request needs the biggest model \u2014 the intelligence is in the routing, not just the model; enables teams to run LLM-scale models in production without proportionally increasing infrastructure cost",
           "tags": [
             "ml",
             "infra",
@@ -606,8 +606,8 @@
           "added": "2026-05-25"
         },
         {
-          "topic": "Kubernetes Gateway API Inference Extension (GIE) — Model-Aware LLM Traffic Routing",
-          "concepts": "Standard Kubernetes load balancing (round-robin) creates GPU hotspots for LLM serving: one pod with a long-running 40-token/s generation blocks many short requests that could have been served in 50ms on an idle pod; GIE routes at the model level not the URL level — InferencePool CRD groups backend pods serving the same model, EndpointPicker (EPP) plugin selects the least-loaded pod using real-time inference metrics (queue depth, TTFT, tokens-in-flight, GPU utilization); supports LoRA-adapter-aware routing (route requests for fine-tuned variants to pods that have the adapter warm in GPU memory); per-request priority classes allow latency-critical (sync API) and batch (async pipeline) traffic to coexist on the same fleet; v1.4.0 reached GA in 2026 with conformance suite; agentgateway (Rust) is first conformant implementation; adopted by Istio, NGINX Gateway Fabric, Envoy Gateway; KubeCon EU 2026 identified GIE as the emerging standard contract between the K8s gateway layer and inference-aware schedulers (llm-d, KAI Scheduler); reduces P99 TTFT hotspots by 60-70% vs naive round-robin for mixed short/long request traffic",
+          "topic": "Kubernetes Gateway API Inference Extension (GIE) \u2014 Model-Aware LLM Traffic Routing",
+          "concepts": "Standard Kubernetes load balancing (round-robin) creates GPU hotspots for LLM serving: one pod with a long-running 40-token/s generation blocks many short requests that could have been served in 50ms on an idle pod; GIE routes at the model level not the URL level \u2014 InferencePool CRD groups backend pods serving the same model, EndpointPicker (EPP) plugin selects the least-loaded pod using real-time inference metrics (queue depth, TTFT, tokens-in-flight, GPU utilization); supports LoRA-adapter-aware routing (route requests for fine-tuned variants to pods that have the adapter warm in GPU memory); per-request priority classes allow latency-critical (sync API) and batch (async pipeline) traffic to coexist on the same fleet; v1.4.0 reached GA in 2026 with conformance suite; agentgateway (Rust) is first conformant implementation; adopted by Istio, NGINX Gateway Fabric, Envoy Gateway; KubeCon EU 2026 identified GIE as the emerging standard contract between the K8s gateway layer and inference-aware schedulers (llm-d, KAI Scheduler); reduces P99 TTFT hotspots by 60-70% vs naive round-robin for mixed short/long request traffic",
           "tags": [
             "ml",
             "infra"
@@ -621,8 +621,8 @@
           "added": "2026-05-25"
         },
         {
-          "topic": "NVIDIA Dynamo Agentic Inference — Full-Stack Optimizations for Multi-Turn Agent Workflows",
-          "concepts": "Agent hints extension: structured metadata (priority level, estimated output length, speculative prefill flags) attached per-request, giving Dynamo's router and runtime agent-aware scheduling and KV cache decisions; v1/responses and v1/messages APIs expose typed content blocks (thinking tokens, tool calls, text) as distinct objects — inference engine applies different cache and scheduling policy per block type; 97.2% KV cache hit rate for multi-agent workflows (vs ~40% for stateless LLM serving) by routing agent turns with shared system prompt to nodes with that prefix already warm; multi-turn streaming: reasoning segments, tool-call events, and response metadata stream back as the turn unfolds (not after final text), reducing perceived latency for orchestrators that parse intermediate output; Rust-based parser crates extracted as standalone reusable libraries for harness authors; agent scheduling: long-context reasoning turns routed to high-SRAM nodes, short tool-call dispatch turns routed to low-latency nodes; coding agents (Stripe generating 1,300+ PRs/week, Ramp attributing 30% of merged PRs to agents) as the primary production agentic workload driving these optimizations; Dynamo 1.0 achieves 7× throughput improvement on Blackwell GPUs over baseline collocated serving; published May 2026",
+          "topic": "NVIDIA Dynamo Agentic Inference \u2014 Full-Stack Optimizations for Multi-Turn Agent Workflows",
+          "concepts": "Agent hints extension: structured metadata (priority level, estimated output length, speculative prefill flags) attached per-request, giving Dynamo's router and runtime agent-aware scheduling and KV cache decisions; v1/responses and v1/messages APIs expose typed content blocks (thinking tokens, tool calls, text) as distinct objects \u2014 inference engine applies different cache and scheduling policy per block type; 97.2% KV cache hit rate for multi-agent workflows (vs ~40% for stateless LLM serving) by routing agent turns with shared system prompt to nodes with that prefix already warm; multi-turn streaming: reasoning segments, tool-call events, and response metadata stream back as the turn unfolds (not after final text), reducing perceived latency for orchestrators that parse intermediate output; Rust-based parser crates extracted as standalone reusable libraries for harness authors; agent scheduling: long-context reasoning turns routed to high-SRAM nodes, short tool-call dispatch turns routed to low-latency nodes; coding agents (Stripe generating 1,300+ PRs/week, Ramp attributing 30% of merged PRs to agents) as the primary production agentic workload driving these optimizations; Dynamo 1.0 achieves 7\u00d7 throughput improvement on Blackwell GPUs over baseline collocated serving; published May 2026",
           "tags": [
             "ml",
             "infra"
@@ -637,7 +637,7 @@
         },
         {
           "topic": "Meta Unified AI Agents for Capacity Efficiency at Hyperscale",
-          "concepts": "Autonomous AI agent platform built on two composable layers: MCP Tools (standardized LLM interfaces for querying profiling data, flamegraphs, code configs, and build systems) and Skills (encoded domain expertise of senior efficiency engineers, reusable across agent workflows); offense + defense strategy — offense agents proactively scan Meta's fleet for compute savings opportunities; defense agents (AI Regression Solver) integrate with Meta's FBDetect CI to auto-detect performance regressions and generate ready-to-review PRs, compressing ~10 hours of manual investigation into ~30 minutes; platform has recovered hundreds of megawatts of power across Meta's AI training fleet (enough to power hundreds of thousands of homes/year); within 1 year the same agent foundation was extended to: conversational efficiency assistants, capacity planning agents, personalized optimization recommendations, guided investigation workflows, and automated validation pipelines; agents operate fully autonomously on production infrastructure changes — the platform IS the Capacity Efficiency Program; the key architectural insight: standardized MCP tool interfaces enable any LLM agent to query the same data that human engineers consult, unlocking automation at scale across all efficiency disciplines; published April 2026",
+          "concepts": "Autonomous AI agent platform built on two composable layers: MCP Tools (standardized LLM interfaces for querying profiling data, flamegraphs, code configs, and build systems) and Skills (encoded domain expertise of senior efficiency engineers, reusable across agent workflows); offense + defense strategy \u2014 offense agents proactively scan Meta's fleet for compute savings opportunities; defense agents (AI Regression Solver) integrate with Meta's FBDetect CI to auto-detect performance regressions and generate ready-to-review PRs, compressing ~10 hours of manual investigation into ~30 minutes; platform has recovered hundreds of megawatts of power across Meta's AI training fleet (enough to power hundreds of thousands of homes/year); within 1 year the same agent foundation was extended to: conversational efficiency assistants, capacity planning agents, personalized optimization recommendations, guided investigation workflows, and automated validation pipelines; agents operate fully autonomously on production infrastructure changes \u2014 the platform IS the Capacity Efficiency Program; the key architectural insight: standardized MCP tool interfaces enable any LLM agent to query the same data that human engineers consult, unlocking automation at scale across all efficiency disciplines; published April 2026",
           "tags": [
             "ml",
             "infra",
@@ -652,8 +652,8 @@
           "added": "2026-06-01"
         },
         {
-          "topic": "Ray Serve 2.55 Online Inference Upgrade — HAProxy Ingress + gRPC Replica Communication",
-          "concepts": "Ray Serve 2.55 introduces two architectural bypasses that eliminate Python-layer bottlenecks: (1) HAProxy integration at ingress — replacing the Python-based HTTP proxy with HAProxy for connection multiplexing, removes the Python GIL from the hot path; (2) Direct gRPC between deployment replicas — bypassing the previous REST-over-Python relay for inter-replica calls. Together these deliver 88% lower P99 latency and 11.1x throughput improvement in unary workloads (490 → 1,573 QPS in recommendation model pipelines), 8.9x in streaming. Both enabled via environment variables in Ray 2.55+; no code changes required for existing Ray Serve deployments.",
+          "topic": "Ray Serve 2.55 Online Inference Upgrade \u2014 HAProxy Ingress + gRPC Replica Communication",
+          "concepts": "Ray Serve 2.55 introduces two architectural bypasses that eliminate Python-layer bottlenecks: (1) HAProxy integration at ingress \u2014 replacing the Python-based HTTP proxy with HAProxy for connection multiplexing, removes the Python GIL from the hot path; (2) Direct gRPC between deployment replicas \u2014 bypassing the previous REST-over-Python relay for inter-replica calls. Together these deliver 88% lower P99 latency and 11.1x throughput improvement in unary workloads (490 \u2192 1,573 QPS in recommendation model pipelines), 8.9x in streaming. Both enabled via environment variables in Ray 2.55+; no code changes required for existing Ray Serve deployments.",
           "tags": [
             "ml",
             "infra",
@@ -668,8 +668,8 @@
           "added": "2026-06-08"
         },
         {
-          "topic": "Netflix Model Lifecycle Graph — Centralized ML Metadata Service for Discovery and Dependency Tracking",
-          "concepts": "Netflix's Metadata Service (MDS) builds a Model Lifecycle Graph that indexes ML entities (models, features, pipelines, experiments, datasets) and their cross-domain relationships across all of Netflix's ML teams. Architecture: real-time event ingestion → Datomic persistence → background enrichment jobs materialize relationships asynchronously → AIP Portal (unified search + navigation UI). Enables cross-team questions like 'Which experiments use this feature?' or 'Which models share these features?' without manual discovery. Mirrors LinkedIn DataHub's graph-centric approach but tailored for Netflix's multi-team ML ecosystem. Part 1 of a multi-part series on Netflix's 1M req/sec ML serving infrastructure (traffic routing via Switchboard + Envoy in Part 2).",
+          "topic": "Netflix Model Lifecycle Graph \u2014 Centralized ML Metadata Service for Discovery and Dependency Tracking",
+          "concepts": "Netflix's Metadata Service (MDS) builds a Model Lifecycle Graph that indexes ML entities (models, features, pipelines, experiments, datasets) and their cross-domain relationships across all of Netflix's ML teams. Architecture: real-time event ingestion \u2192 Datomic persistence \u2192 background enrichment jobs materialize relationships asynchronously \u2192 AIP Portal (unified search + navigation UI). Enables cross-team questions like 'Which experiments use this feature?' or 'Which models share these features?' without manual discovery. Mirrors LinkedIn DataHub's graph-centric approach but tailored for Netflix's multi-team ML ecosystem. Part 1 of a multi-part series on Netflix's 1M req/sec ML serving infrastructure (traffic routing via Switchboard + Envoy in Part 2).",
           "tags": [
             "ml",
             "data",
@@ -689,7 +689,7 @@
         },
         {
           "topic": "vLLM v0.23.0 Multi-Tier KV Cache Offloading + Model Runner V2 + Rust Frontend",
-          "concepts": "Object-store secondary tier for KV cache enables GPU HBM → CPU DRAM → S3/GCS/ABS cascade offloading; per-request offloading policy configurable via on_new_request lifecycle hook for fine-grained GPU memory management under bursty traffic. CUTLASS FP8 padding bypass delivers +20% throughput on FP8 GEMM ops for H100/B200 workloads; MoE-permute buffer pre-allocation yields +9–14% on Mixtral/DeepSeek MoE models. Model Runner V2 now default for Llama and Mistral dense models with FlashInfer samplers and breakable CUDA graphs. Experimental Rust frontend with streaming endpoints bypasses Python GIL on the critical request-handling path. DFlash Causal support with proper lookahead-slot allocation for speculative decoding; DeepSeek-V4 maturity; Transformers v5 compatibility.",
+          "concepts": "Object-store secondary tier for KV cache enables GPU HBM \u2192 CPU DRAM \u2192 S3/GCS/ABS cascade offloading; per-request offloading policy configurable via on_new_request lifecycle hook for fine-grained GPU memory management under bursty traffic. CUTLASS FP8 padding bypass delivers +20% throughput on FP8 GEMM ops for H100/B200 workloads; MoE-permute buffer pre-allocation yields +9\u201314% on Mixtral/DeepSeek MoE models. Model Runner V2 now default for Llama and Mistral dense models with FlashInfer samplers and breakable CUDA graphs. Experimental Rust frontend with streaming endpoints bypasses Python GIL on the critical request-handling path. DFlash Causal support with proper lookahead-slot allocation for speculative decoding; DeepSeek-V4 maturity; Transformers v5 compatibility.",
           "tags": [
             "ml",
             "infra",
@@ -705,7 +705,7 @@
         },
         {
           "topic": "SGLang v0.5.13 HiCache Hierarchical KV Offload + Speculative Decoding V2 Default",
-          "concepts": "HiCache with UnifiedRadixTree enables automatic hierarchical KV cache offloading for hybrid models (Mamba, SWA) — GPU HBM → CPU DRAM → NVMe SSD; token-count bucket warm-up eliminates cold-start stalls on first serving request after model load. Speculative Decoding V2 (tree drafting with topk > 1) is now the production default across all backends (triton, FA3, MLA, aiter), supporting page_size > 1 and hybrid-linear models; Spec V1 deprecated with EAGLE/MTP unified onto the V2 worker path. DeepSeek V4 context parallelism combined with MTP speculation, flash_mla_sparse_fwd sparse-attention kernel, FP4 indexer support, and waterfill load balancing for DeepEP expert parallelism. SM120 GPU (Blackwell) compatibility added; collectively reduces per-step overhead under high concurrency.",
+          "concepts": "HiCache with UnifiedRadixTree enables automatic hierarchical KV cache offloading for hybrid models (Mamba, SWA) \u2014 GPU HBM \u2192 CPU DRAM \u2192 NVMe SSD; token-count bucket warm-up eliminates cold-start stalls on first serving request after model load. Speculative Decoding V2 (tree drafting with topk > 1) is now the production default across all backends (triton, FA3, MLA, aiter), supporting page_size > 1 and hybrid-linear models; Spec V1 deprecated with EAGLE/MTP unified onto the V2 worker path. DeepSeek V4 context parallelism combined with MTP speculation, flash_mla_sparse_fwd sparse-attention kernel, FP4 indexer support, and waterfill load balancing for DeepEP expert parallelism. SM120 GPU (Blackwell) compatibility added; collectively reduces per-step overhead under high concurrency.",
           "tags": [
             "ml",
             "infra",
@@ -720,8 +720,8 @@
           "added": "2026-06-15"
         },
         {
-          "topic": "Meta SilverTorch: Unified Model-Based Recommendation — Index as Model",
-          "concepts": "SilverTorch reimagines Meta's retrieval ecosystem by making every retrieval component (item index, eligibility filter, scoring layer, user tower) a tensor or operator inside a single PyTorch model. Traditional recommendation pipelines treat index lookup, candidate filtering, and scoring as separate systems with separate deployments, build/deploy cycles, and optimization domains; SilverTorch unifies all of these as nn.Modules in a single PyTorch training and inference graph. Key architectural insight: the boundary between ML engineering and infrastructure engineering dissolves — the whole system reduces to a single PyTorch model, so it automatically benefits from every advance in the PyTorch ecosystem (torch.compile, quantization, hardware-specific kernels, CUDA graph capture) without separate per-component optimization work. Enables direct integration of LLM capabilities inside the retrieval model rather than orchestrating LLMs as an external service — tighter coupling raises the system ceiling for LLM-powered recommendation at production scale. GPU-optimized end-to-end retrieval: the unified model runs entirely on GPU for both training and serving, eliminating the CPU-GPU transfer overhead that constrained index lookup in prior architectures. Democratizes large-scale GPU recommendation infrastructure: any team can train and deploy on standard GPU hardware without maintaining a custom index serving system. Accepted at SIGIR 2026 full paper track; deployed in production at Meta for major recommendation surfaces. Published May 26, 2026.",
+          "topic": "Meta SilverTorch: Unified Model-Based Recommendation \u2014 Index as Model",
+          "concepts": "SilverTorch reimagines Meta's retrieval ecosystem by making every retrieval component (item index, eligibility filter, scoring layer, user tower) a tensor or operator inside a single PyTorch model. Traditional recommendation pipelines treat index lookup, candidate filtering, and scoring as separate systems with separate deployments, build/deploy cycles, and optimization domains; SilverTorch unifies all of these as nn.Modules in a single PyTorch training and inference graph. Key architectural insight: the boundary between ML engineering and infrastructure engineering dissolves \u2014 the whole system reduces to a single PyTorch model, so it automatically benefits from every advance in the PyTorch ecosystem (torch.compile, quantization, hardware-specific kernels, CUDA graph capture) without separate per-component optimization work. Enables direct integration of LLM capabilities inside the retrieval model rather than orchestrating LLMs as an external service \u2014 tighter coupling raises the system ceiling for LLM-powered recommendation at production scale. GPU-optimized end-to-end retrieval: the unified model runs entirely on GPU for both training and serving, eliminating the CPU-GPU transfer overhead that constrained index lookup in prior architectures. Democratizes large-scale GPU recommendation infrastructure: any team can train and deploy on standard GPU hardware without maintaining a custom index serving system. Accepted at SIGIR 2026 full paper track; deployed in production at Meta for major recommendation surfaces. Published May 26, 2026.",
           "tags": [
             "ml",
             "infra",
@@ -734,6 +734,38 @@
             }
           ],
           "added": "2026-06-22"
+        },
+        {
+          "topic": "Netflix GenRec \u2014 LLM-Native Recommendation Ranker via vLLM Prefill-Only Mode",
+          "concepts": "GenRec post-trains an internal foundation LLM on Netflix-specific user history (raw logs) and item metadata via context engineering, converting them into natural-language prompts. At inference, GenRec runs on vLLM in prefill-only mode and outputs scores for each catalog item, yielding a recommendation ranking that matches or exceeds the mature production system while requiring far fewer labeled examples and input signals. Demonstrates that LLMs' broad world knowledge enables rich cross-item relationship capture in a shared semantic space without heavy feature engineering.",
+          "tags": [
+            "ml",
+            "infra",
+            "scale"
+          ],
+          "resources": [
+            {
+              "title": "GenRec: Towards LLM-Native Recommendation at Netflix (Netflix TechBlog, July 30 2026)",
+              "url": "https://netflixtechblog.com/genrec-towards-llm-native-recommendation-at-netflix-f20be6f643e3"
+            }
+          ],
+          "added": "2026-08-03"
+        },
+        {
+          "topic": "vLLM Kimi K3 Day-0 \u2014 Serving a 2.8T MoE with Hybrid Linear Attention (KDA), MXFP4, and Disaggregated Prefill",
+          "concepts": "Kimi K3 is a 2.8T-parameter Mixture-of-Experts (16 of 896 experts active per token) using Kimi Delta Attention (KDA) \u2014 a hybrid of linear recurrent and periodic full attention \u2014 plus a 1M-token context window and native vision. Day-0 vLLM support required redesigning hybrid prefix caching to handle recurrent KDA state (not just KV cache), integrating MXFP4 MoE quantization, and adding Mooncake-based agentic KV caching. With DSpark speculative decoding on 16 NVIDIA GB300 NVL72 GPUs, vLLM achieves 370 tok/s (3.14\u00d7 vs. 118 tok/s baseline). Supports NVIDIA Hopper/Blackwell and AMD MI355X.",
+          "tags": [
+            "ml",
+            "infra",
+            "scale"
+          ],
+          "resources": [
+            {
+              "title": "Kimi K3 Is Here: Efficient Day-0 Support on vLLM (vLLM Blog, July 27 2026)",
+              "url": "https://vllm.ai/blog/2026-07-27-k3"
+            }
+          ],
+          "added": "2026-08-03"
         }
       ]
     },
@@ -886,7 +918,7 @@
         },
         {
           "topic": "Disaggregated Prefill-Decode Serving (NVIDIA Dynamo / vLLM / SGLang)",
-          "concepts": "Separates the two LLM generation phases — prefill (compute-bound: processes entire prompt in parallel) and decode (memory-bandwidth-bound: generates one token per step) — onto dedicated GPU pools that scale independently. Prefill workers use compute-heavy GPUs (e.g., H100 SXM with high FLOPs); decode workers use memory-bandwidth-optimized GPUs (e.g., H100 PCIe). NVIDIA Dynamo 1.0 (GA March 2026, GTC) sits above vLLM/SGLang/TRT-LLM as an orchestration layer: it routes each request to a prefill worker, then transfers the completed KV-cache tensors to a decode worker via NIXL over NVLink/InfiniBand. Benchmarks on DeepSeek-R1 on Blackwell: up to 7× higher throughput vs monolithic serving. The architecture enables per-phase autoscaling — a KEDA rule on TTFT percentile scales prefill workers while decode workers scale on TBT (time-between-tokens). Production adopters: Meta, LinkedIn, Mistral, Hugging Face running vLLM with disaggregated serving; AWS, GCP, Azure, OCI all announced Dynamo integrations for managed inference (June 2026). Key operational risk: KV-cache transfer adds 5–15ms of cross-node latency; prefill/decode pool size ratio must be tuned per traffic mix (long prompts → more prefill; high output length → more decode); KEDA scale-down of decode workers can deadlock in-flight KV transfers (covered in vLLM Disaggregated Prefill drill).",
+          "concepts": "Separates the two LLM generation phases \u2014 prefill (compute-bound: processes entire prompt in parallel) and decode (memory-bandwidth-bound: generates one token per step) \u2014 onto dedicated GPU pools that scale independently. Prefill workers use compute-heavy GPUs (e.g., H100 SXM with high FLOPs); decode workers use memory-bandwidth-optimized GPUs (e.g., H100 PCIe). NVIDIA Dynamo 1.0 (GA March 2026, GTC) sits above vLLM/SGLang/TRT-LLM as an orchestration layer: it routes each request to a prefill worker, then transfers the completed KV-cache tensors to a decode worker via NIXL over NVLink/InfiniBand. Benchmarks on DeepSeek-R1 on Blackwell: up to 7\u00d7 higher throughput vs monolithic serving. The architecture enables per-phase autoscaling \u2014 a KEDA rule on TTFT percentile scales prefill workers while decode workers scale on TBT (time-between-tokens). Production adopters: Meta, LinkedIn, Mistral, Hugging Face running vLLM with disaggregated serving; AWS, GCP, Azure, OCI all announced Dynamo integrations for managed inference (June 2026). Key operational risk: KV-cache transfer adds 5\u201315ms of cross-node latency; prefill/decode pool size ratio must be tuned per traffic mix (long prompts \u2192 more prefill; high output length \u2192 more decode); KEDA scale-down of decode workers can deadlock in-flight KV transfers (covered in vLLM Disaggregated Prefill drill).",
           "tags": [
             "ml",
             "infra",
@@ -906,7 +938,7 @@
         },
         {
           "topic": "Scaling LLM Inference with N-D Parallelism at Meta (Tensor + Context + Expert Parallelism)",
-          "concepts": "Meta's engineering blog (Oct 2025) documents how they scaled LLM inference beyond single-node limits by combining three parallelism dimensions simultaneously: (1) Tensor Parallelism (TP) — splits individual weight matrices across GPUs (2–8 devices), reducing per-device memory at the cost of AllReduce synchronization on every attention/FFN layer; optimal TP degree trades off memory vs NVLink bandwidth saturation; (2) Context Parallelism (CP) — distributes the input sequence across GPUs so each device processes a shard of the KV sequence; enables serving 128K+ token contexts without per-device KV memory explosion; ring-attention pattern required to avoid quadratic memory growth; (3) Expert Parallelism (EP) — for MoE (Mixture of Experts) models like Llama-4, distributes expert layers across separate GPU groups so each token's selected experts may live on different devices; AlltoAll collective required for expert routing, latency-sensitive at scale. Meta moved to a prefill/decode disaggregated architecture alongside N-D parallelism, enabling heterogeneous hardware allocation — prefill uses compute-optimal TP configs while decode uses bandwidth-optimal TP configs; both tiers now served by vLLM with Meta-internal disagg integration. Key operational complexity: N-D parallelism requires careful tuning of TP × CP × EP product against GPU count and NVLink topology; incorrect configs produce silent performance cliffs (not errors); a TP-8 config on H100s connected via PCIe (not NVLink) is 3× slower than TP-8 on NVLink SXM due to bandwidth difference.",
+          "concepts": "Meta's engineering blog (Oct 2025) documents how they scaled LLM inference beyond single-node limits by combining three parallelism dimensions simultaneously: (1) Tensor Parallelism (TP) \u2014 splits individual weight matrices across GPUs (2\u20138 devices), reducing per-device memory at the cost of AllReduce synchronization on every attention/FFN layer; optimal TP degree trades off memory vs NVLink bandwidth saturation; (2) Context Parallelism (CP) \u2014 distributes the input sequence across GPUs so each device processes a shard of the KV sequence; enables serving 128K+ token contexts without per-device KV memory explosion; ring-attention pattern required to avoid quadratic memory growth; (3) Expert Parallelism (EP) \u2014 for MoE (Mixture of Experts) models like Llama-4, distributes expert layers across separate GPU groups so each token's selected experts may live on different devices; AlltoAll collective required for expert routing, latency-sensitive at scale. Meta moved to a prefill/decode disaggregated architecture alongside N-D parallelism, enabling heterogeneous hardware allocation \u2014 prefill uses compute-optimal TP configs while decode uses bandwidth-optimal TP configs; both tiers now served by vLLM with Meta-internal disagg integration. Key operational complexity: N-D parallelism requires careful tuning of TP \u00d7 CP \u00d7 EP product against GPU count and NVLink topology; incorrect configs produce silent performance cliffs (not errors); a TP-8 config on H100s connected via PCIe (not NVLink) is 3\u00d7 slower than TP-8 on NVLink SXM due to bandwidth difference.",
           "tags": [
             "ml",
             "infra",
@@ -914,7 +946,7 @@
           ],
           "resources": [
             {
-              "title": "Meta Engineering: Scaling LLM Inference — Tensor, Context, Expert Parallelism",
+              "title": "Meta Engineering: Scaling LLM Inference \u2014 Tensor, Context, Expert Parallelism",
               "url": "https://engineering.fb.com/2025/10/17/ai-research/scaling-llm-inference-innovations-tensor-parallelism-context-parallelism-expert-parallelism/"
             }
           ],
@@ -922,7 +954,7 @@
         },
         {
           "topic": "LLM Router / Proxy Architecture (LiteLLM, Portkey, OpenRouter)",
-          "concepts": "Production LLM deployments increasingly use a proxy routing layer between application services and the model backends. Architecture: unified API endpoint (OpenAI-compatible /v1/chat/completions) → router → backend pool (self-hosted vLLM/SGLang + commercial API fallbacks). Key capabilities: (1) Model failover with configurable health checks, cooldown timers, and success retry thresholds — misconfigured cooldown_time (too high) causes runaway spend on commercial fallbacks when primary is transiently unhealthy; (2) Cost tracking per model/team/department with real-time budget enforcement and hard spending caps per time window; (3) Semantic caching — deduplicate semantically similar prompts (e.g., LiteLLM Redis cache, GPTCache) to cut token spend by 20–60% on repetitive workloads; (4) Load balancing strategies: round-robin, latency-based-routing (route to lowest P50 backend), least-busy (route to lowest queue depth); (5) A/B model testing: split traffic by % across model versions for quality comparison with automatic fallback on increased error rates. Operational pitfalls: router itself becomes a critical dependency — must be HA with ≥2 replicas and a circuit breaker for its own health endpoints; per-request health check adds 2–10ms latency overhead (prefer background health polling for latency-sensitive paths); careless failover configuration causes $10K+/hr surprise costs when commercial fallbacks activate under load.",
+          "concepts": "Production LLM deployments increasingly use a proxy routing layer between application services and the model backends. Architecture: unified API endpoint (OpenAI-compatible /v1/chat/completions) \u2192 router \u2192 backend pool (self-hosted vLLM/SGLang + commercial API fallbacks). Key capabilities: (1) Model failover with configurable health checks, cooldown timers, and success retry thresholds \u2014 misconfigured cooldown_time (too high) causes runaway spend on commercial fallbacks when primary is transiently unhealthy; (2) Cost tracking per model/team/department with real-time budget enforcement and hard spending caps per time window; (3) Semantic caching \u2014 deduplicate semantically similar prompts (e.g., LiteLLM Redis cache, GPTCache) to cut token spend by 20\u201360% on repetitive workloads; (4) Load balancing strategies: round-robin, latency-based-routing (route to lowest P50 backend), least-busy (route to lowest queue depth); (5) A/B model testing: split traffic by % across model versions for quality comparison with automatic fallback on increased error rates. Operational pitfalls: router itself becomes a critical dependency \u2014 must be HA with \u22652 replicas and a circuit breaker for its own health endpoints; per-request health check adds 2\u201310ms latency overhead (prefer background health polling for latency-sensitive paths); careless failover configuration causes $10K+/hr surprise costs when commercial fallbacks activate under load.",
           "tags": [
             "ml",
             "infra"
@@ -936,8 +968,8 @@
           "added": "2026-06-29"
         },
         {
-          "topic": "NVIDIA Dynamo v1.2.0 — Branch-Sharded KV Indexer and Production-Ready GPU Memory Service",
-          "concepts": "NVIDIA Dynamo 1.2.0 (released June 2, 2026, 603 PRs from 82 contributors across Intel, Microsoft, Baseten, Roblox) introduces three major capabilities: (1) Branch-Sharded KV Indexer — anchor-aware routing that inspects the first N tokens of each request's KV cache entry, selects the decode worker with the longest matching prefix stored on device, and routes to it; early benchmarks on multi-turn enterprise chat workloads show 38–52% cache hit rate improvement over round-robin routing across the same pool size; (2) GPU Memory Service graduation — the in-pod sidecar that manages cross-layer KV tensor sharing (DRAM offload, NVLink cross-worker transfer, SSD spill) is now v1beta1 production-stable with documented upgrade paths; it ships as a per-node DaemonSet on Kubernetes and as a sidecar container in ECS/Nomad task definitions; (3) Text-to-image serving on TensorRT-LLM — Dynamo's disaggregated scheduler now supports image generation pipelines (SDXL, Flux) as a new backend alongside LLM endpoints, using the same NIXL transfer protocol for latent activations. Community ecosystem signals: 28 companies have opened 'Dynamo Integration' issues on GitHub as of July 2026, indicating broad adoption intent across cloud providers (AWS, GCP, Azure, OCI all in integration stage per their public roadmaps). Key staff+ operational context: the Branch-Sharded KV Indexer's anchor-based cache key design means long-document prefill workloads (RAG, legal, code review) see dramatically higher cache reuse while short-prompt stateless requests see no benefit; model the traffic mix before enabling to avoid miscalibrated routing decisions.",
+          "topic": "NVIDIA Dynamo v1.2.0 \u2014 Branch-Sharded KV Indexer and Production-Ready GPU Memory Service",
+          "concepts": "NVIDIA Dynamo 1.2.0 (released June 2, 2026, 603 PRs from 82 contributors across Intel, Microsoft, Baseten, Roblox) introduces three major capabilities: (1) Branch-Sharded KV Indexer \u2014 anchor-aware routing that inspects the first N tokens of each request's KV cache entry, selects the decode worker with the longest matching prefix stored on device, and routes to it; early benchmarks on multi-turn enterprise chat workloads show 38\u201352% cache hit rate improvement over round-robin routing across the same pool size; (2) GPU Memory Service graduation \u2014 the in-pod sidecar that manages cross-layer KV tensor sharing (DRAM offload, NVLink cross-worker transfer, SSD spill) is now v1beta1 production-stable with documented upgrade paths; it ships as a per-node DaemonSet on Kubernetes and as a sidecar container in ECS/Nomad task definitions; (3) Text-to-image serving on TensorRT-LLM \u2014 Dynamo's disaggregated scheduler now supports image generation pipelines (SDXL, Flux) as a new backend alongside LLM endpoints, using the same NIXL transfer protocol for latent activations. Community ecosystem signals: 28 companies have opened 'Dynamo Integration' issues on GitHub as of July 2026, indicating broad adoption intent across cloud providers (AWS, GCP, Azure, OCI all in integration stage per their public roadmaps). Key staff+ operational context: the Branch-Sharded KV Indexer's anchor-based cache key design means long-document prefill workloads (RAG, legal, code review) see dramatically higher cache reuse while short-prompt stateless requests see no benefit; model the traffic mix before enabling to avoid miscalibrated routing decisions.",
           "tags": [
             "ml",
             "infra",
@@ -952,8 +984,8 @@
           "added": "2026-07-06"
         },
         {
-          "topic": "Agent-Assisted SGLang Development — SKILL.md Agents for GPU Kernel Optimization and CI Workflows",
-          "concepts": "LMSYS blog post (July 2, 2026) documents the SGLang team's internal experiment encoding CUDA kernel optimization, CI triage, profiling, and benchmark workflows into reusable SKILL.md agent scripts executed by a small agentic system. Workflow: a benchmark-regression CI job flags a P95 TTFT increase → a skill agent reads the flamegraph + microbenchmark diff, proposes a kernel patch, runs the SGLang test suite, and generates a PR with benchmark comparison tables — all autonomously. As of late June 2026, three KDA-Pilot-derived GPU kernel optimizations (attention layer vectorization, KV cache copy vectorization, LoRA adapter weight fusing) landed in SGLang main via this approach, compressing what was previously a 2–3 week human optimization loop into 8–12 hour agent cycles. Key operational reality: 'agent-assisted' is not 'agent-autonomous' — a human reviews and merges each PR; the agent reduces the time spent on exploratory search (85% of optimization time), not on judgment of whether to land the change. Implications for staff+ engineers: (1) inference framework development is shifting from 'skilled CUDA programmer writes kernel' to 'skilled engineer designs the evaluation harness and review criteria, agent finds the optimization'; (2) organizations with strong benchmark suites will extract more value from this pattern than those with weak quality gates; (3) the SKILL.md abstraction (encoding domain expertise as agent capabilities) will likely generalize to ML platform workflows beyond kernel optimization — feature engineering automation, schema migration, cost optimization.",
+          "topic": "Agent-Assisted SGLang Development \u2014 SKILL.md Agents for GPU Kernel Optimization and CI Workflows",
+          "concepts": "LMSYS blog post (July 2, 2026) documents the SGLang team's internal experiment encoding CUDA kernel optimization, CI triage, profiling, and benchmark workflows into reusable SKILL.md agent scripts executed by a small agentic system. Workflow: a benchmark-regression CI job flags a P95 TTFT increase \u2192 a skill agent reads the flamegraph + microbenchmark diff, proposes a kernel patch, runs the SGLang test suite, and generates a PR with benchmark comparison tables \u2014 all autonomously. As of late June 2026, three KDA-Pilot-derived GPU kernel optimizations (attention layer vectorization, KV cache copy vectorization, LoRA adapter weight fusing) landed in SGLang main via this approach, compressing what was previously a 2\u20133 week human optimization loop into 8\u201312 hour agent cycles. Key operational reality: 'agent-assisted' is not 'agent-autonomous' \u2014 a human reviews and merges each PR; the agent reduces the time spent on exploratory search (85% of optimization time), not on judgment of whether to land the change. Implications for staff+ engineers: (1) inference framework development is shifting from 'skilled CUDA programmer writes kernel' to 'skilled engineer designs the evaluation harness and review criteria, agent finds the optimization'; (2) organizations with strong benchmark suites will extract more value from this pattern than those with weak quality gates; (3) the SKILL.md abstraction (encoding domain expertise as agent capabilities) will likely generalize to ML platform workflows beyond kernel optimization \u2014 feature engineering automation, schema migration, cost optimization.",
           "tags": [
             "ml",
             "infra",
@@ -968,8 +1000,8 @@
           "added": "2026-07-06"
         },
         {
-          "topic": "Netflix GenPage — End-to-End Generative Homepage Construction via Autoregressive Transformer",
-          "concepts": "Netflix TechBlog (June 30, 2026) presents GenPage: a single autoregressive transformer that replaces the traditional multi-stage recommender pipeline (retrieval → ranking → layout) to generate the entire structured, multi-row Netflix homepage in one pass. Training recipe mirrors LLM methodology: pretraining on historical production pages (content + layout) followed by post-training via Weighted Binary Classification (WBC) or Reinforcement Learning (RL). Online A/B test vs. the mature production recommender: +0.24% lift in the core user engagement metric (p < 0.001) and 20% reduction in end-to-end serving latency. Key technical findings relevant to ML serving engineers: (1) enriching the input prompt (adding more user context signals, catalog metadata, editorial tags) yields larger quality gains than scaling model parameters — diminishing returns on model size appear earlier than expected in the recommendation domain; (2) RL post-training increases homepage diversity even when diversity is not part of the objective, likely because RL explores a broader behavior space than WBC classification which stays near the historical distribution; (3) for entity cold-start (new titles not in training data), context injection (embedding the new title's metadata into the prefix) is more effective than fine-tuning; (4) GenPage autoregressive sampling is compatible with continuous batching (PagedAttention semantics), enabling shared GPU infrastructure with LLM serving. The shift from a pipeline of multiple specialized models to a single generalist model is consistent with the LLM paradigm shift seen in NLP — Netflix is among the first to demonstrate this transition at production scale for recommendation.",
+          "topic": "Netflix GenPage \u2014 End-to-End Generative Homepage Construction via Autoregressive Transformer",
+          "concepts": "Netflix TechBlog (June 30, 2026) presents GenPage: a single autoregressive transformer that replaces the traditional multi-stage recommender pipeline (retrieval \u2192 ranking \u2192 layout) to generate the entire structured, multi-row Netflix homepage in one pass. Training recipe mirrors LLM methodology: pretraining on historical production pages (content + layout) followed by post-training via Weighted Binary Classification (WBC) or Reinforcement Learning (RL). Online A/B test vs. the mature production recommender: +0.24% lift in the core user engagement metric (p < 0.001) and 20% reduction in end-to-end serving latency. Key technical findings relevant to ML serving engineers: (1) enriching the input prompt (adding more user context signals, catalog metadata, editorial tags) yields larger quality gains than scaling model parameters \u2014 diminishing returns on model size appear earlier than expected in the recommendation domain; (2) RL post-training increases homepage diversity even when diversity is not part of the objective, likely because RL explores a broader behavior space than WBC classification which stays near the historical distribution; (3) for entity cold-start (new titles not in training data), context injection (embedding the new title's metadata into the prefix) is more effective than fine-tuning; (4) GenPage autoregressive sampling is compatible with continuous batching (PagedAttention semantics), enabling shared GPU infrastructure with LLM serving. The shift from a pipeline of multiple specialized models to a single generalist model is consistent with the LLM paradigm shift seen in NLP \u2014 Netflix is among the first to demonstrate this transition at production scale for recommendation.",
           "tags": [
             "ml",
             "infra",
@@ -978,7 +1010,7 @@
           ],
           "resources": [
             {
-              "title": "Netflix TechBlog: GenPage — End-to-End Generative Homepage Construction",
+              "title": "Netflix TechBlog: GenPage \u2014 End-to-End Generative Homepage Construction",
               "url": "https://netflixtechblog.com/genpage-towards-end-to-end-generative-homepage-construction-at-netflix-77146fba8a08"
             },
             {
@@ -989,9 +1021,13 @@
           "added": "2026-07-06"
         },
         {
-          "topic": "vLLM Production Stack with MORI-IO RDMA KV Connector — 2.5× Throughput for Disaggregated Prefill",
-          "concepts": "MORI-IO (Memory-Over-RDMA I/O) is a production KV cache transfer connector for vLLM disaggregated prefill that uses RDMA over the network fabric instead of NVLink-only transfer, enabling prefill and decode instances to span multiple physical nodes without code changes. Key characteristics: uses RDMA transport for cross-node KV cache transfer, achieving 2.5× higher goodput and eliminating inter-token latency (ITL) violations vs. TCP-based transfer at the same hardware configuration. Production-ready connector alongside NixlConnector and MooncakeConnector in vLLM's disaggregated prefill tier. Architecture benefit: RDMA-based KV transfer decouples physical placement from logical prefill/decode assignment — operators can co-locate prefill-heavy H100 SXM nodes with decode-heavy H100 PCIe nodes on different rack switches and route KV cache via RDMA without NVLink requirement. Operational context: MORI-IO requires RoCE v2 or InfiniBand network fabric; requires provisioning RDMA-capable NICs on all nodes in the prefill/decode pool; adds 2–4ms transfer latency for typical KV sizes (16KB–512KB) vs 0.5–1ms on NVLink — evaluate tradeoff vs hardware topology constraints. Integration with vLLM production-stack Helm chart enables fully Kubernetes-native disaggregated serving with RDMA transport.",
-          "tags": ["ml", "infra", "scale"],
+          "topic": "vLLM Production Stack with MORI-IO RDMA KV Connector \u2014 2.5\u00d7 Throughput for Disaggregated Prefill",
+          "concepts": "MORI-IO (Memory-Over-RDMA I/O) is a production KV cache transfer connector for vLLM disaggregated prefill that uses RDMA over the network fabric instead of NVLink-only transfer, enabling prefill and decode instances to span multiple physical nodes without code changes. Key characteristics: uses RDMA transport for cross-node KV cache transfer, achieving 2.5\u00d7 higher goodput and eliminating inter-token latency (ITL) violations vs. TCP-based transfer at the same hardware configuration. Production-ready connector alongside NixlConnector and MooncakeConnector in vLLM's disaggregated prefill tier. Architecture benefit: RDMA-based KV transfer decouples physical placement from logical prefill/decode assignment \u2014 operators can co-locate prefill-heavy H100 SXM nodes with decode-heavy H100 PCIe nodes on different rack switches and route KV cache via RDMA without NVLink requirement. Operational context: MORI-IO requires RoCE v2 or InfiniBand network fabric; requires provisioning RDMA-capable NICs on all nodes in the prefill/decode pool; adds 2\u20134ms transfer latency for typical KV sizes (16KB\u2013512KB) vs 0.5\u20131ms on NVLink \u2014 evaluate tradeoff vs hardware topology constraints. Integration with vLLM production-stack Helm chart enables fully Kubernetes-native disaggregated serving with RDMA transport.",
+          "tags": [
+            "ml",
+            "infra",
+            "scale"
+          ],
           "resources": [
             {
               "title": "vLLM Blog: MORI-IO KV Connector for Disaggregated Prefill",
@@ -1005,9 +1041,13 @@
           "added": "2026-07-13"
         },
         {
-          "topic": "vLLM v0.25.0 — Model Runner V2, Streaming Parser Engine, Universal Speculative Decoding",
+          "topic": "vLLM v0.25.0 \u2014 Model Runner V2, Streaming Parser Engine, Universal Speculative Decoding",
           "concepts": "Model Runner V2 (unified eager + compiled path) is now the default; legacy PagedAttention V1 engine removed. Streaming Parser Engine handles tool-call and reasoning-chain parsing in a single unified pass, eliminating the previous dual-parser split. Universal speculative decoding adds support for heterogeneous-vocabulary drafters: DSpark for small same-vocab drafters and DFlash for cross-model cross-vocab speculation. Transformers backend now matches native vLLM throughput after kernel-level optimization. V1 architecture reduces scheduling overhead ~40% at 1K+ concurrent requests.",
-          "tags": ["ml", "infra", "scale"],
+          "tags": [
+            "ml",
+            "infra",
+            "scale"
+          ],
           "resources": [
             {
               "title": "vLLM v0.25.0 Release Notes",
@@ -1017,9 +1057,13 @@
           "added": "2026-07-20"
         },
         {
-          "topic": "vLLM v0.26.0 — Tiered KV Offloading, Per-Group Attention Backend, NVFP4/MXFP4 Quantization",
-          "concepts": "Object-store secondary KV cache tier enables GPU HBM → CPU DRAM → S3/GCS/ABS cascade offloading with per-request eviction policy hooks. Attention backend is now selectable per KV-cache group (FlashAttention, FlashInfer, or xFormers per layer group), enabling hybrid attention strategies within a single model. Sliding window attention exposed as an explicit backend capability rather than a silent preprocessing transformation. NVFP4 and MXFP4 quantization support added for Blackwell-class GPUs (GB200/B200). Inkling model family (Thinking Machines Lab’s 975B MoE open-weights) added as a supported model class. DeepSeek-V4 serving optimizations including expert-parallel routing improvements. Rust frontend multimodal: video and audio token streams now handled natively without Python fallback. Transformers 5.13.0 compatibility; FlashInfer 0.6.14; NIXL 1.3.1 for cross-node KV transfer. 411 commits, 212 contributors.",
-          "tags": ["ml", "infra", "scale"],
+          "topic": "vLLM v0.26.0 \u2014 Tiered KV Offloading, Per-Group Attention Backend, NVFP4/MXFP4 Quantization",
+          "concepts": "Object-store secondary KV cache tier enables GPU HBM \u2192 CPU DRAM \u2192 S3/GCS/ABS cascade offloading with per-request eviction policy hooks. Attention backend is now selectable per KV-cache group (FlashAttention, FlashInfer, or xFormers per layer group), enabling hybrid attention strategies within a single model. Sliding window attention exposed as an explicit backend capability rather than a silent preprocessing transformation. NVFP4 and MXFP4 quantization support added for Blackwell-class GPUs (GB200/B200). Inkling model family (Thinking Machines Lab\u2019s 975B MoE open-weights) added as a supported model class. DeepSeek-V4 serving optimizations including expert-parallel routing improvements. Rust frontend multimodal: video and audio token streams now handled natively without Python fallback. Transformers 5.13.0 compatibility; FlashInfer 0.6.14; NIXL 1.3.1 for cross-node KV transfer. 411 commits, 212 contributors.",
+          "tags": [
+            "ml",
+            "infra",
+            "scale"
+          ],
           "resources": [
             {
               "title": "vLLM v0.26.0 Release Notes",
@@ -1029,9 +1073,13 @@
           "added": "2026-07-27"
         },
         {
-          "topic": "Netflix In-House LLM Serving — vLLM + NVIDIA Triton Unified Under Model Scoring Service",
-          "concepts": "Netflix’s Model Scoring Service (MSS) is the centralized inference platform serving all production ML models. The LLM serving architecture layers vLLM (autoregressive inference engine) and NVIDIA Triton Inference Server (batching and orchestration for classical ML and embedding models) behind MSS’s unified API surface, exposing both gRPC and OpenAI-compatible HTTP endpoints to internal teams. Key design decisions: single engine selection matrix (vLLM for autoregressive generation, Triton for everything else); model packaging standardized on a Netflix-internal container spec with reproducible dependency locking; output constraints (structured JSON, schema enforcement) applied at the MSS routing layer before reaching the engine. The platform enables Netflix engineering teams to self-serve LLM deployment without managing inference infrastructure. The architecture decouples engine upgrades (e.g. vLLM version bumps) from the API contract — MSS acts as a stable facade. Published July 17, 2026.",
-          "tags": ["ml", "infra", "scale"],
+          "topic": "Netflix In-House LLM Serving \u2014 vLLM + NVIDIA Triton Unified Under Model Scoring Service",
+          "concepts": "Netflix\u2019s Model Scoring Service (MSS) is the centralized inference platform serving all production ML models. The LLM serving architecture layers vLLM (autoregressive inference engine) and NVIDIA Triton Inference Server (batching and orchestration for classical ML and embedding models) behind MSS\u2019s unified API surface, exposing both gRPC and OpenAI-compatible HTTP endpoints to internal teams. Key design decisions: single engine selection matrix (vLLM for autoregressive generation, Triton for everything else); model packaging standardized on a Netflix-internal container spec with reproducible dependency locking; output constraints (structured JSON, schema enforcement) applied at the MSS routing layer before reaching the engine. The platform enables Netflix engineering teams to self-serve LLM deployment without managing inference infrastructure. The architecture decouples engine upgrades (e.g. vLLM version bumps) from the API contract \u2014 MSS acts as a stable facade. Published July 17, 2026.",
+          "tags": [
+            "ml",
+            "infra",
+            "scale"
+          ],
           "resources": [
             {
               "title": "Netflix TechBlog: In-House LLM Serving at Netflix",
@@ -1043,6 +1091,22 @@
             }
           ],
           "added": "2026-07-27"
+        },
+        {
+          "topic": "Meta Iris (MTIA Gen 4) \u2014 Custom RISC-V AI Inference Chip Entering Production Manufacturing September 2026",
+          "concepts": "Meta's fourth-generation inference accelerator under the MTIA program, code-named Iris, uses an open-source RISC-V ISA with PyTorch, vLLM, and Triton as the full software stack. Fabricated by TSMC, co-designed with Broadcom (partnership extended through 2029 covering multiple MTIA generations). Production manufacturing begins September 2026; Iris targets Meta's AI inference workloads across Facebook and Instagram at scale as part of a buildout to double computing capacity from 7 GW (2026) to 14 GW (2027).",
+          "tags": [
+            "ml",
+            "infra",
+            "scale"
+          ],
+          "resources": [
+            {
+              "title": "Meta to Begin Manufacturing In-House Iris AI Chip in September (MLQ News, July 2026)",
+              "url": "https://mlq.ai/news/meta-to-begin-manufacturing-in-house-iris-ai-chip-in-september/"
+            }
+          ],
+          "added": "2026-08-03"
         }
       ]
     }

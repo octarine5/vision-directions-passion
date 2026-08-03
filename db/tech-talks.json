@@ -3,7 +3,7 @@
     "category": "tech-talks",
     "display_name": "Tech Talks",
     "layout": "cards",
-    "last_updated": "2026-07-27"
+    "last_updated": "2026-08-03"
   },
   "sections": [
     {
@@ -30,7 +30,7 @@
           "url": "https://www.youtube.com/watch?v=modXC5IWTJI",
           "speaker": "Martin Kleppmann",
           "venue": "Strange Loop",
-          "description": "Companion talk to the DDIA book — consistency, replication, partitioning",
+          "description": "Companion talk to the DDIA book \u2014 consistency, replication, partitioning",
           "added": "2026-04-07"
         },
         {
@@ -38,7 +38,7 @@
           "url": "https://www.youtube.com/watch?v=fU9hR3kiOK0",
           "speaker": "Martin Kleppmann",
           "venue": "Strange Loop 2014",
-          "description": "Rethinking databases as streams — materialized views, event sourcing",
+          "description": "Rethinking databases as streams \u2014 materialized views, event sourcing",
           "added": "2026-04-07"
         },
         {
@@ -94,7 +94,7 @@
           "url": "https://www.youtube.com/watch?v=CZ3wIuvmHeM",
           "speaker": "Jun Rao",
           "venue": "Strange Loop",
-          "description": "Origin story of Kafka — stream processing, log compaction",
+          "description": "Origin story of Kafka \u2014 stream processing, log compaction",
           "added": "2026-04-07"
         },
         {
@@ -126,7 +126,7 @@
           "url": "https://www.youtube.com/watch?v=nvlt0dA7rsQ",
           "speaker": "Charity Majors",
           "venue": "Monitorama",
-          "description": "Beyond monitoring — high-cardinality observability with Honeycomb",
+          "description": "Beyond monitoring \u2014 high-cardinality observability with Honeycomb",
           "added": "2026-04-07"
         },
         {
@@ -134,7 +134,7 @@
           "url": "https://www.youtube.com/watch?v=9RhOGoChGqo",
           "speaker": "Caitie McCaffrey",
           "venue": "StrangeLoop 2016",
-          "description": "Testing distributed systems — formal methods, property-based testing",
+          "description": "Testing distributed systems \u2014 formal methods, property-based testing",
           "added": "2026-04-07"
         },
         {
@@ -174,7 +174,7 @@
           "url": "https://www.youtube.com/watch?v=tEylFyxbDLE",
           "speaker": "Alex Hidalgo",
           "venue": "SREcon 2020",
-          "description": "Practical SLO implementation — error budgets, burn rates, alerting on SLOs not symptoms",
+          "description": "Practical SLO implementation \u2014 error budgets, burn rates, alerting on SLOs not symptoms",
           "added": "2026-04-07"
         },
         {
@@ -182,7 +182,7 @@
           "url": "https://www.youtube.com/watch?v=30jNsCVLpAE",
           "speaker": "Bryan Cantrill",
           "venue": "Monktoberfest 2018",
-          "description": "Production debugging war stories — dtrace, postmortems, systematic root cause analysis",
+          "description": "Production debugging war stories \u2014 dtrace, postmortems, systematic root cause analysis",
           "added": "2026-04-07"
         },
         {
@@ -190,7 +190,7 @@
           "url": "https://www.youtube.com/watch?v=UthldR_cXlc",
           "speaker": "Brendan Gregg",
           "venue": "LISA 2012",
-          "description": "Utilization, Saturation, Errors — systematic framework for analyzing system performance",
+          "description": "Utilization, Saturation, Errors \u2014 systematic framework for analyzing system performance",
           "added": "2026-04-07"
         },
         {
@@ -206,7 +206,7 @@
           "url": "https://www.youtube.com/watch?v=TGa5EVWx6JM",
           "speaker": "Nora Jones",
           "venue": "Strange Loop 2019",
-          "description": "Learning from incidents — blameless postmortems, contributing factors, organizational learning",
+          "description": "Learning from incidents \u2014 blameless postmortems, contributing factors, organizational learning",
           "added": "2026-04-07"
         }
       ]
@@ -219,7 +219,7 @@
           "url": "https://www.youtube.com/watch?v=K1a2Bk8NrYQ",
           "speaker": "Uber Engineering",
           "venue": "SysML",
-          "description": "Michelangelo platform — feature store, training, serving",
+          "description": "Michelangelo platform \u2014 feature store, training, serving",
           "added": "2026-04-07"
         },
         {
@@ -243,7 +243,7 @@
           "url": "https://www.youtube.com/watch?v=kCc8FmEb1nY",
           "speaker": "Andrej Karpathy",
           "venue": "YouTube",
-          "description": "Building a GPT model from scratch — the best educational resource",
+          "description": "Building a GPT model from scratch \u2014 the best educational resource",
           "added": "2026-04-07"
         },
         {
@@ -259,7 +259,7 @@
           "url": "https://www.youtube.com/watch?v=9-Jl0dxWQs8",
           "speaker": "Google",
           "venue": "NeurIPS 2015",
-          "description": "ML systems debt — testing, monitoring, config, data dependencies",
+          "description": "ML systems debt \u2014 testing, monitoring, config, data dependencies",
           "added": "2026-04-07"
         },
         {
@@ -275,7 +275,7 @@
           "url": "https://www.youtube.com/watch?v=J6XcP4JOHmk",
           "speaker": "Robert Nishihara",
           "venue": "RISELab",
-          "description": "Distributed computing for ML — task parallelism, actor model",
+          "description": "Distributed computing for ML \u2014 task parallelism, actor model",
           "added": "2026-04-07"
         },
         {
@@ -299,7 +299,7 @@
           "url": "https://www.youtube.com/watch?v=Xd5l3CMpONA",
           "speaker": "Andrej Karpathy",
           "venue": "Microsoft Build 2023",
-          "description": "How GPTs are trained — pretraining, SFT, RLHF, prompting",
+          "description": "How GPTs are trained \u2014 pretraining, SFT, RLHF, prompting",
           "added": "2026-04-07"
         },
         {
@@ -315,7 +315,7 @@
           "url": "https://www.youtube.com/watch?v=pjBOxCJblxQ",
           "speaker": "Nathan Lambert",
           "venue": "Hugging Face",
-          "description": "Deep dive into alignment techniques — reward models, PPO, DPO",
+          "description": "Deep dive into alignment techniques \u2014 reward models, PPO, DPO",
           "added": "2026-04-07"
         },
         {
@@ -351,11 +351,11 @@
           "added": "2026-04-07"
         },
         {
-          "title": "RAG — Full Stack",
+          "title": "RAG \u2014 Full Stack",
           "url": "https://www.youtube.com/watch?v=lnbaRjh8Bcc",
           "speaker": "LangChain",
           "venue": "YouTube 2024",
-          "description": "End-to-end RAG — chunking, embeddings, retrieval, generation",
+          "description": "End-to-end RAG \u2014 chunking, embeddings, retrieval, generation",
           "added": "2026-04-07"
         },
         {
@@ -419,7 +419,7 @@
           "url": "https://www.youtube.com/watch?v=FqPwHHrN1bg",
           "speaker": "Meta Staff Engineer",
           "venue": "YouTube 2026",
-          "description": "A Meta staff engineer breaks down agentic AI engineering — what it means in practice, how multi-agent systems are restructuring the SDLC, and what staff+ engineers need to understand about orchestrating agents vs. writing code",
+          "description": "A Meta staff engineer breaks down agentic AI engineering \u2014 what it means in practice, how multi-agent systems are restructuring the SDLC, and what staff+ engineers need to understand about orchestrating agents vs. writing code",
           "added": "2026-04-20"
         },
         {
@@ -427,7 +427,7 @@
           "url": "https://boston.qcon.ai/presentation/boston2026/building-genai-platform-doordash",
           "speaker": "Siddharth Kodwani / Sudeep Das (DoorDash)",
           "venue": "QCon AI Boston 2026",
-          "description": "How DoorDash built internal GenAI infrastructure to support AI capabilities across engineering teams at scale — retries, fallbacks, prompt versioning, cost tracking, and trust/safety checks in a real-time 3-sided marketplace. Engineering deep-dive on the internal developer platform that makes AI features reliable, observable, and cost-controlled in production",
+          "description": "How DoorDash built internal GenAI infrastructure to support AI capabilities across engineering teams at scale \u2014 retries, fallbacks, prompt versioning, cost tracking, and trust/safety checks in a real-time 3-sided marketplace. Engineering deep-dive on the internal developer platform that makes AI features reliable, observable, and cost-controlled in production",
           "added": "2026-05-18"
         },
         {
@@ -435,7 +435,7 @@
           "url": "https://boston.qcon.ai/presentation/boston2026/beyond-prompting-context-engineering-production-grade-ai",
           "speaker": "QCon AI Boston 2026 Speaker",
           "venue": "QCon AI Boston 2026",
-          "description": "Context engineering as an architectural discipline — treating the LLM context window as a first-class resource to design, optimize, and manage. Covers KV cache prefix reuse, memory hierarchies for long multi-turn sessions, tool result compression, retrieval-augmented context injection, and why disciplined context management delivers more consistent task success than prompt engineering alone",
+          "description": "Context engineering as an architectural discipline \u2014 treating the LLM context window as a first-class resource to design, optimize, and manage. Covers KV cache prefix reuse, memory hierarchies for long multi-turn sessions, tool result compression, retrieval-augmented context injection, and why disciplined context management delivers more consistent task success than prompt engineering alone",
           "added": "2026-05-18"
         },
         {
@@ -443,7 +443,7 @@
           "url": "https://www.youtube.com/watch?v=rV9Dy39nqdk",
           "speaker": "Meta Engineering",
           "venue": "Meta Engineering YouTube 2026",
-          "description": "Meta's AI agent platform for autonomous infrastructure capacity optimization — how MCP Tools and encoded engineer Skills power offense (proactive savings discovery) and defense (AI Regression Solver auto-detects regressions and generates PRs), recovering hundreds of megawatts of compute. Covers the architecture, safety boundaries, and how the same foundation scaled from one efficiency application to an entire agentic program. Published April 28, 2026.",
+          "description": "Meta's AI agent platform for autonomous infrastructure capacity optimization \u2014 how MCP Tools and encoded engineer Skills power offense (proactive savings discovery) and defense (AI Regression Solver auto-detects regressions and generates PRs), recovering hundreds of megawatts of compute. Covers the architecture, safety boundaries, and how the same foundation scaled from one efficiency application to an entire agentic program. Published April 28, 2026.",
           "added": "2026-06-01"
         },
         {
@@ -451,7 +451,7 @@
           "url": "https://boston.qcon.ai/presentation/boston2026/serving-llms-scale-hidden-kv-cache-advantage",
           "speaker": "Khawaja Shams (Co-Founder & CEO, Momento)",
           "venue": "QCon AI Boston 2026",
-          "description": "KV cache as the hidden lever behind inference cost and latency: how GPU utilization, TTFB, and throughput are dominated by prefix-cache hit rates. Covers practical techniques for maximizing KV reuse in production LLM serving — shared prefix management, prefix-aware routing, and the economics of on-GPU vs CPU-offloaded KV storage.",
+          "description": "KV cache as the hidden lever behind inference cost and latency: how GPU utilization, TTFB, and throughput are dominated by prefix-cache hit rates. Covers practical techniques for maximizing KV reuse in production LLM serving \u2014 shared prefix management, prefix-aware routing, and the economics of on-GPU vs CPU-offloaded KV storage.",
           "added": "2026-06-08"
         },
         {
@@ -466,12 +466,12 @@
           "title": "Beyond vLLM: Distributed LLM Inferencing With llm-d on Kubernetes",
           "url": "https://www.youtube.com/watch?v=GgQtgwdoOWs",
           "speaker": "Ravindra Patil (Red Hat)",
-          "venue": "KubeCon + CloudNativeCon India 2026, Mumbai (June 18–19, 2026)",
-          "description": "Introduction to llm-d, the CNCF Sandbox project jointly donated by IBM Research, Red Hat, and Google Cloud (with NVIDIA, CoreWeave, AMD, Cisco as founding partners). Demonstrates Kubernetes-native disaggregated LLM serving beyond single-node vLLM: hierarchical KV cache offloading (VRAM → DRAM → NVMe → network), prefix-cache-aware routing using the same Branch-Sharded KV Indexer approach as NVIDIA Dynamo, and the llm-d CRD API for declarative inference deployments. Positions llm-d as a middleware layer in the Kubernetes AI Conformance Program's inference tier.",
+          "venue": "KubeCon + CloudNativeCon India 2026, Mumbai (June 18\u201319, 2026)",
+          "description": "Introduction to llm-d, the CNCF Sandbox project jointly donated by IBM Research, Red Hat, and Google Cloud (with NVIDIA, CoreWeave, AMD, Cisco as founding partners). Demonstrates Kubernetes-native disaggregated LLM serving beyond single-node vLLM: hierarchical KV cache offloading (VRAM \u2192 DRAM \u2192 NVMe \u2192 network), prefix-cache-aware routing using the same Branch-Sharded KV Indexer approach as NVIDIA Dynamo, and the llm-d CRD API for declarative inference deployments. Positions llm-d as a middleware layer in the Kubernetes AI Conformance Program's inference tier.",
           "added": "2026-07-06"
         },
         {
-          "title": "Your AI Agent Has No SLO — Defining Reliability for Autonomous Systems",
+          "title": "Your AI Agent Has No SLO \u2014 Defining Reliability for Autonomous Systems",
           "url": "https://www.youtube.com/watch?v=aYPiXBFdZYQ",
           "speaker": "Andrew Espira (Kustode), AI SRE Summit panel",
           "venue": "AI SRE Summit 2026 (Virtual, May 12, 2026)",
@@ -482,7 +482,7 @@
           "title": "KServe in Production: Scaling Generative Inference the Cloud Native Way",
           "url": "https://kccncind2026.sched.com/event/kserve-in-production",
           "speaker": "Johnu George (Nutanix)",
-          "venue": "KubeCon + CloudNativeCon India 2026, Mumbai (June 18–19, 2026)",
+          "venue": "KubeCon + CloudNativeCon India 2026, Mumbai (June 18\u201319, 2026)",
           "description": "Production deployment patterns for KServe serving generative AI workloads at scale on Kubernetes. Covers KServe's unified model inference platform integrating with llm-d and vLLM backends, autoscaling for LLM serving, multi-model serving with InferenceGraph CRDs, and operational lessons from Nutanix's production KServe deployments handling GPU resource management and model versioning at cloud native scale.",
           "added": "2026-07-13"
         },
@@ -490,8 +490,8 @@
           "title": "When Kubeflow Fights Cilium: Debugging 60% Idle GPUs in Kubernetes",
           "url": "https://kccncind2026.sched.com/event/kubeflow-cilium-gpu-debugging",
           "speaker": "Ramkumar Nagaraj & Bingi Narasimha Karthik (Adobe)",
-          "venue": "KubeCon + CloudNativeCon India 2026, Mumbai (June 18–19, 2026)",
-          "description": "War story from Adobe's ML platform team: a silent network policy conflict between Kubeflow training operators and Cilium eBPF-based CNI left 60% of GPU training nodes idle — GPUs allocated but not running work. Covers the debugging journey through GPU utilization metrics, network policy tracing with Hubble, the Cilium-Kubeflow port conflict root cause, and the fix. Essential viewing for teams running ML training workloads on Kubernetes with advanced CNI plugins.",
+          "venue": "KubeCon + CloudNativeCon India 2026, Mumbai (June 18\u201319, 2026)",
+          "description": "War story from Adobe's ML platform team: a silent network policy conflict between Kubeflow training operators and Cilium eBPF-based CNI left 60% of GPU training nodes idle \u2014 GPUs allocated but not running work. Covers the debugging journey through GPU utilization metrics, network policy tracing with Hubble, the Cilium-Kubeflow port conflict root cause, and the fix. Essential viewing for teams running ML training workloads on Kubernetes with advanced CNI plugins.",
           "added": "2026-07-13"
         },
         {
@@ -499,15 +499,15 @@
           "url": "https://icml.cc/virtual/2026/invited-talk/67258",
           "speaker": "Pascale Fung (HKUST)",
           "venue": "ICML 2026, Seoul, South Korea (July 7, 2026)",
-          "description": "Opening invited talk of ICML 2026 main conference. Fung argues that recent LLM-agent advances driven by imitation learning + RL in digital environments are hitting a ceiling; next leap requires agents grounded in world modeling — integrating multimodal perception, planning-through-reasoning, and memory. Proposes a shift from instruction-following to principled autonomous agents that understand physical environments and user intentions. Frames the key open problems: grounding, causal reasoning, long-horizon planning, and human-centered alignment for real-world deployment.",
+          "description": "Opening invited talk of ICML 2026 main conference. Fung argues that recent LLM-agent advances driven by imitation learning + RL in digital environments are hitting a ceiling; next leap requires agents grounded in world modeling \u2014 integrating multimodal perception, planning-through-reasoning, and memory. Proposes a shift from instruction-following to principled autonomous agents that understand physical environments and user intentions. Frames the key open problems: grounding, causal reasoning, long-horizon planning, and human-centered alignment for real-world deployment.",
           "added": "2026-07-20"
         },
         {
           "title": "WF2026: Autoresearch & Keynotes ft. Anthropic, Google DeepMind, Amazon AGI",
           "url": "https://www.youtube.com/watch?v=4sX_He5c4sI",
           "speaker": "Multiple speakers (Anthropic, Google DeepMind, Amazon AGI, Sonar, Arena, Recursive)",
-          "venue": "AI Engineer World's Fair 2026, Moscone West, San Francisco (June 30 – July 1, 2026)",
-          "description": "Main-stage Day 2 keynote compilation from AI Engineer World's Fair 2026 (6,000+ engineers, 300 speakers, 29 tracks). Covers autoresearch — AI systems that improve AI systems — entering production at Anthropic and DeepMind; Amazon AGI's approach to agentic tool use at scale; and the emerging 'software factory' paradigm where agents write, test, and deploy code autonomously. Specific segments cover eval-driven agent development, reliability of multi-step agentic pipelines, and observability patterns for autonomous systems.",
+          "venue": "AI Engineer World's Fair 2026, Moscone West, San Francisco (June 30 \u2013 July 1, 2026)",
+          "description": "Main-stage Day 2 keynote compilation from AI Engineer World's Fair 2026 (6,000+ engineers, 300 speakers, 29 tracks). Covers autoresearch \u2014 AI systems that improve AI systems \u2014 entering production at Anthropic and DeepMind; Amazon AGI's approach to agentic tool use at scale; and the emerging 'software factory' paradigm where agents write, test, and deploy code autonomously. Specific segments cover eval-driven agent development, reliability of multi-step agentic pipelines, and observability patterns for autonomous systems.",
           "added": "2026-07-20"
         },
         {
@@ -515,7 +515,7 @@
           "url": "https://www.youtube.com/watch?v=htM02KMNZnk",
           "speaker": "Multiple speakers (Microsoft, OpenAI, Z.ai/GLM, MiniMax, Hugging Face)",
           "venue": "AI Engineer World's Fair 2026, Moscone West, San Francisco (June 29, 2026)",
-          "description": "Main-stage Day 1 keynote compilation from AI Engineer World's Fair 2026. Microsoft's vision for AI-native software factories — agents as first-class engineering team members with defined roles, contracts, and handoffs. OpenAI's production engineering patterns for o-series reasoning models in agentic loops. Z.ai (GLM-4 team) and MiniMax present open-source LLM infrastructure patterns for serving at >1T tokens/day. Hugging Face on open-weight model deployment pipelines and the role of community models in enterprise AI stacks.",
+          "description": "Main-stage Day 1 keynote compilation from AI Engineer World's Fair 2026. Microsoft's vision for AI-native software factories \u2014 agents as first-class engineering team members with defined roles, contracts, and handoffs. OpenAI's production engineering patterns for o-series reasoning models in agentic loops. Z.ai (GLM-4 team) and MiniMax present open-source LLM infrastructure patterns for serving at >1T tokens/day. Hugging Face on open-weight model deployment pipelines and the role of community models in enterprise AI stacks.",
           "added": "2026-07-20"
         },
         {
@@ -523,8 +523,24 @@
           "url": "https://netflixtechblog.com/in-house-llm-serving-at-netflix-b1f7e4bc1e15",
           "speaker": "Netflix ML Platform Team",
           "venue": "Netflix TechBlog / InfoQ (July 17, 2026)",
-          "description": "Deep-dive into Netflix’s production LLM serving architecture: vLLM as the primary inference engine + NVIDIA Triton for batching/orchestration, unified behind the Model Scoring Service (MSS) API. Covers the engine selection matrix (vLLM for autoregressive generation, Triton for embeddings and classical ML), model packaging standards, gRPC and OpenAI-compatible HTTP API surface design, and output constraint enforcement (structured JSON schema validation) at the MSS routing layer. Provides a rare look at how a non-AI-first company scales LLM serving for internal product teams without requiring each team to manage inference infrastructure. The MSS facade pattern decouples API consumers from engine implementation details, enabling vLLM version upgrades without breaking callers.",
+          "description": "Deep-dive into Netflix\u2019s production LLM serving architecture: vLLM as the primary inference engine + NVIDIA Triton for batching/orchestration, unified behind the Model Scoring Service (MSS) API. Covers the engine selection matrix (vLLM for autoregressive generation, Triton for embeddings and classical ML), model packaging standards, gRPC and OpenAI-compatible HTTP API surface design, and output constraint enforcement (structured JSON schema validation) at the MSS routing layer. Provides a rare look at how a non-AI-first company scales LLM serving for internal product teams without requiring each team to manage inference infrastructure. The MSS facade pattern decouples API consumers from engine implementation details, enabling vLLM version upgrades without breaking callers.",
           "added": "2026-07-27"
+        },
+        {
+          "title": "GenRec: Towards LLM-Native Recommendation at Netflix",
+          "url": "https://netflixtechblog.com/genrec-towards-llm-native-recommendation-at-netflix-f20be6f643e3",
+          "speaker": "Netflix AI Platform Team",
+          "venue": "Netflix TechBlog (July 30, 2026)",
+          "description": "How Netflix built GenRec \u2014 an LLM ranker that post-trains a foundation model on user history and catalog metadata via context engineering, then runs it on vLLM in prefill-only mode to score recommendation candidates. Matches or exceeds the mature production ranking system with far fewer labeled examples and input signals; demonstrates LLM-native recommendation as a viable replacement for traditional feature engineering.",
+          "added": "2026-08-03"
+        },
+        {
+          "title": "Kimi K3 Is Here: Efficient Day-0 Support on vLLM",
+          "url": "https://vllm.ai/blog/2026-07-27-k3",
+          "speaker": "vLLM Team & Moonshot AI",
+          "venue": "vLLM Blog (July 27, 2026)",
+          "description": "Engineering deep-dive on day-0 production support for Kimi K3 \u2014 a 2.8T-parameter MoE (16 of 896 experts active, 1M-token context, native vision) using Kimi Delta Attention (KDA) hybrid linear/full attention. Covers redesigned prefix caching for recurrent KDA state, MXFP4 MoE quantization, DSpark speculative decoding (3.14\u00d7 throughput to 370 tok/s on 16\u00d7 GB300), prefill/decode disaggregation with Mooncake, and multi-hardware support (NVIDIA Hopper/Blackwell and AMD MI355X).",
+          "added": "2026-08-03"
         }
       ]
     },
@@ -536,7 +552,7 @@
           "url": "https://www.youtube.com/watch?v=4GK1NDncPMY",
           "speaker": "Amazon",
           "venue": "re:Invent",
-          "description": "What principal engineers do — technical vision, bar-raising, writing",
+          "description": "What principal engineers do \u2014 technical vision, bar-raising, writing",
           "added": "2026-04-07"
         },
         {
@@ -552,7 +568,7 @@
           "url": "https://www.youtube.com/watch?v=30a0NI-skR0",
           "speaker": "Camille Fournier",
           "venue": "LeadDev",
-          "description": "From 10 to 100+ engineers — process, communication, culture",
+          "description": "From 10 to 100+ engineers \u2014 process, communication, culture",
           "added": "2026-04-07"
         },
         {
@@ -584,7 +600,7 @@
           "url": "https://www.youtube.com/watch?v=lhXviMxkmlQ",
           "speaker": "Rich Hickey",
           "venue": "Strange Loop 2011",
-          "description": "Simplicity vs easiness in software design — timeless wisdom",
+          "description": "Simplicity vs easiness in software design \u2014 timeless wisdom",
           "added": "2026-04-07"
         },
         {
@@ -600,7 +616,7 @@
           "url": "https://www.youtube.com/watch?v=8bZh5LMaSmE",
           "speaker": "Rich Hickey",
           "venue": "Clojure Conj 2010",
-          "description": "Deep thinking about problems before coding — sleep on it",
+          "description": "Deep thinking about problems before coding \u2014 sleep on it",
           "added": "2026-04-07"
         },
         {
@@ -608,7 +624,7 @@
           "url": "https://www.youtube.com/watch?v=f84n5oFoZBc",
           "speaker": "Bret Victor",
           "venue": "CUSEC 2012",
-          "description": "Direct manipulation, immediate feedback — legendary talk on creativity",
+          "description": "Direct manipulation, immediate feedback \u2014 legendary talk on creativity",
           "added": "2026-04-07"
         },
         {
@@ -616,7 +632,7 @@
           "url": "https://www.youtube.com/watch?v=ji5_MqicxSo",
           "speaker": "Bret Victor",
           "venue": "DBX Conference 2013",
-          "description": "What we lost from 1960s/70s computing vision — provocative",
+          "description": "What we lost from 1960s/70s computing vision \u2014 provocative",
           "added": "2026-04-07"
         },
         {
@@ -632,7 +648,7 @@
           "url": "https://www.youtube.com/watch?v=PAAkCSZUG1c",
           "speaker": "Patrick Kua",
           "venue": "LeadDev",
-          "description": "Communication skills for technical leaders — clarity, audience",
+          "description": "Communication skills for technical leaders \u2014 clarity, audience",
           "added": "2026-04-07"
         },
         {
@@ -656,7 +672,7 @@
           "url": "https://www.youtube.com/watch?v=aAb7hSCtvGw",
           "speaker": "Dan McKinley",
           "venue": "dotScale 2015",
-          "description": "Innovation tokens — why you should pick proven tech",
+          "description": "Innovation tokens \u2014 why you should pick proven tech",
           "added": "2026-04-07"
         },
         {
@@ -688,7 +704,7 @@
           "url": "https://www.youtube.com/watch?v=sY1FQUqCiAg",
           "speaker": "Simon Wardley",
           "venue": "OSCON",
-          "description": "Wardley Mapping — strategic positioning, component evolution",
+          "description": "Wardley Mapping \u2014 strategic positioning, component evolution",
           "added": "2026-04-07"
         },
         {
@@ -712,7 +728,7 @@
           "url": "https://www.youtube.com/watch?v=IUiKAD6jNkI",
           "speaker": "Will Larsen",
           "venue": "LeadDev 2023",
-          "description": "Diagnosis, guiding policy, coherent action — applied to eng orgs",
+          "description": "Diagnosis, guiding policy, coherent action \u2014 applied to eng orgs",
           "added": "2026-04-07"
         },
         {
@@ -736,7 +752,7 @@
           "url": "https://qconlondon.com/presentation/mar2026/team-topologies-infrastructure-agency-ai",
           "speaker": "Matthew Skelton (co-author, Team Topologies)",
           "venue": "QCon London 2026",
-          "description": "Argues that AI success depends on organisational maturity, not just model capability. Maps cognitive load directly to AI context windows: just as humans fail when mental capacity is exceeded, AI agents hallucinate or lose coherence when they operate outside defined boundaries. Introduces stewardship (vs. mere ownership) as the production operating model for AI systems — looking after agentic infrastructure for those who follow. JP Morgan Athena platform case study: reduced 60% of dependencies using opt-in adoption ('friendly FOMO') rather than top-down mandates — social dynamics outperformed enforcement. Innovation and Practices Enabling Teams as the mechanism for knowledge diffusion and measurable AI ROI. Core thesis: the primary obstacles to AI value are organisational, not technical — team structure is the hidden constraint.",
+          "description": "Argues that AI success depends on organisational maturity, not just model capability. Maps cognitive load directly to AI context windows: just as humans fail when mental capacity is exceeded, AI agents hallucinate or lose coherence when they operate outside defined boundaries. Introduces stewardship (vs. mere ownership) as the production operating model for AI systems \u2014 looking after agentic infrastructure for those who follow. JP Morgan Athena platform case study: reduced 60% of dependencies using opt-in adoption ('friendly FOMO') rather than top-down mandates \u2014 social dynamics outperformed enforcement. Innovation and Practices Enabling Teams as the mechanism for knowledge diffusion and measurable AI ROI. Core thesis: the primary obstacles to AI value are organisational, not technical \u2014 team structure is the hidden constraint.",
           "added": "2026-06-22"
         },
         {
@@ -744,7 +760,7 @@
           "url": "https://www.infoq.com/news/2026/03/engineering-data-teams/",
           "speaker": "Lada Indra (Head of Data Platform, Pleo)",
           "venue": "QCon London 2026",
-          "description": "AI systems have erased the boundary between software engineering and data engineering: engineers now deploy models, handle streaming predictions, and manage real-time feature pipelines; data engineers now own production-grade systems with engineer-level SLAs and on-call rotation. Practical convergence strategies: (1) data contracts — treat data streams like APIs by defining ownership, schema, and SLAs in code enforced through CI/CD schema registries, preventing silent breaks from corrupting downstream ML features; (2) full-stack observability — extend monitoring beyond uptime/latency to include data health (semantic validity, freshness, distribution consistency); (3) joint incident management — analytics engineers and data scientists join architecture reviews and share on-call responsibilities. Conclusion: the AI era requires one system, one team, shared responsibility — dissolving silos is the only way to deliver AI features reliably at scale.",
+          "description": "AI systems have erased the boundary between software engineering and data engineering: engineers now deploy models, handle streaming predictions, and manage real-time feature pipelines; data engineers now own production-grade systems with engineer-level SLAs and on-call rotation. Practical convergence strategies: (1) data contracts \u2014 treat data streams like APIs by defining ownership, schema, and SLAs in code enforced through CI/CD schema registries, preventing silent breaks from corrupting downstream ML features; (2) full-stack observability \u2014 extend monitoring beyond uptime/latency to include data health (semantic validity, freshness, distribution consistency); (3) joint incident management \u2014 analytics engineers and data scientists join architecture reviews and share on-call responsibilities. Conclusion: the AI era requires one system, one team, shared responsibility \u2014 dissolving silos is the only way to deliver AI features reliably at scale.",
           "added": "2026-06-22"
         }
       ]
@@ -813,7 +829,7 @@
           "url": "https://www.youtube.com/watch?v=Uocj_PXaVlk",
           "speaker": "Alexis Le-Quoc",
           "venue": "SREcon",
-          "description": "Building an observability platform — from startup to $30B+ company",
+          "description": "Building an observability platform \u2014 from startup to $30B+ company",
           "added": "2026-04-07"
         },
         {
@@ -837,7 +853,7 @@
           "url": "https://www.youtube.com/watch?v=1ae3_5NIZ0Y",
           "speaker": "Canva Engineering",
           "venue": "YOW!",
-          "description": "From startup to $40B — scaling a design platform",
+          "description": "From startup to $40B \u2014 scaling a design platform",
           "added": "2026-04-07"
         },
         {
@@ -893,7 +909,7 @@
           "url": "https://www.youtube.com/watch?v=6LyCC7jE79Y",
           "speaker": "Waymo Engineering",
           "venue": "CVPR",
-          "description": "Perception, prediction, planning — autonomous driving stack",
+          "description": "Perception, prediction, planning \u2014 autonomous driving stack",
           "added": "2026-04-07"
         },
         {
@@ -941,7 +957,7 @@
           "url": "https://www.youtube.com/watch?v=9iqn1HhFJ6c",
           "speaker": "John Jumper",
           "venue": "Nobel Lecture 2024",
-          "description": "Protein structure prediction — transforming biology with ML",
+          "description": "Protein structure prediction \u2014 transforming biology with ML",
           "added": "2026-04-07"
         },
         {
@@ -957,7 +973,7 @@
           "url": "https://www.youtube.com/watch?v=SjSHVDfXHQ4",
           "speaker": "Jay Alammar",
           "venue": "YouTube",
-          "description": "Visual walkthrough of transformer architecture — attention, encoding",
+          "description": "Visual walkthrough of transformer architecture \u2014 attention, encoding",
           "added": "2026-04-07"
         },
         {
@@ -993,7 +1009,7 @@
           "added": "2026-04-07"
         },
         {
-          "title": "GTC 2026 Recap: Inference Engines Deep Dive — Disaggregated Serving, PagedAttention, RadixAttention",
+          "title": "GTC 2026 Recap: Inference Engines Deep Dive \u2014 Disaggregated Serving, PagedAttention, RadixAttention",
           "url": "https://www.youtube.com/watch?v=qDOxTI-4pnU",
           "speaker": "Various (vLLM, SGLang, NVIDIA)",
           "venue": "GTC San Jose 2026 / YouTube",
@@ -1005,16 +1021,24 @@
           "url": "https://www.youtube.com/watch?v=gmAfYEPBYr0",
           "speaker": "Abby Bangser",
           "venue": "KubeCon + CloudNativeCon Europe 2026 Keynote",
-          "description": "KubeCon EU 2026 keynote examining how platform engineering must evolve from golden-path provisioning for human developers to governance infrastructure for autonomous AI agents — covering isolation boundaries, per-workflow cost caps, audit trails, and kill-switch mechanisms for agentic workloads.",
+          "description": "KubeCon EU 2026 keynote examining how platform engineering must evolve from golden-path provisioning for human developers to governance infrastructure for autonomous AI agents \u2014 covering isolation boundaries, per-workflow cost caps, audit trails, and kill-switch mechanisms for agentic workloads.",
           "added": "2026-06-29"
         },
         {
-          "title": "The Big Kubernetes Shift — Inside KubeCon 2026",
+          "title": "The Big Kubernetes Shift \u2014 Inside KubeCon 2026",
           "url": "https://www.youtube.com/watch?v=bN-RtJNOVQU",
           "speaker": "Various",
           "venue": "KubeCon EU 2026 Conference Recap / YouTube",
           "description": "Comprehensive KubeCon EU 2026 recap covering the major themes: Kubernetes AI Conformance Program, CNCF Sandbox projects for inference (llm-d, KAI GPU scheduler), OpenTelemetry consolidation, and the shift toward AI-native platform engineering. Good 30-minute orientation for the 2026 cloud-native landscape.",
           "added": "2026-06-29"
+        },
+        {
+          "title": "GitFarm: Git as a Service for Large-Scale Monorepos",
+          "url": "https://www.uber.com/us/en/blog/gitfarm-as-a-service/",
+          "speaker": "Uber Engineering",
+          "venue": "Uber Engineering Blog (July 30, 2026)",
+          "description": "How Uber built GitFarm \u2014 a Git-as-a-Service platform serving their 40 GB Go monorepo via a gRPC API with pre-warmed bare clone pools. Delivers checkouts in under 500ms (vs. 15 minutes for direct clone), cuts client-side resource utilization by 70%, and enables concurrent CI workers without clone conflicts. Key patterns: repo sharding for horizontal scale, read-through caching for freshness, and per-request ephemeral sandbox isolation.",
+          "added": "2026-08-03"
         }
       ]
     }

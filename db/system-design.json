@@ -10,7 +10,7 @@
       "Tags",
       "Resources"
     ],
-    "last_updated": "2026-07-20"
+    "last_updated": "2026-08-03"
   },
   "sections": [
     {
@@ -1135,7 +1135,7 @@
         },
         {
           "topic": "Multi-Agent Tribal Knowledge Capture for Data Pipelines (Meta)",
-          "concepts": "Swarm of 50+ specialized AI agents that systematically read every file in large-scale data pipeline codebases and produce concise context files encoding tribal knowledge; pre-compute engine runs agents that specialize by artifact type (schema docs, lineage traces, transformation logic, SLA annotations, ownership mappings); output context files are indexed and searchable — used for automated code review assistance, new engineer onboarding, and incident root cause acceleration; agents use retrieval augmentation rather than ad-hoc LLM calls to ensure consistent output quality across thousands of pipeline files; system reduces tribal knowledge loss from engineer attrition and shrinks mean-time-to-debug on data pipelines by enabling engineers to quickly understand undocumented dependencies; deployed at Meta across petabyte-scale data infrastructure (April 2026)",
+          "concepts": "Swarm of 50+ specialized AI agents that systematically read every file in large-scale data pipeline codebases and produce concise context files encoding tribal knowledge; pre-compute engine runs agents that specialize by artifact type (schema docs, lineage traces, transformation logic, SLA annotations, ownership mappings); output context files are indexed and searchable \u2014 used for automated code review assistance, new engineer onboarding, and incident root cause acceleration; agents use retrieval augmentation rather than ad-hoc LLM calls to ensure consistent output quality across thousands of pipeline files; system reduces tribal knowledge loss from engineer attrition and shrinks mean-time-to-debug on data pipelines by enabling engineers to quickly understand undocumented dependencies; deployed at Meta across petabyte-scale data infrastructure (April 2026)",
           "tags": [
             "data",
             "ml",
@@ -1151,7 +1151,7 @@
         },
         {
           "topic": "Identity Graph at Scale for Fraud, Inventory & Lineage (Airbnb)",
-          "concepts": "Multi-tenant knowledge graph infrastructure built on JanusGraph + AWS DynamoDB backing multiple internal graph use cases (user identity resolution, inventory relationships, data lineage) under a shared management service; management service handles schema enforcement, index management, schematized Thrift APIs, and per-tenant namespace isolation — tenants operate independently without risking cross-contamination; key technical innovations: (1) custom DynamoDB conditional-write transaction strategy achieves ACID semantics on an eventually-consistent store by piggybacking row-version checks into existing write operations — eliminates need for a separate coordination service; (2) parallel getMultiSlices endpoint for high-fanout traversal queries (e.g., all edges from a high-degree user node) — parallel multi-key DynamoDB BatchGetItem reduces P99 latency by 60-70% for relationship lookups; (3) integrated distributed tracing in the custom JanusGraph fork, closing the observability gap present in upstream open-source; (4) warm start index management — schema changes and new indices applied online without graph downtime. Serves real-time fraud resolution and entity matching across 400M+ Airbnb users at sub-10ms P99 for point lookups; published May 2026",
+          "concepts": "Multi-tenant knowledge graph infrastructure built on JanusGraph + AWS DynamoDB backing multiple internal graph use cases (user identity resolution, inventory relationships, data lineage) under a shared management service; management service handles schema enforcement, index management, schematized Thrift APIs, and per-tenant namespace isolation \u2014 tenants operate independently without risking cross-contamination; key technical innovations: (1) custom DynamoDB conditional-write transaction strategy achieves ACID semantics on an eventually-consistent store by piggybacking row-version checks into existing write operations \u2014 eliminates need for a separate coordination service; (2) parallel getMultiSlices endpoint for high-fanout traversal queries (e.g., all edges from a high-degree user node) \u2014 parallel multi-key DynamoDB BatchGetItem reduces P99 latency by 60-70% for relationship lookups; (3) integrated distributed tracing in the custom JanusGraph fork, closing the observability gap present in upstream open-source; (4) warm start index management \u2014 schema changes and new indices applied online without graph downtime. Serves real-time fraud resolution and entity matching across 400M+ Airbnb users at sub-10ms P99 for point lookups; published May 2026",
           "tags": [
             "data",
             "infra",
@@ -1166,8 +1166,8 @@
           "added": "2026-05-25"
         },
         {
-          "topic": "Netflix Unified Data Architecture (UDA) — Model Once, Represent Everywhere",
-          "concepts": "Multi-layer knowledge graph solving the 'Spider-Man problem' of inconsistent data models across Netflix content engineering (multiple teams each defining 'Show', 'Episode', 'Season' with divergent schemas); three-layer architecture: (1) Domain Models define canonical business concepts (Show, Episode, Product, Contract) in W3C RDF — single authoritative definition regardless of physical storage; (2) Data Container Representations locate physical stores where concept data lives (Iceberg tables, Kafka topics, DynamoDB tables, Hollow caches); (3) Mappings link domain concepts to physical representations, enabling automatic cross-system data lineage; Upper metamodel (SHACL-based) provides consistent schema validation across all representations; enables 'model once' — define a concept in the knowledge graph and it automatically propagates consistent schema contracts to all downstream systems; eliminates cross-team data chaos: engineers query the KG for the authoritative definition and container for any business concept instead of asking Slack; automated impact analysis: what downstream systems break if the 'Season' schema changes?; integrates with Netflix's Data Mesh and Hollow read-only cache for the graph; UDA became the foundation for data contract enforcement across Netflix content engineering in 2026",
+          "topic": "Netflix Unified Data Architecture (UDA) \u2014 Model Once, Represent Everywhere",
+          "concepts": "Multi-layer knowledge graph solving the 'Spider-Man problem' of inconsistent data models across Netflix content engineering (multiple teams each defining 'Show', 'Episode', 'Season' with divergent schemas); three-layer architecture: (1) Domain Models define canonical business concepts (Show, Episode, Product, Contract) in W3C RDF \u2014 single authoritative definition regardless of physical storage; (2) Data Container Representations locate physical stores where concept data lives (Iceberg tables, Kafka topics, DynamoDB tables, Hollow caches); (3) Mappings link domain concepts to physical representations, enabling automatic cross-system data lineage; Upper metamodel (SHACL-based) provides consistent schema validation across all representations; enables 'model once' \u2014 define a concept in the knowledge graph and it automatically propagates consistent schema contracts to all downstream systems; eliminates cross-team data chaos: engineers query the KG for the authoritative definition and container for any business concept instead of asking Slack; automated impact analysis: what downstream systems break if the 'Season' schema changes?; integrates with Netflix's Data Mesh and Hollow read-only cache for the graph; UDA became the foundation for data contract enforcement across Netflix content engineering in 2026",
           "tags": [
             "data",
             "infra",
@@ -1183,7 +1183,7 @@
         },
         {
           "topic": "ML Model Traffic Routing at Scale (Netflix Switchboard)",
-          "concepts": "Netflix's model serving platform routes 1M requests/sec to hundreds of model types and versions. Architecture: (1) Lightbulb — request context resolver that maps user+use-case context to a routingKey config; (2) Switchboard — centralized routing service that maps routingKey to the actual cluster VIP running that model version; (3) Envoy proxy — performs the physical request forward to the target VIP. This indirection enables researchers to update routing tables (e.g., A/B test weights, canary rollouts) without touching the API layer. Key design principles: domain-independent API abstraction decouples client services from model topology; routing config as data (not code) enables zero-downtime model swaps; multi-shard clusters allow horizontal scale of popular model versions independently.",
+          "concepts": "Netflix's model serving platform routes 1M requests/sec to hundreds of model types and versions. Architecture: (1) Lightbulb \u2014 request context resolver that maps user+use-case context to a routingKey config; (2) Switchboard \u2014 centralized routing service that maps routingKey to the actual cluster VIP running that model version; (3) Envoy proxy \u2014 performs the physical request forward to the target VIP. This indirection enables researchers to update routing tables (e.g., A/B test weights, canary rollouts) without touching the API layer. Key design principles: domain-independent API abstraction decouples client services from model topology; routing config as data (not code) enables zero-downtime model swaps; multi-shard clusters allow horizontal scale of popular model versions independently.",
           "tags": [
             "ml",
             "infra",
@@ -1191,15 +1191,15 @@
           ],
           "resources": [
             {
-              "title": "State of Routing in Model Serving — Netflix TechBlog",
+              "title": "State of Routing in Model Serving \u2014 Netflix TechBlog",
               "url": "https://netflixtechblog.com/state-of-routing-in-model-serving-16e22fe18741"
             }
           ],
           "added": "2026-06-08"
         },
         {
-          "topic": "Multi-Product Data Architecture — Scaling the Offline Warehouse Across Product Boundaries (Airbnb)",
-          "concepts": "After launching new product pillars (Experiences, Rooms) in May 2025, Airbnb faced a data architecture challenge: each product pillar had its own production data models, schemas, and team ownership — but the offline data warehouse needed to provide a consistent, unified view across all pillars for analytics, ML features, and business reporting. Solution: treat the offline data warehouse as a translation layer that transforms raw production data into a standardized, reliable source of truth, rather than letting each pillar own a parallel analytics silo. Three architectural decisions: (1) Data contracts across product boundaries — each pillar codifies formal contracts (schema, owner, SLA, quality guarantees) for the data it publishes, enforced via CI/CD schema registries; cross-team data dependencies are treated like internal APIs with versioning and deprecation timelines, preventing silent schema breaks from corrupting downstream ML features; (2) Canonical domain models — a shared domain modeling layer above raw production tables provides pillar-agnostic views (e.g., a unified 'Booking' model valid across Homes, Experiences, and Rooms despite different underlying schemas), eliminating inconsistencies that arise when three teams each independently define 'what a booking is'; (3) Consistent quality gates, flexible contribution — the warehouse infrastructure enforces freshness checks, null-rate monitors, and distribution tests as non-optional quality gates, but is flexible about what data each pillar contributes — enabling new product pillars to onboard without requiring central infrastructure team involvement in every new dataset. Key lesson: in a multi-product company, the data model IS the shared contract between products; getting it wrong creates compounding integration debt. Published June 2026.",
+          "topic": "Multi-Product Data Architecture \u2014 Scaling the Offline Warehouse Across Product Boundaries (Airbnb)",
+          "concepts": "After launching new product pillars (Experiences, Rooms) in May 2025, Airbnb faced a data architecture challenge: each product pillar had its own production data models, schemas, and team ownership \u2014 but the offline data warehouse needed to provide a consistent, unified view across all pillars for analytics, ML features, and business reporting. Solution: treat the offline data warehouse as a translation layer that transforms raw production data into a standardized, reliable source of truth, rather than letting each pillar own a parallel analytics silo. Three architectural decisions: (1) Data contracts across product boundaries \u2014 each pillar codifies formal contracts (schema, owner, SLA, quality guarantees) for the data it publishes, enforced via CI/CD schema registries; cross-team data dependencies are treated like internal APIs with versioning and deprecation timelines, preventing silent schema breaks from corrupting downstream ML features; (2) Canonical domain models \u2014 a shared domain modeling layer above raw production tables provides pillar-agnostic views (e.g., a unified 'Booking' model valid across Homes, Experiences, and Rooms despite different underlying schemas), eliminating inconsistencies that arise when three teams each independently define 'what a booking is'; (3) Consistent quality gates, flexible contribution \u2014 the warehouse infrastructure enforces freshness checks, null-rate monitors, and distribution tests as non-optional quality gates, but is flexible about what data each pillar contributes \u2014 enabling new product pillars to onboard without requiring central infrastructure team involvement in every new dataset. Key lesson: in a multi-product company, the data model IS the shared contract between products; getting it wrong creates compounding integration debt. Published June 2026.",
           "tags": [
             "data",
             "infra",
@@ -1215,7 +1215,7 @@
         },
         {
           "topic": "LLM Serving Gateway / Proxy Design",
-          "concepts": "Unified OpenAI-compatible API gateway routing to heterogeneous backends (self-hosted vLLM/SGLang + commercial APIs). Key design decisions: health-check strategy (per-request vs background polling — background avoids per-call latency), failover thresholds (allowed_fails + cooldown_time determine blast radius of primary outage), cost-cap enforcement at the router layer (hard budget limits per model/team/window), semantic caching for repeat prompts (GPTCache/Redis with cosine-similarity threshold), load balancing strategies (round-robin, latency-based, least-busy). Critical operational concern: misconfigured cooldown_time on primary failover can route all traffic to expensive commercial APIs for hours, causing $10K+/hr surprise spend; mitigate with background health polling, short cooldown (30s), and an always-on cost alarm at 10% of monthly budget.",
+          "concepts": "Unified OpenAI-compatible API gateway routing to heterogeneous backends (self-hosted vLLM/SGLang + commercial APIs). Key design decisions: health-check strategy (per-request vs background polling \u2014 background avoids per-call latency), failover thresholds (allowed_fails + cooldown_time determine blast radius of primary outage), cost-cap enforcement at the router layer (hard budget limits per model/team/window), semantic caching for repeat prompts (GPTCache/Redis with cosine-similarity threshold), load balancing strategies (round-robin, latency-based, least-busy). Critical operational concern: misconfigured cooldown_time on primary failover can route all traffic to expensive commercial APIs for hours, causing $10K+/hr surprise spend; mitigate with background health polling, short cooldown (30s), and an always-on cost alarm at 10% of monthly budget.",
           "tags": [
             "ml",
             "infra",
@@ -1230,8 +1230,8 @@
           "added": "2026-06-29"
         },
         {
-          "topic": "Meta's AI Storage Blueprint — Solving the GPU-Storage Bandwidth Gap at 1GW+ Data Center Scale",
-          "concepts": "Meta Engineering blog (July 1, 2026) diagnoses storage as the primary bottleneck for GPU utilization in large-scale AI workloads, superseding compute bottlenecks at datacenter scale. Key insight: GPU compute performance has roughly tripled every two years (following training FLOPs scaling laws) while storage bandwidth has grown at ~30–40% per year — creating a widening gap where GPUs frequently stall waiting for checkpoint reads, training data loads, and model weight loads. Meta's blueprint addresses three sub-problems: (1) Checkpoint I/O — saving/loading 100B+ parameter model checkpoints; Meta uses a staged checkpoint system (GPU VRAM → node NVMe RAID → distributed object store) to overlap compute and I/O, cutting checkpoint overhead from 8% of training time to <1% using async flush pipelines; (2) Training data pipeline — high-throughput streaming of multimodal training batches (text, image, video) to GPU memory; uses a pull-based prefetch architecture where a CPU 'data engine' preloads the next N batches to DRAM/NVMe using Linux io_uring for zero-copy; (3) Interconnect architecture — at 1GW+ data center scale, NFS/NAS becomes a bottleneck; Meta's blueprint uses a tiered disaggregated storage fabric: NVMe-over-Fabrics (NVMe-oF) for the hot layer (checkpoint write bursts) + a software-defined distributed file system (custom POSIX-compatible FS similar to DAOS) for the warm layer + cloud object storage for cold/archival. For staff+ engineers designing ML infrastructure: the 'storage bandwidth gap' problem is hitting companies at ~100B parameter model scale; below that, standard NFS/EFS/GCS is adequate; above that, the storage architecture requires the same attention as GPU topology and interconnect design.",
+          "topic": "Meta's AI Storage Blueprint \u2014 Solving the GPU-Storage Bandwidth Gap at 1GW+ Data Center Scale",
+          "concepts": "Meta Engineering blog (July 1, 2026) diagnoses storage as the primary bottleneck for GPU utilization in large-scale AI workloads, superseding compute bottlenecks at datacenter scale. Key insight: GPU compute performance has roughly tripled every two years (following training FLOPs scaling laws) while storage bandwidth has grown at ~30\u201340% per year \u2014 creating a widening gap where GPUs frequently stall waiting for checkpoint reads, training data loads, and model weight loads. Meta's blueprint addresses three sub-problems: (1) Checkpoint I/O \u2014 saving/loading 100B+ parameter model checkpoints; Meta uses a staged checkpoint system (GPU VRAM \u2192 node NVMe RAID \u2192 distributed object store) to overlap compute and I/O, cutting checkpoint overhead from 8% of training time to <1% using async flush pipelines; (2) Training data pipeline \u2014 high-throughput streaming of multimodal training batches (text, image, video) to GPU memory; uses a pull-based prefetch architecture where a CPU 'data engine' preloads the next N batches to DRAM/NVMe using Linux io_uring for zero-copy; (3) Interconnect architecture \u2014 at 1GW+ data center scale, NFS/NAS becomes a bottleneck; Meta's blueprint uses a tiered disaggregated storage fabric: NVMe-over-Fabrics (NVMe-oF) for the hot layer (checkpoint write bursts) + a software-defined distributed file system (custom POSIX-compatible FS similar to DAOS) for the warm layer + cloud object storage for cold/archival. For staff+ engineers designing ML infrastructure: the 'storage bandwidth gap' problem is hitting companies at ~100B parameter model scale; below that, standard NFS/EFS/GCS is adequate; above that, the storage architecture requires the same attention as GPU topology and interconnect design.",
           "tags": [
             "infra",
             "ml",
@@ -1248,8 +1248,11 @@
         },
         {
           "topic": "Zone-Failure-Resilient Search Infrastructure (Uber OpenSearch)",
-          "concepts": "Uber engineering blog (June 25, 2026) by Smit Patel documents how Uber achieved Zone Failure Resilience (ZFR) for OpenSearch — the ability to withstand complete loss of an AWS AZ without impacting querying or data ingestion. Two-layer approach: (1) Physical placement isolation — Uber's in-house 'isolation group' infrastructure built on Odin (Uber's container orchestration platform) ensures OpenSearch nodes are spread across separate failure domains (racks, AZs) with hard placement constraints that prevent multiple primary/replica pairs from co-locating; (2) Logical shard-awareness — OpenSearch's native shard-allocation awareness settings ensure primary and replica shards for the same index are always placed in different isolation groups, decoupling the logical replication topology from physical topology details. Key design insight: by combining physical isolation-group placement constraints with OpenSearch's logical shard-allocation awareness, the system remains stable even during a 'zone + 1 failure' (loss of an entire AZ plus one additional node). This approach is generalizable: isolation groups abstract away physical datacenter topology details so OpenSearch only needs to express logical constraints (primary ≠ replica AZ) and the placement system enforces the physical constraints. Uber's implementation decouples OpenSearch resilience from team knowledge of physical data center topology — any new cluster inherits ZFR by default through the Odin integration.",
-          "tags": ["infra", "scale"],
+          "concepts": "Uber engineering blog (June 25, 2026) by Smit Patel documents how Uber achieved Zone Failure Resilience (ZFR) for OpenSearch \u2014 the ability to withstand complete loss of an AWS AZ without impacting querying or data ingestion. Two-layer approach: (1) Physical placement isolation \u2014 Uber's in-house 'isolation group' infrastructure built on Odin (Uber's container orchestration platform) ensures OpenSearch nodes are spread across separate failure domains (racks, AZs) with hard placement constraints that prevent multiple primary/replica pairs from co-locating; (2) Logical shard-awareness \u2014 OpenSearch's native shard-allocation awareness settings ensure primary and replica shards for the same index are always placed in different isolation groups, decoupling the logical replication topology from physical topology details. Key design insight: by combining physical isolation-group placement constraints with OpenSearch's logical shard-allocation awareness, the system remains stable even during a 'zone + 1 failure' (loss of an entire AZ plus one additional node). This approach is generalizable: isolation groups abstract away physical datacenter topology details so OpenSearch only needs to express logical constraints (primary \u2260 replica AZ) and the placement system enforces the physical constraints. Uber's implementation decouples OpenSearch resilience from team knowledge of physical data center topology \u2014 any new cluster inherits ZFR by default through the Odin integration.",
+          "tags": [
+            "infra",
+            "scale"
+          ],
           "resources": [
             {
               "title": "Uber Engineering: Zone-Failure-Resilient OpenSearch (June 2026)",
@@ -1259,9 +1262,13 @@
           "added": "2026-07-13"
         },
         {
-          "topic": "Agentic Grocery Shopping — Uber Cart Assistant State-Graph Architecture",
+          "topic": "Agentic Grocery Shopping \u2014 Uber Cart Assistant State-Graph Architecture",
           "concepts": "8-stage LLM state graph for ambiguous shopping intent: (1) query understanding LLM, (2) candidate retrieval via deterministic API, (3) semantic relevance judge LLM, (4) dietary/preference filter, (5) quantity disambiguation LLM, (6) price/promo guardrails deterministic, (7) cart validation schema check deterministic, (8) confirmation generation LLM. Key design principle: LLMs own ambiguity resolution and user intent; deterministic systems own retrieval, pricing, schema validation. Timeout guardrails enforce per-stage latency budget. Result: 34% reduction in cart abandonment vs rule-based predecessor. Generalizable pattern for any multi-step agentic workflow where reliability and cost matter.",
-          "tags": ["biz", "ml", "scale"],
+          "tags": [
+            "biz",
+            "ml",
+            "scale"
+          ],
           "resources": [
             {
               "title": "Uber Cart Assistant: Building an Agentic Grocery Shopping Experience",
@@ -1269,6 +1276,21 @@
             }
           ],
           "added": "2026-07-20"
+        },
+        {
+          "topic": "Git-as-a-Service (GitFarm) \u2014 Uber's Sub-500ms Monorepo Checkouts via gRPC API and Pre-Warmed Bare Clones",
+          "concepts": "GitFarm abstracts Git repository access behind a gRPC API, eliminating local clones for CI/CD systems and automation. A server fleet maintains pre-warmed bare clones and ephemeral sandbox pools; clients acquire a checkout sandbox in under 500ms vs. 15 minutes for a direct 40 GB monorepo clone. Key design: repo sharding across servers for horizontal scale, read-through caching with upstream sync for freshness, per-request sandbox isolation enabling concurrent workers without clone conflicts. Reduces client-side resource utilization by 70%+ and CI initialization latency from 15 min to <1 min.",
+          "tags": [
+            "infra",
+            "scale"
+          ],
+          "resources": [
+            {
+              "title": "GitFarm: Git as a Service for Large-Scale Monorepos (Uber Engineering, July 30 2026)",
+              "url": "https://www.uber.com/us/en/blog/gitfarm-as-a-service/"
+            }
+          ],
+          "added": "2026-08-03"
         }
       ]
     }
