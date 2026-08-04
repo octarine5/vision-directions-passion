@@ -2,9 +2,19 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-08-03"
+    "last_updated": "2026-08-04"
   },
   "entries": [
+    {
+      "timestamp": "2026-08-04T07:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: CockroachDB Range Lease Transfer Storm — Rolling Upgrade Retry Logic Gap Causes 40% Write Error Rate for 18 Minutes",
+      "summary": "Added a Hard distributed-systems hotfix drill: a CockroachDB 23.1→23.2 rolling upgrade on Azure AKS triggers 1,204 Raft lease transfers in 90 seconds; a Go orders service using bare Begin/Exec/Commit without SAVEPOINT cockroach_restart retry logic receives SQLSTATE 40001 on every in-flight transaction and starts brand-new transactions each retry — causing 28,400 failed order writes, 41% error rate, and $340K GMV impact over 18 minutes. Fix: pause the Kubernetes Operator upgrade, drain cockroach-8's excess leases, then implement the CockroachDB SAVEPOINT retry idiom.",
+      "tasks": ["drill"],
+      "items_added": [
+        "CockroachDB Range Lease Transfer Storm — Rolling Upgrade Retry Logic Gap Causes 40% Write Error Rate for 18 Minutes (production-drills)"
+      ]
+    },
     {
       "timestamp": "2026-08-03T07:00:00Z",
       "type": "knowledge-base",
