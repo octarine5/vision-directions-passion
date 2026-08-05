@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-08-04"
+    "last_updated": "2026-08-05"
   },
   "entries": [
     {
@@ -1114,6 +1114,16 @@
       ],
       "items_added": [
         "Nomad Job Priority Inversion \u2014 ML Training Batch priority=100 Preempts All 24 Payment Service Allocations, $1.54M Revenue Halt in 22 Minutes"
+      ]
+    },
+    {
+      "timestamp": "2026-08-05T07:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: Temporal Workflow Task Queue Explosion -- Visibility Store Scan Starves Scheduler, Cascades 312 ML Training Pipeline Failures",
+      "summary": "Added a Hard distributed-systems hotfix drill: a data engineering intern's unbounded Temporal workflow list query triggers a full-table scan on the 4.2M-row PostgreSQL executions table, consuming 87 of 100 connection pool slots for 5 minutes and starving the Temporal matching scheduler. 312 ML training workflows breach their ScheduleToStart timeout, cascade-fail, and leave 312 orphaned SageMaker training instances burning $4,200/hr. Fix: emergency SageMaker job stop, matching service rolling restart to clear phantom task queue, PostgreSQL visibility index creation (CREATE INDEX CONCURRENTLY), and workflow reset to recover S3 artifacts without re-launching training.",
+      "tasks": ["drill"],
+      "items_added": [
+        "Temporal Workflow Task Queue Explosion -- Visibility Store Scan Starves Scheduler Connection Pool, Cascades 312 ML Training Pipeline Failures (production-drills)"
       ]
     }
   ]
