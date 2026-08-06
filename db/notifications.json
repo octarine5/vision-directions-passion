@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-08-05"
+    "last_updated": "2026-08-06"
   },
   "entries": [
     {
@@ -1114,6 +1114,16 @@
       ],
       "items_added": [
         "Nomad Job Priority Inversion \u2014 ML Training Batch priority=100 Preempts All 24 Payment Service Allocations, $1.54M Revenue Halt in 22 Minutes"
+      ]
+    },
+    {
+      "timestamp": "2026-08-06T07:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: GKE Node Upgrade Stall — DaemonSet PodDisruptionBudget maxUnavailable:0 Blocks Node Drain, 47 GPU Nodes SchedulingDisabled, $39K Wasted",
+      "summary": "Added a Hard infrastructure hotfix drill: a DaemonSet PodDisruptionBudget (NVIDIA DCGM Exporter, ml-observability Helm chart) was created with maxUnavailable:0 instead of maxUnavailable:1, permanently blocking node drain on all 47 GPU nodes during a GKE 1.30.5→1.31.1 auto-upgrade maintenance window. 23 PyTorch DDP training jobs cannot reschedule for 55 minutes while GPU nodes sit in SchedulingDisabled, burning $39.2K in idle A2 spot compute. Fix: patch PDB to maxUnavailable:1, validate upgrade resumes, enforce via OPA policy and pre-maintenance-window drain dry-run gate in Terraform.",
+      "tasks": ["drill"],
+      "items_added": [
+        "GKE Node Upgrade Stall — DaemonSet PodDisruptionBudget maxUnavailable:0 Blocks Node Drain, 47 GPU Nodes SchedulingDisabled, $39K ML Compute Wasted for 55 Minutes (production-drills)"
       ]
     },
     {
