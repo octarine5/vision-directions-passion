@@ -374,6 +374,20 @@
       "stage": "Series A ($30M, $41M total, July 28, 2026; Battery Ventures + YL Ventures + Akamai strategic)",
       "signal": "watch",
       "notes": "Founded by ex-Meta Networks founders. Builds a machine access platform that issues AI agents just-in-time scoped credentials — short-lived, minimum-permission tokens for each individual action, revoked immediately after. Solves the standing credential problem: AI agents with persistent API keys, OAuth tokens, or service accounts expose far broader attack surfaces than the action they're taking requires. Akamai's strategic investment signals NHI security is now a network-perimeter-level concern (not just IAM). Context: both Hush ($30M) and Act Security ($60M) raised on the same day (July 28, 2026), and Crunchbase reports $855M raised across 150+ AI security seed rounds in 2026. NHI governance is the fastest-growing sub-category inside enterprise security as AI coding agents (Cursor, GitHub Copilot) run with write access to code and secrets on developer machines. Watch: does Hush integrate with Glow (endpoint AI security) to create a full NHI + endpoint protection stack?"
+    },
+    {
+      "name": "Convex",
+      "domain": "AI-Native Application Backend (Reactive Database + Serverless Functions + Real-Time Sync)",
+      "stage": "Series B ($57M, Insight Partners led + a16z + Spark Capital, August 4, 2026; $110.5M total)",
+      "signal": "watch",
+      "notes": "Founded 2021 by ex-Dropbox infrastructure engineers (Jamie Turner + James Cowling). Reactive TypeScript-native backend that unifies database, server-side functions, real-time subscriptions, search, and file storage in a single ACID-consistent hosted API. ~2M apps deployed; OpenAI and Zapier as anchor customers. Key insight: AI coding agents (Cursor, Devin, Copilot Workspace) naturally produce reactive state-machine code — Convex's programming model aligns with what LLMs generate, eliminating the ORM + migration + REST API complexity that creates agent code-gen errors. August 4, 2026 Series B (led by Insight Partners) capitalized for agentic software expansion. For staff+ engineers: Convex is the reference implementation for 'what should the backend look like when AI writes the code.' Monitor for adoption within AI-native engineering org infra."
+    },
+    {
+      "name": "Onyx Security",
+      "domain": "AI Agent Runtime Control Plane (Inline Policy Enforcement Between Agents and Systems)",
+      "stage": "Series B ($113M, $640M valuation, Bessemer + Cyberstarts + TCV + Conviction, July 29, 2026; $153M total)",
+      "signal": "hot",
+      "notes": "Builds a 'secure AI control plane' that intercepts every AI agent action inline — between agent decision and system mutation — enforcing policy in real time (analogous to a WAF for agent actions). Distinct from NHI credential governance (Hush Security) and endpoint AI security (Glow). 4× revenue growth in 4 months since stealth launch. Anthropic announced direct integration in June 2026 — the dominant enterprise LLM platform endorsing Onyx as a required safety layer. Fortune 500 customers across banking, insurance, and energy. Israeli founding team; Bessemer-led round signals this is a generational enterprise security platform. Category thesis: no AI agent will be permitted in regulated industries without a runtime control plane. Watch: will Glow (endpoint) + Hush (NHI) + Onyx (runtime) consolidate into a unified agentic AI security stack?"
     }
   ],
   "careerMilestones": [

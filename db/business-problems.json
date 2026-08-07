@@ -11,7 +11,7 @@
       "TAM",
       "Tags"
     ],
-    "last_updated": "2026-07-31"
+    "last_updated": "2026-08-07"
   },
   "sections": [
     {
@@ -941,6 +941,38 @@
             "ml"
           ],
           "added": "2026-07-31"
+        },
+        {
+          "problem": "Agentic AI-native backend platform — real-time state synchronization and serverless functions for agent-written software",
+          "enterprise": "Convex ($57M Series B, Insight Partners led + a16z + Spark Capital, August 4, 2026; ~2M apps; OpenAI and Zapier customers)",
+          "market_fit": "Convex raised a $57M Series B on August 4, 2026 (led by Insight Partners, with a16z, Spark Capital, and Justin Kan) to build the backend infrastructure layer for AI-generated software. Convex is a TypeScript-native reactive database that combines a database, server-side functions, real-time sync, full-text search, and file storage into a single hosted API — purpose-built for the programming model that AI coding agents (Cursor, GitHub Copilot Workspace, Devin) naturally produce: reactive state machines with real-time push, not polling REST. Key signal: OpenAI itself is a Convex customer — the company powering the AI development tools is using Convex as its preferred backend, creating a demand-side signal that 'what AI agents write' is structurally different from what human developers write. The broader thesis: AI coding agents generate backends optimized for reactive consistency guarantees (they can call functions in a single transaction with no ORMs, migrations, or API versioning complexity) — traditional databases (PostgreSQL with REST APIs, DynamoDB with eventual consistency) require too many layers of state management code for agents to generate reliably. Convex's ACID-compliant reactive model eliminates that impedance mismatch. For staff+ engineers managing AI-generated codebases: the backend chosen for agent-written features will determine the operational overhead of maintaining AI-generated code at production scale.",
+          "tam": "$12B",
+          "tags": [
+            "ml",
+            "infra"
+          ],
+          "added": "2026-08-07"
+        },
+        {
+          "problem": "AI agent runtime control plane — inline policy enforcement between autonomous agents and the systems they touch",
+          "enterprise": "Onyx Security ($113M Series B at $640M valuation, Bessemer Venture Partners led + Cyberstarts + TCV + Conviction + FirstMark, July 29, 2026; 4× revenue growth since stealth launch; Anthropic integration announced)",
+          "market_fit": "Onyx Security raised a $113M Series B on July 29, 2026 at a $640M valuation — 4× revenue growth in 4 months since stealth launch — for its 'secure AI control plane': a runtime governance layer that sits inline between enterprise AI agents and every system they touch (databases, APIs, file systems, communication tools), inspecting and enforcing policy on every agent action before execution. This is architecturally distinct from the three adjacent AI security categories already emerging: (1) NHI credential governance (Hush Security, Act Security) — which scopes *what credentials* agents hold; (2) AI endpoint security (Glow) — which monitors *what agents do on devices*; (3) AI model guardrails (Lakera, Protect AI) — which filter *model inputs and outputs*. Onyx sits at the action-execution layer — between the agent's decision and the system's mutation — enforcing real-time policy like a WAF does for HTTP traffic. Key signal: Anthropic announced direct integration with Onyx in June 2026, meaning the dominant enterprise LLM platform is endorsing a control-plane layer as a required component for safe enterprise agent deployment. $153M total funding since founding 2 years ago; Fortune 500 customers across banking, insurance, and energy. For ML engineers: Onyx represents the emerging 'agent WAF' category — the enterprise security primitive that will be required before agentic AI systems are permitted to touch production data in regulated industries.",
+          "tam": "$7B",
+          "tags": [
+            "ml",
+            "infra"
+          ],
+          "added": "2026-08-07"
+        },
+        {
+          "problem": "Human-robot natural language interface AI — making robot control as intuitive as adjusting device settings",
+          "enterprise": "Enigma ($71M Seed, Index Ventures + Ribbit Capital + Conviction Partners led; OpenAI/Anthropic/xAI/Cognition angel investors; July 27, 2026; founded by Jonathan Jacobi + Gal Niv)",
+          "market_fit": "Israeli startup Enigma emerged from stealth on July 27, 2026 with a $71M seed round led by Index Ventures and Ribbit Capital — the largest AI robotics seed round of 2026 — to build the intelligence layer for human-robot interaction. Enigma's thesis is distinct from hardware robotics companies (Figure AI, NEURA, Agility): the robot hardware already works well enough; the bottleneck to mass adoption is that controlling a robot requires deep technical expertise. Enigma builds AI models that make controlling a robot 'as easy as adjusting the volume' — natural language commands, intuitive physical interaction, and adaptive interpretation of ambiguous human instructions. Public platform: users can interact with AI-powered robots remotely in real time, test how AI models interpret human instructions, and provide feedback that improves the models. The seed investors include angel investors from OpenAI, Anthropic, xAI, and Cognition — the full frontier lab ecosystem is backing the bet that the robot interface AI layer is separate from and complementary to the robot hardware layer. For ML engineers building personalized AI: Enigma's approach — training interface AI on human-robot interaction data, not teleoperated robot trajectories — parallels how LLM instruction-following was unlocked by RLHF: the key variable is human feedback on ambiguous instruction interpretation, not more robot demonstrations.",
+          "tam": "$15B",
+          "tags": [
+            "ml"
+          ],
+          "added": "2026-08-07"
         }
       ]
     }
