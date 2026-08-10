@@ -10,7 +10,7 @@
       "Tags",
       "Resources"
     ],
-    "last_updated": "2026-08-03"
+    "last_updated": "2026-08-10"
   },
   "sections": [
     {
@@ -1107,6 +1107,38 @@
             }
           ],
           "added": "2026-08-03"
+        },
+        {
+          "topic": "vLLM Decode Context Parallelism (DCP) — Cross-GPU KV Cache Sharding for 3× Long-Context Throughput",
+          "concepts": "Decode Context Parallelism (DCP), released in vLLM v0.27.x (Aug 7, 2026), shards the KV cache across GPUs along the sequence dimension during the decode phase, rather than replicating it on each GPU as in standard tensor parallelism. Key characteristics: (1) DCP partitions KV cache slices across N decode GPUs, then uses an AllReduce to combine attention output — eliminating the N× KV memory amplification of naive TP decode, enabling 8× more requests to fit in GPU HBM at 128K context. (2) At 128K context length on H100 8-GPU nodes, DCP delivers 3× higher decode throughput than standard tensor parallelism by amortizing attention compute over the sequence shard rather than the full sequence on each GPU. (3) DCP is composable with prefill-decode disaggregation: prefill pods use standard TP; decode pods run DCP; KV cache is transferred cross-node via NVLink or RDMA. (4) Best-fit workloads: long-context agentic workflows (>32K tokens), multi-turn RAG with large retrieved context, code generation with large repository context. (5) Latency trade-off: DCP adds one AllReduce per decode step (~0.5ms on H100 NVLink, ~1.2ms on InfiniBand 400Gb) — evaluate token-budget impact at your TTFT/ITL SLO. Staff+ note: DCP changes the optimal GPU topology for your decode tier; H100 SXM (NVLink) benefits more than H100 PCIe due to the AllReduce cost.",
+          "tags": [
+            "ml",
+            "infra",
+            "scale"
+          ],
+          "resources": [
+            {
+              "title": "vLLM Blog: Efficient Decode Context Parallelism with vLLM for Long Context Workloads (Aug 7, 2026)",
+              "url": "https://vllm.ai/blog/2026-08-07-decode-context-parallelism"
+            }
+          ],
+          "added": "2026-08-10"
+        },
+        {
+          "topic": "vLLM GB200 NVL72 Disaggregated Serving — 25K Total TPS per GPU on Qwen3.5-397B with NVFP4 Blackwell Kernels",
+          "concepts": "The vLLM team published benchmark results (Aug 6, 2026) showing 25,000 total tokens per second per GPU serving Qwen3.5-397B-A17B-NVFP4 on a single NVIDIA GB200 NVL72 rack (72 GPUs) using disaggregated prefill-decode (36 prefill + 36 decode pods). Key technical enablers: (1) Blackwell GDN (Global Device Network) kernels for NVFP4 matrix-multiply — approximately 2× raw throughput vs FP8 on the same silicon. (2) Hardware Memory Aggregation (HMA) for KV cache transfer across NVLink fabric — eliminates PCIe bandwidth bottleneck for prefill→decode KV handoff, reducing P→D transfer latency from ~4ms (PCIe) to ~0.6ms (NVLink HMA). (3) Async scheduling fixes in vLLM v0.27.x remove Python GIL contention between the scheduler and engine loop during disaggregated prefill fanout. (4) SRT-Slurm recipes enable multi-rack disaggregated deployments with SLURM-partitioned job scheduling. At-scale math: 25K TPS/GPU × 72 GPUs = 1.8M tokens/sec per NVL72 rack; at $0.08/MTok (typical inference API pricing), one rack sustains $8,640/hr of revenue-generating throughput. Staff+ design note: these numbers represent optimal single-rack performance; cross-rack latency for KV transfer in multi-rack disaggregated setups adds 2–4ms per step and must be factored into TTFT SLOs.",
+          "tags": [
+            "ml",
+            "infra",
+            "scale"
+          ],
+          "resources": [
+            {
+              "title": "vLLM Blog: vLLM Reaches 25K Total TPS/GPU on Qwen3.5 (Aug 6, 2026)",
+              "url": "https://vllm.ai/blog/2026-08-06-qwen35-25k-tps"
+            }
+          ],
+          "added": "2026-08-10"
         }
       ]
     }

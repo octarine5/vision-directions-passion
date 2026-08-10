@@ -10,7 +10,7 @@
       "Tags",
       "Resources"
     ],
-    "last_updated": "2026-08-03"
+    "last_updated": "2026-08-10"
   },
   "sections": [
     {
@@ -1291,6 +1291,22 @@
             }
           ],
           "added": "2026-08-03"
+        },
+        {
+          "topic": "Agent Gateway Architecture — DoorDash's Centralized MCP Control Plane for 200+ Tool Servers and 30+ AI Agents",
+          "concepts": "DoorDash engineering blog (July 30, 2026): rather than letting individual AI agents call MCP servers directly, DoorDash built an Agent Gateway — a centralized proxy and control plane positioned between all internal agents and their downstream tool servers. Architecture layers: (1) Authentication — every agent RPC carries a signed identity token verified against the internal service mesh (SPIFFE/SVID); the gateway rejects unauthenticated callers before tool lookup. (2) Authorization — an OPA-based policy engine enforces per-agent, per-team, per-user ACLs on which MCP tools can be called and with which parameter shapes. (3) Tool surface curation — agents receive a scoped subset of the full MCP server catalog, reducing context window noise and improving model behavior; tool catalogs are versioned and A/B-testable. (4) Credential injection — the gateway handles short-lived credential provisioning for downstream API calls (database queries, S3 reads, internal service tokens) so agent code never holds long-lived secrets. (5) Audit trail — every tool call emits a structured event to the internal event pipeline, enabling real-time compliance reporting, anomaly detection, and cost attribution per agent/team. Production scale: 200+ registered MCP servers, 30+ agents, millions of tool calls/week, used by thousands of employees. Key design insight: a centralized gateway makes agent tool access governable at enterprise scale — rate-limiteable, revokable, auditable — without modifying individual agent code. The single-gateway model trades latency (one extra hop ~2ms p50) for governance; DoorDash judged this worthwhile at their compliance requirements and tool-surface complexity.",
+          "tags": [
+            "infra",
+            "biz",
+            "scale"
+          ],
+          "resources": [
+            {
+              "title": "DoorDash Engineering: How DoorDash Built a Centralized Gateway for AI Agent-Tool Access (July 30, 2026)",
+              "url": "https://careersatdoordash.com/blog/how-doordash-built-a-centralized-gateway-for-ai-agent-tool-access/"
+            }
+          ],
+          "added": "2026-08-10"
         }
       ]
     }

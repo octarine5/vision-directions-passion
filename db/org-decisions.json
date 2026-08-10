@@ -9,7 +9,7 @@
       "Key Considerations",
       "Phase"
     ],
-    "last_updated": "2026-08-03"
+    "last_updated": "2026-08-10"
   },
   "sections": [
     {
@@ -619,6 +619,12 @@
           "considerations": "With AI coding tools now embedded in daily workflows (55%+ of engineers use AI agents; 63.5% for staff+), the challenge has shifted from adoption to accountability. Traditional engineering productivity metrics \u2014 lines of code, PR velocity, cycle time \u2014 become noise when AI generates the majority of committed code. Engineering leaders now need frameworks that measure deployment frequency, quality outcomes (defect escape rate, incident rate), and business outcome linkage (revenue per engineer-hour) rather than throughput proxies. A significant measurement gap persists despite reported 59% throughput increases: rising token costs are becoming a material line item requiring optimization strategies similar to cloud cost management. Staff engineers are natural owners of defining these new measurement frameworks, bridging ML/AI tooling fluency with org-level impact visibility.",
           "phase": "Cross-cutting",
           "added": "2026-08-03"
+        },
+        {
+          "topic": "Multi-agent A2A swarm architecture: when to graduate from orchestrated agents to peer-to-peer collaboration",
+          "considerations": "DoorDash's August 2026 post describes a four-stage agentic maturity model with structural org implications: (1) You cannot skip stages — teams that attempt to build swarm architectures before establishing single-agent reliability uniformly fail; reliability compounds across stages, not leaps. (2) The inflection point from 'single agent' to 'deep agent' (hierarchical task decomposition) is driven by task complexity, not team ambition — deploy hierarchical patterns only when single agents demonstrably fail due to context-length or single-LLM reliability limits. (3) True A2A peer-to-peer swarms require a dedicated coordination protocol layer: agent discovery, async state management, and lifecycle events — simple message passing between agents breaks under partial failure. (4) Architecture decision — centralized orchestrator vs decentralized swarm: centralized is more debuggable and auditable (each step is traceable to one orchestrator); decentralized scales better for emergent problem domains but is significantly harder to reason about. Default to centralized until your task domain demonstrably requires emergent coordination. (5) Staff+ engineer role in multi-agent systems: designing A2A interaction contracts, tool surface governance (what tools each agent tier can access), and failure isolation boundaries between agent tiers are first-class system design problems at the same complexity level as distributed database consistency protocol design. (6) The primary engineering challenge in multi-agent production systems is coordination infrastructure — session management, state persistence, partial-failure recovery — not model capability. Budget 2–3× more engineering effort on plumbing than on model integration.",
+          "phase": "Cross-cutting",
+          "added": "2026-08-10"
         }
       ]
     }

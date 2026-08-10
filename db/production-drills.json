@@ -3,7 +3,7 @@
     "category": "production-drills",
     "display_name": "Production Drills",
     "layout": "drills",
-    "last_updated": "2026-08-07"
+    "last_updated": "2026-08-10"
   },
   "sections": [
     {
@@ -325,6 +325,24 @@
             "jupyter"
           ],
           "added": "2026-08-07"
+        },
+        {
+          "drill": "GCP Cloud Spanner Sequential Timestamp Primary Key Hotspot — ML Feature Backfill Transaction Abort Storm Drives P99 to 45s for 26 Minutes",
+          "layer": "Database (Cloud Spanner) / ML Feature Store / GCP",
+          "difficulty": "Hard",
+          "scenario": "At 11:34 UTC, PagerDuty fires: 'spanner_api_request_latencies_p99{method=\"Commit\"} = 45,200ms (threshold: 2,000ms)'. A Go ML feature backfill job (8 goroutines, `spanner.ReadWriteTransaction`) is inserting 847K rows into a Cloud Spanner single-region instance (`projects/ml-platform-prod/instances/feature-store-us-central1`, 3-node cluster, `db9c823e-features` database) using the schema:\n\n  CREATE TABLE ml_features (\n    entity_id   STRING(36) NOT NULL,\n    feature_ts  TIMESTAMP  NOT NULL OPTIONS (allow_commit_timestamp=true),\n    features    JSON,\n    model_ver   INT64,\n  ) PRIMARY KEY (entity_id, feature_ts);\n\nThe job sets `feature_ts = spanner.CommitTimestamp` — Cloud Spanner's server-side monotonically increasing commit timestamp. Cloud Spanner metrics show:\n\n  spanner_api_request_count{method=\"Commit\",response_code=\"ABORTED\"}: 0/min → 4,847/min at 11:34\n  spanner_gfe_latencies_p99: 8ms (stable — not a GFE issue)\n  spanner_read_requests_p99: 9ms (stable)\n\nAll 8 goroutines receive:\n  `rpc error: code = Aborted desc = Transaction was aborted. Another\n  transaction T-8h1g2j modified the same rows. Try again.\n  [google.cloud.spanner.v1.Transaction.Abort]`\n\nThe production ML feature serving path (read-write transactions updating feature freshness scores) shares the same Spanner instance. Cloud Spanner's lock-range manager serializes all write commits to the (entity_id, RECENT_TIMESTAMP) range because CommitTimestamp always appends to the lexicographically latest Spanner split boundary — concentrating 100% of the backfill's write lock contention on a single split server node. The Go Spanner client's built-in retry loop retries on ABORTED with exponential backoff, but each retry generates a new CommitTimestamp — pushing all retries into the same hot split, creating a thundering-herd retry storm.\n\nThe on-call first suspects a Spanner regional outage (console.cloud.google.com/monitoring shows green) and loses 8 minutes ruling out infrastructure causes. Impact: 4.2M users receive stale ML recommendations; P99 commit latency doesn't recover until the backfill is killed at 12:00 UTC, 26 minutes after the incident start.",
+          "exercise": "1. Diagnose: Open Cloud Spanner Key Visualizer in GCP Console (Spanner instance → Key Visualizer) — a bright red horizontal band at the `(*, RECENT_TIMESTAMP)` prefix confirms all write load is concentrated on one split. Validate via Cloud Spanner introspection query on the coordinator:\n  `SELECT SUBSTR(query, 1, 80), avg_latency_seconds, execution_count, avg_rows\n   FROM spanner_sys.query_stats_top_hour\n   ORDER BY avg_latency_seconds DESC LIMIT 10;`\n  Shows Commit RPCs averaging 41.2s in the last hour. Run `kubectl get pods -n ml | grep backfill` to identify the job, then `kubectl logs <pod> | grep 'Aborted' | wc -l` — shows 28,419 ABORTED retries in the past 26 minutes.\n\n2. Immediate mitigation: Kill the backfill job to stop the abort storm:\n  `kubectl delete job feature-backfill -n ml --grace-period=0`\n  Monitor `spanner_api_request_count{response_code=\"ABORTED\"}` — drops from 4,847/min to < 5/min within 45 seconds as the hot split's transaction queue drains. Serving-path P99 commit latency returns to 12ms within 2 minutes.\n\n3. Root cause: `CommitTimestamp` as the trailing primary key component creates a monotonically increasing append-only write pattern. Cloud Spanner auto-splits based on sustained load and key ranges — but the split only covers the HISTORICAL portion of the timestamp range; all new writes always land in the newest, unsplit boundary. This is the Spanner equivalent of a sequential auto-increment key on a sharded database. 8 concurrent goroutines × automatic retry = up to 64 concurrent Commit RPCs targeting the same split boundary, each holding a write lock that blocks all others.\n\n4. Fix: Replace `CommitTimestamp` as the trailing key with a bit-reversed timestamp prefix to distribute writes across splits:\n  Option A (hot path, zero-downtime): Add a HASH shard column:\n    ALTER TABLE ml_features ADD COLUMN shard_id INT64\n      AS (MOD(FARM_FINGERPRINT(entity_id), 64)) STORED;\n    Drop and recreate with interleaved shard prefix:\n    PRIMARY KEY (shard_id, entity_id, feature_ts)\n  Option B (cold path, offline): Export → recreate table with BitReverse(CommitTimestamp) prefix using Dataflow → re-import. Use Spanner's `GENERATE_UUID()` as a random prefix for pure-ingest tables where ordering doesn't matter.\n  Restart the backfill with 8→16 goroutines, each pinned to a distinct shard_id range (0–15 per goroutine), confirming uniform Key Visualizer heatmap.\n\n5. Validate: Key Visualizer shows uniform green across all 64 shards. `spanner_api_request_count{response_code=\"ABORTED\"}` stays below 10/min at 16-goroutine concurrency. P99 Commit latency stays below 20ms throughout the full 847K-row backfill run (ETA ~11 minutes vs original infinite retry loop).\n\n6. Prevent: (a) Add a Cloud Spanner DDL review gate to CI: use the `spanner-schema-linter` (open-source, github.com/cloudspannerecosystem/spanner-schema-linter) with a custom rule that fails PRs where TIMESTAMP or CommitTimestamp appears as the trailing primary key column on a high-write table without a hash-shard prefix. (b) Add Prometheus alert on `spanner_api_request_count{response_code=\"ABORTED\"} > 100` for > 3 minutes. (c) Instrument the backfill job's Spanner client with `spanner.ExponentialBackoff` configured with a MaxDelay of 30s and add a circuit breaker: if abort_rate > 50% for 2 consecutive minutes, pause the job and page instead of retrying indefinitely.",
+          "tags": [
+            "spanner",
+            "database",
+            "hotspot",
+            "transaction-abort",
+            "ml-feature-store",
+            "gcp",
+            "go",
+            "commit-timestamp"
+          ],
+          "added": "2026-08-10"
         }
       ]
     },

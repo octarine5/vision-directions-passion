@@ -3,7 +3,7 @@
     "category": "tech-talks",
     "display_name": "Tech Talks",
     "layout": "cards",
-    "last_updated": "2026-08-03"
+    "last_updated": "2026-08-10"
   },
   "sections": [
     {
@@ -1039,6 +1039,30 @@
           "venue": "Uber Engineering Blog (July 30, 2026)",
           "description": "How Uber built GitFarm \u2014 a Git-as-a-Service platform serving their 40 GB Go monorepo via a gRPC API with pre-warmed bare clone pools. Delivers checkouts in under 500ms (vs. 15 minutes for direct clone), cuts client-side resource utilization by 70%, and enables concurrent CI workers without clone conflicts. Key patterns: repo sharding for horizontal scale, read-through caching for freshness, and per-request ephemeral sandbox isolation.",
           "added": "2026-08-03"
+        },
+        {
+          "title": "How DoorDash Built a Centralized Gateway for AI Agent-Tool Access",
+          "url": "https://careersatdoordash.com/blog/how-doordash-built-a-centralized-gateway-for-ai-agent-tool-access/",
+          "speaker": "DoorDash Engineering",
+          "venue": "DoorDash Engineering Blog (July 30, 2026)",
+          "description": "DoorDash's deep-dive into their Agent Gateway — a centralized MCP proxy and control plane that authenticates agents via SPIFFE, enforces OPA-based authorization, curates per-agent tool surfaces, injects short-lived credentials, and emits structured audit events for every tool call. Now handling millions of tool calls/week across 200+ MCP servers and 30+ internal AI agents. Essential read for engineering teams building multi-agent platforms at enterprise scale: covers the design decision to centralize vs federate MCP routing, the 2ms latency trade-off for governance, and the per-team self-serve tooling model.",
+          "added": "2026-08-10"
+        },
+        {
+          "title": "Beyond Single Agents: How DoorDash is Building a Collaborative AI Ecosystem",
+          "url": "https://careersatdoordash.com/blog/beyond-single-agents-doordash-building-collaborative-ai-ecosystem/",
+          "speaker": "DoorDash Engineering",
+          "venue": "DoorDash Engineering Blog (August 2026)",
+          "description": "DoorDash's four-stage agentic maturity model — from deterministic workflows to single ReAct agents to hierarchical deep agents to peer-to-peer A2A swarms. Key engineering finding: swarm architectures require a dedicated A2A protocol layer handling agent discovery, async state management, and lifecycle events; simple message passing breaks under partial failure. Practical guide for engineering teams designing multi-agent systems at scale, including the decision framework for centralized orchestrator vs decentralized swarm, and why you cannot skip maturity stages.",
+          "added": "2026-08-10"
+        },
+        {
+          "title": "Efficient Decode Context Parallelism with vLLM for Long Context Workloads",
+          "url": "https://vllm.ai/blog/2026-08-07-decode-context-parallelism",
+          "speaker": "vLLM Team",
+          "venue": "vLLM Blog (August 7, 2026)",
+          "description": "Technical deep-dive into Decode Context Parallelism (DCP) in vLLM — a new execution mode that shards the KV cache across GPUs by sequence dimension during decode, delivering 3× throughput on 128K+ context workloads vs standard tensor parallel decode by eliminating N× KV memory amplification. Covers benchmarking methodology on H100 8-GPU nodes, composability with disaggregated prefill-decode architecture, and operational guidance (AllReduce latency trade-off) for teams serving long-context agentic workloads on NVLink vs InfiniBand clusters.",
+          "added": "2026-08-10"
         }
       ]
     }

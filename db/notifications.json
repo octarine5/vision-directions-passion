@@ -2,9 +2,29 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-08-07"
+    "last_updated": "2026-08-10"
   },
   "entries": [
+    {
+      "timestamp": "2026-08-10T07:00:00Z",
+      "type": "knowledge-base",
+      "title": "Monday update: drill + knowledge base refresh",
+      "summary": "Added Hard database hotfix drill: GCP Cloud Spanner Sequential Timestamp Primary Key Hotspot — backfill job using CommitTimestamp as the trailing PK concentrates 100% of write lock contention on one split boundary, causing 4,847 ABORTED/min transaction abort storm and P99 Commit latency of 45s for 26 minutes across 4.2M users. Knowledge base: vLLM Decode Context Parallelism (DCP, Aug 7) delivering 3× long-context throughput via cross-GPU KV sharding; vLLM GB200 NVL72 disaggregated serving hitting 25K TPS/GPU on Qwen3.5-397B with NVFP4 Blackwell kernels (Aug 6); DoorDash Agent Gateway centralized MCP control plane for 200+ servers and 30+ agents; DoorDash four-stage A2A swarm maturity model; and three new tech talks (DoorDash Agent Gateway, DoorDash Beyond Single Agents, vLLM DCP).",
+      "tasks": [
+        "drill",
+        "knowledge-base"
+      ],
+      "items_added": [
+        "GCP Cloud Spanner Sequential Timestamp Primary Key Hotspot — ML Feature Backfill Transaction Abort Storm Drives P99 to 45s for 26 Minutes (production-drills)",
+        "vLLM Decode Context Parallelism (DCP) — Cross-GPU KV Cache Sharding for 3× Long-Context Throughput (ml-systems)",
+        "vLLM GB200 NVL72 Disaggregated Serving — 25K Total TPS per GPU on Qwen3.5-397B with NVFP4 Blackwell Kernels (ml-systems)",
+        "Agent Gateway Architecture — DoorDash's Centralized MCP Control Plane for 200+ Tool Servers and 30+ AI Agents (system-design)",
+        "Multi-agent A2A swarm architecture: when to graduate from orchestrated agents to peer-to-peer collaboration (org-decisions)",
+        "How DoorDash Built a Centralized Gateway for AI Agent-Tool Access (tech-talks)",
+        "Beyond Single Agents: How DoorDash is Building a Collaborative AI Ecosystem (tech-talks)",
+        "Efficient Decode Context Parallelism with vLLM for Long Context Workloads (tech-talks)"
+      ]
+    },
     {
       "timestamp": "2026-08-07T07:00:00Z",
       "type": "market-scan",
