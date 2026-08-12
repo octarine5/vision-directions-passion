@@ -2,9 +2,21 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-08-11"
+    "last_updated": "2026-08-12"
   },
   "entries": [
+    {
+      "timestamp": "2026-08-12T07:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: Nomad Parameterized Job Dispatch Burst — Consul Raft Log Compaction Starves Batch Scheduler, 889 ML Training Jobs Stuck Pending for 38 Minutes",
+      "summary": "Added a Hard distributed-systems hotfix drill: a Python hyperparameter sweep launcher fires 1,200 Nomad job dispatches in 12 seconds (102/sec), triggering Consul Raft log compaction (3.8s pause) that blocks all 4 Nomad scheduler goroutines awaiting Consul service registration writes. Scheduler throughput collapses to <1 job/sec; 889 jobs accumulate in the pending queue; Nomad leader suffers a 14-second GC stop-the-world and loses the Raft lease, triggering a leader election. Nine p3.16xlarge GPU instances idle at $220/hr for 38 minutes. Fix: remove Consul service blocks from ML training job templates, rate-limit dispatches to 20/sec, increase snapshot threshold, and add scheduler queue-depth alerting.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "Nomad Parameterized Job Dispatch Burst — Consul Raft Log Compaction Starves Batch Scheduler, 889 ML Training Jobs Stuck Pending for 38 Minutes While $220/hr in GPU Instances Idle (production-drills)"
+      ]
+    },
     {
       "timestamp": "2026-08-11T07:00:00Z",
       "type": "drill",
