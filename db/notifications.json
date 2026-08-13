@@ -2,9 +2,21 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-08-12"
+    "last_updated": "2026-08-13"
   },
   "entries": [
+    {
+      "timestamp": "2026-08-13T07:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: AWS MSK Kafka Broker JVM G1GC Full Pause During Log Segment Roll — Producer Retry Storm Dead-Letters 18,847 ML Feature Events",
+      "summary": "Added a Hard distributed-systems hotfix drill: AWS MSK Kafka broker-3 JVM heap at 78.3% triggers a G1GC Full GC (11.2 seconds, stop-the-world) during a 1.07 GB log segment roll — a Humongous Allocation that G1GC cannot satisfy without Full GC. Broker-3 becomes unresponsive for 12 seconds; Kafka controller triggers leader election for 47 partitions. Python kafka-python producer with max_retries=3 and retry_backoff_ms=0 exhausts retries before leader election completes, dead-lettering 18,847 ML feature events to SQS DLQ. 4.2M users receive stale recommendations for 38 minutes ($31K estimated revenue loss). Fix: reduce broker heap to 24 GB, tune G1GC InitiatingHeapOccupancyPercent=35, reduce log.segment.bytes to 256 MB, and add producer exponential backoff with request_timeout_ms=60000.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "AWS MSK Kafka Broker JVM G1GC Full Pause During Log Segment Roll — Producer Retry Storm Dead-Letters 18,847 ML Feature Events, 4.2M Users Receive Stale Recommendations for 38 Minutes (production-drills)"
+      ]
+    },
     {
       "timestamp": "2026-08-12T07:00:00Z",
       "type": "drill",
