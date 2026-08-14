@@ -2,9 +2,26 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-08-13"
+    "last_updated": "2026-08-14"
   },
   "entries": [
+    {
+      "timestamp": "2026-08-14T07:00:00Z",
+      "type": "market-scan",
+      "title": "Friday update: drill + market signal scan",
+      "summary": "Added a Hard distributed-systems hotfix drill: RabbitMQ 3.13 Quorum Queue delivery silently suspends for 4m31s during Raft snapshot sync triggered by GKE Autopilot node pool upgrade evicting the Raft leader pod (PV deleted on drain, rabbitmq-0 restarts 2,341,847 entries behind). amqp091-go consumers remain connected with no error — they simply receive nothing. Post-suspension, 2.8M buffered messages burst to all 8 consumer pods, saturating Redis ElastiCache r6g.2xlarge at its 200-connection hard limit (8 pods × PoolSize=25), causing 94.3% enrichment failure for 23 minutes and $94K impact. Market scan: Databricks closes $5.0B Series J at $190B valuation (largest U.S. venture round ever, Microsoft + Google co-invest; Lakebase serverless Postgres + Unity AI Gateway are the 2026 product bets); Lovable raises $400M Series C at $13.3B (largest European Series C ever, General Catalyst led; ~$100M ARR, 75M+ apps generated in 18 months, vibe coding goes enterprise). Added both to enterpriseWatchlist and business-problems.",
+      "tasks": [
+        "drill",
+        "market-scan"
+      ],
+      "items_added": [
+        "RabbitMQ 3.13 Quorum Queue Raft Leader Election Suspension — GKE Autopilot Node Upgrade Evicts Leader Pod, 4m31s Delivery Blackout, Post-Election Message Burst Exhausts Redis ElastiCache Connection Pool, 94% ML Feature Enrichment Failure for 23 Minutes (production-drills)",
+        "Unified data intelligence + AI model serving platform — Databricks Lakebase + Unity AI Gateway (business-problems)",
+        "AI-native full-stack software generation — Lovable vibe coding $400M Series C (business-problems)",
+        "Databricks (enterpriseWatchlist)",
+        "Lovable (enterpriseWatchlist)"
+      ]
+    },
     {
       "timestamp": "2026-08-13T07:00:00Z",
       "type": "drill",

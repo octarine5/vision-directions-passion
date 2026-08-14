@@ -11,7 +11,7 @@
       "TAM",
       "Tags"
     ],
-    "last_updated": "2026-08-07"
+    "last_updated": "2026-08-14"
   },
   "sections": [
     {
@@ -973,6 +973,30 @@
             "ml"
           ],
           "added": "2026-08-07"
+        },
+        {
+          "problem": "Unified data intelligence + AI model serving platform — bridging enterprise data lakes to production ML serving with embedded serverless Postgres (Lakebase) and centralized AI Gateway",
+          "enterprise": "Databricks ($5.0B Series J at $190B post-money valuation, DST Global + Microsoft + Google + Andreessen Horowitz + ICONIQ + Sutter Hill led, August 13, 2026; ~$3.5B ARR; 10,000+ enterprise customers)",
+          "market_fit": "Databricks raised a $5.0B Series J on August 13, 2026 at a $190B post-money valuation — the largest venture round in U.S. history — valuing it at roughly 54x ARR ($3.5B ARR). The 2026 strategic bets: (1) Lakebase — serverless, instantly-scalable Postgres for AI-native applications (announced June 2026) — positions Databricks as the operational database for AI-generated workloads, competing directly with Snowflake Polaris and AWS Aurora Serverless; (2) Unity AI Gateway — centralized AI model routing and governance built on the Unity Catalog, allowing enterprises to manage model versions, prompt routing, cost controls, and compliance policies across all AI API calls organization-wide. Key market signal: Microsoft and Google jointly invested in the same round, implying both hyperscalers view Databricks as infrastructure to support (cloud consumption) rather than displace (competitive threat). The convergence thesis: Databricks is collapsing a 6-vendor ML stack (data lake + feature store + model training + model registry + serving + operational DB) to one platform — Lakebase for the operational tier, Delta Lake + Unity Catalog for the intelligence tier, MLflow for lifecycle, and the AI Gateway as the policy plane. For staff+ ML engineers: the practical implication is that Databricks now competes with Snowflake, AWS SageMaker, GCP Vertex AI, and Postgres simultaneously — enterprises consolidating on Databricks gain deep integration but accept significant vendor lock-in on the critical path of every AI system.",
+          "tam": "$130B",
+          "tags": [
+            "ml",
+            "infra",
+            "data"
+          ],
+          "added": "2026-08-14"
+        },
+        {
+          "problem": "AI-native full-stack software generation — building complete deployed web applications from natural language prompts, eliminating traditional programming for the long tail of software",
+          "enterprise": "Lovable ($400M Series C at $13.3B valuation, General Catalyst led, August 12, 2026; ~$100M ARR; 2.5M users; 75M+ apps generated in 18 months)",
+          "market_fit": "Lovable raised a $400M Series C on August 12, 2026 at a $13.3B valuation led by General Catalyst — the largest Series C in European startup history — for its AI-native 'vibe coding' platform. Lovable generates complete, deployed full-stack web applications from natural language prompts: React frontend, Supabase backend, PostgreSQL database, authentication, real-time subscriptions, and production deployment — all in minutes. Metrics: ~$100M ARR, 2.5M users, 75M+ apps generated. The bifurcation thesis: software development is splitting into (1) expert engineering for performance-critical, security-sensitive core infrastructure and (2) AI-generated 'good enough' software for internal tools, MVPs, landing pages, and prototypes where speed beats code quality. Lovable dominates category 2, with developers paying $25-150/month for subscriptions and enterprises adopting it to bypass IT backlogs. Lovable competes with v0 by Vercel, Bolt.new, and Replit Agent for the AI-generated app market, with differentiation on full-stack completeness (not just UI generation) and production deployment out of the box. The $400M round targets enterprise expansion (SSO, audit logs, custom deployment targets) which is <10% of current revenue. For staff+ engineers: Lovable and this category are shifting the cost floor of software creation — a 2-3 person team's 2-week project ships in hours. This changes build vs. buy calculus for internal tooling and accelerates adoption of the long tail of software projects previously too expensive to justify.",
+          "tam": "$40B",
+          "tags": [
+            "ml",
+            "dev-tools",
+            "ai-coding"
+          ],
+          "added": "2026-08-14"
         }
       ]
     }

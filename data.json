@@ -388,6 +388,20 @@
       "stage": "Series B ($113M, $640M valuation, Bessemer + Cyberstarts + TCV + Conviction, July 29, 2026; $153M total)",
       "signal": "hot",
       "notes": "Builds a 'secure AI control plane' that intercepts every AI agent action inline — between agent decision and system mutation — enforcing policy in real time (analogous to a WAF for agent actions). Distinct from NHI credential governance (Hush Security) and endpoint AI security (Glow). 4× revenue growth in 4 months since stealth launch. Anthropic announced direct integration in June 2026 — the dominant enterprise LLM platform endorsing Onyx as a required safety layer. Fortune 500 customers across banking, insurance, and energy. Israeli founding team; Bessemer-led round signals this is a generational enterprise security platform. Category thesis: no AI agent will be permitted in regulated industries without a runtime control plane. Watch: will Glow (endpoint) + Hush (NHI) + Onyx (runtime) consolidate into a unified agentic AI security stack?"
+    },
+    {
+      "name": "Databricks",
+      "domain": "Unified Data Intelligence + AI Model Serving Platform (Lakebase Serverless Postgres + Unity AI Gateway + Delta Lake + MLflow)",
+      "stage": "Series J ($5.0B, $190B post-money valuation, DST Global + Microsoft + Google + a16z + ICONIQ + Sutter Hill, August 13, 2026; ~$3.5B ARR; 10,000+ enterprise customers)",
+      "signal": "hot",
+      "notes": "Largest venture round in U.S. history at 54x ARR. Two strategic bets define 2026: (1) Lakebase — serverless Postgres for AI-native apps, competing with Snowflake Polaris and Aurora Serverless; (2) Unity AI Gateway — centralized model routing, cost control, and compliance policy for all enterprise AI API calls. Microsoft + Google co-investing signals hyperscaler alignment (consumption > competition). Convergence play: Databricks is collapsing the 6-vendor ML stack (data lake + feature store + training + registry + serving + operational DB) to one platform. For ML engineers: watch Lakebase adoption as the operational database for AI-generated software — if Lovable and Cursor agents default to Lakebase, Databricks becomes the de facto backend for the AI coding wave."
+    },
+    {
+      "name": "Lovable",
+      "domain": "AI-Native Full-Stack Software Generation (Vibe Coding — React + Supabase + PostgreSQL from Natural Language)",
+      "stage": "Series C ($400M, $13.3B valuation, General Catalyst led, August 12, 2026; ~$100M ARR; 2.5M users; 75M+ apps generated)",
+      "signal": "hot",
+      "notes": "Largest Series C in European startup history. Generates complete deployed full-stack web apps from prompts in minutes. $100M ARR in ~18 months validates real enterprise and developer willingness to pay ($25-150/month). Category thesis: software bifurcates into expert engineering (performance/security-critical) and AI-generated 'good enough' (internal tools, MVPs, prototypes). Lovable dominates category 2. Competes with v0 by Vercel, Bolt.new, Replit Agent; differentiates on full-stack completeness + production deployment. Enterprise expansion (<10% of revenue today) is the next growth vector (SSO, audit logs, custom deploy targets). Watch: will Lovable + Cursor converge — one for generating, one for maintaining — into a complete AI software development lifecycle?"
     }
   ],
   "careerMilestones": [
