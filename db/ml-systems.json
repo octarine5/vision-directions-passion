@@ -814,6 +814,22 @@
             }
           ],
           "added": "2026-08-17"
+        },
+        {
+          "topic": "vLLM-Omni Distributed Layerwise Offload \u2014 124 GB Cosmos3 DiT on 64 GB HBM via Sharded Weight Streaming",
+          "concepts": "Solves GPU memory bottleneck for large Diffusion Transformer (video generation) models: weights are sharded across DP ranks (each host stores 1/DP_size of parameters), mmap-backed, AllGather-reconstructed per layer, and double-buffered ahead of computation so H2D transfer overlaps with the prior layer's compute. At 4-way DP on Ascend 910B3, peak cgroup memory fell from 178 GB to 47 GB while serving four concurrent requests. Demonstrated on a 124 GB Cosmos3 model running fully in 64 GB HBM. Generalizes TP weight-sharding ideas from LLM serving to DiT inference and opens the path to 200B-scale multimodal generation on standard hardware.",
+          "tags": [
+            "ml",
+            "infra",
+            "scale"
+          ],
+          "resources": [
+            {
+              "title": "Distributed Layerwise Offload in vLLM-Omni (PR #302)",
+              "url": "https://vllm.ai/blog/2026-08-17-distributed-layerwise-offload"
+            }
+          ],
+          "added": "2026-08-17"
         }
       ]
     },

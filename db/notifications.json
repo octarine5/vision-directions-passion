@@ -1237,7 +1237,7 @@
       "timestamp": "2026-08-17T07:00:00Z",
       "type": "knowledge-base",
       "title": "Monday update: drill + knowledge base refresh",
-      "summary": "Added Hard ML Serving hotfix drill: TGI 2.2 Continuous Batching Head-of-Line Block \u2014 128K-token legal document prefill pauses all short-context decodes for 73 seconds, 362 users timeout (GKE / NVIDIA H100-80GB NVLink / HuggingFace TGI 2.2.0). Fix path: confirm prefill root cause, enforce max-input-length, enable chunked prefill (--max-batch-prefill-tokens), deploy dedicated long-context TGI instance, add KEDA autoscaling. Knowledge base: Meta GEM Training at LLM Scale \u2014 HSDP 5D parallelism (DP\u00d7TP\u00d7PP\u00d7EP\u00d7CP), MXFP8 mixed precision, Jagged Flash Attention, MFU doubled from ~10% to 20\u201325% across 4\u00d7 FLOPs scaling in 12 months (Aug 3); vLLM DSpark Adaptive Verification \u2014 per-step confidence-scheduled speculative decoding via --enable_adaptive_verification (PR #47808), works from concurrency 1\u2013256 (Aug 14); vLLM Day-0 for Qwen3.8-2.4T-A95B \u2014 2.4T sparse MoE with 512 experts (95B activated), MXFP4/NVFP4 Blackwell support, fits on GB200 NVL72 without CPU offload (Aug 12); plus three matching tech talks.",
+      "summary": "Added Hard ML Serving hotfix drill: TGI 2.2 Continuous Batching Head-of-Line Block \u2014 128K-token legal document prefill pauses all short-context decodes for 73 seconds, 362 users timeout (GKE / NVIDIA H100-80GB NVLink / HuggingFace TGI 2.2.0). Fix path: confirm prefill root cause, enforce max-input-length, enable chunked prefill (--max-batch-prefill-tokens), deploy dedicated long-context TGI instance, add KEDA autoscaling. Knowledge base: Meta GEM Training at LLM Scale \u2014 HSDP 5D parallelism (DP\u00d7TP\u00d7PP\u00d7EP\u00d7CP), MXFP8 mixed precision, Jagged Flash Attention, MFU doubled from ~10% to 20\u201325% across 4\u00d7 FLOPs scaling in 12 months (Aug 3); vLLM DSpark Adaptive Verification \u2014 per-step confidence-scheduled speculative decoding via --enable_adaptive_verification (PR #47808), works from concurrency 1\u2013256 (Aug 14); vLLM Day-0 for Qwen3.8-2.4T-A95B \u2014 2.4T sparse MoE with 512 experts (95B activated), MXFP4/NVFP4 Blackwell support, fits on GB200 NVL72 without CPU offload (Aug 12); plus three matching tech talks. Additional items from research agent: vLLM-Omni distributed layerwise offload for 200B+ DiT models (Aug 17); Shopify Sidekick 96% inference cost reduction via continual fine-tuning loop (Aug 5); Anthropic in-house chip design targeting 50% inference cost reduction, 2nm Samsung foundry, 2028 timeline (Aug 5). Total: 10 new items across 5 files.",
       "tasks": [
         "drill",
         "knowledge-base"
@@ -1249,7 +1249,10 @@
         "vLLM Day-0 Support for Qwen3.8-2.4T-A95B \u2014 2.4T Sparse MoE with 512 Experts and MXFP4/NVFP4 (ml-systems)",
         "Training GEM at LLM Scale: Meta Ads Recommendation Foundation Model (tech-talks)",
         "DSpark: Confidence-Scheduled Adaptive Verification for vLLM Speculative Decoding (tech-talks)",
-        "Qwen3.8-2.4T-A95B Is Here: vLLM Day-0 Support for 2.4T Sparse MoE with MXFP4 (tech-talks)"
+        "Qwen3.8-2.4T-A95B Is Here: vLLM Day-0 Support for 2.4T Sparse MoE with MXFP4 (tech-talks)",
+        "vLLM-Omni Distributed Layerwise Offload \u2014 124 GB Cosmos3 DiT on 64 GB HBM via Sharded Weight Streaming (ml-systems)",
+        "Sidekick's Continual Learning Loop: How Shopify Fine-Tuned Its Way to 96% Inference Cost Reduction (tech-talks)",
+        "Hyperscaler AI inference cost and NVIDIA dependency \u2014 foundation model labs building in-house silicon to halve inference costs (business-problems)"
       ]
     }
   ]

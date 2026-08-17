@@ -565,6 +565,14 @@
           "venue": "vLLM Blog",
           "description": "Announces vLLM's immediate support for Qwen3.8-2.4T-A95B \u2014 a 2.4T sparse MoE with 512 experts (95B activated per token). Covers MXFP4/NVFP4 quantization for Blackwell GPUs, expert-parallel routing, and disaggregated prefill integration enabling full in-GPU-memory serving on GB200 NVL72.",
           "added": "2026-08-17"
+        },
+        {
+          "title": "Sidekick's Continual Learning Loop: How Shopify Fine-Tuned Its Way to 96% Inference Cost Reduction",
+          "url": "https://shopify.engineering/sidekicks-continual-learning-loop",
+          "speaker": "Andrew McNamara and Cody Mazza-Anthony",
+          "venue": "Shopify Engineering Blog",
+          "description": "Describes how Shopify's AI commerce assistant Sidekick replaces its reliance on frontier API calls by compressing production interactions into continuous model weight updates. Real interactions generate training signal, which is distilled into a Shopify-fine-tuned model that outperforms the frontier baseline while cutting inference cost by 96% and reducing latency. The continual loop improves the model week-over-week from live traffic without manual labeling pipelines \u2014 a concrete case study in escaping frontier API dependency through targeted specialization.",
+          "added": "2026-08-17"
         }
       ]
     },
