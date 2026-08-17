@@ -9,15 +9,15 @@
       "timestamp": "2026-08-14T07:00:00Z",
       "type": "market-scan",
       "title": "Friday update: drill + market signal scan",
-      "summary": "Added a Hard distributed-systems hotfix drill: RabbitMQ 3.13 Quorum Queue delivery silently suspends for 4m31s during Raft snapshot sync triggered by GKE Autopilot node pool upgrade evicting the Raft leader pod (PV deleted on drain, rabbitmq-0 restarts 2,341,847 entries behind). amqp091-go consumers remain connected with no error — they simply receive nothing. Post-suspension, 2.8M buffered messages burst to all 8 consumer pods, saturating Redis ElastiCache r6g.2xlarge at its 200-connection hard limit (8 pods × PoolSize=25), causing 94.3% enrichment failure for 23 minutes and $94K impact. Market scan: Databricks closes $5.0B Series J at $190B valuation (largest U.S. venture round ever, Microsoft + Google co-invest; Lakebase serverless Postgres + Unity AI Gateway are the 2026 product bets); Lovable raises $400M Series C at $13.3B (largest European Series C ever, General Catalyst led; ~$100M ARR, 75M+ apps generated in 18 months, vibe coding goes enterprise). Added both to enterpriseWatchlist and business-problems.",
+      "summary": "Added a Hard distributed-systems hotfix drill: RabbitMQ 3.13 Quorum Queue delivery silently suspends for 4m31s during Raft snapshot sync triggered by GKE Autopilot node pool upgrade evicting the Raft leader pod (PV deleted on drain, rabbitmq-0 restarts 2,341,847 entries behind). amqp091-go consumers remain connected with no error \u2014 they simply receive nothing. Post-suspension, 2.8M buffered messages burst to all 8 consumer pods, saturating Redis ElastiCache r6g.2xlarge at its 200-connection hard limit (8 pods \u00d7 PoolSize=25), causing 94.3% enrichment failure for 23 minutes and $94K impact. Market scan: Databricks closes $5.0B Series J at $190B valuation (largest U.S. venture round ever, Microsoft + Google co-invest; Lakebase serverless Postgres + Unity AI Gateway are the 2026 product bets); Lovable raises $400M Series C at $13.3B (largest European Series C ever, General Catalyst led; ~$100M ARR, 75M+ apps generated in 18 months, vibe coding goes enterprise). Added both to enterpriseWatchlist and business-problems.",
       "tasks": [
         "drill",
         "market-scan"
       ],
       "items_added": [
-        "RabbitMQ 3.13 Quorum Queue Raft Leader Election Suspension — GKE Autopilot Node Upgrade Evicts Leader Pod, 4m31s Delivery Blackout, Post-Election Message Burst Exhausts Redis ElastiCache Connection Pool, 94% ML Feature Enrichment Failure for 23 Minutes (production-drills)",
-        "Unified data intelligence + AI model serving platform — Databricks Lakebase + Unity AI Gateway (business-problems)",
-        "AI-native full-stack software generation — Lovable vibe coding $400M Series C (business-problems)",
+        "RabbitMQ 3.13 Quorum Queue Raft Leader Election Suspension \u2014 GKE Autopilot Node Upgrade Evicts Leader Pod, 4m31s Delivery Blackout, Post-Election Message Burst Exhausts Redis ElastiCache Connection Pool, 94% ML Feature Enrichment Failure for 23 Minutes (production-drills)",
+        "Unified data intelligence + AI model serving platform \u2014 Databricks Lakebase + Unity AI Gateway (business-problems)",
+        "AI-native full-stack software generation \u2014 Lovable vibe coding $400M Series C (business-problems)",
         "Databricks (enterpriseWatchlist)",
         "Lovable (enterpriseWatchlist)"
       ]
@@ -25,25 +25,25 @@
     {
       "timestamp": "2026-08-13T07:00:00Z",
       "type": "drill",
-      "title": "Daily drill: AWS MSK Kafka Broker JVM G1GC Full Pause During Log Segment Roll — Producer Retry Storm Dead-Letters 18,847 ML Feature Events",
-      "summary": "Added a Hard distributed-systems hotfix drill: AWS MSK Kafka broker-3 JVM heap at 78.3% triggers a G1GC Full GC (11.2 seconds, stop-the-world) during a 1.07 GB log segment roll — a Humongous Allocation that G1GC cannot satisfy without Full GC. Broker-3 becomes unresponsive for 12 seconds; Kafka controller triggers leader election for 47 partitions. Python kafka-python producer with max_retries=3 and retry_backoff_ms=0 exhausts retries before leader election completes, dead-lettering 18,847 ML feature events to SQS DLQ. 4.2M users receive stale recommendations for 38 minutes ($31K estimated revenue loss). Fix: reduce broker heap to 24 GB, tune G1GC InitiatingHeapOccupancyPercent=35, reduce log.segment.bytes to 256 MB, and add producer exponential backoff with request_timeout_ms=60000.",
+      "title": "Daily drill: AWS MSK Kafka Broker JVM G1GC Full Pause During Log Segment Roll \u2014 Producer Retry Storm Dead-Letters 18,847 ML Feature Events",
+      "summary": "Added a Hard distributed-systems hotfix drill: AWS MSK Kafka broker-3 JVM heap at 78.3% triggers a G1GC Full GC (11.2 seconds, stop-the-world) during a 1.07 GB log segment roll \u2014 a Humongous Allocation that G1GC cannot satisfy without Full GC. Broker-3 becomes unresponsive for 12 seconds; Kafka controller triggers leader election for 47 partitions. Python kafka-python producer with max_retries=3 and retry_backoff_ms=0 exhausts retries before leader election completes, dead-lettering 18,847 ML feature events to SQS DLQ. 4.2M users receive stale recommendations for 38 minutes ($31K estimated revenue loss). Fix: reduce broker heap to 24 GB, tune G1GC InitiatingHeapOccupancyPercent=35, reduce log.segment.bytes to 256 MB, and add producer exponential backoff with request_timeout_ms=60000.",
       "tasks": [
         "drill"
       ],
       "items_added": [
-        "AWS MSK Kafka Broker JVM G1GC Full Pause During Log Segment Roll — Producer Retry Storm Dead-Letters 18,847 ML Feature Events, 4.2M Users Receive Stale Recommendations for 38 Minutes (production-drills)"
+        "AWS MSK Kafka Broker JVM G1GC Full Pause During Log Segment Roll \u2014 Producer Retry Storm Dead-Letters 18,847 ML Feature Events, 4.2M Users Receive Stale Recommendations for 38 Minutes (production-drills)"
       ]
     },
     {
       "timestamp": "2026-08-12T07:00:00Z",
       "type": "drill",
-      "title": "Daily drill: Nomad Parameterized Job Dispatch Burst — Consul Raft Log Compaction Starves Batch Scheduler, 889 ML Training Jobs Stuck Pending for 38 Minutes",
+      "title": "Daily drill: Nomad Parameterized Job Dispatch Burst \u2014 Consul Raft Log Compaction Starves Batch Scheduler, 889 ML Training Jobs Stuck Pending for 38 Minutes",
       "summary": "Added a Hard distributed-systems hotfix drill: a Python hyperparameter sweep launcher fires 1,200 Nomad job dispatches in 12 seconds (102/sec), triggering Consul Raft log compaction (3.8s pause) that blocks all 4 Nomad scheduler goroutines awaiting Consul service registration writes. Scheduler throughput collapses to <1 job/sec; 889 jobs accumulate in the pending queue; Nomad leader suffers a 14-second GC stop-the-world and loses the Raft lease, triggering a leader election. Nine p3.16xlarge GPU instances idle at $220/hr for 38 minutes. Fix: remove Consul service blocks from ML training job templates, rate-limit dispatches to 20/sec, increase snapshot threshold, and add scheduler queue-depth alerting.",
       "tasks": [
         "drill"
       ],
       "items_added": [
-        "Nomad Parameterized Job Dispatch Burst — Consul Raft Log Compaction Starves Batch Scheduler, 889 ML Training Jobs Stuck Pending for 38 Minutes While $220/hr in GPU Instances Idle (production-drills)"
+        "Nomad Parameterized Job Dispatch Burst \u2014 Consul Raft Log Compaction Starves Batch Scheduler, 889 ML Training Jobs Stuck Pending for 38 Minutes While $220/hr in GPU Instances Idle (production-drills)"
       ]
     },
     {
@@ -1231,6 +1231,25 @@
       ],
       "items_added": [
         "Temporal Workflow Task Queue Explosion -- Visibility Store Scan Starves Scheduler Connection Pool, Cascades 312 ML Training Pipeline Failures (production-drills)"
+      ]
+    },
+    {
+      "timestamp": "2026-08-17T07:00:00Z",
+      "type": "knowledge-base",
+      "title": "Monday update: drill + knowledge base refresh",
+      "summary": "Added Hard ML Serving hotfix drill: TGI 2.2 Continuous Batching Head-of-Line Block \u2014 128K-token legal document prefill pauses all short-context decodes for 73 seconds, 362 users timeout (GKE / NVIDIA H100-80GB NVLink / HuggingFace TGI 2.2.0). Fix path: confirm prefill root cause, enforce max-input-length, enable chunked prefill (--max-batch-prefill-tokens), deploy dedicated long-context TGI instance, add KEDA autoscaling. Knowledge base: Meta GEM Training at LLM Scale \u2014 HSDP 5D parallelism (DP\u00d7TP\u00d7PP\u00d7EP\u00d7CP), MXFP8 mixed precision, Jagged Flash Attention, MFU doubled from ~10% to 20\u201325% across 4\u00d7 FLOPs scaling in 12 months (Aug 3); vLLM DSpark Adaptive Verification \u2014 per-step confidence-scheduled speculative decoding via --enable_adaptive_verification (PR #47808), works from concurrency 1\u2013256 (Aug 14); vLLM Day-0 for Qwen3.8-2.4T-A95B \u2014 2.4T sparse MoE with 512 experts (95B activated), MXFP4/NVFP4 Blackwell support, fits on GB200 NVL72 without CPU offload (Aug 12); plus three matching tech talks.",
+      "tasks": [
+        "drill",
+        "knowledge-base"
+      ],
+      "items_added": [
+        "TGI 2.2 Continuous Batching Head-of-Line Block \u2014 128K-Token Legal Document Prefill Pauses All Short-Context Decodes for 73 Seconds, 362 Users Timeout (production-drills)",
+        "Meta GEM Training at LLM Scale \u2014 Ads Recommendation Foundation Model with HSDP 5D Parallelism (ml-systems)",
+        "vLLM DSpark Adaptive Verification \u2014 Confidence-Scheduled Speculative Decoding at Concurrency 1\u2013256 (ml-systems)",
+        "vLLM Day-0 Support for Qwen3.8-2.4T-A95B \u2014 2.4T Sparse MoE with 512 Experts and MXFP4/NVFP4 (ml-systems)",
+        "Training GEM at LLM Scale: Meta Ads Recommendation Foundation Model (tech-talks)",
+        "DSpark: Confidence-Scheduled Adaptive Verification for vLLM Speculative Decoding (tech-talks)",
+        "Qwen3.8-2.4T-A95B Is Here: vLLM Day-0 Support for 2.4T Sparse MoE with MXFP4 (tech-talks)"
       ]
     }
   ]
