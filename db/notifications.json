@@ -2,9 +2,19 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-08-14"
+    "last_updated": "2026-08-18"
   },
   "entries": [
+    {
+      "timestamp": "2026-08-18T04:30:00Z",
+      "type": "drill",
+      "title": "Daily drill: ONNX Runtime CUDA Session Handle Leak — Java gRPC Gateway Missing close() on Early-Return Validation Path, V100 VRAM Exhausted After 47-Hour Canary",
+      "summary": "Added a Hard ML Serving hotfix drill: Java 21 Armeria gRPC inference gateway v2.1.1 leaks OrtSession handles when empty-feature probe requests hit an early-return validation path that bypasses the try-with-resources block, accumulating 7,614 unreturned ONNX Runtime CUDA sessions over 47 hours on Azure AKS V100-16GB. GPU VRAM grows linearly from 5.2 GB to 15.87 GB (228 MB/hr) until OOM causes CrashLoopBackOff at 03:52 UTC. Fix: wrap session acquisition in an outer try-finally, add Micrometer onnxruntime.sessions.active gauge with alert threshold at 50 (6× pool max), and add Argo Rollouts canary VRAM growth rate gate to catch leaks before full-fleet promotion.",
+      "tasks": ["drill"],
+      "items_added": [
+        "ONNX Runtime CUDA Execution Provider Session Handle Leak — Java 21 gRPC Gateway Missing close() on Early-Return Validation Path Exhausts V100 VRAM After 47-Hour Canary, Full-Fleet OOM Forecast in 11 Hours (production-drills)"
+      ]
+    },
     {
       "timestamp": "2026-08-14T07:00:00Z",
       "type": "market-scan",
