@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-08-18"
+    "last_updated": "2026-08-19"
   },
   "entries": [
     {
@@ -1263,6 +1263,16 @@
         "vLLM-Omni Distributed Layerwise Offload \u2014 124 GB Cosmos3 DiT on 64 GB HBM via Sharded Weight Streaming (ml-systems)",
         "Sidekick's Continual Learning Loop: How Shopify Fine-Tuned Its Way to 96% Inference Cost Reduction (tech-talks)",
         "Hyperscaler AI inference cost and NVIDIA dependency \u2014 foundation model labs building in-house silicon to halve inference costs (business-problems)"
+      ]
+    },
+    {
+      "timestamp": "2026-08-19T00:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: CoreDNS ndots:5 Search Domain Amplification — EKS Scale-Out Saturates DNS Cache",
+      "summary": "Added a Hard Infrastructure hotfix drill: CoreDNS ndots:5 default causes 4-5 NXDOMAIN lookups per external hostname (api.stripe.com, s3.amazonaws.com) on every new pod. A 100→600 pod scale-out on AWS EKS spikes CoreDNS query rate from 1,500 to 28,500/sec, thrashing the 1,000-entry cache (hit rate drops to 13%), driving DNS P99 from 2ms to 340ms and causing 12.1% timeout rate on Stripe and S3 calls for 34 minutes ($94K revenue impact). Fix: set ndots:1 in pod dnsConfig, scale CoreDNS, and enable NodeLocal DNSCache.",
+      "tasks": ["drill"],
+      "items_added": [
+        "CoreDNS ndots:5 Search Domain Amplification — 600-Pod EKS Scale-Out Saturates DNS Cache, 340ms P99 Causes 12% Timeout Rate on Stripe and S3 API Calls for 34 Minutes (production-drills)"
       ]
     }
   ]
