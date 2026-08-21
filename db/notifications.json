@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-08-20"
+    "last_updated": "2026-08-21"
   },
   "entries": [
     {
@@ -1289,6 +1289,23 @@
       ],
       "items_added": [
         "CoreDNS ndots:5 Search Domain Amplification — 600-Pod EKS Scale-Out Saturates DNS Cache, 340ms P99 Causes 12% Timeout Rate on Stripe and S3 API Calls for 34 Minutes (production-drills)"
+      ]
+    },
+    {
+      "timestamp": "2026-08-21T08:00:00Z",
+      "type": "market-scan",
+      "title": "Friday update: drill + market signal scan",
+      "summary": "Added a Hard ML Serving hotfix drill: SageMaker Multi-Model Endpoint LRU eviction churn loop during A/B test burst — 420 concurrent model loads overwhelm the 4-thread loading pool, causing 34.3% InvocationModelErrors across 847 customer-segment model variants for 21 minutes ($840K recommendation failure impact). Market scan: France inaugurated Projet Voltaire (50K H200 GPUs, sovereign AI compute); Japan METI announced Aug 15 AI hardware subsidy; global sovereign AI spend exceeds $100B in 2026. Added sovereign AI compute, specialty GPU cloud, and AI inference routing to business-problems. Added Crusoe Cloud ($3B at $30B valuation, IPO-path) to enterpriseWatchlist.",
+      "tasks": [
+        "drill",
+        "market-scan"
+      ],
+      "items_added": [
+        "SageMaker Multi-Model Endpoint Container Memory Pressure — Background Model Unload Race During Burst Causes 34% InvocationModelErrors for 21 Minutes (production-drills)",
+        "National sovereign AI compute programs and government GPU cloud infrastructure (business-problems)",
+        "Sustainable and specialty AI GPU cloud as infrastructure-tier alternative to hyperscalers (business-problems)",
+        "Enterprise AI inference gateway and multi-cloud GPU routing platform (business-problems)",
+        "Crusoe Cloud (enterpriseWatchlist)"
       ]
     }
   ]

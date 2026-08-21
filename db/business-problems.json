@@ -11,7 +11,7 @@
       "TAM",
       "Tags"
     ],
-    "last_updated": "2026-08-17"
+    "last_updated": "2026-08-21"
   },
   "sections": [
     {
@@ -1009,6 +1009,39 @@
             "ai-coding"
           ],
           "added": "2026-08-14"
+        },
+        {
+          "problem": "National sovereign AI compute programs and government GPU cloud infrastructure",
+          "enterprise": "France Projet Voltaire (50,000 H200 GPUs, OVHcloud partnership, inaugurated August 2026); Japan METI AI hardware subsidy package (announced August 15, 2026); Canada $890M National AI Compute Program; UK £1.1B AI Compute Commitment",
+          "market_fit": "Multiple G7 nations simultaneously launched or funded sovereign AI compute programs in 2026, recognizing that dependence on US hyperscalers (AWS, Azure, GCP) for GPU infrastructure constitutes a strategic risk. France's Projet Voltaire — a 50,000 H200 GPU national cloud operated in partnership with OVHcloud — was inaugurated in August 2026, making it the largest sovereign AI compute deployment in the EU. Japan's METI announced an AI hardware subsidy package on August 15, 2026 targeting domestic GPU procurement and AI datacenter construction. Canada's $890M National AI Compute Program (2025-2026 budget) funds compute access for Canadian researchers and companies. The UK committed £1.1B to AI compute as part of its AI Action Plan. The market signal: global sovereign AI spend is expected to exceed $100B cumulatively by end of 2026. For enterprise software companies: sovereign compute programs create fragmented deployment targets — enterprises serving EU governments may be required to run inference on Projet Voltaire or equivalent national cloud, not AWS. For ML platform teams: sovereign cloud deployments require portable model serving (no AWS SageMaker-specific integrations), federated model registries, and export-controlled data isolation. The opportunity is infrastructure tooling and AI software that runs identically on AWS, Azure, GCP, and sovereign clouds without lock-in.",
+          "tam": "$100B+",
+          "tags": [
+            "infra",
+            "biz"
+          ],
+          "added": "2026-08-21"
+        },
+        {
+          "problem": "Sustainable and specialty AI GPU cloud as infrastructure-tier alternative to hyperscalers",
+          "enterprise": "Crusoe Cloud (~$30B target valuation, $3B raise in progress, IPO discussions with JPMorgan/Goldman Sachs/Morgan Stanley/BofA, July-August 2026); Lambda Labs ($2.5B+ capital raised, growth-stage); CoreWeave (public, $23B market cap)",
+          "market_fit": "The specialty AI GPU cloud category has matured to the point where multiple companies are simultaneously pursuing $10B+ valuations and public market exits. Crusoe Cloud — which builds AI-optimized datacenters powered by sustainable energy (stranded natural gas, renewable) with Meta and Oracle as anchor compute customers — is in discussions for a $3B raise at ~$30B valuation (a 10x step-up from its $2.8B Series D valuation in October 2025, achieved in under 9 months). Bloomberg reported in July 2026 that Crusoe has engaged JPMorgan, Goldman Sachs, Morgan Stanley, and BofA simultaneously for IPO preparation — the full roster of bulge-bracket banks signals a 2026 or early-2027 public debut. Michael Gordon (ex-MongoDB COO/CFO who led MongoDB's NASDAQ IPO) joined as COO/CFO in December 2025, a deliberate IPO preparation hire. Key signal for ML platform engineers: the long-term viability of non-hyperscaler AI compute at enterprise scale is now confirmed. Enterprises can safely build ML serving infrastructure on Crusoe, Lambda, or CoreWeave without betting on a single-vendor future. The differentiation from hyperscalers: dedicated AI workload optimization (not repurposed enterprise cloud capacity), sustainability credentials (stranded gas → lower carbon per GPU-hour), and no conflict-of-interest with the enterprise's own AI products. The opportunity: tooling, gateways, and orchestration layers that span hyperscaler and specialty GPU cloud simultaneously — multi-cloud GPU routing, cost arbitrage, and workload portability.",
+          "tam": "$50B+",
+          "tags": [
+            "infra",
+            "ml"
+          ],
+          "added": "2026-08-21"
+        },
+        {
+          "problem": "Enterprise AI inference gateway and multi-cloud GPU routing platform",
+          "enterprise": "DeepInfra (5T tokens/week, 190+ models, OpenAI-compatible API, Series A-stage); Together AI (Series B, $1.25B valuation); Fireworks AI (Series B); Baseten (Series B)",
+          "market_fit": "Enterprises running AI at scale face a fragmented inference market: 6+ viable GPU cloud providers (AWS Bedrock, Azure AI, GCP Vertex, Together AI, Fireworks AI, DeepInfra, Baseten, Crusoe) offer meaningfully different price-performance tradeoffs by model, time-of-day, and workload type. No single provider is cheapest or fastest for all workloads — Llama 3.1 70B may be 40% cheaper on Together AI than AWS Bedrock at 3am, but 2x slower for batch jobs at peak. The emerging enterprise requirement: an intelligent inference gateway that routes AI API calls across providers based on cost, latency, and availability SLAs — analogous to how CDNs route web traffic or how cloud cost optimization tools (Spot.io, CloudHealth) optimize EC2 spend. DeepInfra (5T tokens/week, 190+ models, OpenAI-compatible API) is the largest independent inference provider by volume. The market need: a vendor-neutral routing layer with fallback, load balancing, cost metering, and compliance controls (data residency, model version pinning) that enterprises can deploy as a managed proxy in front of all AI API calls. Current fragmentation creates real cost and reliability risk for teams sending >1B tokens/month across providers without unified observability. The opportunity is both the gateway itself (SaaS or self-hosted) and the observability/cost analytics layer on top of multi-provider inference spend.",
+          "tam": "$15B",
+          "tags": [
+            "ml",
+            "infra"
+          ],
+          "added": "2026-08-21"
         }
       ]
     }

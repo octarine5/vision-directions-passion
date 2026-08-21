@@ -402,6 +402,13 @@
       "stage": "Series C ($400M, $13.3B valuation, General Catalyst led, August 12, 2026; ~$100M ARR; 2.5M users; 75M+ apps generated)",
       "signal": "hot",
       "notes": "Largest Series C in European startup history. Generates complete deployed full-stack web apps from prompts in minutes. $100M ARR in ~18 months validates real enterprise and developer willingness to pay ($25-150/month). Category thesis: software bifurcates into expert engineering (performance/security-critical) and AI-generated 'good enough' (internal tools, MVPs, prototypes). Lovable dominates category 2. Competes with v0 by Vercel, Bolt.new, Replit Agent; differentiates on full-stack completeness + production deployment. Enterprise expansion (<10% of revenue today) is the next growth vector (SSO, audit logs, custom deploy targets). Watch: will Lovable + Cursor converge — one for generating, one for maintaining — into a complete AI software development lifecycle?"
+    },
+    {
+      "name": "Crusoe Cloud",
+      "domain": "Sustainable AI Datacenter Infrastructure (Purpose-Built GPU Cloud for AI Training and Inference)",
+      "stage": "Growth ($600M Series D at $2.8B valuation Oct 2025; targeting $3B new round at ~$30B valuation July 2026; IPO discussions ongoing with JPMorgan, Goldman Sachs, Morgan Stanley, BofA)",
+      "signal": "hot",
+      "notes": "Crusoe builds AI-optimized data centers powered by sustainable energy (stranded natural gas, renewable). Meta and Oracle as anchor compute customers with supply agreements. July 2026: Bloomberg reports $3B raise at ~$30B valuation (10x Series D valuation in <9 months). IPO discussions with all four top banks (JPM, Goldman, MS, BofA) signal 2026/early-2027 public debut. Key differentiator from CoreWeave/Lambda: sustainability focus (stranded gas → lower carbon footprint at scale) and dedicated AI workload optimization (not repurposed enterprise cloud). Michael Gordon (ex-MongoDB COO/CFO who led MongoDB's IPO) joined as COO/CFO in December 2025 — a deliberate IPO preparation hire. At $30B target, Crusoe would be among the largest AI infrastructure companies globally alongside CoreWeave. Signal for engineering teams: the specialty AI GPU cloud category is now large enough for multiple $10B+ public companies — the long-term viability of non-hyperscaler AI compute at enterprise scale is confirmed."
     }
   ],
   "careerMilestones": [
