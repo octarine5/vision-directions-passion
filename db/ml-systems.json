@@ -10,7 +10,7 @@
       "Tags",
       "Resources"
     ],
-    "last_updated": "2026-08-17"
+    "last_updated": "2026-08-24"
   },
   "sections": [
     {
@@ -1187,6 +1187,21 @@
             }
           ],
           "added": "2026-08-10"
+        },
+        {
+          "topic": "Netflix LLM Post-Training Framework \u2014 Ray Actor-Based SFT + On-Policy RL Pipeline for Production GenAI",
+          "concepts": "Netflix built an internal Post-Training Framework (published Feb 2026) on Ray that decouples modeling logic from GPU hardware via actor-based workflow orchestration. Four platform dimensions: (1) Data \u2014 standardized ingestion and preprocessing pipelines with point-in-time correctness for recommendation training data; (2) Model \u2014 pluggable adapters for foundation LLM fine-tuning (SFT) and on-policy RL (PPO/GRPO) without coupling researchers to infrastructure code; (3) Compute \u2014 transparent scaling from single-GPU to multi-node via Ray's placement group API, with automatic fault-tolerant checkpointing on node failures; (4) Workflow \u2014 DAG-based orchestration that interleaves training runs with inference rollouts (on-policy RL) without requiring researchers to manage Ray clusters directly. Key insight: treating post-training as a software engineering problem means defining explicit, versioned interfaces at each dimension boundary \u2014 this is what enables researchers to iterate on model innovation while the platform handles fault tolerance, NCCL topology, and performance optimization. Production use case at Netflix: adapting foundation LLMs for recommendation ranking, personalized artwork generation, and search reranking \u2014 tasks requiring domain-specific SFT + RL from human feedback without the scale of pre-training infrastructure. Staff+ note: the framework's Workflow abstraction is what makes on-policy RL feasible in production \u2014 interleaving a 70B parameter policy update with an inference rollout step requires coordinated compute allocation that ad-hoc scripts cannot provide reliably.",
+          "tags": [
+            "ml",
+            "infra"
+          ],
+          "resources": [
+            {
+              "title": "Netflix TechBlog: Scaling LLM Post-Training at Netflix (Feb 2026)",
+              "url": "https://netflixtechblog.com/scaling-llm-post-training-at-netflix-0046f8790194"
+            }
+          ],
+          "added": "2026-08-24"
         },
         {
           "topic": "vLLM GB200 NVL72 Disaggregated Serving \u2014 25K Total TPS per GPU on Qwen3.5-397B with NVFP4 Blackwell Kernels",

@@ -3,7 +3,7 @@
     "category": "tech-talks",
     "display_name": "Tech Talks",
     "layout": "cards",
-    "last_updated": "2026-08-17"
+    "last_updated": "2026-08-24"
   },
   "sections": [
     {
@@ -1095,6 +1095,30 @@
           "venue": "vLLM Blog (August 7, 2026)",
           "description": "Technical deep-dive into Decode Context Parallelism (DCP) in vLLM \u2014 a new execution mode that shards the KV cache across GPUs by sequence dimension during decode, delivering 3\u00d7 throughput on 128K+ context workloads vs standard tensor parallel decode by eliminating N\u00d7 KV memory amplification. Covers benchmarking methodology on H100 8-GPU nodes, composability with disaggregated prefill-decode architecture, and operational guidance (AllReduce latency trade-off) for teams serving long-context agentic workloads on NVLink vs InfiniBand clusters.",
           "added": "2026-08-10"
+        },
+        {
+          "title": "Scaling LLM Post-Training at Netflix",
+          "url": "https://netflixtechblog.com/scaling-llm-post-training-at-netflix-0046f8790194",
+          "speaker": "Netflix ML Platform Team (Baolin Li, Lingyi Liu, Binh Tang, Shaojing Li)",
+          "venue": "Netflix TechBlog (February 2026)",
+          "description": "Engineering deep-dive into Netflix's internal Post-Training Framework built on Ray \u2014 decouples modeling logic from GPU hardware via actor-based workflow orchestration. Covers four platform dimensions (Data, Model, Compute, Workflow) that abstract distributed training complexity from ML researchers; standardized pipelines from SFT to on-policy RL; and fault-tolerant checkpointing for multi-node GPU runs. Used in production to adapt foundation LLMs for recommendation, personalization, and search. The key architectural insight: treating post-training as a software engineering problem requires explicit interfaces for each dimension, not just model code.",
+          "added": "2026-08-24"
+        },
+        {
+          "title": "From Single-Node to Multi-GPU Clusters: How Discord Made Distributed Compute Easy for ML Engineers",
+          "url": "https://discord.com/blog/from-single-node-to-multi-gpu-clusters-how-discord-made-distributed-compute-easy-for-ml-engineers",
+          "speaker": "Discord Engineering",
+          "venue": "Discord Engineering Blog (October 2025)",
+          "description": "How Discord built an internal ML distributed compute platform on Ray \u2014 with a custom CLI, Dagster + KubeRay orchestration layer, and an observability tool called X-Ray \u2014 to eliminate the friction of scaling experiments from single GPU to multi-node clusters. Their first production deployment (Ads Ranking: sharded neural networks on multi-GPU clusters) delivered +200% business metric improvement and doubled Quest participation. Concrete template for platform teams tasked with building internal ML compute abstractions that prioritize developer experience.",
+          "added": "2026-08-24"
+        },
+        {
+          "title": "Rearchitecting the Workflows Control Plane for the Agentic Era",
+          "url": "https://blog.cloudflare.com/workflows-v2/",
+          "speaker": "Cloudflare Engineering",
+          "venue": "Cloudflare Blog (April 2026)",
+          "description": "Deep-dive on migrating Cloudflare Workflows from a single-shard Durable Object coordinator (V1) to a horizontally scaled V2 control plane \u2014 driven by AI agent traffic patterns that overwhelmed assumptions built for human-paced workflows. V2 supports 50,000 concurrent workflow instances (11\u00d7 V1), 300 new instances/second (3\u00d7), and 2M queued instances per workflow. Covers the zero-downtime migration of millions of live instances, the consistency tradeoffs in distributed durable execution, and why agentic orchestration demands fundamentally different control plane architecture than traditional workflow engines.",
+          "added": "2026-08-24"
         }
       ]
     }

@@ -10,7 +10,7 @@
       "Tags",
       "Resources"
     ],
-    "last_updated": "2026-08-10"
+    "last_updated": "2026-08-24"
   },
   "sections": [
     {
@@ -1307,6 +1307,21 @@
             }
           ],
           "added": "2026-08-10"
+        },
+        {
+          "topic": "Durable Execution Control Plane Design — Cloudflare Workflows V2 for Agentic Orchestration at Scale",
+          "concepts": "Cloudflare published (April 2026) a deep-dive on rearchitecting Workflows' Durable Objects-based control plane for AI agent traffic patterns that fundamentally differ from human-paced workflows. V1 problem: a single Durable Object per account acted as the central registry and coordinator, serializing all workflow creation/state operations — fine for human-triggered workflows at O(1–10) concurrent instances, but failing at O(10K) concurrent AI agent workflows per account. V2 architecture: (1) Horizontal sharding — the account coordinator is replaced by a consistent-hash ring of Durable Objects; each workflow instance routes to a stable shard by workflow ID, eliminating the single-object bottleneck. (2) Capacity improvements — 50,000 concurrent instances per account (11× V1's 4,500), 300 new instances/second (3× V1), 2M queued instances per workflow. (3) Zero-downtime migration — millions of live V1 instances migrated by versioning the Durable Object namespace and lazy-migrating on first access; no rollover window required. Key design lesson for agentic infrastructure: control planes sized for human-driven automation fail at AI agent concurrency within months; design the concurrency budget as a first-class capacity dimension from day one. Parallel to Lambda/Step Functions scaling challenges, but tighter because Durable Objects provide per-instance state — the hard problem isn't compute scheduling, it's consistent distributed state at high instance churn rate. Staff+ design note: the consistent-hash ring for workflow routing is the core architectural change; adding shards requires rebalancing, so Cloudflare uses virtual nodes (256 per physical shard) to minimize resharding cost as the ring grows.",
+          "tags": [
+            "infra",
+            "scale"
+          ],
+          "resources": [
+            {
+              "title": "Cloudflare Blog: Rearchitecting the Workflows Control Plane for the Agentic Era (April 2026)",
+              "url": "https://blog.cloudflare.com/workflows-v2/"
+            }
+          ],
+          "added": "2026-08-24"
         }
       ]
     }

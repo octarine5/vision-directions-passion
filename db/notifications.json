@@ -2,9 +2,27 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-08-21"
+    "last_updated": "2026-08-24"
   },
   "entries": [
+    {
+      "timestamp": "2026-08-24T07:00:00Z",
+      "type": "knowledge-base",
+      "title": "Monday update: drill + knowledge base refresh",
+      "summary": "Added a Hard distributed-systems hotfix drill: Apache Pulsar BookKeeper bookie-3 crosses diskUsageWarnThreshold (95.7%) and enters READ_ONLY mode, triggering simultaneous ledger rollover attempts across 18 Flink ML feature jobs — queuing behind managedLedgerMaxOutstandingLedgerCreate=16 causes two jobs to timeout and 14 topics to hit their backlog ceiling, halting 94% of feature writes for 28 minutes ($78K impact). Monday KB refresh: added Netflix LLM post-training framework (Ray actor-based SFT+RL), Cloudflare Workflows V2 agentic control plane redesign, three new tech talks (Netflix post-training, Discord multi-GPU ML platform, Cloudflare Workflows V2).",
+      "tasks": [
+        "drill",
+        "knowledge-base"
+      ],
+      "items_added": [
+        "Apache Pulsar BookKeeper Bookie READ_ONLY Disk Alarm — Ledger Rollover Storm Stalls 18 Flink Feature Jobs for 28 Minutes (production-drills)",
+        "Netflix LLM Post-Training Framework — Ray Actor-Based SFT + On-Policy RL Pipeline for Production GenAI (ml-systems)",
+        "Durable Execution Control Plane Design — Cloudflare Workflows V2 for Agentic Orchestration at Scale (system-design)",
+        "Scaling LLM Post-Training at Netflix (tech-talks)",
+        "From Single-Node to Multi-GPU Clusters: How Discord Made Distributed Compute Easy for ML Engineers (tech-talks)",
+        "Rearchitecting the Workflows Control Plane for the Agentic Era (tech-talks)"
+      ]
+    },
     {
       "timestamp": "2026-08-20T16:16:09Z",
       "type": "drill",
