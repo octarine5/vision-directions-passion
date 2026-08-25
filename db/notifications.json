@@ -2,9 +2,21 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-08-24"
+    "last_updated": "2026-08-25"
   },
   "entries": [
+    {
+      "timestamp": "2026-08-25T07:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: Rust Axum Fraud Scoring — tokio spawn_blocking Pool Deadlock Starves All Async Workers for 14 Minutes",
+      "summary": "Added a Hard ML Serving hotfix drill: a Rust axum fraud scoring service on GCP n2-highcpu-48 enters a tokio async-executor deadlock during a 3× flash sale traffic spike (850→2,580 req/sec) — all 512 spawn_blocking threads saturate running ONNX CPU inference, causing all 48 async worker threads to park awaiting JoinHandles, collapsing the TCP acceptor loop and producing 78.3% Envoy upstream timeouts for 14 minutes ($89K in unscreened transactions). Fix: replace spawn_blocking with a 48-thread Rayon pool + Semaphore backpressure returning HTTP 429.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "Rust Axum Fraud Scoring Service — tokio spawn_blocking Pool Deadlock: ONNX CPU Inference Starves All Async Workers, Complete Service Unresponsiveness for 14 Minutes During Flash Sale (production-drills)"
+      ]
+    },
     {
       "timestamp": "2026-08-24T07:00:00Z",
       "type": "knowledge-base",
