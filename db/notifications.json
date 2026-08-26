@@ -2,9 +2,21 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-08-25"
+    "last_updated": "2026-08-26"
   },
   "entries": [
+    {
+      "timestamp": "2026-08-26T07:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: vLLM LoRA Adapter S3 Multipart Upload Byte-Range Collision — Corrupted Weights Serve Wrong Outputs for 14% of Traffic, Undetected 46 Minutes",
+      "summary": "Added a Hard ML Serving hotfix drill: an S3 multipart upload retry bug (HTTP 503 on part 6) reuses part 5's byte range offset, silently duplicating 107 MB of LoRA adapter weights and leaving 107 MB of data missing. safetensors loads the structurally valid but semantically corrupted file without error; 18 of 32 LoRA-B weight tensors contain inflated or deflated norms. vLLM routes 14% of production traffic to the corrupted customer-support-v2 adapter, returning HTTP 200 with plausible but factually wrong support responses for 46 minutes until a golden-set quality eval Lambda detects semantic similarity drop from 0.88 to 0.61. Fix: disable adapter routing immediately, SHA-256 end-to-end upload verification, safetensors weight norm validation gate, and reduced quality eval cadence for new adapters.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "vLLM LoRA Adapter S3 Multipart Upload Byte-Range Collision — Corrupted Weights Serve Structurally Valid but Semantically Wrong Outputs for 14% of Production Traffic, Undetected for 46 Minutes (production-drills)"
+      ]
+    },
     {
       "timestamp": "2026-08-25T07:00:00Z",
       "type": "drill",
