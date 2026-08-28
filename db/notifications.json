@@ -2,9 +2,27 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-08-27"
+    "last_updated": "2026-08-28"
   },
   "entries": [
+    {
+      "timestamp": "2026-08-28T07:00:00Z",
+      "type": "market-scan",
+      "title": "Friday update: drill + market signal scan",
+      "summary": "Added a Hard ML Serving hotfix drill: TensorFlow Serving batching timeout inversion after hot-swapping a 220M BERT ranker (RecSys-v7) to a 7B cross-encoder (RecSys-v8) on GKE Autopilot — batch_timeout_micros=3000 (optimal for 2ms BERT inference) triggers at 3ms when 7B model needs 214ms/batch, fragmenting batches to avg size 5.5 items and collapsing TFS throughput from 1,847 RPS to 103 items/sec. grpc::StatusCode::RESOURCE_EXHAUSTED is translated by Envoy to HTTP 429, bypassing PagerDuty (scoped to 5xx only). Python tenacity.retry amplifies TFS load 3× to 5,541 req/sec. Undetected 34 minutes until recommendation diversity score collapses (0.84 → 0.12). $94K estimated impact. Market signal scan (Aug 21-28, 2026): Stripe acquired OpenRouter for $7B+ (Aug 16) — AI inference routing absorbed into payment infrastructure; Dynatrace acquired Arize AI for $915M (Aug 13) — ML observability consolidates into enterprise APM; River AI raised $1.1B pre-product led by General Catalyst (Aug 11, 2 months old) — largest pre-product AI raise ever, betting on regulated-industry sovereign AI infrastructure.",
+      "tasks": [
+        "drill",
+        "market-scan"
+      ],
+      "items_added": [
+        "TensorFlow Serving Batching Timeout Inversion After 7B Model Swap — HTTP 429 Storm Undetected 34 Minutes, Python Retry Amplification Triples TFS Load on GKE Autopilot (production-drills)",
+        "AI inference routing consolidation into financial infrastructure — OpenRouter acquired by Stripe for $7B+ (business-problems)",
+        "ML observability consolidation into enterprise APM — Arize AI acquired by Dynatrace for $915M (business-problems)",
+        "Pre-product AI foundation infrastructure for regulated enterprise domains — River AI $1.1B at 2 months old (business-problems)",
+        "OpenRouter (enterpriseWatchlist)",
+        "River AI (enterpriseWatchlist)"
+      ]
+    },
     {
       "timestamp": "2026-08-27T07:00:00Z",
       "type": "drill",
