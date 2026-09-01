@@ -2,9 +2,21 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-08-31"
+    "last_updated": "2026-09-01"
   },
   "entries": [
+    {
+      "timestamp": "2026-09-01T07:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: AWS CloudWatch EMF Log Group PutLogEvents Throttle — Lambda Inference Cluster Metrics Go Dark, 7 Error Rate Alarms Enter INSUFFICIENT_DATA for 51 Minutes",
+      "summary": "Added a Hard metrics drill: 5 new voice-assistant Lambda functions sharing the /aws/lambda/inference-cluster-prod log group push combined EMF throughput from 2.1 MB/s to 4.8 MB/s, triggering silent CloudWatch PutLogEvents throttling. EMF metric payloads are dropped without error to the Lambda runtime; 7 CloudWatch Alarms enter INSUFFICIENT_DATA; the composite InferenceCluster-P1 alarm treats them as non-alerting (not ALARM). A 23% tokenizer error rate on Japanese/Korean voice inference requests goes undetected for 51 minutes across 43,000 requests. Fix: split log groups by Lambda family, set treat-missing-data: breaching on all composite alarm children, and alert on AWS/Logs ThrottledLogEvents > 0.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "AWS CloudWatch EMF Log Group PutLogEvents Throttle — Lambda Inference Cluster Metrics Go Dark After Feature Launch Doubles Log Volume, 7 Error Rate Alarms Enter INSUFFICIENT_DATA for 51 Minutes (production-drills)"
+      ]
+    },
     {
       "timestamp": "2026-08-31T07:00:00Z",
       "type": "knowledge-base",
