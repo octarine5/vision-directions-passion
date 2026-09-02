@@ -2,9 +2,21 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-09-01"
+    "last_updated": "2026-09-02"
   },
   "entries": [
+    {
+      "timestamp": "2026-09-02T07:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: Temporal.io Workflow History Shard Hotspot — Deterministic ML Training Sweep IDs Concentrate Aurora PostgreSQL Writes, Payment Namespace Starved for 23 Minutes",
+      "summary": "Added a Hard distributed-systems hotfix drill: a Go ML engineer launches a 4,000-workflow Temporal.io hyperparameter sweep with deterministic IDs sharing the 27-character prefix 'sweep_v4_llm-ranker-large_' — FNV-1a hash clustering concentrates 71% of child workflows onto shards 3, 7, and 11 (all on the same Aurora PostgreSQL writer), driving WriteIOPS to 17,800/20,000 cap and CPUUtilization to 96.4%. The shared Aurora writer starves the payments-prod namespace despite those shards being unaffected, blocking 312 payment settlement workflows ($4.8M in transactions) and idling 128 A100 GPU nodes ($1,563 waste) for 23 minutes. Fix: inject 4-byte random entropy prefix into workflow IDs, add pre-launch shard distribution validation gate (fail if max/avg shard ratio > 2.0), and namespace rate limit MaxWorkflowExecutionsPerSecond=200 on ml-training-prod.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "Temporal.io Workflow History Shard Hotspot — Deterministic ML Training Sweep IDs Concentrate Aurora PostgreSQL Writes, Payment Namespace Starved for 23 Minutes (production-drills)"
+      ]
+    },
     {
       "timestamp": "2026-09-01T07:00:00Z",
       "type": "drill",
