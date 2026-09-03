@@ -2,9 +2,21 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-09-02"
+    "last_updated": "2026-09-03"
   },
   "entries": [
+    {
+      "timestamp": "2026-09-03T07:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: GCP Pub/Sub Subscription AckDeadline Under-Provisioned for Dataflow GroupByKey Shuffle — Dense Feature Addition Triggers Redelivery Storm, Cloud Bigtable Mutation Rate 12× Sustained Limit for 31 Minutes",
+      "summary": "Added a Hard distributed-systems hotfix drill: a data scientist adds purchase_sequence_embedding_v4 (512-dim float32, stored as 512 individual Bigtable cells) to the Dataflow Streaming user-feature-v3 pipeline, pushing GroupByKey shuffle P99 from 7.8s to 13.4s — just above the 10-second Pub/Sub ackDeadlineSeconds set at subscription creation. Pub/Sub begins redelivering each unacked message 2.1–3.7×; 512 cells × avg 2.9 replays = 1,484 Bigtable mutations per user per window (12.3× amplification), spiking Cloud Bigtable to 284,000 mutations/sec vs the 4-node limit of 24,000/sec and driving P99 to 4,847ms for 31 minutes. Fix: drain the Dataflow job to stop the mutation storm, extend ackDeadlineSeconds to 300, serialize the embedding as a single proto bytes cell, and enforce a CI ack-deadline validator gate on all pipeline config PRs.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "GCP Pub/Sub Subscription AckDeadline Under-Provisioned for Dataflow GroupByKey Shuffle — Dense Feature Addition Triggers Redelivery Storm, Cloud Bigtable Mutation Rate 12× Sustained Limit for 31 Minutes (production-drills)"
+      ]
+    },
     {
       "timestamp": "2026-09-02T07:00:00Z",
       "type": "drill",
