@@ -11,7 +11,7 @@
       "TAM",
       "Tags"
     ],
-    "last_updated": "2026-08-28"
+    "last_updated": "2026-09-04"
   },
   "sections": [
     {
@@ -1082,6 +1082,56 @@
             "compliance"
           ],
           "added": "2026-08-28"
+        },
+        {
+          "problem": "Multi-silicon inference orchestration — hardware-agnostic AI inference cloud routing agentic AI workloads across heterogeneous accelerators (NVIDIA, AMD, Arm) via a single API",
+          "company": "Gimlet Labs",
+          "stage": "Series B ($300M, $3B valuation, September 4, 2026; a16z led + Arm + Microsoft M12 as strategic investors)",
+          "tam": "$15B (inference compute market, hardware-agnostic routing layer)",
+          "signal": "Gimlet Labs raised $300M at a $3B valuation on September 4, 2026 — led by a16z with Arm and Microsoft M12 as new strategic investors. Gimlet builds the industry's first multi-silicon inference cloud: software that routes AI inference workloads across heterogeneous accelerators (NVIDIA, AMD, Arm) via a single API, eliminating hardware vendor lock-in. The round came 6 months after an $80M raise and was triggered by multiple unsolicited term sheets from hyperscalers. Strategic significance: Arm and Microsoft's co-investment signals that chip vendors view Gimlet's routing layer as distribution infrastructure for their silicon. For ML engineers: multi-silicon routing enables cost-performance optimization across GPU types that single-vendor inference clouds (CoreWeave, Lambda) cannot provide — directly relevant to agentic AI workloads where inference latency and cost vary 4–6× across accelerator types.",
+          "tags": [
+            "ml",
+            "infra",
+            "inference",
+            "multi-silicon",
+            "agentic-ai",
+            "hardware-agnostic"
+          ],
+          "added": "2026-09-04"
+        },
+        {
+          "problem": "Physical AI perception silicon for robotics — custom SoC + multimodal sensors + LyteVision spatial software enabling real-time spatial perception in unstructured environments",
+          "company": "Lyte",
+          "stage": "Series C ($165M, $1.6B valuation — 3× jump, September 2, 2026; Maverick Silicon led + Fidelity + Atreides + Key1 Capital; $272M total raised)",
+          "tam": "$20B (physical AI perception hardware and software for robotics and industrial automation)",
+          "signal": "Lyte raised $165M Series C at a $1.6B valuation (3× valuation increase) on September 2, 2026, led by Maverick Silicon. Founded by ex-Apple and ex-PrimeSense engineers (PrimeSense built the 3D sensing technology Apple acquired for Face ID). Builds custom perception silicon (AI SoC), multimodal sensors, and LyteVision spatial software for intelligent robotics. Distinct from general-purpose AI chip companies: Lyte's silicon is optimized for real-time spatial perception — depth sensing, 3D mapping, object recognition in unstructured environments. The Maverick Silicon + Fidelity investor combination signals institutional conviction that physical AI perception hardware is a distinct category from data-center AI silicon. Relevant to ML platform engineers building inference pipelines for robotics: Lyte's custom SoC offers on-device inference for perception tasks that cannot tolerate round-trip cloud latency.",
+          "tags": [
+            "ml",
+            "infra",
+            "robotics",
+            "physical-ai",
+            "silicon",
+            "perception",
+            "edge-inference"
+          ],
+          "added": "2026-09-04"
+        },
+        {
+          "problem": "AI GPU cloud as strategic financial infrastructure tier — institutional quant trading firms treating dedicated GPU compute as core infrastructure at the $13B+ contract scale",
+          "company": "Crusoe Cloud (confirmed $3B at $30B + Jane Street $13B contract)",
+          "stage": "Growth ($3B confirmed at $30B valuation, September 3, 2026; Atreides + Valor + Mubadala Capital; $13B Jane Street 5-year compute contract; IPO discussions ongoing)",
+          "tam": "$50B+ (dedicated AI GPU cloud for financial services, AI training, and inference)",
+          "signal": "Crusoe confirmed its $3B funding round at a $30B valuation on September 3, 2026, with Jane Street signing a $13B five-year compute contract simultaneously. This is the single largest AI infrastructure contract in history and validates a new category: dedicated GPU cloud as strategic financial infrastructure. Jane Street's $13B bet signals that top-tier quant trading firms now treat GPU compute the way they treat prime brokerage and clearing — as non-negotiable, purpose-built, institutional-grade infrastructure, not shared-tenant cloud. Implications for ML platform engineers: (1) the AI GPU cloud market is large enough for multiple $10B+ public companies alongside CoreWeave; (2) financial services is the surprise anchor tenant driving GPU cloud economics; (3) Crusoe's IPO (JPMorgan, Goldman, MS, BofA all advising) will be a sector-defining data point for AI infrastructure valuations in 2026–2027.",
+          "tags": [
+            "infra",
+            "ml",
+            "biz",
+            "gpu-cloud",
+            "financial-services",
+            "ipo",
+            "institutional"
+          ],
+          "added": "2026-09-04"
         }
       ]
     }

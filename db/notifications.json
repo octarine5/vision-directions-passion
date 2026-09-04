@@ -2,9 +2,25 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-09-03"
+    "last_updated": "2026-09-04"
   },
   "entries": [
+    {
+      "timestamp": "2026-09-04T07:00:00Z",
+      "type": "market-scan",
+      "title": "Friday update: drill + market signal scan",
+      "summary": "Added a Hard ML Serving hotfix drill: Java 21 virtual thread pinning on TensorFlow JNI causes Vertex AI custom container gRPC handler deadlock — spring.threads.virtual.enabled=true routes gRPC threads to virtual threads which pin carrier threads on TensorFlow's synchronized(this) { nativeRun(...); } block; all 8 vCPU carrier threads saturate at 847ms/request with 2,048-item A/B test payloads; Undertow /health returns 200 masking the deadlock for 38 minutes; 12,840 ranking requests fail, 4.2M users receive default rankings ($94K CTR impact). Fix: disable virtual threads or replace synchronized with ReentrantLock. Market signal scan (Aug 28 – Sep 4, 2026): Gimlet Labs raises $300M Series B at $3B (a16z + Arm + Microsoft M12, Sep 4) — industry's first multi-silicon inference cloud routes agentic AI workloads across heterogeneous accelerators; Lyte raises $165M Series C at $1.6B (Maverick Silicon + Fidelity, Sep 2) — ex-Apple/PrimeSense team builds physical AI perception silicon + LyteVision for robotics; Crusoe confirms $3B at $30B valuation (Atreides + Valor + Mubadala, Sep 3) with $13B Jane Street 5-year compute contract — GPU cloud validated as strategic financial infrastructure.",
+      "tasks": ["drill", "market-scan"],
+      "items_added": [
+        "Java 21 Virtual Thread Pinning on TensorFlow JNI — Vertex AI Custom Container gRPC Handlers Deadlock on Carrier Thread Saturation (production-drills)",
+        "Multi-silicon inference orchestration — Gimlet Labs $300M Series B at $3B, hardware-agnostic agentic AI inference cloud (business-problems)",
+        "Physical AI perception silicon for robotics — Lyte $165M Series C at $1.6B, LyteVision platform (business-problems)",
+        "AI GPU cloud as financial quant infrastructure tier — Crusoe $3B confirmed at $30B + Jane Street $13B contract (business-problems)",
+        "Gimlet Labs (enterpriseWatchlist)",
+        "Lyte (enterpriseWatchlist)",
+        "Crusoe Cloud (watchlist update: $3B confirmed at $30B + $13B Jane Street contract)"
+      ]
+    },
     {
       "timestamp": "2026-09-03T07:00:00Z",
       "type": "drill",

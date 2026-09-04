@@ -3,7 +3,7 @@
     "category": "production-drills",
     "display_name": "Production Drills",
     "layout": "drills",
-    "last_updated": "2026-09-03"
+    "last_updated": "2026-09-04"
   },
   "sections": [
     {
@@ -1076,6 +1076,27 @@
             "timeout-inversion"
           ],
           "added": "2026-08-28"
+        },
+        {
+          "drill": "Java 21 Virtual Thread Pinning on TensorFlow JNI — Vertex AI Custom Container gRPC Handlers Deadlock on Carrier Thread Saturation",
+          "layer": "Hotfix / ML Serving (GCP Vertex AI Managed Online Endpoint / Java 21 / Spring Boot 3.2.4 / TensorFlow Java 0.5.0 / gRPC)",
+          "difficulty": "Hard",
+          "scenario": "At 14:22 UTC, PagerDuty fires: 'vertex_ai_online_prediction_error_rate{model_id=\"ranker-v7\",endpoint=\"prod-ranking\"} = 100% for 5 consecutive minutes.' The ranker-v7 endpoint (Vertex AI Managed Online Endpoint, us-central1, n1-standard-8 × 3 replicas) runs a Java 21 custom container: Spring Boot 3.2.4 + gRPC + TensorFlow Java 0.5.0 for a GBDT-hybrid ranking model. A platform engineer set spring.threads.virtual.enabled=true in application.yml 10 days earlier as a blanket latency optimization — transparently switching the gRPC thread executor to Java 21 virtual threads (JEP 444).\n\nAt 14:18 UTC, a new A/B test cohort starts sending 2,048-item candidate sets (vs. the typical 512). Each ranking request calls TensorFlow Java Session.run() with a 4× larger input tensor, increasing per-call latency from 12ms to 847ms.\n\nThe deadlock: TensorFlow Java 0.5.0's Session.run() wraps all native JNI calls in an intrinsic synchronized block — synchronized (this) { nativeRun(...); }. Java 21 virtual threads pin to their OS carrier thread whenever they enter an intrinsic monitor. The n1-standard-8 provides 8 vCPUs → 8 OS carrier threads. With 847ms per Session.run() and incoming gRPC concurrency > 8, all 8 carriers pin simultaneously by 14:22 UTC. No new virtual thread can be scheduled. gRPC acceptor queues incoming requests indefinitely — zero predictions complete.\n\nCritical detection gap: the /health Undertow endpoint runs on a dedicated platform thread, not a virtual thread — it returns HTTP 200 continuously. Vertex AI's health check does not verify prediction throughput, only HTTP liveness. The endpoint stays InService for 38 minutes while serving zero predictions. Vertex AI Monitoring shows: prediction/online/request_count = 0/sec (idle-looking, not erroring); prediction/online/latencies = empty. Client-side Go upstream logs: 'rpc error: code = DeadlineExceeded desc = context deadline exceeded after 30s' at 100% from 14:22 UTC. 12,840 ranking requests fail. 4.2M users receive default rankings. Estimated CTR impact: -14% ($94K).",
+          "exercise": "1. Diagnose: Check Go upstream service logs — 100% DeadlineExceeded from 14:22 UTC confirms no predictions completing. Query Vertex AI Monitoring prediction/online/request_count response_code breakdown — zero 4xx/5xx but also zero 2xx, confirming silent starvation. Get a JVM thread dump: gcloud compute ssh into the node (if GKE-hosted) or use kubectl exec, then run jcmd $(pgrep java) Thread.print | grep -A10 'BLOCKED\\|parking'. All 8 carrier threads show BLOCKED waiting for the TensorFlow Session synchronized monitor lock. Reproduce in staging: write a JUnit test submitting 32 concurrent Session.run() calls via virtual threads on an 8-vCPU node — execution halts after 8 concurrent calls.\n2. Immediate mitigation: Shift 100% traffic to the warmed ranker-v6 endpoint via the Vertex AI traffic split: gcloud ai endpoints deploy-model prod-ranking --region=us-central1 --model=ranker-v6 --traffic-split=ranker-v7=0,ranker-v6=100. Error rate drops to 0% within 60 seconds. Total outage: 38 minutes. Retain ranker-v7 for post-incident root-cause analysis.\n3. Root cause: spring.threads.virtual.enabled=true routes ALL Spring Boot thread pools to JEP 444 virtual threads. TensorFlow Java 0.5.0 uses synchronized(this) { nativeRun(); } for thread-safe JNI lifecycle management. Java 21 virtual threads park (pin) to their OS carrier thread on any intrinsic monitor entry — they cannot be unmounted during synchronized blocks. With 8 vCPUs providing 8 carrier threads and 847ms per synchronized nativeRun(), 8 concurrent requests saturate all carriers indefinitely. The Undertow /health thread is a platform thread, not a virtual thread — it is immune to this starvation, creating a fatal monitoring blind spot. Validate: add JVM flag -Djdk.tracePinnedThreads=full and reproduce — JFR events confirm pinning source is com.tensorflow.Session:synchronized.\n4. Fix — Option A (immediate): Disable virtual threads globally: set spring.threads.virtual.enabled=false in application.yml and redeploy ranker-v7. Option B (correct): Replace TensorFlow Java Session's synchronized block with java.util.concurrent.locks.ReentrantLock — virtual threads can park during ReentrantLock.lock() without pinning their carrier. Patch: private final ReentrantLock lock = new ReentrantLock(); public Tensor run(Tensor t) { lock.lock(); try { return nativeRun(t); } finally { lock.unlock(); } }. Option C: Upgrade to TensorFlow Java 0.5.2+ which ships with ReentrantLock replacing synchronized in Session (JEP 444 compatibility backport). Build and push: ./gradlew jib --image=gcr.io/project/ranker:v8-vtfixed.\n5. Validate: Gatling load test (400 concurrent gRPC clients, 30-second ramp at 4×-size payloads): gatling run --simulation RankerLoadTest. Monitor JVM carrier thread state via JFR — assert zero VirtualThreadPinned events during the 847ms-latency window. Confirm Vertex AI prediction/online/request_count recovers to baseline 1,200 RPS with P99 < 120ms.\n6. Prevent: (a) Semgrep CI rule: flag any synchronized block inside a class with JNI, Native, or Session in the name when spring.threads.virtual.enabled=true is present in the project. Block merge. (b) JFR alert: configure GCP Cloud Monitoring to capture JFR VirtualThreadPinned events > 10 in 60 seconds → PagerDuty P2 'JVM virtual thread pinning detected — carrier saturation risk'. (c) Add throughput canary: a Cloud Scheduler job fires a prediction request every 60 seconds and asserts a valid response — would have fired at 14:23 UTC (T+1 min) instead of T+38 min via the client timeout alarm. (d) Vertex AI health check fix: extend /health to include a Session.run() probe with a 100ms timeout — if the synchronized monitor is saturated, the probe blocks, the endpoint returns 503, and Vertex AI replaces the unhealthy instance automatically.",
+          "tags": [
+            "java-21",
+            "virtual-threads",
+            "jni",
+            "tensorflow-java",
+            "grpc",
+            "vertex-ai",
+            "gcp",
+            "spring-boot",
+            "ml-serving",
+            "deadlock",
+            "thread-pinning"
+          ],
+          "added": "2026-09-04"
         }
       ]
     },

@@ -406,7 +406,7 @@
     {
       "name": "Crusoe Cloud",
       "domain": "Sustainable AI Datacenter Infrastructure (Purpose-Built GPU Cloud for AI Training and Inference)",
-      "stage": "Growth ($600M Series D at $2.8B valuation Oct 2025; targeting $3B new round at ~$30B valuation July 2026; IPO discussions ongoing with JPMorgan, Goldman Sachs, Morgan Stanley, BofA)",
+      "stage": "Growth ($600M Series D at $2.8B valuation Oct 2025; $3B confirmed at $30B valuation Sep 3, 2026; Atreides + Valor + Mubadala Capital; $13B Jane Street 5-year compute contract; IPO discussions with JPMorgan, Goldman Sachs, Morgan Stanley, BofA)",
       "signal": "hot",
       "notes": "Crusoe builds AI-optimized data centers powered by sustainable energy (stranded natural gas, renewable). Meta and Oracle as anchor compute customers with supply agreements. July 2026: Bloomberg reports $3B raise at ~$30B valuation (10x Series D valuation in <9 months). IPO discussions with all four top banks (JPM, Goldman, MS, BofA) signal 2026/early-2027 public debut. Key differentiator from CoreWeave/Lambda: sustainability focus (stranded gas → lower carbon footprint at scale) and dedicated AI workload optimization (not repurposed enterprise cloud). Michael Gordon (ex-MongoDB COO/CFO who led MongoDB's IPO) joined as COO/CFO in December 2025 — a deliberate IPO preparation hire. At $30B target, Crusoe would be among the largest AI infrastructure companies globally alongside CoreWeave. Signal for engineering teams: the specialty AI GPU cloud category is now large enough for multiple $10B+ public companies — the long-term viability of non-hyperscaler AI compute at enterprise scale is confirmed."
     },
@@ -423,6 +423,20 @@
       "stage": "Seed/Series A ($1.1B raised, General Catalyst led, August 11, 2026; 2 months old; pre-product; $3B+ implied valuation)",
       "signal": "hot",
       "notes": "River AI raised $1.1B on August 11, 2026 — the largest pre-product AI funding round in history — at just 2 months old, led by General Catalyst. Founded by ex-OpenAI, ex-DeepMind, and ex-Waymo engineers. Building AI foundation model infrastructure for regulated industries (HIPAA, FedRAMP, SOC2) that cannot deploy commercial cloud APIs due to data sovereignty requirements. The $1.1B pre-product raise is a pure institutional bet on the size of the regulated enterprise AI TAM ($30B+). For staff+ ML engineers: River AI represents the thesis that regulated industries (healthcare, legal, government) will be a distinct AI infrastructure category requiring compliance-native sovereign AI stacks — not cloud APIs, not open-source self-hosting, but a purpose-built certified AI foundation. If River ships, it creates a third category alongside (1) cloud APIs (OpenAI, Anthropic) and (2) self-hosted open-source (Llama, Mistral). Watch: first product announcement and design partner list expected late 2026. Key risk: $1.1B runway with no product and pressure to certify against HIPAA/FedRAMP simultaneously is the hardest possible GTM path."
+    },
+    {
+      "name": "Gimlet Labs",
+      "domain": "Multi-Silicon Inference Orchestration (Hardware-Agnostic AI Inference Cloud for Agentic AI)",
+      "stage": "Series B ($300M, $3B valuation, September 4, 2026; a16z led + Arm + Microsoft M12)",
+      "signal": "hot",
+      "notes": "Gimlet Labs raised $300M at a $3B valuation on September 4, 2026 — led by a16z with Arm and Microsoft M12 as new strategic investors. Gimlet builds the industry's first multi-silicon inference cloud: software that routes AI inference workloads across heterogeneous accelerators (NVIDIA, AMD, Arm) via a single API, eliminating hardware lock-in. The round came just 6 months after a $80M raise and was triggered by multiple unsolicited term sheets — validation that enterprise demand for hardware-agnostic inference routing is at inflection. Strategic significance: Arm and Microsoft's co-investment signals that chip vendors view Gimlet's routing layer as distribution infrastructure for their silicon. For ML engineers: multi-silicon routing enables cost-performance optimization across GPU types that single-vendor inference clouds (CoreWeave, Lambda) cannot provide."
+    },
+    {
+      "name": "Lyte",
+      "domain": "Physical AI Perception Silicon + Spatial Software for Robotics (Custom SoC + LyteVision Platform)",
+      "stage": "Series C ($165M, $1.6B valuation 3× jump, September 2, 2026; Maverick Silicon led + Fidelity + Atreides + Key1 Capital)",
+      "signal": "hot",
+      "notes": "Lyte raised $165M Series C at $1.6B valuation (3× increase) on September 2, 2026, led by Maverick Silicon. Founded by ex-Apple and PrimeSense (Israeli 3D-sensing company acquired by Apple) engineers. Builds custom perception silicon (AI SoC), multimodal sensors, and LyteVision spatial software for intelligent robotics. $272M total raised since founding in 2021. Use of funds: scale production of sensing silicon, advance AI and perception capabilities, expand deployments with robotics companies and industrial customers. Distinct from general-purpose AI chip companies: Lyte's silicon is optimized for real-time spatial perception in robotics — depth sensing, 3D mapping, object recognition in unstructured environments. The Maverick Silicon + Fidelity investor combination signals institutional conviction in the robotics perception hardware category."
     }
   ],
   "careerMilestones": [
