@@ -2,9 +2,19 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-09-07"
+    "last_updated": "2026-09-08"
   },
   "entries": [
+    {
+      "timestamp": "2026-09-08T07:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: TorchServe 0.9.0 BatchAggregator ReentrantLock Livelock — Flash-Sale RPS Spike Freezes All GPU Workers on Azure AKS",
+      "summary": "Added a Hard ML Serving hotfix drill: TorchServe 0.9.0's BatchAggregator thread holds a global ReentrantLock while iterating over all 8 worker channel poll() calls; under a 4.5× RPS spike (4,200 → 18,700 RPS), nginx load-imbalance leaves worker channel 7 empty, causing the BatchAggregator to hold the lock for the full 50ms poll timeout repeatedly — starving all high-traffic workers from replenishing their queues. All 8 worker channels fill to capacity in under 1 second, GPU utilization drops to 0%, and 34.8M ranking requests fail over 31 minutes. Fix: upgrade to TorchServe 0.9.2 (per-channel lock release fix) and add a GPU-idle + full-queue composite Azure Monitor alert.",
+      "tasks": ["drill"],
+      "items_added": [
+        "TorchServe 0.9.0 BatchAggregator ReentrantLock Livelock — Flash-Sale RPS Spike Freezes All GPU Workers, 34.8M Failed Ranking Requests Over 31 Minutes on Azure AKS (production-drills)"
+      ]
+    },
     {
       "timestamp": "2026-09-07T07:00:00Z",
       "type": "knowledge-base",
