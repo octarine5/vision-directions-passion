@@ -2,9 +2,19 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-09-09"
+    "last_updated": "2026-09-10"
   },
   "entries": [
+    {
+      "timestamp": "2026-09-10T07:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: Kafka Connect JDBC Source Connector Timestamp Watermark Race — EC2 NTP Clock Drift Permanently Skips 284K ML Training Rows, Recommendation CTR Degrades 6.3% Over 72 Hours",
+      "summary": "Added a Hard distributed-systems hotfix drill: Kafka Connect 3.7 JDBC source connector in timestamp+incrementing mode (timestamp.delay.interval.ms=0) permanently skips 284,001 ML training rows after a 3.1-second NTP sync gap on 6 of 32 EC2 workers causes their application-side created_at timestamps to lag 2.78 seconds behind UTC. The accurate-clock workers advance the connector watermark to 01:37:24.891 before the drifted workers' rows (created_at 01:36:47–01:37:22) are inserted; all 284,001 rows are permanently below the watermark and never polled. No error log fires. The SageMaker training job completes successfully on a 8.15% incomplete dataset, producing a recommendation model that under-ranks electronics, luxury, and sporting goods categories — CTR declines 6.3% over 72 hours before discovery at Thursday standup. Fix: set timestamp.delay.interval.ms=120000 for a 2-minute late-arrival buffer; replay the missing rows via connector offset reset; migrate to server-side PostgreSQL timestamps to eliminate clock-skew races.",
+      "tasks": ["drill"],
+      "items_added": [
+        "Kafka Connect JDBC Source Connector Timestamp Watermark Race — EC2 NTP Clock Drift Permanently Skips 284K ML Training Rows, Recommendation CTR Degrades 6.3% Over 72 Hours (production-drills)"
+      ]
+    },
     {
       "timestamp": "2026-09-09T07:00:00Z",
       "type": "drill",
