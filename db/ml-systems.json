@@ -10,7 +10,7 @@
       "Tags",
       "Resources"
     ],
-    "last_updated": "2026-09-07"
+    "last_updated": "2026-09-14"
   },
   "sections": [
     {
@@ -1254,6 +1254,22 @@
             }
           ],
           "added": "2026-08-10"
+        },
+        {
+          "topic": "vLLM x AgentX — Session-Aware Sticky Routing and KV Cache Optimization for Real-World Agentic Serving",
+          "concepts": "vLLM's September 8, 2026 AgentX benchmark post reveals the key insight that optimizing agentic LLM serving is fundamentally different from single-turn serving: (1) Session-aware sticky routing outperforms pure load-balance routing because agentic sessions have short inter-turn delays — the next turn frequently arrives while its prefix is still resident on the same GPU's KV cache. Routing to a different (less loaded) rank forces remote KV cache retrieval, which is asynchronous but not free. The recommendation: sticky routing by session ID until a rank exceeds a threshold load factor, then spillover. (2) Agentic serving benchmarks achieved: 130,000 total tokens/GPU-second on DeepSeek V4 Pro; 376 tokens/second interactivity (ITL) on MiniMax M3; 14.6×–106× serving-cost advantage vs Opus 5 API pricing, depending on workload mix. (3) Core architectural optimizations enabling these numbers: prefix-cache-aware scheduler that prioritizes hits on resident KV blocks before fetching from distributed cache; disaggregated prefill (long tool-call results offloaded to prefill workers, decode workers serve only generation tokens); chunked prefill to interleave agentic prompt processing with decode steps for low-TTFT even at large context. Staff+ note: the 14.6×–106× cost advantage over API pricing is the single most compelling build-vs-buy signal for teams serving >500K tokens/day at <$1/Mtok cost targets — the break-even analysis is now measurable from public benchmark data.",
+          "tags": [
+            "ml",
+            "infra",
+            "scale"
+          ],
+          "resources": [
+            {
+              "title": "vLLM x AgentX: Optimizing for Real-World Agentic Serving (Sep 8, 2026)",
+              "url": "https://vllm.ai/blog/2026-09-08-vllm-agentx"
+            }
+          ],
+          "added": "2026-09-14"
         }
       ]
     }

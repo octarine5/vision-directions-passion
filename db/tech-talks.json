@@ -3,7 +3,7 @@
     "category": "tech-talks",
     "display_name": "Tech Talks",
     "layout": "cards",
-    "last_updated": "2026-09-07"
+    "last_updated": "2026-09-14"
   },
   "sections": [
     {
@@ -1143,6 +1143,22 @@
           "venue": "Cloudflare Blog (April 2026)",
           "description": "Deep-dive on migrating Cloudflare Workflows from a single-shard Durable Object coordinator (V1) to a horizontally scaled V2 control plane \u2014 driven by AI agent traffic patterns that overwhelmed assumptions built for human-paced workflows. V2 supports 50,000 concurrent workflow instances (11\u00d7 V1), 300 new instances/second (3\u00d7), and 2M queued instances per workflow. Covers the zero-downtime migration of millions of live instances, the consistency tradeoffs in distributed durable execution, and why agentic orchestration demands fundamentally different control plane architecture than traditional workflow engines.",
           "added": "2026-08-24"
+        },
+        {
+          "title": "vLLM x AgentX: Optimizing for Real-World Agentic Serving",
+          "url": "https://vllm.ai/blog/2026-09-08-vllm-agentx",
+          "speaker": "vLLM Team",
+          "venue": "vLLM Blog (September 8, 2026)",
+          "description": "Comprehensive benchmarking and design analysis of vLLM's agentic serving optimizations measured against the AgentX benchmark suite. Key findings: session-aware sticky routing delivers significantly better KV cache hit rates than load-balance routing for agentic workloads because short inter-turn delays keep prefixes resident on the same GPU; routing away forces expensive remote KV retrieval. Achieves 130,000 total tokens/GPU-second on DeepSeek V4 Pro and 376 ITL tokens/second on MiniMax M3, with a 14.6\u00d7\u2013106\u00d7 cost advantage over API pricing. Covers prefix-cache-aware scheduling, chunked prefill for low TTFT, and disaggregated prefill for large tool-call contexts. Essential read before evaluating build-vs-buy for any team serving multi-turn agentic workloads.",
+          "added": "2026-09-14"
+        },
+        {
+          "title": "From Silos to Service Topology: Why Netflix Built a Real-Time Service Map",
+          "url": "https://netflixtechblog.com/from-silos-to-service-topology-why-netflix-built-a-real-time-service-map-0165ba13a7bc",
+          "speaker": "Netflix Infrastructure Engineering",
+          "venue": "Netflix TechBlog (May 2026)",
+          "description": "Engineering writeup on Netflix's real-time service dependency graph that answers incident questions \u2014 blast radius, upstream dependencies, propagation paths \u2014 in seconds rather than minutes of runbook hunting. Merges three data sources into a single queryable live graph: eBPF network flows (kernel-level TCP tracking, no instrumentation needed), IPC metrics (service mesh call volumes and error rates), and distributed traces (causal ordering). Three-stage pipeline separates resolution, enrichment, and persistence; back-pressure propagates to Kafka rather than dropping; server-sent events replace gRPC for high-cardinality topology update streams. Concrete template for infra teams building observability products at microservice-heavy organizations.",
+          "added": "2026-09-14"
         }
       ]
     }

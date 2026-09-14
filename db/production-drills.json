@@ -3,7 +3,7 @@
     "category": "production-drills",
     "display_name": "Production Drills",
     "layout": "drills",
-    "last_updated": "2026-09-11"
+    "last_updated": "2026-09-14"
   },
   "sections": [
     {
@@ -383,6 +383,25 @@
             "terraform"
           ],
           "added": "2026-08-31"
+        },
+        {
+          "drill": "PostgreSQL pg_partman DETACH PARTITION Lock Convoy — Autovacuum Blocks DDL 14 Minutes on RDS, 312 Payment Writes Fail ($218K GMV Impact)",
+          "layer": "Database (PostgreSQL 16.4 / Amazon RDS Multi-AZ db.r7g.4xlarge / pg_partman 5.1.0 / pg_cron 1.6.2 / Go 1.22 GORM)",
+          "difficulty": "Hard",
+          "scenario": "At 02:00:00 UTC, pg_cron fires the weekly pg_partman maintenance job on production RDS PostgreSQL 16.4: 'SELECT partman.run_maintenance(''orders.orders_partitioned'')'. The orders table is range-partitioned by order_month (monthly, 36 child partitions, 650M rows total). pg_partman must DETACH the oldest partition (orders_partitioned_2023_09) for S3 archival — requiring AccessExclusiveLock on the parent.\n\nUnknown to the on-call: autovacuum has been running on orders.orders_partitioned since 01:46:14 UTC, triggered by the nightly ML feature backfill (23:00 UTC) that inserted 22M rows creating 18M dead tuples (24% dead-tuple ratio). Autovacuum holds ShareUpdateExclusiveLock. In PostgreSQL, any AccessExclusiveLock waiter behind a granted lock blocks ALL subsequent lock acquisitions — even AccessShareLock (SELECT) — creating a lock convoy.\n\nAt 02:00:04 UTC: PagerDuty fires 'orders_api_prod pg_pool_exhausted: Active connections 199/200'. Go gRPC pods log 'ERROR context deadline exceeded after 5.002s: orders.CreateOrder deadline exceeded'. RDS Performance Insights shows Lock:relation consuming 98.4% of DB time across 99 of 101 active sessions. pg_stat_activity shows:\n  pid=87234 (autovacuum worker): state=active, wait_event=AutoVacuumMain, running since 01:46:14 UTC\n  pid=87891 (pg_cron): state=active, wait_event=relation, query=CALL partman.partition_data_proc(...), running since 02:00:01 UTC\n  pid=88001-88847 (OLTP): state=active, wait_event=relation, queries=INSERT/SELECT INTO orders, all started 02:00:02-02:00:04 UTC\npg_locks confirms: pid=87234 holds ShareUpdateExclusiveLock (granted=true); pid=87891 waits for AccessExclusiveLock (granted=false); pid=88001-88847 wait for AccessShareLock (granted=false) — all blocked behind the AEL waiter. Impact: 14 minutes until autovacuum finishes at 02:14:07 UTC; 312 payment CreateOrder mutations fail ($218K GMV); 847 connections time out. Zero errors visible in application logs — transactions block at lock acquisition, never reaching retry or error paths.",
+          "exercise": "1. Diagnose lock chain: SELECT pid, backend_type, wait_event_type, wait_event, left(query,80) FROM pg_stat_activity WHERE state != 'idle' ORDER BY query_start — identifies autovacuum worker pid=87234 as the root holder and pg_partman pid=87891 as the AEL waiter. Confirm via pg_locks: SELECT pid, mode, granted FROM pg_locks WHERE relation='orders.orders_partitioned'::regclass ORDER BY granted DESC — shows the full chain.\n2. Immediate fix: SELECT pg_terminate_backend(87234) — kills the autovacuum worker (safe; autovacuum is resumable and restarts automatically). pg_partman AEL is granted within 50ms. All 847 queued sessions acquire locks within 500ms. Verify: SELECT count(*) FROM pg_stat_activity WHERE wait_event='relation' drops to 0 within 30 seconds.\n3. Confirm pg_partman completion: SELECT schemaname, tablename FROM pg_tables WHERE tablename LIKE 'orders_partitioned_%' ORDER BY tablename — verifies October 2026 partition exists and September 2023 is detached.\n4. Root cause: pg_partman weekly maintenance window (02:00 UTC) collides with autovacuum from the nightly ML batch (23:00 UTC → autoVac lag ~46 minutes → 01:46 UTC autovacuum start). pg_partman's DETACH PARTITION requires AccessExclusiveLock, which in PostgreSQL's lock queue model blocks all readers and writers that arrive after the AEL waiter.\n5. Fix — add lock_timeout pre-flight: In the pg_partman maintenance wrapper, set SET lock_timeout='3s' before calling partition_data_proc(). If autovacuum is still running, PostgreSQL raises LockNotAvailable (55P03) after 3 seconds — pg_cron logs the failure and retries on the next cycle without blocking OLTP for 14 minutes. Add PagerDuty alert on pg_cron failures: scan cron.job_run_details WHERE status='failed' AND start_time > now()-interval '1h' via a Lambda on a 15-minute schedule.\n6. Fix — pre-flight autovacuum check: Add a PL/pgSQL guard: IF EXISTS (SELECT 1 FROM pg_stat_activity WHERE backend_type='autovacuum worker' AND query ILIKE '%orders_partitioned%') THEN RAISE NOTICE 'Autovacuum active, skipping this cycle'; RETURN; END IF — exits immediately without queuing an AEL waiter.\n7. Fix — throttle autovacuum after batch inserts: ALTER TABLE orders.orders_partitioned SET (autovacuum_vacuum_cost_delay = 50); (vs the global default 2ms) to slow autovacuum on the hot partition, reducing the likelihood it runs past 02:00 UTC.\n8. Long-term: PostgreSQL 17 adds DETACH PARTITION ... CONCURRENTLY, which acquires only ShareLock (compatible with concurrent reads/writes) — completely eliminating the lock convoy risk. Plan the RDS major version upgrade. Until then, move the pg_partman cron window to 04:00 UTC (safely past the autovacuum window for a 23:00 UTC batch).\n9. Validate: In staging, simulate autovacuum with BEGIN; LOCK TABLE orders.orders_partitioned IN SHARE UPDATE EXCLUSIVE MODE; (held open in a psql session), then run SELECT partman.run_maintenance(...) in a second connection with lock_timeout='3s'. Confirm it raises ERROR: canceling statement due to lock timeout in 3 seconds with zero OLTP connections blocked.\n10. Prevent: Add CloudWatch alarm on DatabaseConnections >= 180 AND DBLoadCPU < 20 (high connections + low CPU = lock wait signature) → PagerDuty P1 'Possible lock convoy'. This fires within 60 seconds of onset vs the 14-minute autovacuum cycle. Add the autovacuum-active check to the pg_partman deployment checklist for all partitioned tables with active batch write workloads.",
+          "tags": [
+            "postgresql",
+            "partitioning",
+            "pg_partman",
+            "autovacuum",
+            "lock-convoy",
+            "rds",
+            "ddl",
+            "go",
+            "aws"
+          ],
+          "added": "2026-09-14"
         }
       ]
     },

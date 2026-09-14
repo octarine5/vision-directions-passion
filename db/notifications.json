@@ -2,9 +2,28 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-09-11"
+    "last_updated": "2026-09-14"
   },
   "entries": [
+    {
+      "timestamp": "2026-09-14T07:00:00Z",
+      "type": "knowledge-base",
+      "title": "Monday update: drill + knowledge base refresh",
+      "summary": "Added a Hard database hotfix drill: PostgreSQL pg_partman DETACH PARTITION lock convoy — autovacuum (triggered by nightly ML batch insert of 22M rows) holds ShareUpdateExclusiveLock on the orders table while pg_partman's weekly maintenance job waits for AccessExclusiveLock; PostgreSQL's lock queue semantics block all subsequent reads and writes (even SELECTs) behind the AEL waiter for 14 minutes, failing 312 payment transactions ($218K GMV) with zero app-level errors. Fix: pg_terminate_backend on the autovacuum worker for immediate relief; long-term: SET lock_timeout='3s' + autovacuum pre-flight check + schedule pg_partman at 04:00 UTC; PostgreSQL 17 DETACH ... CONCURRENTLY eliminates the AEL requirement entirely. Monday KB refresh: vLLM x AgentX (Sep 8) — session-aware sticky routing achieves 130K tokens/GPU-second on DeepSeek V4 Pro, 14.6×–106× cost advantage vs API pricing; Netflix Real-Time Service Dependency Map — eBPF + IPC + distributed traces merged into live graph for instant blast-radius queries; Netflix Kueue batch compute — replacing in-house CMB with Kubernetes-native job queueing; org decision on agentic leadership credibility requiring proximity to the work.",
+      "tasks": [
+        "drill",
+        "knowledge-base"
+      ],
+      "items_added": [
+        "PostgreSQL pg_partman DETACH PARTITION Lock Convoy — Autovacuum Blocks DDL 14 Minutes on RDS, 312 Payment Writes Fail ($218K GMV Impact) (production-drills)",
+        "vLLM x AgentX — Session-Aware Sticky Routing and KV Cache Optimization for Real-World Agentic Serving (ml-systems)",
+        "Netflix Real-Time Service Dependency Map — eBPF + IPC + Distributed Traces Merged into Live Service Topology Graph (system-design)",
+        "Netflix Simplified Batch Compute with Kueue — Kubernetes-Native Job Queueing Replaces In-House CMB at Petabyte Scale (system-design)",
+        "vLLM x AgentX: Optimizing for Real-World Agentic Serving (tech-talks)",
+        "From Silos to Service Topology: Why Netflix Built a Real-Time Service Map (tech-talks)",
+        "Leading agentic engineering teams: credibility requires proximity to the work (org-decisions)"
+      ]
+    },
     {
       "timestamp": "2026-09-11T07:00:00Z",
       "type": "market-scan",

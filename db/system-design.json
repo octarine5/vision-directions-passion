@@ -10,7 +10,7 @@
       "Tags",
       "Resources"
     ],
-    "last_updated": "2026-09-07"
+    "last_updated": "2026-09-14"
   },
   "sections": [
     {
@@ -1358,6 +1358,38 @@
             }
           ],
           "added": "2026-09-07"
+        },
+        {
+          "topic": "Netflix Real-Time Service Dependency Map — eBPF + IPC + Distributed Traces Merged into Live Service Topology Graph",
+          "concepts": "Netflix's 'From Silos to Service Topology' engineering series (May–Aug 2026) describes building a live dependency graph for thousands of microservices to answer incident questions: 'what depends on this?', 'what's the blast radius?', 'is this a local or upstream problem?' The system merges three independently stored data sources into a single queryable graph updated near-real-time: (1) eBPF network flows — kernel-level TCP connection tracking, no instrumentation required, captures all service-to-service calls even uninstrumented legacy services; (2) IPC metrics — inter-process communication metrics from the service mesh, providing labeled call volumes and error rates; (3) distributed traces — Zipkin/Atlas trace spans giving per-endpoint causal ordering. The pipeline has three stages separating resolution (mapping IPs to service instances), enrichment (adding metadata: owner team, SLA tier, criticality), and persistence (graph DB write). Back-pressure is propagated to Kafka rather than dropping records during fan-out spikes. Server-sent events (not gRPC) handle high-volume internal topology update streams — lower connection overhead for unidirectional streaming at this cardinality. Staff+ impact: the system shifts incident triage from 'manually check runbooks and Slack for dependency context' to 'query the graph in real time'. At Netflix's 5,000+ microservice scale, this is the difference between a 10-minute MTTR and a 45-minute one on P0 incidents.",
+          "tags": [
+            "infra",
+            "scale",
+            "data"
+          ],
+          "resources": [
+            {
+              "title": "From Silos to Service Topology: Why Netflix Built a Real-Time Service Map (May 2026)",
+              "url": "https://netflixtechblog.com/from-silos-to-service-topology-why-netflix-built-a-real-time-service-map-0165ba13a7bc"
+            }
+          ],
+          "added": "2026-09-14"
+        },
+        {
+          "topic": "Netflix Simplified Batch Compute with Kueue — Kubernetes-Native Job Queueing Replaces In-House CMB at Petabyte Scale",
+          "concepts": "Netflix's June 2026 post details migrating millions of batch jobs from their in-house Compute Managed Batch (CMB) system to Kueue — a Kubernetes-native job queueing and admission control system developed by the CNCF community. CMB was built in 2018 when Kubernetes lacked mature batch primitives; by 2026, Kueue provides comparable scheduling capabilities (quota management, fair-share scheduling, borrowing and lending across teams) while eliminating ~80K lines of custom infrastructure code. Key architectural decisions: (1) ClusterQueue + LocalQueue hierarchy maps naturally to Netflix's org structure (team-level quotas within platform-level total capacity); (2) workload prioritization via PriorityClass ensures ML training jobs preempt low-priority batch when capacity is constrained; (3) pod-gang scheduling (all-or-nothing allocation for distributed jobs) prevents partial job startup that wastes GPU allocation. The migration path: run Kueue in shadow mode alongside CMB for 6 weeks, comparing scheduling decisions, then gradually shift traffic. Engineering insight: infrastructure teams should default to community-maintained Kubernetes primitives before building custom schedulers — Kueue's multi-company contributor base means features like DRA (Dynamic Resource Allocation for GPUs) land in Kueue without Netflix engineering effort.",
+          "tags": [
+            "infra",
+            "scale",
+            "ml"
+          ],
+          "resources": [
+            {
+              "title": "How Netflix Simplified Batch Compute with Kueue (Jun 2026)",
+              "url": "https://netflixtechblog.com/how-netflix-simplified-batch-compute-with-kueue-87860682629c"
+            }
+          ],
+          "added": "2026-09-14"
         }
       ]
     }

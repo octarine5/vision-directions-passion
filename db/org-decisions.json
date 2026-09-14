@@ -9,7 +9,7 @@
       "Key Considerations",
       "Phase"
     ],
-    "last_updated": "2026-09-07"
+    "last_updated": "2026-09-14"
   },
   "sections": [
     {
@@ -643,6 +643,12 @@
           "considerations": "Uber's public data point: >70% of PRs from local or cloud agents, 84% of devs agentic coding users (Mar 2026), 3,600+ employee-built skills, 30K skill executions/day, 7\u00d7 WAU growth since Feb 2026 \u2014 with total AI spend flat since April. The cost stabilization model: decompose total AI cost into (tokens \u00d7 cost_per_token) at each layer and optimize independently \u2014 batch-size token reduction, cache hit rate improvement, model tier selection (routing requests to smaller models when the agent skill doesn't need frontier capability). Key org decision: who builds and governs agent skills? Uber chose bottom-up skill creation with centralized MCP Gateway governance (authZ + rate limits + audit), rather than a central AI platform team owning all skills. Tradeoff: 3,600 skills at the edge, but governance surface is at the gateway choke point.",
           "phase": "Cross-cutting",
           "added": "2026-09-07"
+        },
+        {
+          "topic": "Leading agentic engineering teams: engineering leadership credibility requires proximity to the work, not just proximity to AI strategy",
+          "considerations": "Kilo.ai's September 2026 post 'You can't afford to lead agentic engineering from the sidelines' surfaces a distinct leadership failure mode emerging in 2026: engineering managers and Staff+ engineers who understand agentic AI conceptually but haven't adopted the tools themselves lose credibility with their teams and make poor prioritization decisions. Key observations from the field: (1) Leadership proximity is where leverage lives \u2014 teams need leaders close enough to the work to know where the leverage is real vs. where the workflow is genuinely awkward, where fear is coming from, and where the organization isn't ready yet. Leaders who haven't experienced the tool gaps firsthand make abstract roadmap decisions that miss the actual friction. (2) The adoption gap is a political problem, not a knowledge problem \u2014 technical leaders who don't use agentic tooling can't negotiate effectively with skeptical stakeholders because they lack concrete evidence. (3) AI tooling as a leadership amplifier: the most credible pattern in 2026 is the Staff+ engineer who uses Claude Code or Cursor for their own exploratory prototyping, then translates that into specific infrastructure investments and workflow changes for the team. The inverse \u2014 delegating AI adoption research to an IC while the leader stays at a high altitude \u2014 is the fastest path to irrelevance. (4) The 'sideline leader' pattern emerges: 35\u201340% of engineering managers in AI-heavy orgs are not hands-on with agentic tooling by mid-2026, creating an organizational gap between leaders who can discuss AI strategy and the ICs who have already moved on to the next tool generation. Staff+ imperative: the 're-hands-on' call from earlier analyses has urgency \u2014 agentic tooling is no longer a 'we should try this' experiment; it's the base assumption for 2026 engineering capacity planning.",
+          "phase": "Cross-cutting",
+          "added": "2026-09-14"
         }
       ]
     }
