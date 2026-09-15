@@ -2,9 +2,21 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-09-14"
+    "last_updated": "2026-09-15"
   },
   "entries": [
+    {
+      "timestamp": "2026-09-15T07:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: KServe InferenceService Knative Revision Drain Race",
+      "summary": "Added a Hard ML serving hotfix drill: KServe 0.13 + Knative Serving 1.14 on GKE — Istio sidecar's 5s default terminationDrainDuration sends RST_STREAM CANCEL on all active HTTP/2 SSE streams when KPA scales down replicas, silently truncating 7.3% of LLM completions (those needing >5s streaming time) at 0% measured error rate for 23 minutes. Fix: extend Istio drain to 65s, add preStop sleep 75s on the KServe container, set EXIT_ON_ZERO_ACTIVE_REQUESTS=true.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "KServe InferenceService Knative Revision Drain Race — Istio Sidecar 5s Drain Truncates In-Flight Streaming LLM Completions at 0% Error Rate, 7.3% Silent Corruption for 23 Minutes (production-drills)"
+      ]
+    },
     {
       "timestamp": "2026-09-14T07:00:00Z",
       "type": "knowledge-base",

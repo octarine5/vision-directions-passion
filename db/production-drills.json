@@ -3,7 +3,7 @@
     "category": "production-drills",
     "display_name": "Production Drills",
     "layout": "drills",
-    "last_updated": "2026-09-14"
+    "last_updated": "2026-09-15"
   },
   "sections": [
     {
@@ -1205,6 +1205,29 @@
             "cross-compilation"
           ],
           "added": "2026-09-09"
+        },
+        {
+          "drill": "KServe InferenceService Knative Revision Drain Race — Istio Sidecar 5s Drain Truncates In-Flight Streaming LLM Completions at 0% Error Rate, 7.3% Silent Corruption for 23 Minutes",
+          "layer": "ML Serving (KServe 0.13 / Knative Serving 1.14 / Istio 1.20 / GKE 1.29 / NVIDIA H100-80GB / vLLM 0.5.4)",
+          "difficulty": "Hard",
+          "scenario": "At 14:23 UTC, a partner-team Slack message surfaces: 'our LLM integration is returning truncated JSON in prod — looks like completions just stop mid-sentence'. No PagerDuty fires. HTTP 200 status across the board. P99 latency is stable at 34ms. Error rate monitor reads 0.00%.\n\nThe serving stack: KServe 0.13 InferenceService on GKE 1.29 (us-central1), backed by vLLM 0.5.4 running Llama-3.2-3B-Instruct (fp16) on 2× NVIDIA H100-80GB. Traffic flows: Istio ingress → Knative activator → KServe pod → SSE-over-HTTP/2 to client. KPA (Knative Pod Autoscaler) is configured with target concurrency 20; during mid-afternoon traffic lull KPA decides to scale 4 → 2 replicas.\n\nOn scale-down, Knative sends SIGTERM to the two evicted pods. vLLM's FastAPI process catches SIGTERM, sets a shutdown flag, and refuses new requests with HTTP 503: `{'detail': 'Server is shutting down'}`. However, vLLM correctly continues streaming all in-flight generation requests. The problem: Istio's Envoy sidecar proxy also receives SIGTERM simultaneously and begins draining using its default `terminationDrainDuration: 5s`. After 5 seconds, Envoy closes all active HTTP/2 connections — including those carrying live SSE token streams — with RST_STREAM (error code CANCEL). vLLM is mid-generation on 47 long-context requests (avg response length 1,200 tokens, ~9s streaming time). All 47 are truncated at the 5-second mark.\n\nGrafana metrics at 14:23 UTC:\n  knative_serving_revision_request_count{response_code=\"200\"} = 12,847 (unchanged)\n  knative_serving_revision_request_count{response_code=\"503\"} = 0\n  vllm:generation_tokens_total: drops 34% during each scale-down event (14:23, 14:31, 14:38 UTC)\n  vllm:request_success_total: unchanged (vLLM marks requests complete at stream EOF, which Envoy RST sends)\n  istio_requests_total{response_code=\"200\"}: normal\n\nDownstream service accumulates SSE chunks into a string buffer and calls `json.loads()` inside a bare `except: pass` block — malformed JSON from truncated completions is silently swallowed. No exception propagates to logging. The 7.3% figure exactly matches requests with response token count > 580 (those needing > 5s to stream at the vLLM decode rate of ~116 tokens/s on H100).\n\nDiscovery takes 23 minutes because the signal is a partner Slack message, not a metric. Structured logging on the KServe pod shows:\n  [2026-09-15T14:23:17Z] INFO: Received SIGTERM, draining new requests\n  [2026-09-15T14:23:22Z] WARN: Envoy proxy terminated 47 active streams (RST_STREAM CANCEL)\n  [2026-09-15T14:23:22Z] INFO: vLLM graceful shutdown complete\nbut nobody has a Datadog saved search on `WARN.*Envoy proxy terminated.*active streams`.",
+          "exercise": "1. Diagnose: Check Knative KPA scale events: `kubectl get events -n serving --field-selector reason=ScaleDown | grep llm-inference`. Cross-correlate timestamps with vLLM pod logs: `kubectl logs llm-inference-predictor-<hash> -c kserve-container | grep -E 'SIGTERM|Envoy|terminated.*streams'`. Confirm 5-second boundary: count tokens in truncated responses — all truncate between token 570–600 (5s × 116 tokens/s). Check Istio MeshConfig for terminationDrainDuration: `kubectl -n istio-system get configmap istio -o jsonpath='{.data.mesh}' | grep terminationDrain` — returns empty (unset, defaults to 5s). Reproduce locally: deploy two vLLM pods behind a test KNative revision, trigger a scale-down while streaming a 2,000-token response, observe RST_STREAM at T+5s in Wireshark.\n2. Immediate mitigation: Patch KServe InferenceService with an explicit preStop hook to outlast Envoy drain:\n  ```yaml\n  lifecycle:\n    preStop:\n      exec:\n        command: [\"/bin/sh\", \"-c\", \"sleep 75\"]\n  terminationGracePeriodSeconds: 90\n  ```\n  Apply: `kubectl patch inferenceservice llm-inference -n serving --type=merge -p '{\"spec\":{\"predictor\":{\"containerSpec\":{\"lifecycle\":{\"preStop\":{\"exec\":{\"command\":[\"/bin/sh\",\"-c\",\"sleep 75\"]}}}}}}}'`. Knative respects preStop hooks — the pod stays alive for 75s, giving in-flight streams time to complete before Envoy drains.\n3. Root fix — extend Istio sidecar drain duration: Patch Istio MeshConfig globally:\n  ```yaml\n  apiVersion: install.istio.io/v1alpha1\n  kind: IstioOperator\n  spec:\n    meshConfig:\n      defaultConfig:\n        terminationDrainDuration: 65s\n  ```\n  Apply: `istioctl install -f meshconfig-patch.yaml`. This makes Envoy wait up to 65 seconds for active streams to drain before force-closing H2 connections. On scale-down, vLLM completes in-flight generations (bounded by max_model_len and decode speed), streams EOF to the client cleanly, and Envoy closes the connection gracefully.\n4. Also set `EXIT_ON_ZERO_ACTIVE_REQUESTS=true` on the Envoy sidecar annotation so Envoy exits immediately once all streams complete rather than waiting the full drain timeout: add `proxy.istio.io/config: '{ \"drainDuration\": \"65s\", \"parentShutdownDuration\": \"70s\", \"exitOnZeroActiveRequests\": true }'` to the InferenceService pod template annotations.\n5. Fix the downstream client: Replace the silent `except: pass` on `json.loads()` with explicit error handling that logs and retries: `except json.JSONDecodeError as e: logger.error(\"LLM response truncated: %s — retrying\", e); return self._retry_completion(prompt)`. Add a Datadog metric for truncation events: `statsd.increment('llm.response.truncated', tags=['model:llama-3.2-3b'])`.\n6. Validate: After deploying the preStop hook and Istio drain extension, trigger manual scale-down: `kubectl scale deployment llm-inference-predictor -n serving --replicas=1`. Stream a 3,000-token response during the scale-down. Confirm no RST_STREAM in the Envoy access log and the full response arrives. Monitor `vllm:generation_tokens_total` — no drop during scale-down events.\n7. Prevent: (a) Add a Datadog monitor on `kubernetes_state.pod.status_phase{phase:Terminating,kube_namespace:serving} > 0` joined with `vllm:generation_tokens_total drop > 20%` — fires within 60s of any scale-down truncation event. (b) Add a CI integration test that sends a 2,000-token streaming request and triggers pod SIGTERM at T+2s, asserting the full response completes. (c) Document in the KServe onboarding checklist: 'For any streaming inference service, set terminationGracePeriodSeconds ≥ (max expected response time + Istio drain duration + 10s buffer)'. (d) Add OPA admission webhook rejecting KServe InferenceServices in the serving namespace with terminationGracePeriodSeconds < 60.",
+          "tags": [
+            "kserve",
+            "knative",
+            "istio",
+            "envoy",
+            "vllm",
+            "gke",
+            "ml-serving",
+            "streaming",
+            "grpc",
+            "llm",
+            "scale-down",
+            "graceful-shutdown",
+            "silent-failure"
+          ],
+          "added": "2026-09-15"
         }
       ]
     },
