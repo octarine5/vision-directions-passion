@@ -2,9 +2,21 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-09-15"
+    "last_updated": "2026-09-16"
   },
   "entries": [
+    {
+      "timestamp": "2026-09-16T07:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: DynamoDB DAX Cache Flush Cold-Read Storm",
+      "summary": "Added a Hard distributed-systems hotfix drill: Amazon DynamoDB DAX cluster maintenance upgrade (3.1.14 → 3.2.7) flushes all in-memory cache on both nodes, sending 24 Go ECS Fargate inference tasks into a 0% cache-hit cold-read storm — DynamoDB receives 43,710 GetItem calls/sec against 4,000 RCU provisioned capacity; aws-sdk-go-v2 retry amplification raises total demand to 101,840 RCU/sec; 98.5% of reads throttle with HTTP 400 ProvisionedThroughputExceededException that the Go service silently masks as HTTP 200 empty-feature-vector responses, causing 674,300 recommendation requests to serve cold-start popularity fallbacks over 22 minutes ($47K impact) with zero alarms firing.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "Amazon DynamoDB DAX Cluster Version Upgrade — Cache Flush Cold-Read Storm Saturates Provisioned RCUs, Go ML Inference P99 Spikes 101× for 22 Minutes While HTTP 400 Throttle Errors Bypass All Alarms (production-drills)"
+      ]
+    },
     {
       "timestamp": "2026-09-15T07:00:00Z",
       "type": "drill",
