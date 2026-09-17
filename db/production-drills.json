@@ -3,7 +3,7 @@
     "category": "production-drills",
     "display_name": "Production Drills",
     "layout": "drills",
-    "last_updated": "2026-09-16"
+    "last_updated": "2026-09-17"
   },
   "sections": [
     {
@@ -1228,6 +1228,28 @@
             "silent-failure"
           ],
           "added": "2026-09-15"
+        },
+        {
+          "drill": "DCGM Exporter Helm Chart 3.3.6 Upgrade Overwrites Custom GPU Metrics ConfigMap — dcgm_fi_dev_fb_used Missing from Prometheus for 3h 28m, vLLM KV Cache OOM Fires 78K HTTP 503s Undetected",
+          "layer": "Metrics / ML Serving (DCGM Exporter v3.3.6 / GKE / vLLM 0.6.3 / Prometheus / Grafana)",
+          "difficulty": "Hard",
+          "scenario": "At 22:13 UTC, a platform engineer runs `helm upgrade dcgm-exporter nvidia/dcgm-exporter --version 3.3.6 --namespace gpu-operator --reuse-values` on the GKE ml-serving-prod cluster (us-central1, 8×A100-80GB nodes, vLLM 0.6.3 serving Llama-3.1-70B-Instruct). Chart version 3.3.6 reclassifies the GPU metrics ConfigMap (dcgm-exporter-metrics-config) from a user-managed resource to a chart-owned resource. --reuse-values does not re-apply values for ConfigMaps not previously owned by the chart, so Helm silently replaces the team's custom ConfigMap (11 counters including dcgm_fi_dev_fb_used, dcgm_fi_dev_fb_free, dcgm_fi_dev_sm_clock, and 7 custom gauges) with the chart default (only dcgm_fi_dev_gpu_util + dcgm_fi_dev_power_usage). Prometheus stops receiving dcgm_fi_dev_fb_used and dcgm_fi_dev_fb_free at 22:14 UTC. The recording rule `vllm:gpu_memory_used_fraction:ratio = dcgm_fi_dev_fb_used / (dcgm_fi_dev_fb_used + dcgm_fi_dev_fb_free)` evaluates to NaN (absent series in the binary division). All three Prometheus GPUMemoryPressureHigh alerts — scoped to `vllm:gpu_memory_used_fraction:ratio > 0.85 for 5m` — silently enter INACTIVE state. All 8 Grafana GPU memory panels show 'No data' (not noticed; dashboards use fill=null). Over 3.5 hours, U.S. West Coast prime-time traffic climbs from 280 to 1,140 req/min. At 01:41 UTC, vLLM KV cache across all 8 GPUs hits 100%: `torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 4.12 GiB (GPU 0; 79.19 GiB total capacity; 75.82 GiB already allocated; 1.32 GiB free; 76.50 GiB reserved in total by PyTorch)`. vLLM drops all new requests with HTTP 503 Service Unavailable. The pre-existing error-rate alert `vllm_request_error_rate > 5%` fires at 01:48 UTC — 3h 34m after the ConfigMap was overwritten. 78,447 inference requests fail ($9,414 at $0.12/request) before the on-call engineer acknowledges.",
+          "exercise": "1. Diagnose: PagerDuty fires 01:48 UTC: 'vllm_request_error_rate{cluster=ml-serving-prod} = 34.7% > 5%'. Query Prometheus: `dcgm_fi_dev_fb_used{cluster=\"ml-serving-prod\"}` returns empty — confirms GPU memory metrics are absent. Check Grafana: 8 memory panels blank, `dcgm_fi_dev_gpu_util` still present (confirming exporter is alive but misconfigured). Run: `kubectl exec -it $(kubectl get pod -n gpu-operator -l app=dcgm-exporter -o jsonpath='{.items[0].metadata.name}') -n gpu-operator -- curl -s localhost:9400/metrics | grep dcgm_fi_dev_fb` — returns empty. Confirm: `kubectl exec ... -- curl -s localhost:9400/metrics | grep dcgm_fi_dev | cut -d{ -f1 | sort -u` returns only 2 metric names vs expected 11. Cross-reference Helm history: `helm history dcgm-exporter -n gpu-operator` shows release revision 5 at 22:13 UTC with chart version 3.3.6. This is the change event.\n2. Immediate mitigation: Reduce vLLM max_num_seqs (256 → 48) and max_num_batched_tokens (8192 → 3072) via ConfigMap patch to force KV cache steady-state below 70% without relying on GPU memory metrics. `kubectl patch configmap vllm-config -n llm-serving -p '{\"data\":{\"max_num_seqs\":\"48\",\"max_num_batched_tokens\":\"3072\"}}' && kubectl rollout restart deployment/vllm-deployment -n llm-serving`. Error rate falls from 34.7% to 0.6% within 9 minutes as new pods start with conservative batching limits.\n3. Restore GPU metrics: `kubectl get configmap dcgm-exporter-metrics-config -n gpu-operator -o yaml` confirms only 2 metrics. Apply git-managed backup: `kubectl apply -f infra/k8s/gpu-operator/dcgm-custom-metrics-configmap.yaml && kubectl rollout restart daemonset/dcgm-exporter -n gpu-operator`. Within 90 seconds confirm: `kubectl exec ... -- curl -s localhost:9400/metrics | grep -c dcgm_fi_dev_fb_used` returns 48 (8 nodes × 6 GPUs per node). `vllm:gpu_memory_used_fraction:ratio` resumes non-NaN evaluation. Gradually restore max_num_seqs to 192 as GPU memory headroom confirms safe.\n4. Root cause: Helm 3 does not apply `--reuse-values` to ConfigMaps that were not previously templated into the chart's managed resource set. Chart 3.3.5 required manual ConfigMap creation; 3.3.6 added `# Source: dcgm-exporter/templates/metrics-config.yaml` Helm templating for the same object. On upgrade, Helm sees the ConfigMap as a newly chart-owned resource and replaces the existing one with chart defaults. Running `helm diff upgrade dcgm-exporter nvidia/dcgm-exporter --version 3.3.6 -n gpu-operator` (not run before upgrade) would have shown the ConfigMap deletion as a clear diff line.\n5. Long-term fixes: (a) Migrate custom metrics list to values.yaml under the chart's metricsConfig.contents key, verified by diffing against the 3.3.6 schema. (b) Add to CI Helm upgrade pipeline: `helm diff upgrade ... | grep -E '^-.*kind: ConfigMap' && exit 1` — fail the pipeline on any ConfigMap deletion. (c) Pin dcgm-exporter chart to minor version in Argo CD ApplicationSet (targetRevision: ~3.3.x) to prevent surprise major-minor jumps during automated GitOps reconciliation. (d) Separate the custom GPU metrics ConfigMap into an independent Argo CD Application that is never managed by the dcgm-exporter Helm release.\n6. Prevent blind spots: (a) Add absent-metric Prometheus alert: `absent(dcgm_fi_dev_fb_used{cluster=\"ml-serving-prod\"}) == 1` for 5m → PagerDuty P2 'GPU memory metric missing — OOM risk elevated'. (b) Add Grafana panel 'Metrics Health' that plots `max(absent(dcgm_fi_dev_fb_used))` on the GPU dashboard — any value > 0 turns the panel red. (c) Add a post-upgrade smoke test to the Helm upgrade job: wait 60s for exporter rollout, then assert all 11 expected metric names are present with cardinality ≥ (nodes × GPUs_per_node) before marking the upgrade successful.",
+          "tags": [
+            "dcgm",
+            "prometheus",
+            "ml-serving",
+            "vllm",
+            "gke",
+            "helm",
+            "gpu",
+            "oom",
+            "configmap",
+            "metrics",
+            "silent-failure",
+            "absent-metric"
+          ],
+          "added": "2026-09-17"
         }
       ]
     },

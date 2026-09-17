@@ -2,9 +2,21 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-09-16"
+    "last_updated": "2026-09-17"
   },
   "entries": [
+    {
+      "timestamp": "2026-09-17T07:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: DCGM Exporter Helm Upgrade Overwrites GPU Metrics ConfigMap — vLLM KV Cache OOM 78K HTTP 503s Undetected for 3h 28m",
+      "summary": "Added a Hard ML Serving hotfix drill: DCGM Exporter Helm chart 3.3.6 upgrade silently replaces the team's 11-counter custom GPU metrics ConfigMap with a 2-metric default when the chart takes ownership of the resource for the first time — dcgm_fi_dev_fb_used and dcgm_fi_dev_fb_free disappear from Prometheus, all three GPUMemoryPressureHigh alerts enter INACTIVE, and vLLM KV cache fills undetected over 3.5 hours of prime-time traffic growth until a CUDA OOM crashes all 8 A100 GPUs and 78,447 requests fail ($9,414 impact) before the error-rate alarm fires.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "DCGM Exporter Helm Chart 3.3.6 Upgrade Overwrites Custom GPU Metrics ConfigMap — dcgm_fi_dev_fb_used Missing from Prometheus for 3h 28m, vLLM KV Cache OOM Fires 78K HTTP 503s Undetected (production-drills)"
+      ]
+    },
     {
       "timestamp": "2026-09-16T07:00:00Z",
       "type": "drill",
