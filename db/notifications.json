@@ -2,9 +2,21 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-09-21"
+    "last_updated": "2026-09-22"
   },
   "entries": [
+    {
+      "timestamp": "2026-09-22T07:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: AWS EKS AL2023 nf_conntrack Table Exhaustion — Rust ML Scoring Canary Wave Drops S3 Connections for 17 Minutes",
+      "summary": "Added a Hard infrastructure hotfix drill: AWS EKS AL2023 nf_conntrack table exhaustion — a 20-pod canary wave of a Rust ML scoring service (model-scorer-prod) opens 640 parallel S3 HTTPS connections during model weight init, saturating the default nf_conntrack_max=131072 on node ip-10-0-3-47 (already at 83.4% due to uneven pod distribution), silently dropping all new TCP SYN packets while established health checks pass; 11 pods enter CrashLoopBackOff and 2.24M inference requests go unserved for 17 minutes ($47K SLA credits). Fix: bump nf_conntrack_max to 524288 via SSM, add a shared hyper connection pool (32→8 connections per pod), and enforce topologySpreadConstraints maxSkew=1.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "AWS EKS AL2023 nf_conntrack Table Exhaustion — Rust ML Scoring 20-Pod Canary Wave Saturates Connection Tracking at 131,072 Entries, S3 Model Weight Downloads Silently Drop for 17 Minutes While Health Checks Pass (production-drills)"
+      ]
+    },
     {
       "timestamp": "2026-09-21T07:00:00Z",
       "type": "knowledge-base",
