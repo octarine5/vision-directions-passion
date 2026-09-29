@@ -2,9 +2,21 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-09-28"
+    "last_updated": "2026-09-29"
   },
   "entries": [
+    {
+      "timestamp": "2026-09-29T07:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: Azure ADLS Gen2 Stale Spark Checkpoint Rolls Back Structured Streaming Watermark 4 Hours — 14.7M Duplicate User Events Corrupt Feature Store Delta Table",
+      "summary": "Added a Hard distributed-systems hotfix drill: a stale ADLS Gen2 Spark checkpoint from an overnight test run causes the morning production Spark Structured Streaming job to resume with a batchWatermarkMs 4.25 hours in the past, replaying 362M Event Hub events; dropDuplicates watermark window semantics miss cross-window duplicates, writing 14.7M stale last_seen_at rows to Delta Lake and causing the ML ranking model to demote 14.7M active users for 38 minutes ($184K estimated CTR impact). Fix: Delta RESTORE to pre-corruption snapshot version, checkpoint path isolation (prod vs test), and pre-run watermark lag assertion gate.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "Azure ADLS Gen2 Stale Spark Checkpoint Rolls Back Structured Streaming Watermark 4 Hours — Delta Lake Feature Store Receives 14.7M Duplicate User Events, ML Ranking Model Demotes Active Users for 38 Minutes (production-drills)"
+      ]
+    },
     {
       "timestamp": "2026-09-25T16:08:03Z",
       "type": "market-scan",
