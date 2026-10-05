@@ -2,9 +2,30 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-10-02"
+    "last_updated": "2026-10-05"
   },
   "entries": [
+    {
+      "timestamp": "2026-10-05T07:55:00Z",
+      "type": "knowledge-base",
+      "title": "Monday update: drill + knowledge base refresh",
+      "summary": "Added 1 Kafka distributed-systems hotfix drill (Rebalance Storm on GKE HPA scale-out, 8.4M messages halted 26min). Knowledge base refresh: 2 ML systems entries (SmartGen disaggregated KV cache 4.3× TTST reduction, OpWeave heterogeneous operator disaggregation 31% cost reduction), 4 tech talks (vLLM/llm-d Ray Summit 2026 sessions on agentic serving, KV cache optimization, sovereign inference on heterogeneous GPUs), 1 system design entry (LLM platform engineering: prompt registry, schema enforcement, token cost attribution), 1 org decisions entry (Sociotechnical Staff+ at QCon London 2026).",
+      "tasks": [
+        "drill",
+        "knowledge-base"
+      ],
+      "items_added": [
+        "Kafka Partition Reassignment Triggers JVM Consumer Group Rebalance Storm — GKE HPA Scale-Out Halts 8.4M Messages for 26 Minutes (production-drills)",
+        "SmartGen: Seamless Disaggregated LLM Inference with Selective KV Cache Transfer — 4.3× TTST reduction (ml-systems)",
+        "OpWeave: Flexible Operator Disaggregation for Heterogeneous LLM Serving — 31% cost reduction (ml-systems)",
+        "Serving vLLM on Agentic Production Workloads — Ray Summit 2026 (tech-talks)",
+        "Combining Kubernetes and vLLM for Distributed Inference with llm-d — Greg Pereira (tech-talks)",
+        "Optimize KV Cache with llm-d and vLLM (tech-talks)",
+        "Sovereign LLM Inference on Heterogeneous AI Accelerators using llm-d and vLLM (tech-talks)",
+        "LLM Platform Engineering — Prompt Registry, Schema Enforcement, Token Cost Attribution (system-design)",
+        "Staff+ engineering in sociotechnical systems: architecture, culture, and org change — QCon London 2026 (org-decisions)"
+      ]
+    },
     {
       "timestamp": "2026-10-02T16:09:00Z",
       "type": "market-scan",

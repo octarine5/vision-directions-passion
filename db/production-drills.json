@@ -3,7 +3,7 @@
     "category": "production-drills",
     "display_name": "Production Drills",
     "layout": "drills",
-    "last_updated": "2026-10-02"
+    "last_updated": "2026-10-05"
   },
   "sections": [
     {
@@ -2327,6 +2327,24 @@
             "python"
           ],
           "added": "2026-09-29"
+        },
+        {
+          "drill": "Kafka Partition Reassignment Triggers JVM Consumer Group Rebalance Storm — GKE HPA Scale-Out During Preferred-Replica Leader Election Halts 8.4M Message Processing for 26 Minutes",
+          "layer": "Distributed Systems (Kafka 3.7 / Java / GKE Autopilot)",
+          "difficulty": "Hard",
+          "scenario": "At 07:52 UTC, PagerDuty fires: 'kafka_consumer_group_lag{group=\"ml-feature-pipeline\",topic=\"user-events\"} = 8,412,044 (threshold: 500,000)'. A scheduled kafka-reassign-partitions.sh job (moving 180 of 720 partitions from kafka-broker-4 to kafka-broker-9, both i4i.4xlarge EC2 instances) began at 07:40 UTC during low-traffic hours. The reassignment triggers preferred-replica leader elections across 180 partitions simultaneously. Each election creates a ~150ms window where the partition has no leader; Java KafkaConsumer clients (kafka-clients 3.7.0) interpret this as FetchRequest ErrorCode=UNKNOWN_TOPIC_OR_PARTITION and trigger group coordinator rejoin. With 64 consumer pods (GKE Autopilot) all detecting leadership gaps at the same time, a global rebalance fires; each rebalance takes 12–18 seconds with 64 members (group.initial.rebalance.delay.ms=3000, max.poll.interval.ms=300000, session.timeout.ms=45000). While the first rebalance is in progress, KEDA v2.14.1 observes kafkaConsumerLag rising past 8M and scales from 64 → 88 pods; the 24 new members join mid-rebalance, triggering a second global rebalance. The second rebalance completes, then the third pod batch joins — triggering a third. In 26 minutes: 11 rebalances, 0 messages processed, consumer group lag accumulates 8.4M messages. Kafka broker logs: '[2026-10-05T07:52:14.843Z] Preparing to rebalance group ml-feature-pipeline in state PreparingRebalance with old generation 40 (reason: Adding member consumer-ml-feature-pipeline-7-4a2b to group because it just joined)' — 88 instances per rebalance. ML feature pipeline falls behind; ranking model uses 4-hour stale features for 22 minutes post-resolution, degrading recommendation CTR 3.1% ($52K estimated revenue impact over the resolution window).",
+          "exercise": "1. Diagnose: Cross-correlate consumer group rebalance events (kafka-consumer-groups.sh --describe --group ml-feature-pipeline) with Kafka broker logs and GKE HPA events. Grafana: overlay kafka_consumergroup_lag{group=\"ml-feature-pipeline\"} with kube_deployment_status_replicas{deployment=\"ml-feature-pipeline\"} — lag spike starts exactly at reassignment start; worsens with each HPA scale event. Confirm preferred-replica election still in progress via kafka-log-dirs.sh --describe --topic-list user-events.\n2. Immediate mitigation: Freeze HPA to stop new-member join cascade: 'kubectl patch hpa ml-feature-pipeline -p \"{\\\"spec\\\":{\\\"minReplicas\\\":64,\\\"maxReplicas\\\":64}}\"'. Abort the reassignment: 'kafka-reassign-partitions.sh --bootstrap-server kafka:9092 --cancel --reassignment-json-file reassign.json'. Wait for one stable rebalance to complete (kafka_consumer_group_state{state=\"Stable\"} == 1). Verify processing resumes — lag should decrease within 3 minutes.\n3. Root cause: (a) 180 simultaneous leader elections produce thundering-herd FetchErrors, triggering a global rebalance across all 64 pods at once. (b) Static group membership (group.instance.id) was NOT configured, so each HPA-spawned pod is treated as a net-new member rather than a rejoiner, triggering additional full rebalances. (c) KEDA's kafkaConsumerLag scaler lacked scaleDown.stabilizationWindowSeconds, so it continued firing scale-out events during the rebalance-induced lag accumulation. The net effect: every KEDA scale event extends the rebalance storm rather than resolving it.\n4. Fix: (a) Enable static group membership: set group.instance.id=$(POD_NAME) in consumer config — pods rejoin with their prior partition assignments via incremental cooperative rebalances rather than triggering full rebalances. (b) Switch partition.assignment.strategy=org.apache.kafka.clients.consumer.CooperativeStickyAssignor — incremental rebalances allow non-assigned partitions to continue processing during membership changes. (c) Set reassignment throttle: kafka-reassign-partitions.sh --throttle 52428800 (50 MB/s), stage reassignment in batches of ≤30 partitions per round spaced 10 minutes apart during off-peak. (d) Add KEDA ScaledObject: scaleDown.stabilizationWindowSeconds=300 to prevent scale-out during rebalance-induced lag spikes.\n5. Validate: In staging: run 180-partition reassignment with the new cooperative-sticky + static-membership config. Monitor kafka_consumer_group_rebalances_total — expect 1–2 incremental rebalances instead of 11 full rebalances. Verify throughput stays > 90% of nominal during the entire reassignment window (k6 load test concurrent with kafka-reassign-partitions.sh).\n6. Prevent: Add a Kafka reassignment pre-flight script that (a) verifies group state == Stable, (b) enables throttle, (c) stages ≤30 partitions per batch. Add KEDA annotation-based circuit breaker: suspend scaling when kafka_consumergroup_rebalancing > 0. Document in runbook: 'Never run kafka-reassign-partitions.sh without --throttle on topics with active GKE-scaled consumer groups; verify CooperativeStickyAssignor and group.instance.id are set before scheduling any reassignment.'",
+          "tags": [
+            "kafka",
+            "consumer-group",
+            "rebalance",
+            "kubernetes",
+            "hpa",
+            "gke",
+            "java",
+            "keda"
+          ],
+          "added": "2026-10-05"
         }
       ]
     },
