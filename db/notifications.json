@@ -2,9 +2,21 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-10-05"
+    "last_updated": "2026-10-06"
   },
   "entries": [
+    {
+      "timestamp": "2026-10-06T16:11:00Z",
+      "type": "drill",
+      "title": "Daily drill: BentoML ONNX Runtime cuDNN 9 Silent CPU Fallback — Library Rename Drops Inference Throughput 37×, ECS ALB Health Check Cascade for 38 Minutes",
+      "summary": "Added a Hard ML Serving drill on AWS ECS/Fargate: upgrading the CUDA base image from cuDNN 8 to cuDNN 9 silently breaks ONNX Runtime 1.17.3's CUDA EP (hard-coded dlopen of libcudnn_adv_infer.so.8, renamed in cuDNN 9 to libcudnn_adv.so.9). ResNet-50 inference falls back to CPU at 1.67s/req (37× slower), throughput drops from 1,100 rps to 14.4 rps, SQS depth reaches 42K, and an ALB health-check cascade cycles all 6 tasks continuously — all while p99 latency stays just under the 2.0s SLO alarm threshold, going undetected for 38 minutes.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "BentoML ONNX Runtime cuDNN 9 Silent CPU Fallback — Library Rename Drops Inference Throughput 37×, ECS ALB Health Check Cascade Cycles All GPU Tasks for 38 Minutes (production-drills)"
+      ]
+    },
     {
       "timestamp": "2026-10-05T07:55:00Z",
       "type": "knowledge-base",
