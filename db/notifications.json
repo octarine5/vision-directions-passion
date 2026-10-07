@@ -2,9 +2,21 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-10-06"
+    "last_updated": "2026-10-07"
   },
   "entries": [
+    {
+      "timestamp": "2026-10-07T07:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: Grafana Alertmanager Inhibition Rule Overreach — All ML Serving GPU Alerts Silenced During DB Maintenance Window, vLLM CUDA OOM Undetected for 1h 12min",
+      "summary": "Added a Hard metrics observability drill: an Alertmanager inhibition rule with an unscoped 'team=ml-platform' target matcher silences all 14 ML serving GPU alerts (including vLLM KV-cache OOM and CUDAOOMCrash) when a manually-fired DatabaseMaintenanceWindow alert lacks an endsAt expiry and outlasts the planned 30-minute maintenance window by 90 minutes, leaving an A100 CUDA OOM incident undetected for 1h 12min and causing 78K HTTP 503s and $94K revenue impact.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "Grafana Alertmanager Inhibition Rule Source-Label Regex Overreach — All ML Serving GPU Alerts Silenced During Unrelated Database Maintenance Window, vLLM CUDA OOM Undetected for 1h 12min (production-drills)"
+      ]
+    },
     {
       "timestamp": "2026-10-06T16:11:00Z",
       "type": "drill",
