@@ -2,9 +2,21 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-10-07"
+    "last_updated": "2026-10-08"
   },
   "entries": [
+    {
+      "timestamp": "2026-10-08T16:08:00Z",
+      "type": "drill",
+      "title": "Daily drill: AWS SQS FIFO DLQ Replay Violates MessageGroup Ordering — Go ML Feature Writer Overwrites 8,200 Recent Feature Vectors, CTR Degrades 9.4% for 44 Minutes",
+      "summary": "Added a Hard distributed-systems hotfix drill: a data engineer's DLQ replay script requeues 8,247 stale SQS FIFO messages using new MessageDeduplicationIds, appending them after live messages in their groups; the Go ML feature ingestion service processes them in FIFO order and overwrites recent DynamoDB feature vectors (version 847, rec-v9) with 23-hour-old stale data (version 114, rec-v7) for 8,200 users — degrading recommendation CTR by 9.4% for 44 minutes ($68K impact). Fix: add DynamoDB ConditionExpression version guard to all consumer writes; DLQ remediation must bypass the queue and use direct conditional writes.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "AWS SQS FIFO Dead-Letter Queue Replay Violates MessageGroup Ordering — Go ML Feature Writer Overwrites 8,200 Recent Feature Vectors with Stale Data, Recommendation CTR Degrades 9.4% for 44 Minutes (production-drills)"
+      ]
+    },
     {
       "timestamp": "2026-10-07T07:00:00Z",
       "type": "drill",
