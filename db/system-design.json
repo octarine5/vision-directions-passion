@@ -10,7 +10,7 @@
       "Tags",
       "Resources"
     ],
-    "last_updated": "2026-10-05"
+    "last_updated": "2026-10-12"
   },
   "sections": [
     {
@@ -1406,6 +1406,18 @@
             }
           ],
           "added": "2026-10-05"
+        },
+        {
+          "topic": "Real-Time Service Dependency Topology at Netflix",
+          "concepts": "Netflix built a unified, continuously-updated service dependency map by fusing three complementary data streams: eBPF network flows (layer 4 TCP connections captured at the kernel, complete but noisy), IPC/RPC metrics (layer 7 service call rates from Envoy sidecars, accurate but sampled), and distributed tracing (Zipkin traces, high-fidelity but < 5% sampled). A three-stage Apache Pekko Streams pipeline ingests all three from Kafka: Stage 1 aggregates raw per-packet flows into per-service-pair communication edges with byte rates and connection counts. Stage 2 resolves network intermediaries (load balancers, proxies, VIPs) to reconstruct true service-to-service edges, eliminating false intermediary nodes. Stage 3 enriches edges with service metadata from Netflix's service registry (team ownership, criticality tier, deployment version). Production engineering challenges: gateway services create hot nodes receiving ~100× normal event volume, requiring per-node backpressure; JVM GC pauses caused late data arrival in stage-2 windows, requiring a late-data tolerance window; the team migrated inter-stage communication from gRPC streaming to Server-Sent Events to reduce connection management overhead. The resulting live service graph enables engineers to query real-time 'what calls what?' for any service, surfaces unexpected dependency edges (undocumented callers, shadow traffic), and serves as the substrate for automated root cause analysis and blast-radius estimation. Key insight for Staff+ engineers: a service topology built from multi-source fusion is more actionable than any single-source approach — each source covers blind spots of the others, and the architecture decision to keep sources separately queryable (not merged irreversibly) enables source-specific debugging during incidents.",
+          "tags": ["infra", "scale", "data"],
+          "resources": [
+            {
+              "title": "From Silos to Service Topology: Why Netflix Built a Real-Time Service Map (Netflix TechBlog, May 2026)",
+              "url": "https://netflixtechblog.com/from-silos-to-service-topology-why-netflix-built-a-real-time-service-map-0165ba13a7bc"
+            }
+          ],
+          "added": "2026-10-12"
         }
       ]
     }

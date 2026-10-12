@@ -10,7 +10,7 @@
       "Tags",
       "Resources"
     ],
-    "last_updated": "2026-10-05"
+    "last_updated": "2026-10-12"
   },
   "sections": [
     {
@@ -914,6 +914,22 @@
             }
           ],
           "added": "2026-10-05"
+        },
+        {
+          "topic": "LLM Inference Engine Landscape 2026: vLLM vs SGLang vs TGI — Workload-Driven Specialization",
+          "concepts": "By mid-2026 the LLM serving engine market bifurcated into workload-optimized tiers rather than one dominant solution. SGLang spun out as RadixArk (commercial startup, Jan 2026), signaling that prefix-heavy and structured-output workloads have distinct enough requirements to sustain a separate company. Benchmark landscape (H100-SXM5): SGLang and LMDeploy lead on throughput-optimized batch workloads (~16,200 tok/s on Llama-3-70B vs. vLLM ~12,500 tok/s — note: figures from vendor benchmarks, verify against your workload). Workload-specific guidance: (1) vLLM — default for Kubernetes-native production with disaggregated prefill/decode (llm-d), agentic multi-turn KV cache reuse via turn-aware routing, and the broadest hardware portability (NVIDIA, AMD ROCm, AWS Neuron); (2) SGLang/RadixArk — preferred for prefix-heavy workloads (shared system prompts, RAG with fixed preambles) and structured-output pipelines (JSON schema enforcement via RadixTree constraint decoding); (3) TGI — HuggingFace moved to maintenance mode in 2026 and recommends vLLM or SGLang for new deployments; (4) TensorRT-LLM — highest throughput on pure NVIDIA deployments but requires per-model compilation, limiting agility. Staff+ production decision: choose by workload profile — measure prefix cache hit rate and structured output percentage before committing to an engine. Cache hit rate > 60% favors SGLang's radix caching; low hit rate favors vLLM's mature ecosystem and disaggregation story.",
+          "tags": ["ml", "infra", "scale"],
+          "resources": [
+            {
+              "title": "LLM Inference Servers Compared: vLLM vs TGI vs SGLang vs Triton 2026 (PremAI)",
+              "url": "https://blog.premai.io/llm-inference-servers-compared-vllm-vs-tgi-vs-sglang-vs-triton-2026"
+            },
+            {
+              "title": "vLLM vs SGLang: Which Inference Engine Should You Use in 2026? (Yotta Labs)",
+              "url": "https://www.yottalabs.ai/post/vllm-vs-sglang-which-inference-engine-should-you-use-in-2026.md"
+            }
+          ],
+          "added": "2026-10-12"
         }
       ]
     },

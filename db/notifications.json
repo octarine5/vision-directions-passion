@@ -2,9 +2,26 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-10-09"
+    "last_updated": "2026-10-12"
   },
   "entries": [
+    {
+      "timestamp": "2026-10-12T09:00:00Z",
+      "type": "knowledge-base",
+      "title": "Monday update: drill + knowledge base refresh",
+      "summary": "Added a Hard Metrics drill: AWS X-Ray SDK silent 64KB segment overflow causes 85% trace drop for 2h 59m after recommendation-v8.3 deploy, masking a feature encoding regression affecting 4.7% of recommendations to 2.8M users ($67K CTR impact). Knowledge base refresh (Oct 5–12): Netflix real-time service topology (eBPF + IPC + traces fusion, Pekko Streams pipeline); LLM inference engine landscape 2026 (vLLM vs SGLang/RadixArk workload specialization); Spotify velocity/quality tension post (AI shifts bottleneck from code generation to verification); Spotify Technology commercial launch (internal developer tools — Portal, Confidence, Xirp — now available as SaaS).",
+      "tasks": [
+        "drill",
+        "knowledge-base"
+      ],
+      "items_added": [
+        "AWS X-Ray SDK Silent 64KB Segment Overflow — ML Inference Tracing Blind-Spot Masks Recommendation Regression for 2h 59m, $67K CTR Impact (production-drills)",
+        "Real-Time Service Dependency Topology at Netflix (system-design)",
+        "LLM Inference Engine Landscape 2026: vLLM vs SGLang vs TGI — Workload-Driven Specialization (ml-systems)",
+        "AI-accelerated development: verification becomes the new engineering bottleneck (org-decisions)",
+        "Internal developer tools as commercial SaaS — Spotify Technology launch (business-problems)"
+      ]
+    },
     {
       "timestamp": "2026-10-09T16:09:00Z",
       "type": "market-scan",

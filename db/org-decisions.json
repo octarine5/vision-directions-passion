@@ -9,7 +9,7 @@
       "Key Considerations",
       "Phase"
     ],
-    "last_updated": "2026-10-05"
+    "last_updated": "2026-10-12"
   },
   "sections": [
     {
@@ -667,6 +667,12 @@
           "considerations": "QCon London 2026 session 'The Socio-Technical Staff+ Engineer' (Vanessa Formicola, Principal Architect, Prima) frames Staff+ engineers not just as technical leads but as architects of sociotechnical systems — the intersection of codebase structure, team topology, and organizational norms. Key decision points: (1) Coupling architecture to org structure: Conway's Law means that decoupling a monolith requires decoupling the teams first, not after; (2) Change sequencing: technical changes that require cultural pre-conditions (e.g., adopting SLOs requires a blameless postmortem culture first) must be staged accordingly; (3) Influence without authority: at Staff+ level, most architectural impact comes through RFC processes, ADRs, and pairing with team leads, not direct mandate. Practical framing: 'The architecture review isn't done until the team can own it' — sustainability is a success criterion alongside correctness.",
           "phase": "Cross-cutting",
           "added": "2026-10-05"
+        },
+        {
+          "topic": "AI-accelerated development: verification becomes the new engineering bottleneck",
+          "considerations": "Spotify Engineering's September 2026 post 'AI Changed How Spotify Builds. What We Learned (and Fixed) About Quality at Higher Velocity' documents a fundamental shift in engineering productivity constraints after > 99% of Spotify engineers adopted AI coding tools weekly. Key org-design findings: (1) The constraint moved from generating code to verifying it — 'We went from writing code to reviewing code'; AI tools eliminated most of the time cost of writing first drafts, exposing the review and verification pipeline as the new bottleneck. (2) Quality gates designed for human-paced output cannot scale to AI-paced output — code review backlogs, test coverage gaps, and CI flakiness all became more visible. Spotify invested in automated code review tooling, better static analysis integration, and test generation to match output velocity. (3) Engineering productivity metrics need a rethink — PR throughput, lines of code, and merge frequency all increase with AI tools, but quality metrics (bug escape rate, rollback rate, time-to-detect regression) are the correct leading indicators for whether AI adoption is actually positive. (4) The AI 'skill atrophy' risk is real and named — engineers delegating too much to AI tooling show reduced debugging fluency over time; Spotify began piloting 'AI-off' debugging sessions to maintain fundamental skills. Org-decision implications: (a) Invest in evaluation and correctness tooling as a first-class platform concern — it is the new force multiplier for teams at high AI adoption; (b) Redefine 'engineering productivity' for leadership reporting before AI tools do it for you — naive metrics will show inflated output, masking quality regression; (c) Build explicit onboarding for AI tool 'guardrails' so engineers know when to trust and when to verify.",
+          "phase": "Cross-cutting",
+          "added": "2026-10-12"
         }
       ]
     }
