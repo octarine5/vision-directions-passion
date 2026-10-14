@@ -2,9 +2,19 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-10-13"
+    "last_updated": "2026-10-14"
   },
   "entries": [
+    {
+      "timestamp": "2026-10-14T16:10:00Z",
+      "type": "drill",
+      "title": "Daily drill: NVIDIA DCGM Exporter MIG Label Cardinality Explosion — GPU SLIs Dark for 52 Minutes",
+      "summary": "Added a Hard Metrics drill: NVIDIA MIG partitioning on GKE A100 nodes explodes DCGM Exporter cardinality 7× (23K → 161K time series), causing all Prometheus scrape targets to time out. GPU SLOs go dark for 52 minutes during a Llama-3.1-405B migration, concealing KV cache thrashing from a tensor-parallel misconfiguration that degrades 4.2M requests to 14× SLO P99 TTFT with zero alerts fired.",
+      "tasks": ["drill"],
+      "items_added": [
+        "NVIDIA DCGM Exporter MIG Label Cardinality Explosion — Prometheus Scrape Timeout Blackouts GPU SLIs During Llama-3.1-405B Migration, KV Cache Thrashing Undetected for 52 Minutes (production-drills)"
+      ]
+    },
     {
       "timestamp": "2026-10-13T00:00:00Z",
       "type": "drill",
