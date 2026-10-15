@@ -2,9 +2,19 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-10-14"
+    "last_updated": "2026-10-15"
   },
   "entries": [
+    {
+      "timestamp": "2026-10-15T09:14:00Z",
+      "type": "drill",
+      "title": "Daily drill: GCP Cloud Monitoring ALIGN_RATE on GAUGE MetricKind",
+      "summary": "Added a Hard Metrics drill: a Go ML engineer migrates a Prometheus alert to GCP Cloud Monitoring MQL using align rate() on a GAUGE metric. For GAUGE MetricKind, rate() computes the derivative (units: %/sec), not the gauge value — causing the signal to peak at 0.046 %/sec (108× below threshold) while the real error rate is 14.2%, leaving a vLLM KV-cache OOM undetected for 41 minutes and exposing $89K in SLA credit risk.",
+      "tasks": ["drill"],
+      "items_added": [
+        "GCP Cloud Monitoring ALIGN_RATE on GAUGE MetricKind — Go ML Inference Error-Percentage Derivative Near Zero While Real Error Rate Is 14.2%, vLLM KV-Cache OOM Undetected for 41 Minutes (production-drills)"
+      ]
+    },
     {
       "timestamp": "2026-10-14T16:10:00Z",
       "type": "drill",
