@@ -3,7 +3,7 @@
     "category": "production-drills",
     "display_name": "Production Drills",
     "layout": "drills",
-    "last_updated": "2026-10-16"
+    "last_updated": "2026-10-19"
   },
   "sections": [
     {
@@ -1486,6 +1486,25 @@
             "cpu-fallback"
           ],
           "added": "2026-10-06"
+        },
+        {
+          "drill": "HuggingFace TEI v1.6 normalize_embeddings Default Flip \u2014 Query-Index Embedding Norm Mismatch Collapses Qdrant Dot-Metric ANN Recall 47%, Recommendation CTR Falls 12% for 3h 21min with Zero Errors or Alerts",
+          "layer": "ML Serving (HuggingFace TEI v1.6.0 / Qdrant 1.10 / Azure AKS / Python / FastAPI)",
+          "difficulty": "Hard",
+          "scenario": "At 14:27 UTC, Datadog fires: recommendation_ctr_7d_rolling = 2.98% (baseline 3.41%, threshold 3.1%). Your recommendation service (Azure AKS West US 2) queries HuggingFace Text Embeddings Inference (TEI) on 2\u00d7 A100 40GB nodes and runs ANN search against a Qdrant 1.10 cluster (6 nodes, 1.2B vectors, HNSW, BAAI/bge-large-en-v1.5). A platform-team Helm chart bump at 11:06 UTC upgraded TEI v1.5.2 \u2192 v1.6.0 for a libssl CVE patch. No ML-specific tests ran in CI.\n\nTEI v1.6.0 release notes (breaking change): 'normalize parameter default changed from false to true to align with MTEB evaluation standard.' Your FastAPI embed wrapper does not pass normalize explicitly: json={\"inputs\": texts}. Pre-upgrade vectors had L2 norm ~1.78 (raw, un-normalized). Post-upgrade: unit norm (1.0). Your Qdrant collection was migrated from Distance.COSINE to Distance.DOT 3 weeks ago for 1.4\u00d7 lower latency. Qdrant's dot product computes the raw dot product without normalizing query vectors at search time. Query vector L2 norm dropped from ~1.78 to ~1.00, shifting all dot product scores down ~44%. HNSW ef_search terminates early because fewer candidates cross the score threshold: recall collapses from 94.2% to 50.1%. Qdrant returns HTTP 200 with valid (but degraded) results \u2014 no 5xx, no crashes, no pod restarts.\n\nMetrics at 14:27 UTC (3h 21min post-upgrade):\n  - recommendation_ctr_7d_rolling: 2.98% (from 3.41% baseline, -12.6%)\n  - qdrant_search_result_count_avg: 7.1 (limit=10, HNSW returning fewer candidates)\n  - qdrant_search_duration_p99_ms: 4.1 ms (from 3.8 ms baseline)\n  - tei_request_duration_p99_ms: 18 ms (from 19 ms \u2014 normalization is fast)\n  - service_5xx_error_rate: 0.00%\n  - azure_aks_pod_restarts_24h: 0\n  - Qdrant /healthz: HTTP 200\n  No alert fired for 3h 21min. Only signal: downstream CTR rolling metric crossed threshold after 3+ hours.",
+          "exercise": "1. Triage \u2014 Correlate deployment to metric drop: kubectl get events -n ml-serving --sort-by=.lastTimestamp | grep tei \u2014 Helm rollout completed 11:06 UTC, 3h 21min before the CTR alert. kubectl describe pod -n ml-serving -l app=tei | grep Image: \u2192 ghcr.io/huggingface/text-embeddings-inference:1.6.0. Reproduce the embedding norm shift: import numpy as np; v = np.array(tei_embed('test text')); print(np.linalg.norm(v)) \u2014 returns 1.00000 (pre-upgrade returned ~1.78). Confirm Qdrant collection metric: curl http://qdrant:6333/collections/items-v3 | jq .result.config.params.vectors.distance \u2192 'Dot'. Smoking gun: Distance.DOT + index built on raw-norm vectors + now-normalized query vectors = score distribution collapse + HNSW recall drop.\n2. Immediate mitigation \u2014 Restore norm alignment without rebuilding the index: Add normalize: False explicitly to all TEI embed calls. json={'inputs': texts, 'normalize': False}. Rolling restart (60 seconds, zero downtime). Verify: python scripts/check_qdrant_recall.py --n=1000 \u2014 assert recall > 92%. qdrant_search_result_count_avg should return to 9.8-10.0 within one deploy.\n3. Root cause: Two compounding silent failures: (a) TEI v1.6.0 changed the normalize default in a minor release \u2014 a breaking behavioral change without a major version bump. (b) The Distance.COSINE \u2192 Distance.DOT collection migration 3 weeks earlier introduced an undocumented invariant: dot metric requires query and index vectors to share the same L2 norm for scores to be comparable. Cosine metric is norm-invariant; dot is not. Neither change alone caused the regression.\n4. Fix: (a) Pass normalize explicitly in every TEI call \u2014 never rely on defaults. Add a required normalize: bool parameter (no default) to the FastAPI embed() wrapper. (b) Add an embedding norm health check gate to the Helm deploy pipeline: after any TEI version bump, assert 0.99 < np.linalg.norm(probe_embedding) < 2.5 (or 0.999-1.001 if normalize=True is intentional). Fail the Helm deployment if norm distribution shifts. (c) Store the embedding norm profile as Qdrant collection metadata: PUT /collections/items-v3 payload {'embed_norm_avg': 1.82, 'normalize_at_ingest': False}. Alert if serving-time norm deviates >5% from collection metadata norm.\n5. Prevent: (a) Add Datadog monitor on qdrant_search_score_avg_1h_rolling: alert if score drops >10% from 7-day baseline (p < 0.01). Fires within 30 min of embedding norm shift \u2014 vs 3+ hours for CTR telemetry. (b) Add qdrant_search_result_count_avg < 9.0 for limit=10 queries as a leading indicator of HNSW recall collapse \u2014 fires in <15 min. (c) Pin TEI image tag in Helm values.yaml. Require ML Platform sign-off with mandatory embedding distribution regression test (norm histogram + ANN recall smoke test) for any TEI minor/major version bump.",
+          "tags": [
+            "huggingface",
+            "embeddings",
+            "qdrant",
+            "vector-search",
+            "python",
+            "azure-aks",
+            "ml-serving",
+            "silent-failure",
+            "ann"
+          ],
+          "added": "2026-10-19"
         }
       ]
     },

@@ -3,7 +3,7 @@
     "category": "tech-talks",
     "display_name": "Tech Talks",
     "layout": "cards",
-    "last_updated": "2026-10-05"
+    "last_updated": "2026-10-19"
   },
   "sections": [
     {
@@ -1207,6 +1207,38 @@
           "venue": "Netflix TechBlog (May 2026)",
           "description": "Engineering writeup on Netflix's real-time service dependency graph that answers incident questions — blast radius, upstream dependencies, propagation paths — in seconds rather than minutes of runbook hunting. Merges three data sources into a single queryable live graph: eBPF network flows (kernel-level TCP tracking, no instrumentation needed), IPC metrics (service mesh call volumes and error rates), and distributed traces (causal ordering). Three-stage pipeline separates resolution, enrichment, and persistence; back-pressure propagates to Kafka rather than dropping; server-sent events replace gRPC for high-cardinality topology update streams. Concrete template for infra teams building observability products at microservice-heavy organizations.",
           "added": "2026-09-14"
+        },
+        {
+          "title": "vLLM Support for NVIDIA Vera Rubin NVL72: 7.8× Per-GPU Throughput over GB200 NVL72 on AgentX",
+          "url": "https://vllm.ai/blog/2026-10-09-vera-rubin-preview",
+          "speaker": "vLLM Team (Inferact, Red Hat, NVIDIA)",
+          "venue": "vLLM Blog (October 9, 2026)",
+          "description": "vLLM's day-0 preview of NVIDIA Vera Rubin NVL72 (RB100 GPU) support. On the AgentX agentic benchmark suite, vLLM achieves 7.8× per-GPU throughput over the GB200 NVL72 baseline — driven by CUDA 13.4 locality domains enabling fine-grained GPU resource partitioning for disaggregated prefill/decode, Rubin-tuned FlashInfer 0.7.0 kernels targeting Rubin's new SM architecture, and 288 GB HBM4 per RB100 GPU (2.25× GB200's HBM3e). Covers the hardware architecture changes, vLLM integration approach, and per-workload performance breakdown across single-turn, multi-turn, and agentic profiles. Essential read for teams evaluating next-gen GPU procurement for LLM serving workloads.",
+          "added": "2026-10-19"
+        },
+        {
+          "title": "Push-Based KV Transfer to Improve TTFT and TPOT for Disaggregated Inference in vLLM",
+          "url": "https://vllm.ai/blog/2026-10-14-nixl-push-connector",
+          "speaker": "vLLM Team",
+          "venue": "vLLM Blog (October 14, 2026)",
+          "description": "Introduces the NIXL PUSH connector for vLLM disaggregated prefill/decode: instead of the decode worker pulling KV blocks from prefill through a centralized coordinator (adding 2+ round-trips to TTFT), the prefill worker pushes KV blocks directly to the decode worker's pre-allocated GPU buffer as layers complete. Measured improvements: 18-34% lower TTFT on long-context prompts (>4K tokens), 8-12% better TPOT under high concurrency. The NIXL UCX/UCX-Py transport (P2P RDMA or NVLink intra-node, UCX inter-node) is unchanged; only the transfer direction and coordinator involvement flip. Compatible with vLLM v0.31+ and NVIDIA Dynamo. Critical for teams optimizing agentic workloads where large tool-call contexts dominate TTFT.",
+          "added": "2026-10-19"
+        },
+        {
+          "title": "vLLM vs SGLang: Choosing the Right Inference Engine for Your Workload",
+          "url": "https://developers.redhat.com/articles/2026/10/14/vllm-vs-sglang-choosing-the-right-inference-engine-for-your-workload",
+          "speaker": "Red Hat Developer Team",
+          "venue": "Red Hat Developer Blog (October 14, 2026)",
+          "description": "Practical workload-fit decision framework comparing vLLM and SGLang for production LLM serving in 2026. Key guidance: choose vLLM for Kubernetes-native disaggregated prefill/decode (llm-d), broadest hardware portability (NVIDIA, AMD ROCm, AWS Neuron, Google TPU), and agentic multi-turn KV cache reuse via turn-aware routing. Choose SGLang (now RadixArk) for prefix-heavy workloads (shared system prompts, RAG fixed preambles, prefix cache hit rate >60%), structured-output pipelines (JSON schema enforcement via RadixTree constraint decoding), and multi-turn conversational agents. Covers benchmark methodology, RadixTree vs PagedAttention trade-offs, and the architectural implications of SGLang's commercial spinout as RadixArk. Practical staff-level reference for vendor selection decisions.",
+          "added": "2026-10-19"
+        },
+        {
+          "title": "vLLM Sessions at PyTorch Conference North America 2026",
+          "url": "https://pytorch.org/blog/vllm-sessions-at-pytorch-conference-north-america-2026/",
+          "speaker": "vLLM contributors (Mistral AI, Amazon, Red Hat, others)",
+          "venue": "PyTorch Conference North America 2026 (October 20-21, San Jose)",
+          "description": "Preview of vLLM sessions at PyTorch Conference NA 2026. Headline talk: 'State-of-the-Art KV Transfer for Disaggregated LLM Serving' covering push-based NIXL KV transfer, SmartGen selective KV transfer (4.3× TTST reduction via dynamic attention sparsity), and production deployment patterns from Mistral AI, Amazon, and Red Hat. Additional sessions cover vLLM's Rust frontend gRPC path, Model Runner V2 performance engineering, and disaggregated serving at hyperscale. Useful agenda overview for teams tracking vLLM's production serving roadmap and the state of KV cache transfer protocols in disaggregated inference.",
+          "added": "2026-10-19"
         }
       ]
     }

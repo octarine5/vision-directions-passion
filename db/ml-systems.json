@@ -10,7 +10,7 @@
       "Tags",
       "Resources"
     ],
-    "last_updated": "2026-10-12"
+    "last_updated": "2026-10-19"
   },
   "sections": [
     {
@@ -930,6 +930,18 @@
             }
           ],
           "added": "2026-10-12"
+        },
+        {
+          "topic": "vLLM NIXL Push-Based KV Transfer — Eliminating Pull-Path Coordinator Overhead in Disaggregated Inference",
+          "concepts": "Traditional disaggregated LLM serving uses pull-based KV transfer: decode worker requests KV blocks from the prefill worker through a centralized coordinator (vLLM KV Router), adding 2+ coordinator round-trips per request to TTFT. The NIXL PUSH connector (vLLM v0.31+, Oct 2026) flips the direction: the prefill worker pushes KV blocks directly to the decode worker's pre-allocated GPU buffer as each layer completes, without waiting for coordinator acknowledgement. Key properties: (1) Zero coordinator RTT on the KV transfer hot path; (2) NIXL UCX/UCX-Py transport unchanged — P2P RDMA or NVLink intra-node, UCX inter-node; (3) Prefill sends a lightweight 'transfer complete' notification after all layers are pushed; (4) Decode begins attention computation as KV blocks arrive, not after full-tensor delivery. Measured improvements over pull-based baseline: 18-34% lower TTFT on long-context prompts (>4K input tokens), 8-12% improvement in TPOT under high concurrency. Compatible with NVIDIA Dynamo. Highest-value optimization for agentic workloads with large tool-call contexts where cross-node KV transfer dominates TTFT.",
+          "tags": ["ml", "infra", "scale"],
+          "resources": [
+            {
+              "title": "Push-Based KV Transfer to Improve TTFT and TPOT for Disaggregated Inference in vLLM (Oct 14, 2026)",
+              "url": "https://vllm.ai/blog/2026-10-14-nixl-push-connector"
+            }
+          ],
+          "added": "2026-10-19"
         }
       ]
     },

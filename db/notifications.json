@@ -2,9 +2,27 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-10-16"
+    "last_updated": "2026-10-19"
   },
   "entries": [
+    {
+      "timestamp": "2026-10-19T09:00:00Z",
+      "type": "knowledge-base",
+      "title": "Monday update: drill + knowledge base refresh",
+      "summary": "Added Hard ML Serving drill: HuggingFace TEI v1.6 normalize_embeddings default flip causes Qdrant dot-metric ANN recall to collapse 47%, recommendation CTR drops 12% for 3h 21min with zero errors or alerts (Azure AKS / Qdrant 1.10 / TEI / FastAPI). Added 4 tech talks to ML & AI Systems: vLLM Vera Rubin NVL72 7.8x throughput preview (Oct 9), push-based NIXL KV transfer TTFT/TPOT improvements (Oct 14), Red Hat vLLM vs SGLang workload-fit guide (Oct 14), PyTorch Conference NA 2026 vLLM sessions (Oct 20-21). Added 1 ml-systems entry on NIXL push-based KV transfer architecture for disaggregated inference.",
+      "tasks": [
+        "drill",
+        "knowledge-base"
+      ],
+      "items_added": [
+        "HuggingFace TEI v1.6 normalize_embeddings Default Flip — Qdrant Dot-Metric ANN Recall Collapse 47%, CTR -12% for 3h 21min (production-drills)",
+        "vLLM Support for NVIDIA Vera Rubin NVL72: 7.8× Per-GPU Throughput over GB200 NVL72 on AgentX (tech-talks)",
+        "Push-Based KV Transfer to Improve TTFT and TPOT for Disaggregated Inference in vLLM (tech-talks)",
+        "vLLM vs SGLang: Choosing the Right Inference Engine for Your Workload — Red Hat (tech-talks)",
+        "vLLM Sessions at PyTorch Conference North America 2026 (tech-talks)",
+        "vLLM NIXL Push-Based KV Transfer — Disaggregated Inference Coordinator Overhead Elimination (ml-systems)"
+      ]
+    },
     {
       "timestamp": "2026-10-16T09:00:00Z",
       "type": "market-scan",
