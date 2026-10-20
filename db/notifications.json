@@ -2,9 +2,21 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-10-19"
+    "last_updated": "2026-10-20"
   },
   "entries": [
+    {
+      "timestamp": "2026-10-20T16:04:00Z",
+      "type": "drill",
+      "title": "Daily drill: Cassandra TWCS Tombstone Accumulation — ML Feature Store P99 12× SLO Breach",
+      "summary": "Added a Hard Database drill: Cassandra 4.1.3 on GCP GKE ML feature store accumulates 103K tombstones per partition due to TWCS 1-hour windows and gc_grace_seconds=10d mismatched against 24h TTL, causing ReadTimeoutException, model serving P99 12× SLO breach (583ms vs 50ms), and -8.3% recommendation CTR for 67 minutes across 380K high-activity users.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "Cassandra TWCS Tombstone Accumulation in ML Feature Store — ReadTimeoutException Causes Model Serving P99 12× SLO Breach for 67 Minutes, Recommendation CTR -8.3% (production-drills)"
+      ]
+    },
     {
       "timestamp": "2026-10-19T09:00:00Z",
       "type": "knowledge-base",
