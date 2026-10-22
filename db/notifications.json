@@ -2,9 +2,21 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-10-21"
+    "last_updated": "2026-10-22"
   },
   "entries": [
+    {
+      "timestamp": "2026-10-22T00:05:00Z",
+      "type": "drill",
+      "title": "Daily drill: Micrometer 1.13 Histogram Bucket Boundary Migration — histogram_quantile Returns NaN During Rolling Deploy, Java 21 Ranking API P99 Alert Blind for 43 Minutes",
+      "summary": "Added a Hard Metrics drill: Micrometer 1.13.6 changes default Timer histogram bucket boundaries from a 14-bucket legacy set to an 18-bucket OTel-compatible set; during a GKE rolling deploy, mixed Micrometer versions across 12 pods produce incommensurable le labels that cause histogram_quantile to return NaN. PagerDuty P99 SLO alert silently fails to fire (NaN > 0.200 evaluates false) for 43 minutes during a Postgres connection pool exhaustion that spikes ranking latency 23×, impacting 4.7M users with $41K CTR impact. Fix: pin explicit SLO boundaries in application.yaml and use per-pod histogram_quantile averaging to tolerate mixed fleets.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "Micrometer 1.13 Histogram Bucket Boundary Migration — Mixed `le` Labels During GKE Rolling Deploy Cause `histogram_quantile` to Return NaN, Java 21 Ranking API P99 SLO Alert Blind for 43 Minutes While Latency Spikes 23× (production-drills)"
+      ]
+    },
     {
       "timestamp": "2026-10-21T16:05:52Z",
       "type": "drill",
