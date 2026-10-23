@@ -2,9 +2,25 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-10-22"
+    "last_updated": "2026-10-23"
   },
   "entries": [
+    {
+      "timestamp": "2026-10-23T16:03:22Z",
+      "type": "market-scan",
+      "title": "Friday update: drill + market signal scan",
+      "summary": "Added Hard ML Serving drill: Ray Serve 2.40 min_replicas=0 cold start — AWS ALB 408 taxonomy gap silences CloudWatch 5xx alarm, 14,700 ranker requests timeout silently for 17 minutes ($53K CTR impact). Market scan (Oct 17-23, 2026): Modal Labs $750M Series D at $15.75B ($1B+ ARR, Sandboxes agentic execution is 1/3 of revenue); Arena $200M Series B at $3.1B ($100M ARR, AI model evaluation becomes standalone infrastructure category); Legora $550M Series E at $8.8B ($200M ARR in 18 months, legal AI vertical scale inflection).",
+      "tasks": [
+        "drill",
+        "market-scan"
+      ],
+      "items_added": [
+        "Ray Serve 2.40 min_replicas=0 Scale-to-Zero Cold Start — AWS ALB Counts HTTP 408 as 4xx, CloudWatch 5xx Alarm Silent, 14,700 Ranker Requests Timeout for 17 Minutes (production-drills)",
+        "Serverless AI inference PaaS at $1B ARR — Modal Labs $750M Series D, Sandboxes agentic execution 1/3 of revenue (business-problems)",
+        "AI model evaluation infrastructure — Arena $200M Series B at $3.1B, $100M ARR, Alignment Index for EU AI Act compliance (business-problems)",
+        "Legal AI platform scale inflection — Legora $550M Series E at $8.8B, $200M ARR in 18 months (business-problems)"
+      ]
+    },
     {
       "timestamp": "2026-10-22T00:05:00Z",
       "type": "drill",
