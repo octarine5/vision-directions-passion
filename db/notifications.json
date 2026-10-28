@@ -2,9 +2,21 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-10-27"
+    "last_updated": "2026-10-28"
   },
   "entries": [
+    {
+      "timestamp": "2026-10-28T16:04:00Z",
+      "type": "drill",
+      "title": "Daily drill: Apache Kafka Zombie Transaction Freezes Last Stable Offset — Java ML Feature Consumer read_committed Reports Lag=1 While 840K Records Queue Invisibly for 48 Minutes",
+      "summary": "Added a Hard distributed-systems hotfix drill: scaling down a Java transactional Kafka producer (ECS Fargate) mid-transaction without a preStop abortTransaction() hook leaves zombie transactions on AWS MSK Kafka 3.7. The broker's Last Stable Offset (LSO) freezes at each open transaction's BEGIN marker. Downstream read_committed consumers stall, reporting LAG=1 per partition (kafka-consumer-groups.sh shows LSO as end-offset, masking 840K+ invisible records behind the frozen LSO). 48-minute feature store outage — 47M user feature vectors stale — detected only when a data scientist noticed DynamoDB updated_at timestamps frozen at 08:25 UTC. Fix: set transaction.timeout.ms=60000 (not 15 minutes), add SIGTERM shutdown hook calling producer.abortTransaction(), monitor LEO-LSO gap per partition (not just consumer lag), and gate ECS scale-downs on kafka-transactions.sh --list showing no ONGOING transactions.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "Apache Kafka Zombie Transaction Freezes Last Stable Offset — Java ML Feature Consumer read_committed Reports Lag=1 While 840K Records Queue Invisibly for 48 Minutes (production-drills)"
+      ]
+    },
     {
       "timestamp": "2026-10-27T16:04:12Z",
       "type": "drill",
