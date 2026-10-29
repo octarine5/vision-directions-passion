@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-10-28"
+    "last_updated": "2026-10-29"
   },
   "entries": [
     {
@@ -1990,6 +1990,18 @@
         "Breaking the Monolith: Improving Velocity by Migrating to ML Platform — Vaidehi Thete, PlatformCon 2026 (tech-talks)",
         "Prefill-Decode Disaggregated Inference: Heterogeneous GPU Pool Architecture (ml-systems)",
         "Disaggregated LLM Inference System Design (system-design)"
+      ]
+    },
+    {
+      "timestamp": "2026-10-29T16:14:00Z",
+      "type": "drill",
+      "title": "Daily drill: TensorRT-LLM Engine ABI Mismatch — Silent Flash Attention Regression on GKE After CUDA Upgrade",
+      "summary": "Added a Hard ML Serving hotfix drill: a GCP OS patch cycle upgrades the CUDA driver without rebuilding the TensorRT-LLM engine, causing a silent Flash Attention mask off-by-one for sequences > 512 tokens on Gemma-7B. 12,400 requests return empty padding-token responses with 0% HTTP error rate — only the BLEU quality alarm detects it after 25 minutes.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "TensorRT-LLM 0.8.0 Engine ABI Mismatch After CUDA Driver Upgrade — Flash Attention Mask Off-by-One Silently Returns Padding Tokens for Sequences > 512 Tokens (production-drills)"
       ]
     }
   ]
