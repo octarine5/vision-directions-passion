@@ -2,9 +2,25 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-10-29"
+    "last_updated": "2026-10-30"
   },
   "entries": [
+    {
+      "timestamp": "2026-10-30T16:00:00Z",
+      "type": "market-scan",
+      "title": "Friday update: drill + market signal scan",
+      "summary": "Added Hard distributed-systems hotfix drill: confluent-kafka 2.5.0 regression applies auto.offset.reset=earliest on consumer group rolling restart — 72h event replay overwrites PostgreSQL last_engagement_30m (last-write-wins column) for 4.7M users, recommendation CTR -9.1% for 2.8 hours with zero Kafka lag alerts. Market scan (Oct 24-30, 2026): Anthropic public S-1 filed Oct 26 (ANT/Nasdaq, Nov 2026, $1.5T-$2T) — enterprise procurement urgency to lock in pre-IPO Claude pricing; ASI $325M Series C at $3B validates AI infrastructure management as distinct category; Daytona $60M Series B for AI agent dev environment automation closes the agentic sandbox execution stack.",
+      "tasks": [
+        "drill",
+        "market-scan"
+      ],
+      "items_added": [
+        "confluent-kafka 2.5.0 auto.offset.reset Regression — 72-Hour Event Replay Overwrites last_engagement_30m for 4.7M Users, CTR -9.1% for 2.8 Hours (production-drills)",
+        "Anthropic public S-1 filed October 26 — ANT Nasdaq IPO November 2026 target, $1.5T-$2T enterprise procurement urgency (business-problems)",
+        "AI infrastructure management software Series C — ASI $325M at $3B validates multi-provider cost allocation as distinct category (business-problems)",
+        "Agentic AI sandboxed execution environments — Daytona $60M Series B, E2B, Modal Sandboxes close the agentic dev environment stack (business-problems)"
+      ]
+    },
     {
       "timestamp": "2026-10-28T16:04:00Z",
       "type": "drill",
