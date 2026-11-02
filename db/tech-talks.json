@@ -3,7 +3,7 @@
     "category": "tech-talks",
     "display_name": "Tech Talks",
     "layout": "cards",
-    "last_updated": "2026-10-26"
+    "last_updated": "2026-11-02"
   },
   "sections": [
     {
@@ -661,6 +661,30 @@
           "venue": "PlatformCon 2026",
           "description": "How the NYT ML Platform team rebuilt a monolithic ML job as composable services \u2014 cutting processing time for 4M users from hours to minutes and scaling to 40M users",
           "added": "2026-10-26"
+        },
+        {
+          "title": "llm-d 1.0: Open-Source Kubernetes-Native Distributed LLM Inference Hits Production Grade",
+          "url": "https://research.ibm.com/blog/llmd-1-0-is-ready-for-production-inference-serving",
+          "speaker": "IBM Research / Red Hat / Google Cloud (llm-d maintainers)",
+          "venue": "IBM Research Blog / PyTorch Conference North America 2026 (San Jose, Oct 20-21, 2026)",
+          "description": "llm-d 1.0 GA announcement covering the five production-hardening additions: multi-tenant quality-of-service (per-tenant burst limits and fairness queues), zero-downtime model hot-swap via Ray Direct Transport, agent-aware serving (turn-affinity routing to keep KV cache warm across agent turns), prefix-aware load balancing with host-memory KV offload (cutting median TTFT by 85% on agentic coding workloads on Ironwood TPU in Google Cloud benchmarks), and disaggregated prefill/decode for 75%+ throughput gains on long-context requests. The 1.0 milestone declares API stability for the InferencePool, LLMRoute, and InferenceModel CRDs, making llm-d production-safe for teams building Kubernetes-native LLM serving infrastructure without managing per-model inference daemons.",
+          "added": "2026-11-02"
+        },
+        {
+          "title": "vLLM Large Scale Serving: DeepSeek @ 2.2k tok/s/H200 with Wide Expert Parallelism",
+          "url": "https://vllm.ai/blog/large-scale-serving",
+          "speaker": "vLLM Core Team",
+          "venue": "vLLM Blog (October 2026)",
+          "description": "vLLM's production benchmarks for large-scale MoE serving at 2,200 tokens/second/H200 on DeepSeek models using Wide Expert Parallelism (Wide-EP): expert shards distributed across many nodes with minimal all-to-all communication overhead. Covers Elastic Expert Parallelism \u2014 dynamically adjusting the number of active expert shards at runtime in response to load, without restarting the serving process. Demonstrates that Wide-EP with 64 nodes outperforms tensor parallelism for MoE models by eliminating the all-reduce bottleneck: each GPU only communicates with its expert shard neighbors rather than all-reducing across all GPUs. Production guidance: optimal EP degree = sqrt(experts_per_layer * active_experts_per_token) for bandwidth-compute balance. Essential reading for teams scaling MoE LLMs beyond a single-node vLLM deployment.",
+          "added": "2026-11-02"
+        },
+        {
+          "title": "Google Cloud: What's New in AI Infrastructure \u2014 October 2026",
+          "url": "https://cloud.google.com/blog/topics/ai-infrastructure/whats-new-in-ai-infrastructure-this-month",
+          "speaker": "Google Cloud AI Infrastructure Team",
+          "venue": "Google Cloud Blog (October 2026)",
+          "description": "Monthly roundup covering the GA of llm-d 1.0 on Google Cloud Kubernetes Engine with Ironwood TPU support; GKE Node Auto-Provisioning for AI workloads (automatic Autopilot node pool creation when inference pods request accelerators with no matching nodes); Cloud Run support for GPU-backed inference up to 8\u00d7 H100s; and Hyperdisk ML Balanced \u2014 a new storage class optimized for model weight streaming with 12 GB/s sustained read bandwidth for serving large checkpoints at startup.",
+          "added": "2026-11-02"
         }
       ]
     },

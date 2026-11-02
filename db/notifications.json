@@ -2,9 +2,27 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-10-30"
+    "last_updated": "2026-11-02"
   },
   "entries": [
+    {
+      "timestamp": "2026-11-02T16:31:00Z",
+      "type": "knowledge-base",
+      "title": "Monday update: drill + knowledge base refresh",
+      "summary": "Added a Hard distributed-systems hotfix drill: RabbitMQ 3.13 quorum queue network partition during rolling upgrade — ACK-before-commit race condition in Go payments worker (amqp091-go) commits 5 duplicate charges ($47K) and loses 12 payment records to PostgreSQL 16 on Nomad/AWS. Knowledge base update: 3 new tech talks (llm-d 1.0 GA at PyTorch Conf, vLLM Wide Expert Parallelism for MoE at 2,200 tok/s/H200, Google Cloud October 2026 AI infra roundup) and 2 new ML systems topics (Elastic Expert Parallelism for MoE LLM serving and disaggregated prefill/decode deployment patterns).",
+      "tasks": [
+        "drill",
+        "knowledge-base"
+      ],
+      "items_added": [
+        "RabbitMQ 3.13 Quorum Queue Leader Election Deadlock During Rolling Upgrade — Go Payments Worker ACK-Before-Commit Race Condition Commits Duplicate Charges to PostgreSQL 16 for 19 Minutes ($47K) (production-drills)",
+        "llm-d 1.0: Open-Source Kubernetes-Native Distributed LLM Inference Hits Production Grade (tech-talks)",
+        "vLLM Large Scale Serving: DeepSeek @ 2.2k tok/s/H200 with Wide Expert Parallelism (tech-talks)",
+        "Google Cloud: What's New in AI Infrastructure — October 2026 (tech-talks)",
+        "Elastic Expert Parallelism for Large-Scale MoE LLM Serving (ml-systems)",
+        "Disaggregated LLM Prefill/Decode Architecture — Production Deployment Patterns (ml-systems)"
+      ]
+    },
     {
       "timestamp": "2026-10-30T16:00:00Z",
       "type": "market-scan",

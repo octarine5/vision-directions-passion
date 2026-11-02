@@ -10,7 +10,7 @@
       "Tags",
       "Resources"
     ],
-    "last_updated": "2026-10-26"
+    "last_updated": "2026-11-02"
   },
   "sections": [
     {
@@ -1405,6 +1405,46 @@
             }
           ],
           "added": "2026-09-21"
+        },
+        {
+          "topic": "Elastic Expert Parallelism for Large-Scale MoE LLM Serving",
+          "concepts": "Wide Expert Parallelism (Wide-EP) distributes MoE expert shards across many nodes, replacing all-reduce with expert-local communication. Elastic EP adjusts the number of active expert shards at runtime under load without process restart. Key design insight: for MoE models, the optimal parallelism degree is EP (not TP) when expert_count / active_experts > 8 — the all-to-all expert routing becomes cheaper than NVLink all-reduce at scale. Production benchmark: vLLM DeepSeek-V4 at 2,200 tokens/s/H200 with Wide-EP=64 nodes outperforms TP=8 single-node by 6.3×. llm-d 1.0 (Oct 20, 2026) ships Elastic EP as a GA feature with InferencePool autoscaling CRD support. Staff+ design note: switching from TP to EP requires re-sharding the expert weight files — plan for a one-time weight re-partition step when adopting Wide-EP on an existing deployment.",
+          "tags": [
+            "ml",
+            "infra",
+            "scale"
+          ],
+          "resources": [
+            {
+              "title": "vLLM Large Scale Serving: DeepSeek @ 2.2k tok/s/H200 with Wide-EP",
+              "url": "https://vllm.ai/blog/large-scale-serving"
+            },
+            {
+              "title": "llm-d 1.0 Production Release (IBM Research, Oct 2026)",
+              "url": "https://research.ibm.com/blog/llmd-1-0-is-ready-for-production-inference-serving"
+            }
+          ],
+          "added": "2026-11-02"
+        },
+        {
+          "topic": "Disaggregated LLM Prefill/Decode Architecture — Production Deployment Patterns",
+          "concepts": "Disaggregated inference separates the prefill phase (compute-bound: processes prompt tokens in parallel) from decode phase (memory-bandwidth-bound: autoregressively generates one token per step) onto different GPU pools. Prefill pods: high-compute (H100 SXM recommended), large batch size, no KV cache retention needed beyond transfer. Decode pods: high-memory-bandwidth (optimized for KV cache hit rate), low concurrency, session-affinity routing. KV cache transfer between pools via RDMA or PCIe at 40–120 GB/s (NVIDIA Dynamo protocol or llm-d RDT). Impact: 75%+ throughput improvement on long-context requests (28K+ tokens) vs. colocated serving; p90 inter-token latency reduced 40% by removing prefill competition for GPU cycles. Operational complexity: requires P/D ratio tuning (typically 1:4 prefill:decode for typical workloads), KV transfer bandwidth monitoring, and session-affinity sticky routing for multi-turn agents. Reference implementation: vLLM Serving vLLM on Agentic Workloads (Ray Summit 2026), llm-d disaggregated serving, NVIDIA Dynamo.",
+          "tags": [
+            "ml",
+            "infra",
+            "scale"
+          ],
+          "resources": [
+            {
+              "title": "Serving vLLM on Agentic Production Workloads (Ray Summit 2026)",
+              "url": "https://www.youtube.com/watch?v=RqKFVTWx_Qo"
+            },
+            {
+              "title": "llm-d: Combining Kubernetes and vLLM for Distributed Inference",
+              "url": "https://www.youtube.com/watch?v=zJag9bgK80M"
+            }
+          ],
+          "added": "2026-11-02"
         }
       ]
     }
