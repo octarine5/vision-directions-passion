@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-11-02"
+    "last_updated": "2026-11-03"
   },
   "entries": [
     {
@@ -2036,6 +2036,18 @@
       ],
       "items_added": [
         "TensorRT-LLM 0.8.0 Engine ABI Mismatch After CUDA Driver Upgrade — Flash Attention Mask Off-by-One Silently Returns Padding Tokens for Sequences > 512 Tokens (production-drills)"
+      ]
+    },
+    {
+      "timestamp": "2026-11-03T16:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: vLLM Prefix Cache Race — Rust Tokenizer Bug Triggers Cross-Tenant KV Block Reuse on Azure AKS H100",
+      "summary": "Added a Hard ML Serving hotfix drill: a Rust tokenizer microservice async RwLock check-then-act race (v2.4.1) merges token sequences from two concurrent enterprise tenants, causing vLLM 0.6.4 prefix caching to reuse cross-tenant KV blocks. 841 responses contain proprietary code from a different tenant's session — detected after 19 minutes by a cross-tenant context classifier alarm, not by any infrastructure metric.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "vLLM 0.6.4 Prefix Cache Block Reference Count Race — Rust Tokenizer Microservice Parallel Decode Burst Triggers KV Block Reuse Across Tenant Sessions, 6.3% of Responses Contain Cross-Tenant Code Context for 19 Minutes (production-drills)"
       ]
     }
   ]
