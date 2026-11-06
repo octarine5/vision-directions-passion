@@ -465,6 +465,13 @@
       "stage": "Series A ($80M, Sequoia Capital, September 23, 2026; Apache-2.0 open-source; supports Llama-3/Phi-3.5/Gemma-3)",
       "signal": "hot",
       "notes": "MLC LLM raised $80M Series A on September 23, 2026 led by Sequoia Capital. Apache-2.0 open-source; the Apache license is strategic — prevents NVIDIA/Apple from forking and closing the runtime while enabling enterprise use without GPL concerns. Builds the TVM-based compiler stack that deploys Llama-3/Phi-3.5/Gemma-3 on Apple Neural Engine, Qualcomm Hexagon NPU, and ARM Ethos-U85 — hitting the trifecta of consumer device AI accelerators. Catalyst for the raise: Apple Intelligence Enterprise Attestation API (Sept 20, 2026) created an enterprise-grade compliance wrapper around on-device inference, solving the HIPAA/GDPR data-residency question that blocked regulated-industry adoption. For ML engineers: MLC LLM is the lowest-friction path to deploying 7B-parameter models on enterprise employee devices; evaluate for document summarization, note-taking assistant, and policy lookup use cases where data-egress liability exceeds inference cost savings from cloud APIs. Watch: Qualcomm AI Hub Enterprise SDK (GA Sept 2026) uses MLC LLM as its default inference runtime — distribution partnership with 900M+ Snapdragon-powered enterprise devices."
+    },
+    {
+      "name": "fal",
+      "domain": "Generative Media Inference / Image & Video Generation PaaS",
+      "stage": "Series F ($1.3B at $16B valuation, November 3, 2026; Andreessen Horowitz + Tiger Global led)",
+      "signal": "hot",
+      "notes": "Generative media inference PaaS (Flux Pro, Stable Diffusion XL, Runway Gen-3, MusicGen, 150+ media generation models); $1.3B Series F at $16B valuation Nov 3, 2026; processes 500M+ image/video/audio generations/week. Architecturally distinct from LLM inference: iterative denoising loops (20-50 steps/image), hot LoRA adapter cache for 1,000+ fine-tuned adapters per cluster, and prompt-conditioning cache (fal's core IP) that reduces step count on similar prompts by 30-40%. Pricing: $0.0025–$0.009 per image, implying ~$160M+ ARR if fully monetized. For ML platform teams: running media generation on a generic LLM serving stack (vLLM, TGI) leaves 3-5× cost and latency improvement on the table vs. media-inference-specialized infrastructure."
     }
   ],
   "careerMilestones": [

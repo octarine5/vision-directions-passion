@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-11-05"
+    "last_updated": "2026-11-06"
   },
   "entries": [
     {
@@ -2072,6 +2072,23 @@
       ],
       "items_added": [
         "AWS CloudFront Custom Error Response Cache TTL — Terraform State Drift Caches 503 ML Inference Error Pages for 58 Minutes, 2.3M Users See Stale Errors After Origin Recovery (production-drills)"
+      ]
+    },
+    {
+      "timestamp": "2026-11-06T00:00:00Z",
+      "type": "market-scan",
+      "title": "Friday update: DogStatsD drill + market signal scan (fal Series F, Marvell+Lumentum, Salesforce CRM consolidation)",
+      "summary": "Added DogStatsD UDP buffer overflow drill (Hard, Metrics/Observability, AWS EKS + Go + Datadog): 48K datagrams/sec silently drops 94% of SLO metrics, 173K failed requests undetected for 29 minutes. Market scan: fal $1.3B Series F at $16B (generative media inference PaaS); Marvell + Lumentum $115B combination (AI data center optical networking semiconductor consolidation, largest semiconductor deal of 2026); Salesforce acquires Cresta ~$3.1B + Braze $5.7B (enterprise AI CRM consolidation wave). Added fal to enterpriseWatchlist.",
+      "tasks": [
+        "drill",
+        "market-scan"
+      ],
+      "items_added": [
+        "DogStatsD UDP Receive Buffer Overflow — High-Cardinality ML Inference Metrics Silently Dropped at 48K datagrams/sec, Datadog SLO Monitor Frozen During Flash Sale Spike, 173K Failed Requests Undetected for 29 Minutes (production-drills)",
+        "Generative media inference at hyperscale — fal $1.3B Series F at $16B (business-problems)",
+        "AI data center optical networking semiconductor consolidation — Marvell+Lumentum $115B (business-problems)",
+        "CRM platforms absorbing AI-native customer engagement point solutions — Salesforce acquires Cresta + Braze (business-problems)",
+        "fal (enterpriseWatchlist)"
       ]
     }
   ]

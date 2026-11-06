@@ -11,7 +11,7 @@
       "TAM",
       "Tags"
     ],
-    "last_updated": "2026-10-30"
+    "last_updated": "2026-11-06"
   },
   "sections": [
     {
@@ -1473,6 +1473,39 @@
             "sandbox"
           ],
           "added": "2026-10-30"
+        },
+        {
+          "problem": "Generative media inference at hyperscale — image/video/audio generation requires dedicated serving infrastructure architecturally distinct from LLM serving",
+          "enterprise": "fal ($1.3B Series F at $16B valuation, November 3, 2026; Andreessen Horowitz and Tiger Global led; 500M+ total image/video/audio generations/week; serves Flux Pro, Stable Diffusion XL, Runway Gen-3, MusicGen, and 150+ media generation models); Replicate (media inference PaaS, $200M ARR); Modal (media inference vertical growing to ~25% of Sandboxes ARR as of Q4 2026)",
+          "market_fit": "fal's $1.3B Series F at $16B (November 3, 2026) — the second-largest inference infrastructure round of 2026 after Fireworks AI — establishes generative media inference as a category architecturally separate from LLM inference. The key differences: (1) Media models (Flux, SDXL, Runway Gen-3) require iterative denoising loops (20-50 inference steps per image vs. one token per LLM step), making speculative decoding inapplicable but attention caching for prompt-image conditioning useful in a different way — fal's core IP is a prompt-conditioning cache that reduces step count on similar prompts by 30-40%. (2) LoRA/ControlNet adapter switching frequency: media inference stacks manage 1,000+ fine-tuned adapters per cluster (style LoRAs, character LoRAs, structural ControlNets), vs. fewer than 100 LoRA variants for most LLM serving clusters — this requires a hot adapter cache with sub-second swap time. (3) Request batching differs: media inference batches images by resolution and step count, requiring a scheduler that understands diffusion model memory footprints. fal processes ~71M+ image/video generation requests per week at $0.0025–$0.009 per image. For ML platform engineers: if your team is building image/video generation features and running on a generic LLM serving stack (vLLM, TGI), you are likely leaving 3–5× cost and latency improvement on the table compared to media-inference-specialized infrastructure. The LoRA adapter management and prompt-conditioning cache are the two highest-leverage engineering investments for media inference serving.",
+          "tam": "$12B",
+          "tags": [
+            "ml",
+            "infra"
+          ],
+          "added": "2026-11-06"
+        },
+        {
+          "problem": "AI data center optical networking semiconductor consolidation — the ASIC-to-photonics stack becomes a single vertically integrated layer as 100K+ GPU clusters expose cross-rack latency as the dominant training bottleneck",
+          "enterprise": "Marvell Technology + Lumentum Holdings (merger announced November 2, 2026; $115B combined entity; Marvell: custom AI ASICs for AWS Trainium3, Google TPUv6, Microsoft Azure NPU — 40%+ of Marvell revenue from cloud AI silicon; Lumentum: coherent optical interconnects powering 400G/800G spine fabric between GPU clusters at hyperscalers); NVIDIA (NVLink covers intra-rack; cross-rack Ethernet runs on Lumentum optics); Ciena, Infinera (optical networking competitors now under acquisition pressure)",
+          "market_fit": "The Marvell + Lumentum combination ($115B, Nov 2, 2026) is the defining semiconductor consolidation event of 2026 for AI data centers. Its strategic logic: as GPU cluster scale grows to 100K+ H100/H200 equivalents (xAI Colossus, Meta Grand Teton, Google TPU v6 pods), the networking layer between compute nodes — specifically the optical interconnects running between ToR switches, spine fabric, and cross-rack GPU-to-GPU paths — has become the dominant cost and latency constraint. NVIDIA's NVLink covers intra-node GPU-to-GPU bandwidth (1.8 TB/s within a GB200 NVL72 rack). But cross-rack and cross-pod traffic uses 400G/800G Ethernet running on Lumentum-sourced DSP-coherent optics. Marvell already makes the switching ASICs (Teralynx 10, 51.2 Tbps) that form the AI data center spine. The combined entity controls both the switching silicon AND the optical transceivers — the full networking stack from ASIC to fiber. This creates a single vendor able to co-design the ASIC-transceiver interface for sub-100ns end-to-end hop latency, eliminating the ~200ns ASIC-optics handoff overhead per hop. For Staff+ ML engineers: 100K-GPU cluster training jobs that run for weeks are increasingly bottlenecked by the cross-rack all-reduce step — optical networking latency directly determines MFU (Model FLOP Utilization). This consolidation should produce 2–3× more cost-efficient optical interconnects for AI by 2028. Near-term watch: how AWS, Google, and Microsoft respond to losing Marvell as an independent ASIC vendor, and whether they accelerate in-house silicon investment to avoid single-vendor dependency.",
+          "tam": "$50B",
+          "tags": [
+            "infra",
+            "biz"
+          ],
+          "added": "2026-11-06"
+        },
+        {
+          "problem": "CRM platforms absorbing AI-native customer engagement point solutions before they reach platform scale — enterprise AI vertical squeeze accelerates as Salesforce acquires Cresta and Braze",
+          "enterprise": "Salesforce (acquires Cresta for ~$3.1B, November 2026 — voice AI and real-time agent coaching for contact centers; acquires Braze for $5.7B, November 2026 — real-time customer engagement and cross-channel AI marketing; combined $8.8B in AI customer engagement acquisitions in one month); Cresta ($400M ARR run rate; real-time Transformer-based call analysis and agent coaching with sub-300ms latency on live voice; Cisco and Verizon as anchor customers); Braze ($600M ARR; real-time cross-channel customer journey AI); Sierra AI, Intercom AI, Decagon, Voiceflow (next wave facing platform squeeze)",
+          "market_fit": "Salesforce's simultaneous acquisition of Cresta (~$3.1B) and Braze ($5.7B) in November 2026 marks the first major wave of CRM platform absorbing AI-native customer engagement infrastructure. The pattern: AI point solutions that grew to $400–600M ARR on the strength of better ML models are now being acquired by CRM incumbents before they can establish a platform-level moat. Cresta's ML stack (real-time agent coaching via Transformer-based call analysis, latency sub-300ms on live voice calls) becomes Salesforce Einstein for Contact Center. Braze's real-time customer journey AI becomes the activation layer for Salesforce Data Cloud. The enterprise implication for ML engineers: the winning technical differentiator in customer-facing AI was real-time inference latency on voice/chat workloads (sub-300ms end-to-end) — that is what justified the Cresta premium. Cresta solved the technically hardest problem (streaming Transformer inference on live phone audio with sub-300ms round-trip including ASR, LLM, and TTS), which is why it commanded a 7.75× revenue multiple despite not being a platform. Generic LLM-wrapper customer support bots face rapid commoditization as Salesforce bundles them into Einstein. Specialized real-time ML inference on structured interaction data (voice, chat, behavioral signals) does not. For Staff+ ML engineers building customer-facing AI products: the bar to avoid acquisition-or-platform-squeeze is demonstrably sub-300ms inference latency on live interaction data with accuracy that beats Salesforce's bundled models — that is the technical moat that persists through CRM consolidation.",
+          "tam": "$20B",
+          "tags": [
+            "biz",
+            "ml"
+          ],
+          "added": "2026-11-06"
         }
       ]
     }

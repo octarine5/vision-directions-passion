@@ -3,7 +3,7 @@
     "category": "production-drills",
     "display_name": "Production Drills",
     "layout": "drills",
-    "last_updated": "2026-11-05"
+    "last_updated": "2026-11-06"
   },
   "sections": [
     {
@@ -3079,6 +3079,36 @@
             "ml-serving"
           ],
           "added": "2026-10-22"
+        },
+        {
+          "drill": "DogStatsD UDP Receive Buffer Overflow — High-Cardinality ML Inference Metrics Silently Dropped at 48K datagrams/sec, Datadog SLO Monitor Frozen During Flash Sale Spike, 173K Failed Requests Undetected for 29 Minutes",
+          "layer": "Metrics / Observability (DogStatsD / Datadog Go Client v5 / AWS EKS 1.29 / Go 1.22 / us-east-1)",
+          "difficulty": "Hard",
+          "scenario": "A Black Friday flash sale drives 7× traffic on a 24-pod Go ML inference service. At peak, each pod emits 48,000 DogStatsD UDP datagrams/second (baseline: 7,000/sec) for high-cardinality metrics: ml.inference.requests_total and ml.inference.errors_total tagged with {model_version, tenant_id, region, endpoint, status_code} — 3,200 active tag combinations per pod. The host OS UDP receive buffer (net.core.rmem_default=212992, 208 KB) fills in approximately 14ms. DogStatsD agent logs WARN: 'UDPReader: read udp 0.0.0.0:8125: recvfrom: resource temporarily unavailable' internally but drops metrics silently — no Datadog infrastructure metric immediately surfaced. 94% of ml.inference.requests_total and ml.inference.errors_total counter events are dropped. The Datadog metric-based SLO (good_requests / total_requests, both using ml.inference.requests_total) reads 100% healthy because both numerator and denominator drop proportionally. At 15:11 UTC, vLLM KV-cache OOM begins causing real 7.2% HTTP 503 error rate — but ml.inference.errors_total has zero data points. No SLO alert fires. The incident runs 29 minutes undetected until a data scientist notices implausibly flat request-rate charts during peak traffic and manually queries the hidden DogStatsD internal metric datadog.dogstatsd.udp.packet_reading_errors, which shows 940K dropped packets in the last 30 minutes. 173,000 failed inference requests; $94,000 estimated revenue impact.",
+          "questions": [
+            "An SLO monitor shows 100% compliance during a flash sale spike while users report errors. The SLO uses ml.inference.requests_total for both numerator and denominator. What failure modes produce a 100% SLO reading with real user errors?",
+            "A pod is emitting 48K DogStatsD UDP datagrams/sec. The OS socket receive buffer is 208 KB. The DogStatsD agent processes datagrams at 12K/sec. How quickly does the buffer overflow? What determines whether metric drops are silent?",
+            "Given net.core.rmem_default=212992 on the EKS nodes, what sysctl would you change first to absorb a 7× traffic spike? What is the ceiling before you must switch transport protocols?",
+            "You need to verify metric drop is happening in real time without restarting the DogStatsD agent. What two Datadog-native metrics expose UDP drop statistics? How do you distinguish host buffer drops from DogStatsD-side processing drops?",
+            "The Go client uses dogstatsd.NewBuffered() with UDPAddr. What is the one-line configuration change to switch to Unix Domain Socket transport? What must exist on the EKS pod spec for this to work?",
+            "After switching to UDS transport, metric cardinality is still 3,200 tag combinations per pod. The DogStatsD agent recommendation is fewer than 2,000. What instrumentation refactor eliminates the excess cardinality without losing diagnostic fidelity?",
+            "The Datadog SLO was blind because both good and total used the same dropped metric. How do you redesign the SLO to remain accurate even if the primary request counter is partially dropped? What alternative signal serves as the denominator?",
+            "Write the alert query for a monitor on DogStatsD UDP packet drops that fires within 60 seconds of buffer overflow beginning, with zero false positives during normal 7K datagrams/sec baseline operation."
+          ],
+          "fix": "Switch the Go DogStatsD client from UDP to Unix Domain Socket transport: dogstatsd.NewBuffered('unix:///var/run/datadog/dsd.socket', 100) and mount the socket via the Datadog Agent DaemonSet hostPath volume. Set dogstatsd_buffer_size: 32768 in datadog.yaml. Refactor metric tags to remove endpoint and status_code from high-frequency counters (move to lower-frequency histograms), reducing cardinality below 2,000 combinations/pod. Add a P0 monitor: avg(last_1m):avg:datadog.dogstatsd.udp.packet_reading_errors{*} > 0 with 60-second evaluation window. Redesign the SLO denominator to use nginx/envoy access log-derived request counts via Datadog Log-based metrics so SLO accuracy is independent of application-side metric emission.",
+          "tags": [
+            "dogstatsd",
+            "datadog",
+            "metrics",
+            "udp-buffer",
+            "ml-serving",
+            "go",
+            "aws-eks",
+            "cardinality",
+            "observability",
+            "silent-failure"
+          ],
+          "added": "2026-11-06"
         }
       ]
     }
