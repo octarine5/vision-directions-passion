@@ -3,7 +3,7 @@
     "category": "tech-talks",
     "display_name": "Tech Talks",
     "layout": "cards",
-    "last_updated": "2026-11-02"
+    "last_updated": "2026-11-09"
   },
   "sections": [
     {
@@ -1287,6 +1287,22 @@
           "venue": "PyTorch Conference North America 2026 (October 20-21, San Jose)",
           "description": "Preview of vLLM sessions at PyTorch Conference NA 2026. Headline talk: 'State-of-the-Art KV Transfer for Disaggregated LLM Serving' covering push-based NIXL KV transfer, SmartGen selective KV transfer (4.3\u00d7 TTST reduction via dynamic attention sparsity), and production deployment patterns from Mistral AI, Amazon, and Red Hat. Additional sessions cover vLLM's Rust frontend gRPC path, Model Runner V2 performance engineering, and disaggregated serving at hyperscale. Useful agenda overview for teams tracking vLLM's production serving roadmap and the state of KV cache transfer protocols in disaggregated inference.",
           "added": "2026-10-19"
+        },
+        {
+          "title": "llm-d 1.0: Production-Ready Kubernetes-Native Disaggregated LLM Serving",
+          "url": "https://research.ibm.com/blog/llmd-1-0-is-ready-for-production-inference-serving",
+          "speaker": "Dhruv Matani, Dhara Patel, Suraj Nair (IBM Research) + Greg Pereira (Red Hat)",
+          "venue": "IBM Research Blog + PyTorch Conference NA 2026 (October 20, 2026, San Jose)",
+          "description": "GA announcement for llm-d 1.0 (CNCF Sandbox project, joint donation from IBM Research, Red Hat, Google Cloud). Key GA capabilities: Kubernetes-native InferencePool CRD for declarative disaggregated P/D serving, Elastic Expert Parallelism for MoE models with no-restart EP degree changes at runtime, production-grade observability (Prometheus metrics, Jaeger tracing, structured audit logs for GDPR/HIPAA workloads), and GPU memory reclaim API for reclaiming fragmented HBM without pod restart. Benchmarks: 7× TTST reduction on cold vs warm prefix cache, 10× cost reduction per 1M tokens for cached agentic workloads (Qwen3-32B on 8×H100). Production reference deployments from CoreWeave, Red Hat Hybrid Cloud. Staff+ note: llm-d 1.0 is the first Kubernetes-native framework where disaggregated P/D serving is a first-class primitive rather than a configuration option — teams running >32 GPU nodes for LLM inference should evaluate whether to adopt it as their control-plane abstraction layer instead of managing Ray Serve P/D deployments directly.",
+          "added": "2026-11-09"
+        },
+        {
+          "title": "KubeCon + CloudNativeCon NA 2026 — AI & ML Inference at Scale Track",
+          "url": "https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/",
+          "speaker": "Multiple CNCF contributors (Tim Hockin, llm-d team, KServe maintainers, NVIDIA, Google)",
+          "venue": "KubeCon + CloudNativeCon North America 2026 (November 9–12, Atlanta, GA)",
+          "description": "AI & ML Inference track at KubeCon NA 2026 covers Kubernetes-native LLM serving at hyperscale: llm-d 1.0 operational patterns, GKE Inference Gateway production case studies (70%+ TTFT reduction via ML-driven capacity-aware routing), KServe v0.15 multi-model serving with InferenceGraph for agentic pipelines, and NVIDIA GPU Operator disaggregated P/D scheduling support. The InferencePool and InferenceModel Kubernetes CRDs from the WG-Serving working group are presented as the emerging standard for model lifecycle management across cloud providers. Tim Hockin keynotes on Kubernetes scheduler extensions (Topology Aware Scheduling, Dynamic Resource Allocation) and how Kubernetes handles heterogeneous GPU topologies (NVLink, InfiniBand, NVMe-oF) for disaggregated inference clusters. Session recordings to be posted on the CNCF YouTube channel in December 2026 — bookmark the event schedule for talk titles and abstract links.",
+          "added": "2026-11-09"
         }
       ]
     }

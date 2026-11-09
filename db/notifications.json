@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-11-06"
+    "last_updated": "2026-11-09"
   },
   "entries": [
     {
@@ -2089,6 +2089,23 @@
         "AI data center optical networking semiconductor consolidation — Marvell+Lumentum $115B (business-problems)",
         "CRM platforms absorbing AI-native customer engagement point solutions — Salesforce acquires Cresta + Braze (business-problems)",
         "fal (enterpriseWatchlist)"
+      ]
+    },
+    {
+      "timestamp": "2026-11-09T00:00:00Z",
+      "type": "knowledge-base",
+      "title": "Monday update: drill + knowledge base refresh",
+      "summary": "Added Hard ML Serving hotfix drill: vLLM 0.7.0 P/D disaggregation ConfigMap stale pod IPs after GKE node auto-upgrade cause 100% fallback to single prefill worker, A100 KV cache OOM, 8.7% error rate for 23 minutes — a realistic vLLM 0.7 disaggregated serving failure scenario. KB refresh: added 2 new tech talks (llm-d 1.0 GA blog, KubeCon NA 2026 AI inference track) and 2 new ML systems topics (inference-time compute scaling for thinking models, GPU cluster reliability engineering with DCGM).",
+      "tasks": [
+        "drill",
+        "knowledge-base"
+      ],
+      "items_added": [
+        "vLLM 0.7.0 Disaggregated P/D — Stale Decode Worker Pod IPs After GKE Node Auto-Upgrade Cause 100% KV Cache OOM on Single Prefill Worker (production-drills)",
+        "llm-d 1.0: Production-Ready Kubernetes-Native Disaggregated LLM Serving (tech-talks)",
+        "KubeCon + CloudNativeCon NA 2026 — AI & ML Inference at Scale Track (tech-talks)",
+        "Inference-Time Compute Scaling — Engineering Production Thinking Models (ml-systems)",
+        "GPU Cluster Reliability Engineering for Large-Scale ML Workloads (ml-systems)"
       ]
     }
   ]

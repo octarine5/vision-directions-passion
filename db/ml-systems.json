@@ -10,7 +10,7 @@
       "Tags",
       "Resources"
     ],
-    "last_updated": "2026-11-02"
+    "last_updated": "2026-11-09"
   },
   "sections": [
     {
@@ -1445,6 +1445,45 @@
             }
           ],
           "added": "2026-11-02"
+        },
+        {
+          "topic": "Inference-Time Compute Scaling — Engineering Production Thinking Models",
+          "concepts": "Inference-time compute scaling (ITC) uses additional GPU compute at generation time to improve response quality: rather than training a larger model, the same model generates reasoning chains, verifies them with a process reward model (PRM), and returns the best result. Key engineering dimensions: (1) Variable output length: thinking models (DeepSeek-R1, o3-style) generate 1,000–32,000 'thinking tokens' before the final answer; serving SLO moves from fixed P99 latency to quality-adjusted cost-per-query. (2) Budget forcing: operators cap thinking tokens per request (--max-thinking-tokens) to control cost/quality tradeoffs — a 2× thinking budget yields ~12–18% quality improvement on hard reasoning benchmarks (MATH-500, LiveCodeBench) but at 2× token cost. (3) KV cache for thinking traces: thinking tokens are generated autoregressively and must remain in KV cache until the final answer; long reasoning chains (32K tokens) stress KV cache capacity and require hierarchical offloading for high-concurrency serving. (4) Process reward models (PRMs): trained to score intermediate reasoning steps, PRMs enable best-of-N sampling (generate N chains, score each, return the highest PRM-scored chain) — more compute-efficient than self-consistency majority voting for math and code tasks. (5) MCTS-guided decoding: tree-search approaches (AlphaCode-style) explore reasoning branches by expanding higher-PRM-scored nodes, trading inference latency for quality on structured tasks. Staff+ serving note: ITC workloads are fundamentally incompatible with fixed-latency SLOs — teams adopting thinking models need quality-adjusted cost SLOs (e.g., cost per MATH-500 point) rather than latency SLOs, and must instrument thinking token length distributions to right-size KV cache capacity for high-percentile thinking trace lengths.",
+          "tags": [
+            "ml",
+            "infra",
+            "scale"
+          ],
+          "resources": [
+            {
+              "title": "Let's Verify Step by Step — Process Reward Models (OpenAI, 2023)",
+              "url": "https://arxiv.org/abs/2305.20050"
+            },
+            {
+              "title": "Scaling LLM Test-Time Compute Optimally Can be More Effective than Scaling Model Parameters (DeepMind, 2024)",
+              "url": "https://arxiv.org/abs/2408.03314"
+            }
+          ],
+          "added": "2026-11-09"
+        },
+        {
+          "topic": "GPU Cluster Reliability Engineering for Large-Scale ML Workloads",
+          "concepts": "At 1,000+ GPU scales, hardware failures (NVLink errors, GPU memory ECC errors, thermal throttling, PCIe bandwidth drops) occur daily and significantly impact job completion rates without proactive detection and migration. Key engineering patterns: (1) DCGM (Data Center GPU Manager) continuous health monitoring: DCGM runs as a DaemonSet, emitting 100+ per-GPU metrics at 1-second granularity including sm_active, fb_used, nvlink_errors, dbe_retired_pages (double-bit ECC errors indicating memory cell retirement). Key alert thresholds: dbe_retired_pages > 100 (retire GPU from pool), nvlink_errors > 0 (investigate before next job), thermal_violation_ms > 1000/min (check airflow/cooling). (2) Proactive job migration: checkpoint-and-restart on DCGM health threshold breach, before an uncorrectable error kills the job. For distributed training, this means synchronizing a checkpoint barrier across all ranks (using PyTorch FSDP save_state_dict or Megatron-LM DistCkpt) before migrating the affected rank's GPU. (3) GPU drain and replacement: 'GPU cordon' (kubectl cordon + DCGM health taint) removes a GPU from the scheduling pool for maintenance without killing running pods. The GPU drain workflow: cordon → wait for running jobs to checkpoint → physically replace GPU → uncordon → validate with DCGM health check suite. (4) Spot/preemptible GPU instance handling: on cloud platforms (GCP, AWS), spot GPU instances (A100/H100) are reclaimed with 2-minute notice. The serving stack needs graceful preemption handling: drain in-flight requests, checkpoint model state if applicable, restart on a new instance. vLLM's --preemption-mode=recompute handles this by recomputing KV blocks from input tokens rather than checkpointing KV state. (5) NVLink fault isolation: an NVLink error on one GPU in an 8-GPU NVLink island impacts all-reduce performance for all 8 GPUs (the collective falls back to PCIe). DCGM's nvlink_bandwidth metric isolates the affected GPU; fix is to restart affected pods on a healthy island. Staff+ note: GPU hardware reliability becomes a P1 concern at 100+ GPU clusters — budget 10–15% GPU spare capacity for the replacement pool, establish a GPU health dashboard, and automate the cordon/drain/replace workflow to reduce MTTR from hours to minutes.",
+          "tags": [
+            "ml",
+            "infra"
+          ],
+          "resources": [
+            {
+              "title": "DCGM (Data Center GPU Manager) Documentation",
+              "url": "https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/index.html"
+            },
+            {
+              "title": "PyTorch FSDP Checkpoint Documentation",
+              "url": "https://pytorch.org/docs/stable/fsdp.html"
+            }
+          ],
+          "added": "2026-11-09"
         }
       ]
     }

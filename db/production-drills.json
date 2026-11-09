@@ -3,7 +3,7 @@
     "category": "production-drills",
     "display_name": "Production Drills",
     "layout": "drills",
-    "last_updated": "2026-11-06"
+    "last_updated": "2026-11-09"
   },
   "sections": [
     {
@@ -1609,6 +1609,28 @@
             "async"
           ],
           "added": "2026-11-03"
+        },
+        {
+          "drill": "vLLM 0.7.0 Disaggregated Prefill/Decode — Stale Decode Worker Pod IPs After GKE Node Auto-Upgrade Route 100% Traffic to Single Prefill Worker, KV Cache OOM, 8.7% Error Rate for 23 Minutes",
+          "layer": "ML Serving (vLLM 0.7.0 / GKE Autopilot 1.31 / Ray Serve 2.38 / GCP us-central1 / NVIDIA A100-40GB SXM4)",
+          "difficulty": "Hard",
+          "scenario": "At 09:14 UTC, GKE Autopilot silently completes a node auto-upgrade on the ml-inference-prod node pool in GCP us-central1-b. Three of eight n2-highgpu-4g nodes are replaced via a rolling in-place upgrade — a maintenance window configured 11 months prior by the original platform team.\n\nThe vLLM 0.7.0 disaggregated prefill/decode (P/D) serving stack on this cluster consists of:\n  2 Ray Serve prefill worker pods (1 NVIDIA A100-40GB SXM4 each)\n  6 Ray Serve decode worker pods (1 NVIDIA A100-40GB SXM4 each)\n  1 P/D router (Python FastAPI Deployment: vllm-pd-router) reading decode worker endpoints from ConfigMap vllm-pd-endpoints at startup\n\nThe ConfigMap vllm-pd-endpoints was written by a Terraform init job at cluster bootstrap 8 months ago using the pods' static pod IPs from their original StatefulSet deployment. When the team migrated from StatefulSets to Deployments 3 months ago to enable faster rolling updates, the ConfigMap IP management strategy was not updated. The ConfigMap still holds pod IPs from the original bootstrap.\n\nThe 3 upgraded nodes host: 1 prefill worker (prefill-0) and 2 decode workers (decode-3 and decode-5). After node replacement, all 3 pods restart on new nodes and receive new pod IPs. The ConfigMap is not updated.\n\nAt 09:19 UTC (5 minutes post-upgrade), the router's HTTP health checks to decode-3 and decode-5 begin failing with connection refused. The router's fallback logic — written 7 months ago to handle \"decode pool overloaded\" scenarios — activates when >25% of decode workers return errors: it routes 100% of inference traffic to the prefill pool and schedules a retry every 30 seconds.\n\nWith prefill-0 still restarting after its own node migration (~6 minute restart), 100% of traffic routes to prefill-1 alone — a single A100-40GB servicing the entire cluster load.\n\nCloud Monitoring metrics at incident peak:\n  09:19 UTC — vllm:num_requests_running{pod=\"prefill-1\"}: 94 (normal design capacity: 32)\n  09:21 UTC — vllm:gpu_kv_cache_usage_perc{pod=\"prefill-1\"}: 100%\n  09:21 UTC — vllm:gpu_kv_cache_usage_perc{pod=\"decode-0\"}: 0%, {pod=\"decode-1\"}: 0% (fully idle)\n  09:22 UTC — ERROR vllm.engine.engine_base: KV cache OOM: num_gpu_blocks_waiting=412, num_gpu_blocks_swapped=0. Consider using smaller batch size or increasing GPU memory utilization.\n  09:22 UTC — http_5xx_rate: 8.7% (from 0% 3 minutes prior)\n  09:23 UTC — PagerDuty P1: \"ml-inference-prod: http_5xx_rate > 5% for 2 minutes\"\n  09:25 UTC — on-call acknowledges\n  09:30 UTC — first responder investigates vLLM 0.7.0 KV OOM logs, suspects vLLM regression (deployed 6 days prior)\n  09:37 UTC — SRE spots GKE NodeAutoUpgrade events at 09:12 UTC; connects dots to stale ConfigMap IPs\n  09:38 UTC — ConfigMap updated with new pod IPs; router restarted; traffic distributes correctly within 90 seconds\n\nTotal affected requests: ~12,400 (09:22–09:38 UTC, 16 minutes at 8.7% error rate).",
+          "exercise": "1. Confirm node auto-upgrade timeline: kubectl get events -n kube-system --sort-by='.metadata.creationTimestamp' | grep -i 'upgrade\\|node' | tail -20 — shows three NodeAutoUpgrade events at 09:12–09:14 UTC, coinciding with first decode health check failures at 09:19 UTC (5-minute graceful drain window post-upgrade).\n2. Cross-reference decode worker pod IPs vs ConfigMap: kubectl get pods -n ml-serving -l role=decode -o wide | awk '{print $6}' shows current IPs 10.128.14.{21,22,23,24,25,26} — 6 live IPs; kubectl get configmap vllm-pd-endpoints -n ml-serving -o jsonpath='{.data}' shows 10.128.12.{34,38,42,44,51,56} — the original bootstrap IPs from 8 months ago. Two entries (decode-3: 10.128.12.42, decode-5: 10.128.12.51) no longer route to any live pod.\n3. Confirm fallback is active: kubectl logs -n ml-serving -l app=vllm-pd-router --since=30m | grep 'fallback_active' — shows continuous fallback_active=true starting at 09:19 UTC with reason='decode_unhealthy_count=2 (threshold=1.5)'.\n4. Immediate hotfix — update ConfigMap with current pod IPs and restart router: kubectl patch configmap vllm-pd-endpoints -n ml-serving --type merge -p '{\"data\":{\"decode-3-ip\":\"10.128.14.23\",\"decode-5-ip\":\"10.128.14.25\"}}' && kubectl rollout restart deployment/vllm-pd-router -n ml-serving. Traffic normalizes within 90 seconds; prefill-1 KV cache drops from 100% to ~28%; all 6 decode workers receive traffic.\n5. Validate recovery: kubectl top pods -n ml-serving — decode pods show 35–55% GPU utilization; prefill pods show 20–30%; http_5xx_rate returns to 0% within 2 minutes of router restart.\n6. Root cause: ConfigMap-based static IP endpoint registry does not update when pods receive new IPs after node replacement. The router's fallback logic conflates 'decode pool unreachable' (TCP connection refused) with 'decode pool overloaded', silently routing all traffic to prefill — a cascading amplification failure where the mitigation worsens the incident.\n7. Permanent fix — replace static-IP ConfigMap with Kubernetes headless Service DNS: Create a headless Service (spec.clusterIP: None, selector: role=decode) in the ml-serving namespace. The P/D router queries the DNS name decode-workers.ml-serving.svc.cluster.local which Kubernetes always resolves to the current set of live pod IPs via DNS-based load balancing. No manual ConfigMap updates needed after any pod replacement, rolling restart, or node upgrade.\n8. Fix fallback logic — distinguish unreachable from overloaded: Add a third routing mode for 'decode pool unreachable' (gRPC StatusCode.UNAVAILABLE or TCP connection refused within 2 retries): return HTTP 503 + Retry-After: 15 to callers instead of routing to prefill. Prevents cascading overload of the prefill pool during decode network failures. Alert: vllm_pd_router_fallback_reason{reason=\"unreachable\"} > 0 for >60 seconds as a P2 pager.\n9. Preventive monitoring: Add a ConfigMap IP staleness check — a Kubernetes CronJob running every 60 seconds comparing vllm-pd-endpoints IPs against current pod IPs and emitting vllm_configmap_stale_ips > 0. This alert would have fired 3 minutes before the first OOM. Add GKE NodeAutoUpgrade events to the incident timeline dashboard alongside service error rate metrics so on-call engineers see upgrade events during triage rather than hunting for them separately.",
+          "tags": [
+            "vllm",
+            "disaggregated-serving",
+            "gke",
+            "gcp",
+            "ray-serve",
+            "configmap",
+            "pod-ip",
+            "kv-cache-oom",
+            "node-auto-upgrade",
+            "p-d-disaggregation",
+            "a100",
+            "fallback-logic"
+          ],
+          "added": "2026-11-09"
         }
       ]
     },
