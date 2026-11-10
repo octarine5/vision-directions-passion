@@ -2,9 +2,21 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-11-09"
+    "last_updated": "2026-11-10"
   },
   "entries": [
+    {
+      "timestamp": "2026-11-10T00:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: GCP Memorystore Redis Double Failover — WAIT Returns 0 Replicas, 7-Minute Replication Gap Rolls Back 284K ML Feature Cache Writes",
+      "summary": "Added a Hard distributed-systems hotfix drill: GCP Memorystore Redis 7.0 double failover (GCP-triggered maintenance + disk fault) causes WAIT(1,500ms) to return 0 replicas for 7 minutes; 284K ML feature cache writes are rolled back when the original primary is re-promoted. Python cache-aside pattern serves stale Redis hits for 51 minutes, delivering pre-rollback features to 284K users with -7.1% CTR impact ($107K). Fix: treat WAIT=0 as mandatory DynamoDB fallback, delete stale Redis keys on zero-ACK detection, and add redis/replication/offset_diff alert as P1.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "GCP Memorystore Redis 7.0 Double Failover — WAIT(1,500ms) Returns 0 Replicas, 7-Minute Replication Gap Rolls Back 284K ML Feature Cache Writes, Cache-Aside Serves Stale Redis Hits for 51 Minutes (production-drills)"
+      ]
+    },
     {
       "timestamp": "2026-11-04T00:00:00Z",
       "type": "drill",
