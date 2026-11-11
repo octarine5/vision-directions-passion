@@ -2,9 +2,21 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-11-10"
+    "last_updated": "2026-11-11"
   },
   "entries": [
+    {
+      "timestamp": "2026-11-11T00:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: Apache Flink 1.19 EMR S3 Checkpoint AccessDenied — Terraform VPC Endpoint Removal Triggers Infinite Restart Loop, 847K DynamoDB Feature Records Overwritten",
+      "summary": "Added a Hard distributed-systems hotfix drill: Apache Flink 1.19 on AWS EMR 7.1 enters an infinite restart loop (13 cycles, 38 minutes) after a Terraform S3 bucket policy change removes the VPC Gateway Endpoint route for eu-west-1b, causing Flink checkpoint writes to fail with AccessDenied. Each restart replays from the last good checkpoint (11:41:30 UTC), and the unconditional DynamoDB PutItem sink overwrites 847,241 user feature records with stale ML aggregations, degrading recommendation CTR 8.3% ($74K estimated impact). Fix: restore the VPC endpoint route table association, add DynamoDB ConditionExpression idempotency guard, reduce tolerable-checkpoint-failure-number to 2, and emit CloudWatch EMF on each Flink job restart.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "Apache Flink 1.19 on AWS EMR 7.1 — Terraform S3 Bucket Policy VPC Endpoint Removal Triggers Infinite Checkpoint Restart Loop, DynamoDB Sink Overwrites 847K ML Feature Records with Stale Aggregations for 38 Minutes (production-drills)"
+      ]
+    },
     {
       "timestamp": "2026-11-10T00:00:00Z",
       "type": "drill",
