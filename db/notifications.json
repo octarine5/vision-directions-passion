@@ -2,9 +2,21 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-11-11"
+    "last_updated": "2026-11-12"
   },
   "entries": [
+    {
+      "timestamp": "2026-11-12T00:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: Azure Service Bus Geo-Failover Invalidates Deferred Message Sequence Numbers",
+      "summary": "Added a Hard distributed-systems hotfix drill: Azure Service Bus Premium geo-DR failover (South Central US → North Central US) silently invalidates 2,847 deferred message sequence numbers — Python ML pipeline workers on AKS receive MessageNotFoundError and silently abandon all in-flight feature computation jobs. 28 SageMaker training jobs stall at 0% progress for 44 minutes with zero alarms (no DLQ, no error counter, no SageMaker failure). Fix: replace deferral pattern with Redis-state-machine (complete message immediately, track job state in geo-replicated Azure Cache for Redis), add deferred_jobs_abandoned_counter > 0 alert, and add monthly geo-DR failover drill.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "Azure Service Bus Premium Geo-Failover Invalidates Deferred Message Sequence Numbers — Python ML Pipeline Workers Orphan 2,847 Feature Computation Jobs for 44 Minutes (production-drills)"
+      ]
+    },
     {
       "timestamp": "2026-11-11T00:00:00Z",
       "type": "drill",
