@@ -2,9 +2,25 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-11-12"
+    "last_updated": "2026-11-13"
   },
   "entries": [
+    {
+      "timestamp": "2026-11-13T16:08:00Z",
+      "type": "market-scan",
+      "title": "Friday update: drill + market signal scan",
+      "summary": "Added Hard Metrics drill: Thanos Ruler 0.35 OOO sample ingestion — Prometheus 2.52 TSDB head compaction 8.3s pause on a 47K-new-series experiment doubles SLO error events in the 5-minute rate window, causing 1,412× error budget inflation and four simultaneous false P1 PagerDuty incidents for 1h 47m on GKE. Market scan (Nov 7-13, 2026): Anthropic ANT Nasdaq IPO roadshow launched Nov 10 at $70-$78/share (825M shares, ~$1.26-1.41T valuation, pricing Nov 18, debut Nov 19) — enterprise Claude API contracts reprice at public-company rate cards post-IPO; OpenAI acquires Pierre Computer (Trees/Diffs OSS libraries + Code Storage, Nov 4) for agentic Codex code-intelligence stack consolidation; Nscale S-1/A filed Nov 12 confirming Anyscale ($1.65B) acquisition pending close — first public GPU cloud with in-house Ray orchestration layer.",
+      "tasks": [
+        "drill",
+        "market-scan"
+      ],
+      "items_added": [
+        "Thanos Ruler Out-of-Order Sample Ingestion — Prometheus 2.52 TSDB Head Compaction Pause Doubles SLO Error Events in 5-Minute Rate Window, False P1 Burn Rate Alert Storm Fires for 1h 47m (production-drills)",
+        "Anthropic ANT Nasdaq IPO roadshow — $70-$78/share, pre-Thanksgiving debut, enterprise Claude API repricing event (business-problems)",
+        "OpenAI acquires Pierre Computer — agentic Codex code-intelligence stack consolidation (Trees/Diffs/Code Storage) (business-problems)",
+        "Nscale S-1/A + Anyscale ($1.65B) acquisition pending close — first public GPU cloud with in-house Ray orchestration layer (business-problems)"
+      ]
+    },
     {
       "timestamp": "2026-11-12T00:00:00Z",
       "type": "drill",

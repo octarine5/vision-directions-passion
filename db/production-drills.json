@@ -3,7 +3,7 @@
     "category": "production-drills",
     "display_name": "Production Drills",
     "layout": "drills",
-    "last_updated": "2026-11-12"
+    "last_updated": "2026-11-13"
   },
   "sections": [
     {
@@ -2869,6 +2869,31 @@
             "business"
           ],
           "added": "2026-04-07"
+        },
+        {
+          "drill": "Thanos Ruler Out-of-Order Sample Ingestion — Prometheus 2.52 TSDB Head Compaction Pause Doubles SLO Error Events in 5-Minute Rate Window, False P1 Burn Rate Alert Storm Fires for 1h 47m",
+          "layer": "Metrics / Observability (Thanos 0.35 / Prometheus 2.52 / GKE / SLO Recording Rules)",
+          "difficulty": "Hard",
+          "scenario": "At 11:06 UTC, four PagerDuty P1 incidents fire simultaneously:\n  - 'ErrorBudgetBurnRateHigh recommendation-service' (threshold: 2% remaining)\n  - 'SLOWindowExhausted ranking-api'\n  - 'SLOWindowExhausted personalization-service'\n  - 'RecommendationSLOCritical'\n\nAll four on-call engineers page. P99 latency checks out normal (42ms, SLO 200ms). Error rate nominal (0.08%, SLO 0.5%). Grafana SLO dashboards show budget dropping from ~72% remaining to <2% in a single scrape interval at 11:04 UTC.\n\nThanos Ruler (v0.35.0) on GKE evaluates SLO recording rules every 60s against a federated Prometheus store (6 Prometheus 2.52.0 replicas). Thanos Ruler logs at 11:04 UTC:\n  2026-11-10T11:03:52Z level=warn component=ruler msg=\"appending out-of-order samples\" num_samples=12847 rule=slo:recommendation_service:error_budget_remaining:ratio_rate5m\n\nRoot cause: At 11:02 UTC, Prometheus replica prometheus-prod-2 (us-central1-b) triggered a TSDB head block compaction (threshold: 2M samples) caused by a new feature experiment that added 47K time series in the past hour. Compaction stalled the WAL replay for 8.3 seconds. When federation resumed at 11:02:08, the scrape interval [11:01:52–11:02:00] was re-emitted with corrected timestamps 8.3 seconds earlier than originally recorded.\n\nThanos Ruler accepted these corrected samples as valid out-of-order samples (within its default --tsdb.out-of-order-time-window=60s window). The 5-minute rate() evaluation window for the SLO recording rule `slo:recommendation_service:error_budget_remaining:ratio_rate5m` now contained the [11:01:52–11:02:00] interval twice — both the original scrape AND the corrected re-emission contributing error_seconds_total to the rate calculation. The resulting `slo_error_seconds_total_rate` = 847.3 seconds/min (baseline: 0.6 seconds/min — a 1,412× inflation).\n\nThanos Object Storage Compactor then picked up the corrupted recording rule output blocks and persisted them to GCS, ensuring the false budget calculation survived a Ruler restart. All four services showed <2% error budget remaining in Thanos Query for 1h 47m (11:04–12:51 UTC) until an SRE manually confirmed the raw metric showed no actual errors.",
+          "exercise": [
+            "Diagnosis: Why does Thanos Ruler accept re-emitted samples from a Prometheus replica that just completed TSDB head compaction? Which Thanos Ruler configuration parameter controls out-of-order sample ingestion? What is the default value and what does it mean for federation correctness?",
+            "Detection gap: The false P1 paged before any real production impact. Write a Prometheus recording rule that cross-validates an SLO error budget output against the underlying raw metric — if the recording rule output diverges by >100× from the raw metric rate, suppress the SLO burn-rate alert and fire a 'RulerMetricAnomalous' alert instead. What query specifically catches this 1,412× inflation?",
+            "Blast radius: After the Thanos Compactor writes corrupted blocks to GCS, a Ruler restart would read them back and continue serving false data. Write the commands to: (a) identify corrupted blocks (source: ruler, time range 11:00–11:15 UTC) using `thanos tools bucket inspect`; (b) safely delete them before they propagate to Thanos Query's block index. What is the risk if you delete the wrong block?",
+            "Root fix: Set --tsdb.out-of-order-time-window=0s on Thanos Ruler. Justify why OOO support is safe to disable for real-time rule evaluation but risky for historical backfill. What is the tradeoff if a legitimate late-arriving sample from a Prometheus replica restart arrives 10s after its scrape timestamp?",
+            "Prevention: Design a CI validation test for all SLO recording rules that asserts the output never exceeds 2× the theoretical maximum error rate derivable from the raw metrics. How would you implement this in a rules-as-code pipeline that runs on every PR modifying rules/*.yaml files, using a Prometheus unit test fixture?"
+          ],
+          "fix": "Set --tsdb.out-of-order-time-window=0s in the Thanos Ruler deployment spec — this rejects re-emitted compaction-corrected samples rather than double-ingesting them. For scrape intervals <=15s, a compaction-caused timestamp gap produces no double-count even without OOO support. Additionally: (1) Enforce a 50K new-series-per-experiment cardinality budget via Prometheus recording rule aggregation before federation, preventing compaction pauses entirely. (2) Add a cross-validation recording rule: slo:recording_rule_sanity_ratio = slo_error_seconds_total_rate / on(service) (rate(http_requests_total{status=~'5.*'}[5m]) + 0.001) — if ratio > 100, silence downstream SLO alerts and fire 'RulerMetricAnomaly'. (3) After deleting corrupted GCS blocks via `thanos tools bucket delete <block_ulid>`, restart Thanos Ruler to clear in-memory corrupted state. Verify with `thanos_rule_evaluation_with_warnings_total` metric dropping to zero.",
+          "tags": [
+            "thanos",
+            "prometheus",
+            "metrics",
+            "slo",
+            "recording-rules",
+            "out-of-order",
+            "gke",
+            "error-budget"
+          ],
+          "added": "2026-11-13"
         }
       ]
     },
