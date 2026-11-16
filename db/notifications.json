@@ -2,9 +2,29 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-11-13"
+    "last_updated": "2026-11-16"
   },
   "entries": [
+    {
+      "timestamp": "2026-11-16T10:00:00Z",
+      "type": "knowledge-base",
+      "title": "Monday update: drill + knowledge base refresh",
+      "summary": "Added Hard Infrastructure hotfix drill: cert-manager 1.14.3 Istio 1.21 mTLS root CA rotation causes 11.2% gRPC error rate for 23 minutes during a GKE rolling restart of ml-feature-serving — new pods receive certs from the new CA while existing Envoy sidecars still trust only the old CA trust bundle for up to 15 minutes (xDS SDS poll interval), causing CERTIFICATE_VERIFY_FAILED on mTLS handshakes while HTTP health checks pass throughout. Knowledge base update (Nov 2–16, 2026): 5 new tech talks (Kinference launch on vLLM blog, KubeCon NA 2026 inference track: OpenAI LLM serving on K8s, Composing Inference with Gateway+Schedule+Serve+Observe, KAITO+llm-d disaggregated prefill/decode, QCon SF Netflix AI SDLC talk) and 2 new ML systems entries (vLLM v0.33.0 with PyTorch 2.14 + encoder disaggregation + NVFP4 KV cache + /v1/decisions endpoint; Kinference Kubernetes-native inference control plane for vLLM).",
+      "tasks": [
+        "drill",
+        "knowledge-base"
+      ],
+      "items_added": [
+        "cert-manager 1.14.3 Istio 1.21 mTLS Root CA Rotation — Rolling Restart of ml-feature-serving Causes 11.2% RPC Error Rate for 23 Minutes While HTTP Health Checks Pass (production-drills)",
+        "Introducing Kinference: An Open Source Inference Control Plane for vLLM and Kubernetes (tech-talks)",
+        "Rolling Out LLM Inference Engines on Kubernetes — Meng Dong & Zihan Zheng, OpenAI, KubeCon NA 2026 (tech-talks)",
+        "Composing Inference on Kubernetes: Gateway, Schedule, Serve, Observe — KubeCon NA 2026 (tech-talks)",
+        "Prefill Here, Decode There: Running Disaggregated Inference on Kubernetes with KAITO and llm-d — KubeCon NA 2026 (tech-talks)",
+        "How Netflix Retrofitted Its SDLC for AI Coding Agents — Mark Khuzam, QCon SF Nov 2026 (tech-talks)",
+        "vLLM v0.33.0 — PyTorch 2.14, Encoder Disaggregation (EPD), NVFP4 KV Cache, /v1/decisions Endpoint (ml-systems)",
+        "Kinference — Open-Source Kubernetes-Native Inference Control Plane for vLLM (ml-systems)"
+      ]
+    },
     {
       "timestamp": "2026-11-13T16:08:00Z",
       "type": "market-scan",

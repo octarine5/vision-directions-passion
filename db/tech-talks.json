@@ -3,7 +3,7 @@
     "category": "tech-talks",
     "display_name": "Tech Talks",
     "layout": "cards",
-    "last_updated": "2026-11-09"
+    "last_updated": "2026-11-16"
   },
   "sections": [
     {
@@ -685,6 +685,46 @@
           "venue": "Google Cloud Blog (October 2026)",
           "description": "Monthly roundup covering the GA of llm-d 1.0 on Google Cloud Kubernetes Engine with Ironwood TPU support; GKE Node Auto-Provisioning for AI workloads (automatic Autopilot node pool creation when inference pods request accelerators with no matching nodes); Cloud Run support for GPU-backed inference up to 8\u00d7 H100s; and Hyperdisk ML Balanced \u2014 a new storage class optimized for model weight streaming with 12 GB/s sustained read bandwidth for serving large checkpoints at startup.",
           "added": "2026-11-02"
+        },
+        {
+          "title": "Introducing Kinference: An Open Source Inference Control Plane for vLLM and Kubernetes",
+          "url": "https://vllm.ai/blog/2026-11-04-introducing-kinference",
+          "speaker": "William Morgan (Buoyant CEO) & vLLM Team",
+          "venue": "vLLM Blog (November 4, 2026)",
+          "description": "Buoyant (creators of Linkerd) launches Kinference — an open-source Kubernetes-native inference control plane built specifically for vLLM. Kinference adds four production capabilities missing from raw vLLM: (1) token-rate limiting per tenant via a Kubernetes admission webhook that tracks rolling-window token budgets per ServiceAccount; (2) KV-cache-aware routing using the Kubernetes Gateway API Inference Extension (GIE) to route requests to the vLLM replica with the warmest KV prefix cache for the incoming prompt; (3) tenant cost tracking via a Prometheus exporter that meters tokens-in and tokens-out per namespace label; (4) multi-model fleet management via an InferenceFleet CRD that declaratively configures vLLM deployments including model, replica count, LoRA adapters, and resource requests. Announced at KubeCon NA 2026 (Salt Lake City, Nov 9–12). Positions Kinference as the service-mesh equivalent for the AI inference tier — a thin control plane that handles cross-cutting concerns without modifying the inference engine itself.",
+          "added": "2026-11-16"
+        },
+        {
+          "title": "Rolling Out LLM Inference Engines on Kubernetes",
+          "url": "https://kccncna2026.sched.com/event/rolling-out-llm-inference-kubernetes",
+          "speaker": "Meng Dong & Zihan Zheng (OpenAI)",
+          "venue": "KubeCon + CloudNativeCon NA 2026, Salt Lake City (November 9–12, 2026)",
+          "description": "OpenAI engineers describe how they deploy and operate vLLM-based inference engines at scale on Kubernetes. Covers the OpenAI internal inference platform: multi-tenant model routing via a custom Kubernetes operator that manages vLLM Deployments per model version, blue-green model swaps using the Gateway API Inference Extension EndpointPicker for traffic splitting, autoscaling on GPU KV cache utilization rather than CPU/memory, and canary deployment patterns that validate TTFT and throughput SLOs before promoting new model versions. Key insight: standard Kubernetes HPA metrics (CPU, memory) are inadequate for LLM serving — the team built custom HPA scalers driven by vLLM-native metrics (vllm:num_queued_requests, vllm:gpu_kv_cache_usage_perc). Presented at the first dedicated AI Inference track at KubeCon NA 2026.",
+          "added": "2026-11-16"
+        },
+        {
+          "title": "Composing Inference on Kubernetes: Gateway, Schedule, Serve, Observe",
+          "url": "https://kccncna2026.sched.com/event/composing-inference-kubernetes-gateway",
+          "speaker": "Karena Angell (Google) & Alex Chircop (Striveworks)",
+          "venue": "KubeCon + CloudNativeCon NA 2026, Salt Lake City (November 9–12, 2026)",
+          "description": "Presents the emerging Kubernetes inference stack as four composable layers: (1) Gateway — Kubernetes Gateway API Inference Extension (GIE) with EndpointPicker for model-aware load balancing; (2) Schedule — KAI Scheduler for GPU-aware bin-packing and fair multi-tenant queuing; (3) Serve — vLLM/llm-d as the inference engine with InferencePool CRDs; (4) Observe — OpenTelemetry inference spans from prefill to decode, correlated with KV cache hit rates and tenant token budgets. Demonstrates how these four open-source components compose into a full Kubernetes-native inference platform without vendor lock-in. Argues that this four-layer stack replaces ad-hoc inference platforms at companies where each team was previously building their own routing, scheduling, and observability glue code.",
+          "added": "2026-11-16"
+        },
+        {
+          "title": "Prefill Here, Decode There: Running Disaggregated Inference on Kubernetes with KAITO and llm-d",
+          "url": "https://kccncna2026.sched.com/event/prefill-here-decode-there-kubernetes",
+          "speaker": "KAITO and llm-d maintainers (Microsoft Azure + IBM/Red Hat)",
+          "venue": "KubeCon + CloudNativeCon NA 2026, Salt Lake City (November 9–12, 2026)",
+          "description": "Joint talk by the KAITO (Kubernetes AI Toolchain Operator, Azure) and llm-d (CNCF Sandbox, IBM/Red Hat) teams demonstrating production disaggregated prefill/decode on Kubernetes. Shows how KAITO's Workspace CRD provisions separate GPU node pools for prefill (compute-bound, H100 SXM5) and decode (memory-bandwidth-bound, H200) workers; llm-d's InferencePool CRD connects the pools via NIXL RDMA KV cache transfer. Benchmark: Llama-3.1-70B at 2.1× TTFT improvement and 38% lower cost vs collocated serving on the same GPU budget. Covers operational challenges: NIXL connection failure recovery, decode-worker KV cache fragmentation under burst traffic, and KEDA-driven scale-to-zero for decode pools during off-peak hours.",
+          "added": "2026-11-16"
+        },
+        {
+          "title": "How Netflix Retrofitted Its SDLC for AI Coding Agents",
+          "url": "https://qconsf.com/presentation/nov2026/how-netflix-retrofitted-sdlc-ai-coding-agents",
+          "speaker": "Mark Khuzam (Principal Engineer, Netflix)",
+          "venue": "QCon San Francisco, November 2026",
+          "description": "Netflix principal engineer Mark Khuzam describes the concrete changes Netflix made to its software development lifecycle after deploying AI coding agents (Claude-based) across engineering teams. Key changes: (1) PR review process updated to require agent-generated PRs to include a 'delegation summary' — what the engineer delegated, what decisions the agent made, and what the engineer validated; (2) CI pipeline extended with an 'agent confidence score' that flags PRs with low test coverage on agent-generated code paths; (3) Context engineering discipline formalized — Netflix now treats the agent's context window as a first-class engineering resource with standards for how to pass codebase context, existing patterns, and team conventions; (4) Incident retrospective format updated to include 'agent attribution' — which parts of the failing code were agent-generated and what validation was applied before merge. Reports 40% reduction in time-to-PR for new feature work, with agent-generated PRs averaging 2× more test coverage than purely human-written PRs.",
+          "added": "2026-11-16"
         }
       ]
     },

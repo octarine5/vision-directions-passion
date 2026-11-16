@@ -10,7 +10,7 @@
       "Tags",
       "Resources"
     ],
-    "last_updated": "2026-11-09"
+    "last_updated": "2026-11-16"
   },
   "sections": [
     {
@@ -970,6 +970,38 @@
             }
           ],
           "added": "2026-10-26"
+        },
+        {
+          "topic": "vLLM v0.33.0 — PyTorch 2.14, Encoder Disaggregation (EPD), NVFP4 KV Cache, /v1/decisions Endpoint",
+          "concepts": "Released November 2026 with four production-impacting capabilities: (1) PyTorch 2.14 upgrade — brings improved CUDA graph capture for heterogeneous batch sizes and 15-20% throughput improvement on H100/H200 for dense attention models via updated FlashAttention 3.2 integration; torch.compile improvements reduce kernel launch overhead on agentic multi-turn workloads. (2) Encoder disaggregation (EPD — Encoder-Prefill-Decode) — for multimodal models (vision + text), the vision encoder can now run on a separate GPU pool from the prefill and decode workers; vision encoders are compute-bound while text decode is memory-bandwidth-bound, so separate pools eliminate head-of-line blocking where large image batches delay text generation. EPD enables serving vision-language models (LLaVA, Qwen-VL, InternVL) at text-only throughput for text-only requests while still handling multimodal requests in the same fleet. (3) NVFP4 KV cache quantization — KV cache blocks can now be stored in NVFP4 (4-bit floating point, Blackwell-native) rather than BF16 or FP8, halving KV cache memory footprint vs FP8 and enabling 2.5-3× more concurrent sessions per H200/B200 GPU. Combined with tiered offload, NVFP4 KV cache unlocks >100K concurrent sessions per 8-GPU node on 70B-class models. (4) /v1/decisions endpoint — a new OpenAI-compatible API endpoint that returns structured model decisions (tool calls, structured JSON output, reasoning traces as typed blocks) separately from the generated text, enabling orchestrators to parse decisions without regex-based extraction from the completion string. The decisions endpoint deprecates the previous tool_calls field in favor of a typed decision graph with per-decision confidence scores.",
+          "tags": [
+            "ml",
+            "infra",
+            "scale"
+          ],
+          "resources": [
+            {
+              "title": "vLLM v0.33.0 Release Notes",
+              "url": "https://github.com/vllm-project/vllm/releases/tag/v0.33.0"
+            }
+          ],
+          "added": "2026-11-16"
+        },
+        {
+          "topic": "Kinference — Open-Source Kubernetes-Native Inference Control Plane for vLLM",
+          "concepts": "Kinference (Buoyant, launched Nov 4, 2026) is an open-source control plane that adds production-critical cross-cutting concerns to vLLM serving without modifying the inference engine. Architecture: a Kubernetes operator + admission webhook that wraps vLLM Deployments with four capabilities. (1) Token-rate limiting: a per-tenant admission webhook tracks rolling-window token budgets stored in Redis; requests exceeding the budget return HTTP 429 with a Retry-After header, preventing a single tenant from saturating shared GPU capacity. (2) KV-cache-aware routing: integrates with the Kubernetes Gateway API Inference Extension (GIE) EndpointPicker to route each request to the vLLM replica with the highest cache hit probability for the incoming prompt hash, exploiting prefix caching to reduce redundant prefill computation. (3) Tenant cost tracking: a Prometheus exporter reads vLLM's /metrics endpoint and aggregates tokens-in/out per Kubernetes namespace label, enabling chargeback dashboards without modifications to vLLM. (4) InferenceFleet CRD: declaratively configures a fleet of vLLM Deployments including model, replica count, LoRA adapters, resource requests, and autoscaling policy in a single Kubernetes manifest. Staff+ positioning: Kinference occupies the same conceptual space as Linkerd for HTTP services — a thin control plane that handles tenant isolation, observability, and policy enforcement without coupling to the data plane. Use it when deploying vLLM for multiple teams/products that share GPU infrastructure and need per-team quotas, cost visibility, and cache-efficiency improvements without building custom routing middleware.",
+          "tags": [
+            "ml",
+            "infra",
+            "scale"
+          ],
+          "resources": [
+            {
+              "title": "Introducing Kinference (vLLM Blog, Nov 4, 2026)",
+              "url": "https://vllm.ai/blog/2026-11-04-introducing-kinference"
+            }
+          ],
+          "added": "2026-11-16"
         }
       ]
     },
