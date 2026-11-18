@@ -2,7 +2,7 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-11-17"
+    "last_updated": "2026-11-18"
   },
   "entries": [
     {
@@ -2188,8 +2188,20 @@
         "vLLM 0.7.0 Disaggregated P/D \u2014 Stale Decode Worker Pod IPs After GKE Node Auto-Upgrade Cause 100% KV Cache OOM on Single Prefill Worker (production-drills)",
         "llm-d 1.0: Production-Ready Kubernetes-Native Disaggregated LLM Serving (tech-talks)",
         "KubeCon + CloudNativeCon NA 2026 \u2014 AI & ML Inference at Scale Track (tech-talks)",
-        "Inference-Time Compute Scaling \u2014 Engineering Production Thinking Models (ml-systems)",
+        "Inference-Time Compute Scaling \u2014 Engineering Production Scaling Thinking Models (ml-systems)",
         "GPU Cluster Reliability Engineering for Large-Scale ML Workloads (ml-systems)"
+      ]
+    },
+    {
+      "timestamp": "2026-11-18T04:30:00Z",
+      "type": "drill",
+      "title": "Daily drill: Kafka Consumer Rebalance Storm \u2014 Rust Tokio max.poll.interval.ms Violation During Cold-Start ML Batch Inference",
+      "summary": "Added Hard Distributed Systems hotfix drill: Rust rdkafka consumer group trips max.poll.interval.ms=300000 during 7m42s ONNX model cold-start warm-up, triggering 847 consecutive rebalances across 6 pods and 94-minute offset lag spike to 441,500 messages. Downstream Redis cache starvation drives ranker-api P99 from 38ms to 1,840ms and 11.4% 503 error rate before PagerDuty fires.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "Kafka Consumer Rebalance Storm \u2014 Rust Tokio max.poll.interval.ms Violation During Cold-Start ML Batch Inference, 94-Minute Offset Lag Spike (production-drills)"
       ]
     }
   ]

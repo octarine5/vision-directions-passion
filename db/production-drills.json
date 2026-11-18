@@ -3,7 +3,7 @@
     "category": "production-drills",
     "display_name": "Production Drills",
     "layout": "drills",
-    "last_updated": "2026-11-17"
+    "last_updated": "2026-11-18"
   },
   "sections": [
     {
@@ -3262,6 +3262,38 @@
             "silent-failure"
           ],
           "added": "2026-11-06"
+        },
+        {
+          "drill": "Kafka Consumer Rebalance Storm — Rust Tokio Consumer max.poll.interval.ms Violation During Cold-Start ML Batch Inference Causes 94-Minute Offset Lag Spike and Full Consumer Group Starvation on 48-Partition Topic",
+          "layer": "Distributed Systems (Apache Kafka 3.6 / Rust tokio / GKE 1.30 / GCP us-west1 / PostgreSQL 16 / Redis 7.2)",
+          "difficulty": "Hard",
+          "scenario": "At 03:17 UTC, a GKE CronJob triggers a cold-start batch ML inference job: feature-scorer-job, a Rust service using rdkafka 0.36 (librdkafka 2.3.0) in a consumer group feature-scorer-prod consuming from topic user-feature-events (48 partitions, replication factor 3, Kafka 3.6.1 on Confluent Cloud). The job is configured with max.poll.interval.ms=300000 (5 minutes, the Kafka default). On cold start, the job performs a one-time model warm-up: it loads a 2.1 GB ONNX model from GCS into memory and runs 500 warm-up inference passes, taking 7 minutes 42 seconds on the provisioned n2-standard-4 GKE node (4 vCPU, 16 GB RAM). During model warm-up, the Rust consumer holds its group membership but does not call poll() — rdkafka’s background rebalance thread keeps the heartbeat alive, but the application-level poll timeout (max.poll.interval.ms=300000) expires at 03:22:17 UTC, exactly 5 minutes after the consumer joined.\n\nKafka broker logs at 03:22:17 UTC:\n  [2026-11-18 03:22:17,431] INFO [GroupCoordinator 2]: Member feature-scorer-prod-7f3a2b1c-0 in group feature-scorer-prod has failed, removing it from the group and trigger rebalance. (kafka.coordinator.group.GroupCoordinator)\n  Reason: 'Failed to send heartbeat to consumer group coordinator: max.poll.interval.ms=300000 elapsed since the last call to poll()'\n\nKafka triggers a rebalance, revoking all 48 partitions from the offending consumer. The consumer group has 6 replicas (Deployment: feature-scorer-job, replicas=6); all 6 pods started simultaneously and are all in cold-start model warm-up. Within 180 seconds, all 6 consumers trip max.poll.interval.ms and are ejected from the group one by one:\n\n  03:22:17 UTC — Pod feature-scorer-job-5xk8p ejected, rebalance #1 starts\n  03:23:44 UTC — Pod feature-scorer-job-9m2vr ejected mid-rebalance, rebalance #2 starts\n  03:24:11 UTC — Pod feature-scorer-job-3nq7t ejected, rebalance #3 starts\n  03:24:58 UTC — Pod feature-scorer-job-8bp1c ejected, rebalance #4 starts\n  03:25:33 UTC — Pod feature-scorer-job-1wf4d ejected, rebalance #5 starts\n  03:26:02 UTC — Pod feature-scorer-job-6yt0e ejected, rebalance #6 starts\n\nEach rebalance attempt fails because newly-joining consumers (now completing warm-up) also exceed max.poll.interval.ms within seconds of joining. The group enters a rebalance loop: Kafka logs show 847 consecutive GROUP_COORDINATOR_FENCED and REBALANCE_IN_PROGRESS errors from 03:22 to 04:13 UTC.\n\nConsumer group lag telemetry (Confluent Cloud Lag Monitor):\n  03:17 UTC — consumer_lag{group=\"feature-scorer-prod\", topic=\"user-feature-events\"} = 12,400 messages (baseline backlog)\n  03:22 UTC — consumer_lag = 12,400 (no consumption during rebalance storm)\n  03:45 UTC — consumer_lag = 189,000 (upstream producers continue at 2,800 msg/min)\n  04:13 UTC — consumer_lag = 441,500 (peak, 94 min of zero consumption)\n\nDownstream impact: The feature scoring pipeline feeds a Redis 7.2 cache (user-feature-cache) with pre-scored features consumed by an online ranking API (ranker-api, Go, 20 replicas). Cache TTL is 15 minutes. With zero fresh scores written from 03:17 UTC, Redis keys begin expiring. By 04:00 UTC, 73% of cache keys are stale (ranker-api cache miss rate spikes from 0.4% to 68% in 43 minutes). ranker-api falls back to a PostgreSQL 16 feature store; PG connection pool (pgbouncer, pool_size=120) saturates at 04:08 UTC:\n\n  2026-11-18 04:08:33 ERROR [ranker-api-pod-7r9x2] pgx: failed to acquire conn from pool: pool exhausted (120/120 connections active), waited 5001ms\n\nranker-api P99 latency climbs from 38ms to 1,840ms. HTTP 503 error rate reaches 11.4% at 04:11 UTC. PagerDuty fires at 04:11 UTC: 'ranker-api error rate 11.4% > SLO threshold 1% for 3 consecutive minutes'.\n\nOn-call SRE joins at 04:14 UTC. Kafka consumer group lag of 441,500 messages is immediately visible in Confluent Cloud dashboard but root cause (rebalance storm from max.poll.interval.ms) is not surfaced directly.",
+          "questions": [
+            "The ranker-api SLO alert fired at 04:11 UTC but the root cause began at 03:17 UTC. What is the minimum set of monitors that would have detected the problem within 5 minutes of the first consumer ejection at 03:22 UTC?",
+            "rdkafka’s background heartbeat thread kept the Kafka session alive (session.timeout.ms=45000) while max.poll.interval.ms=300000 was violated. Explain why Kafka has two separate timeout parameters and why a healthy heartbeat alone does not prevent consumer ejection.",
+            "All 6 consumers were ejected within a 4-minute window, causing rebalance cascades. What Kafka group coordinator configuration or consumer-side strategy prevents cascading rebalances when multiple consumers fail simultaneously?",
+            "The cold-start model warm-up takes 7 minutes 42 seconds but max.poll.interval.ms is 5 minutes. What are three distinct architectural patterns to decouple model initialization from Kafka consumer group membership?",
+            "Given consumer_lag reached 441,500 at peak with 48 partitions and 2,800 msg/min production rate, how long will it take to drain the backlog once all 6 consumers are healthy, assuming each consumer processes 950 msg/sec? Show your calculation.",
+            "The Redis cache TTL is 15 minutes and the outage lasted 94 minutes. Even after Kafka consumers recover, how does the cache eventually return to a healthy hit rate? What is the warm-up curve, and how would you instrument it to know when normal operation has resumed?",
+            "Write the rdkafka Rust configuration block that correctly handles the model warm-up scenario. Include the specific parameter values and explain the trade-offs between max.poll.interval.ms and session.timeout.ms in this context.",
+            "The pgbouncer pool of 120 connections was exhausted at 04:08 UTC with 20 ranker-api replicas. What is the maximum HikariCP maximumPoolSize per replica that would prevent pool exhaustion, assuming uniform load distribution?"
+          ],
+          "fix": "Immediate mitigation: Scale the feature-scorer-job Deployment to 0 replicas ('kubectl scale deployment feature-scorer-job -n ml-prod --replicas=0'), wait for the consumer group to fully leave (verify via 'kafka-consumer-groups.sh --bootstrap-server $BROKER --describe --group feature-scorer-prod' shows no members), then scale back to 6. This clears the rebalance storm. The consumer group rejoins cleanly once all warm-up is complete. Drain the 441,500-message backlog by temporarily scaling to 12 replicas; at 950 msg/sec per consumer, full drain takes ~8 minutes. Redis cache naturally repopulates within 15 minutes (one TTL cycle) after scoring resumes. For the root fix: separate model initialization from consumer group membership. In Rust, load and warm the model before calling consumer.subscribe(); use a tokio::sync::Barrier or a readiness file (/tmp/model-ready) checked in the Kubernetes readinessProbe to gate consumer startup until warm-up completes. Alternatively, set max.poll.interval.ms=900000 (15 minutes) to exceed the worst-case warm-up duration, paired with session.timeout.ms=60000 to maintain liveness detection. Prevent recurrence: add a Kafka consumer group lag monitor (threshold: lag > 50000 for feature-scorer-prod for 3 consecutive minutes, severity: P1) and a rebalance-rate monitor (kafka.consumer.group.rebalance.rate > 10/min for 1 minute, severity: P2). Add a preStop lifecycle hook to gracefully revoke partitions before pod shutdown, reducing rebalance storms on rolling deploys.",
+          "tags": [
+            "kafka",
+            "rust",
+            "consumer-group",
+            "rebalance",
+            "max-poll-interval",
+            "gke",
+            "gcp",
+            "ml-serving",
+            "redis",
+            "cache",
+            "distributed-systems",
+            "cold-start"
+          ],
+          "added": "2026-11-18"
         }
       ]
     }
