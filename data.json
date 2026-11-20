@@ -472,6 +472,13 @@
       "stage": "Series F ($1.3B at $16B valuation, November 3, 2026; Andreessen Horowitz + Tiger Global led)",
       "signal": "hot",
       "notes": "Generative media inference PaaS (Flux Pro, Stable Diffusion XL, Runway Gen-3, MusicGen, 150+ media generation models); $1.3B Series F at $16B valuation Nov 3, 2026; processes 500M+ image/video/audio generations/week. Architecturally distinct from LLM inference: iterative denoising loops (20-50 steps/image), hot LoRA adapter cache for 1,000+ fine-tuned adapters per cluster, and prompt-conditioning cache (fal's core IP) that reduces step count on similar prompts by 30-40%. Pricing: $0.0025–$0.009 per image, implying ~$160M+ ARR if fully monetized. For ML platform teams: running media generation on a generic LLM serving stack (vLLM, TGI) leaves 3-5× cost and latency improvement on the table vs. media-inference-specialized infrastructure."
+    },
+    {
+      "name": "LanceDB",
+      "domain": "Multimodal AI Data Lakehouse (Lance columnar format + ANN vector search + training data management + context store)",
+      "stage": "Series B ($57.5M, $98.5M total, November 17, 2026; Bessemer Venture Partners + Innovation Endeavors led; Theory Ventures, Dimension, CRV, Y Combinator co-investors)",
+      "signal": "hot",
+      "notes": "LanceDB closed $57.5M Series B on November 17, 2026 led by Bessemer Venture Partners and Innovation Endeavors. $98.5M total capital. Enterprise customers: Microsoft AI, Netflix, Runway. Builds a multimodal AI data lakehouse on the Lance columnar format — a custom on-disk layout optimized for ML data access patterns (random access over embeddings, versioned dataset snapshots, ANN search without a separate vector DB). Distinct from Pinecone/Weaviate (pure vector DBs): LanceDB unifies vector storage, training data, evaluation logs, model rollout data, and context into one queryable store. Key differentiator: Lance format enables zero-copy embedding access with 5-10× lower read latency than Parquet for ML workloads, and versioned snapshots enable reproducible training without data duplication. The Bessemer + Innovation Endeavors + Theory Ventures investor coalition (all infrastructure-tier investors) positions LanceDB as platform infrastructure, not a point tool. For ML platform engineers: LanceDB is the reference architecture for teams building multimodal training pipelines (video generation, world models, robotics) that need to co-locate embeddings, raw data, and rollout metadata without maintaining separate systems. Watch: LanceDB Cloud managed tier expected Q1 2027; evaluate as a unified replacement for separate vector DB + data lake + feature store stacks."
     }
   ],
   "careerMilestones": [

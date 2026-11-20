@@ -2,9 +2,26 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-11-19"
+    "last_updated": "2026-11-20"
   },
   "entries": [
+    {
+      "timestamp": "2026-11-20T10:00:00Z",
+      "type": "drill+market-scan",
+      "title": "Friday update: Flink RocksDB checkpoint timeout drill + 3 market signals (LanceDB, Fal.ai, Stripe/OpenRouter)",
+      "summary": "Added Hard Distributed Systems hotfix drill: Apache Flink 1.19 RocksDB state backend checkpoint timeout on AWS ECS Fargate — 4.2× MSK traffic spike exhausts EBS gp3 burst credits (250 MB/s → 125 MB/s sustained) during incremental checkpoint, triggering 847 GB full state recovery from S3 over 73 minutes; ml-feature-aggregation-prod offline, recommendation serving degraded. Fix: migrate from EBS gp3 to EFS or io2 Block Express for sustained checkpoint throughput, switch to incremental checkpoints + externalized state, add EBS burst credit CloudWatch alarm. Market Signal Scan added 3 entries to business-problems.json: (1) LanceDB $57.5M Series B (Nov 17, Bessemer + Innovation Endeavors led, $98.5M total; multimodal AI data lakehouse — Lance columnar format, ANN search, training data + context unification); (2) Fal.ai $1.3B Series F at $16B valuation (Nov 3, Andreessen Horowitz + Tiger Global led; real-time generative AI inference, 500M+ media generations/week); (3) Stripe closes OpenRouter acquisition (Nov 10, $7.5B reported; LLM routing + API aggregation becomes payments infrastructure). Updated enterpriseWatchlist in data.json: added LanceDB (new Series B, ML data lakehouse category signal).",
+      "tasks": [
+        "drill",
+        "market-scan"
+      ],
+      "items_added": [
+        "Apache Flink 1.19 RocksDB State Backend Checkpoint Timeout — EBS Burst Credit Exhaustion During MSK Traffic Spike Triggers 73-Minute Full State Recovery, ML Feature Aggregation Offline (production-drills, Hotfix / Distributed Systems)",
+        "LanceDB $57.5M Series B — Multimodal AI Data Lakehouse at Petabyte Scale for Video Generation, World Models, and Robotics (business-problems, AI & Software Infrastructure)",
+        "Fal.ai $1.3B at $16B Valuation — Real-Time Generative AI Inference for Video/Image Production at Hyperscale (business-problems, AI & Software Infrastructure)",
+        "Stripe Acquires OpenRouter — LLM API Routing Becomes Payments Infrastructure, $7.5B Closed Nov 10, 2026 (business-problems, AI & Software Infrastructure)",
+        "LanceDB (data.json enterpriseWatchlist — new entry, Series B Nov 17, 2026)"
+      ]
+    },
     {
       "timestamp": "2026-11-19T10:00:00Z",
       "type": "drill",
