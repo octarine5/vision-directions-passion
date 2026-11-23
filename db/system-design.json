@@ -10,7 +10,7 @@
       "Tags",
       "Resources"
     ],
-    "last_updated": "2026-10-26"
+    "last_updated": "2026-11-23"
   },
   "sections": [
     {
@@ -1438,6 +1438,22 @@
             }
           ],
           "added": "2026-10-26"
+        },
+        {
+          "topic": "Adaptive System Design for AI Agents \u2014 Lessons from Production Recommendation Systems",
+          "concepts": "Production recommendation systems evolved from heuristic rules to self-adapting ML loops over a decade, and agent systems are now following the same trajectory. Transferable architecture patterns: (1) feedback loop latency budgets \u2014 every agent action must produce an observable signal within a bounded window; (2) cold-start strategies for new agents operating in unseen contexts; (3) exploration/exploitation tradeoffs under production traffic constraints (shadow scoring, canary agents); (4) graceful degradation \u2014 deterministic fallback when agent confidence is low or model is stale; (5) continuous eval pipelines analogous to real-time A/B infra for rankers. QCon SF 2026 talk by Mallika Rao ('Adaptive Systems in Production: What Recommendation Systems Can Teach Us About Agents') argues the eval infra and rollout tooling from RecSys is directly reusable for agentic systems.",
+          "tags": [
+            "ml",
+            "scale",
+            "infra"
+          ],
+          "resources": [
+            {
+              "title": "QCon SF 2026 \u2014 Engineering AI Systems Track",
+              "url": "https://qconsf.com/track/nov2026/engineering-ai-systems"
+            }
+          ],
+          "added": "2026-11-23"
         }
       ]
     }
