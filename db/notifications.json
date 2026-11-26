@@ -2,9 +2,21 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-11-24"
+    "last_updated": "2026-11-26"
   },
   "entries": [
+    {
+      "timestamp": "2026-11-26T10:00:00Z",
+      "type": "drill",
+      "title": "Daily drill: Temporal 1.24 Workflow History Size Limit — LLM Fine-Tune Orchestration Accumulates 40,849 Events After Spot Interruption Retries",
+      "summary": "Added Hard Distributed Systems hotfix drill: Temporal 1.24 workflow history overflow on GKE — LLaMA 3.1 70B fine-tune orchestration on AWS p5.48xlarge spot instances accumulates 40,849 events (exceeding the 40,000 limit) due to two compounding bugs: per-training-step SideEffect logging and parent-context spot-interruption retries on child workflows; Go worker returns RESOURCE_EXHAUSTED, leaving an 8-hour checkpoint upload gap and wasting $14K in H100 GPU compute. Fix: implement ContinueAsNew to roll history at step 500, move spot-interruption retries to child workflow RetryPolicy, replace SideEffect logging with training metrics in MLflow, and add EFS checkpoint freshness alert.",
+      "tasks": [
+        "drill"
+      ],
+      "items_added": [
+        "Temporal 1.24 Workflow History Size Limit — LLM Fine-Tune Orchestration Accumulates 40,849 Events After Spot Interruption Retries, Go Worker RESOURCE_EXHAUSTED, 8-Hour Checkpoint Upload Gap Wastes $14K GPU Compute (production-drills)"
+      ]
+    },
     {
       "timestamp": "2026-11-20T10:00:00Z",
       "type": "drill+market-scan",
