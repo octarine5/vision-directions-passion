@@ -11,7 +11,7 @@
       "TAM",
       "Tags"
     ],
-    "last_updated": "2026-11-23"
+    "last_updated": "2026-11-27"
   },
   "sections": [
     {
@@ -178,6 +178,40 @@
             "scale"
           ],
           "added": "2026-11-23"
+        },
+        {
+          "problem": "Enterprise security layer for open-weight AI model deployment — SASE/NGFW vendors acquiring AI inference platforms",
+          "enterprise": "Palo Alto Networks (acquires Applied Compute for ~$4.5B all-stock, Nov 18, 2026); Wiz, Lacework, Prisma Cloud",
+          "market_fit": "Palo Alto Networks' $4.5B acquisition of Applied Compute (Nov 18, 2026) is the first signal that traditional enterprise security vendors are absorbing the AI inference deployment stack. Applied Compute built a post-training + inference platform enabling enterprises to deploy open-weight models (Llama, DeepSeek, Qwen) alongside closed frontier APIs — with security policy enforcement, model access controls, and usage audit trails. The strategic rationale: enterprises piloting open-weight AI models have a new attack surface (model weights as data exfiltration vectors, prompt injection via open API endpoints, unsanctioned fine-tuning on customer data) that sits squarely in the SASE/NGFW threat surface Palo Alto already owns. By bundling AI model deployment security into Prisma Cloud, Palo Alto creates a procurement forcing function: enterprises buying Prisma Cloud for cloud security now get AI model governance 'for free' — undercutting standalone AI governance vendors. For ML platform engineers, this acquisition signals that the AI security stack is shifting from independent tooling (Lakera, Protect AI) toward bundled enterprise platform features, compressing standalone vendor TAMs.",
+          "tam": "$12B",
+          "tags": [
+            "infra",
+            "ml",
+            "biz"
+          ],
+          "added": "2026-11-27"
+        },
+        {
+          "problem": "ML observability + adversarial AI security consolidation into enterprise EDR platforms",
+          "enterprise": "CrowdStrike (acquires Fiddler AI + Dreadnode, ~$495M combined, Nov 2026); Dynatrace (acquired Arize AI, $915M, Aug 2026); Datadog (acquired Adaptive ML for RLOps, Jun 2026)",
+          "market_fit": "CrowdStrike's simultaneous acquisition of Fiddler AI (ML model monitoring, explainability, bias detection — $100M+ ARR) and Dreadnode (adversarial AI red-teaming, automated prompt injection and jailbreak testing) for a combined ~$495M in November 2026 completes a trifecta of ML observability consolidation into enterprise security/APM platforms — following Dynatrace/Arize AI ($915M, Aug 2026) and Datadog/Adaptive ML (RLOps, Jun 2026). The pattern is unambiguous: ML observability and AI security tooling are not standalone budget categories — they are features that enterprise buyers expect to procure within their existing security or APM platforms. CrowdStrike integrates Fiddler into Falcon Intelligence for model drift and bias monitoring, and Dreadnode into Falcon Adversary Intelligence for AI red-teaming at enterprise scale. For ML platform teams: standalone ML observability vendors (Arize, WhyLabs, Braintrust) face accelerating consolidation risk. The most defensible position is either (a) deep technical specialization (e.g., Braintrust's LLM evals at the prompt-engineering workflow layer) or (b) workflow integration (e.g., Langfuse's open-source developer adoption). Procurement teams should factor acquisition risk into 3-year observability platform contracts signed in 2026.",
+          "tam": "$10B",
+          "tags": [
+            "ml",
+            "infra"
+          ],
+          "added": "2026-11-27"
+        },
+        {
+          "problem": "Frontier AI lab IPO market validation — Anthropic ANT Nasdaq debut sets enterprise contract repricing baseline",
+          "enterprise": "Anthropic (ANT, Nasdaq, Nov 19, 2026; priced at $83/share, 980M shares, above $70-78 roadshow range; ~$1.19-1.5T market cap; stock fell sharply after early gains on debut; largest US tech IPO in history by proceeds)",
+          "market_fit": "Anthropic's Nasdaq debut on November 19, 2026 — priced at $83/share (above the $70-78 roadshow range), raising the largest proceeds in US tech IPO history — marks the moment frontier AI model APIs became publicly traded infrastructure. The debut stock performance (early gains followed by a sharp decline, with Nasdaq erasing all 2026 gains the same week) illustrates the risk/return asymmetry now embedded in AI infrastructure vendor relationships: enterprise CIOs who signed multi-year Claude API contracts at pre-IPO pricing now hold obligations to a public company facing quarterly earnings pressure to expand margins. Key enterprise engineering implications: (1) Claude API pricing is now subject to public-market scrutiny — promotional discounts given to early enterprise customers face investor pressure to roll off in 2027-2028 contract renewals; (2) Anthropic's first earnings call (Q1 2027 expected) will reveal ARR, enterprise customer count, and gross margin — the first public data on frontier AI API unit economics, which will recalibrate the entire market's understanding of AI API vendor profitability; (3) The IPO proceeds (~$81B at $83/share × 980M shares) fund the Samsung-partnership custom silicon roadmap and competitive model releases through 2028+. For staff+ engineers: the Anthropic IPO creates a forcing function to quantify Claude API spend as a line item in annual planning, since the vendor is now subject to public reporting timelines and will not remain below procurement radar.",
+          "tam": "$200B+",
+          "tags": [
+            "ml",
+            "biz"
+          ],
+          "added": "2026-11-27"
         }
       ]
     },

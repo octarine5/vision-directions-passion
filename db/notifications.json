@@ -2,9 +2,26 @@
   "metadata": {
     "category": "notifications",
     "display_name": "Trigger Notifications",
-    "last_updated": "2026-11-26"
+    "last_updated": "2026-11-27"
   },
   "entries": [
+    {
+      "timestamp": "2026-11-27T10:00:00Z",
+      "type": "drill+market-scan",
+      "title": "Friday update: OPA Gatekeeper admission webhook drill + 3 market signals (Palo Alto/Applied Compute, CrowdStrike/Fiddler+Dreadnode, Anthropic ANT IPO debut)",
+      "summary": "Added Hard Infrastructure hotfix drill: OPA Gatekeeper 3.17 ValidatingWebhook `failurePolicy: Fail` during cert-manager TLS rotation causes 20 of 32 H100 training pods to fail admission with `context deadline exceeded` — kube-apiserver's 60s caBundle re-read delay creates a TLS mismatch window; Kubernetes Job controller does not retry FailedCreate pods, 12 Active/20 Failed state, $49K GPU compute wasted for 14 minutes. Fix: add cainjector annotation for atomic CA bundle propagation, add PodDisruptionBudget minAvailable:2 on Gatekeeper, alert on apiserver_admission_webhook_rejection_count{type=timeout}. Market Signal Scan added 3 entries to business-problems.json: (1) Palo Alto Networks acquires Applied Compute for ~$4.5B (Nov 18) — SASE/NGFW vendor absorbs open-weight AI inference deployment platform, compressing standalone AI governance TAM; (2) CrowdStrike acquires Fiddler AI + Dreadnode for ~$495M (Nov 2026) — ML observability and adversarial AI security absorbed into Falcon EDR platform, completing trifecta with Dynatrace/Arize and Datadog/Adaptive ML; (3) Anthropic ANT Nasdaq IPO closed Nov 19 at $83/share (above $70-78 range), 980M shares, ~$1.19-1.5T market cap — enterprise Claude API repricing era begins. Updated Anthropic watchlist entry in data.json to reflect public company status.",
+      "tasks": [
+        "drill",
+        "market-scan"
+      ],
+      "items_added": [
+        "OPA Gatekeeper 3.17 ValidatingWebhook failurePolicy: Fail During cert-manager TLS Rotation — 20 of 32 H100 Training Pods Fail Admission, Kubernetes Job Non-Retriable, $49K GPU Compute Wasted for 14 Minutes (production-drills, Infrastructure & Networking)",
+        "Enterprise security layer for open-weight AI model deployment — Palo Alto Networks acquires Applied Compute $4.5B (business-problems, AI & Software Infrastructure)",
+        "ML observability + adversarial AI security consolidation into EDR — CrowdStrike acquires Fiddler AI + Dreadnode ~$495M (business-problems, AI & Software Infrastructure)",
+        "Frontier AI lab IPO market validation — Anthropic ANT Nasdaq debut $83/share, $1.19-1.5T market cap, enterprise repricing era begins (business-problems, AI & Software Infrastructure)",
+        "Anthropic watchlist entry updated: Pre-IPO → Public (Nasdaq: ANT, Nov 19, 2026)"
+      ]
+    },
     {
       "timestamp": "2026-11-26T10:00:00Z",
       "type": "drill",
